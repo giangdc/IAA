@@ -1,0 +1,28 @@
+# Claude Code — track hook enforcement + shared settings, ignore local/personal
+.claude/*
+!.claude/settings.json
+!.claude/hooks/
+.claude/settings.local.json
+
+# Credentials / secrets — NEVER commit (để ở ~/.<project>/ hoặc ~/.config/, ngoài repo)
+*credentials*.env
+*.env
+.env
+
+# Node / build
+node_modules/
+dist/
+build/
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Test run local (lớn / có PII) — che qua archive-run-evidence trước khi track
+daily-runs/
+
+# sync-online: thư mục nháp (candidates.json, draft, snapshot sheet) — KHÔNG track
+03_test-cases/*/.sync-online/

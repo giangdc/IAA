@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "node .claude/hooks/validate-vibe-run.mjs" } ] }
+    ],
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "node .claude/hooks/inject-project-rule.mjs" } ] }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [ { "type": "command", "command": "node .claude/hooks/run-python.mjs .claude/hooks/memory-guard.py" } ]
+      }
+    ]
+  }
+}
