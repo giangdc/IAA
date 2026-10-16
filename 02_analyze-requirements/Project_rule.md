@@ -41,13 +41,22 @@
 
 | Mã | Module | Tên chức năng | Status |
 |---|---|---|---|
-<!-- `analyze-requirements --init` điền bảng này ở lần chạy đầu. Gợi ý theo 4 chức năng của URD
-     (CHƯA chốt — analyze quyết định tên module):
-     | TC-01 | XHD | Đồng bộ đơn hàng & xuất hóa đơn tự động (đa kênh, 1 đơn 1..n HĐ) — URD §I | Active |
-     | TC-02 | GN  | Gạch nợ hóa đơn (Paid / Cọc, gạch nợ tạm) — URD §II | Active |
-     | TC-03 | HK  | Đẩy hậu kỳ qua dịch vụ – tiền trả trước — URD §III | Active |
-     | TC-04 | TL  | Điều chỉnh tính lương FPT Play SA — URD §IV | Active |
--->
+| FR01 | XHD | Đồng bộ đơn hàng SPF → INVOICE (17 kênh × 20 nhóm DV × bán mới / bán thêm), tín hiệu giao hàng 3 nguồn, thông tin khách xuất HĐ | Active |
+| FR02 | XHD | Lịch xuất HĐ + phân luồng worker / realtime (gồm kênh FPL) | Active |
+| FR03 | XHD | Điều kiện phát hành DV / TB (PĐK, hợp đồng con) + điều kiện hợp lệ | Active |
+| FR04 | XHD | Gộp / tách HĐ (1 đơn n HĐ) + chống phát hành trùng | Active |
+| FR05 | XHD | Phát hành HĐ qua Billing + Invoice Event + chi nhánh xuất HĐ | Active |
+| FR06 | XHD | Cutover v1 → v2 + kiểm tra chéo | Active |
+| FR07 | GN | Đồng bộ Paid + điểm chạm + xác định phương thức Paid / Cọc | Active |
+| FR08 | GN | Gạch nợ bằng Paid: gạch nợ tạm (kênh sàn), gạch nợ thật, chừa phần EVC bị lock | Active |
+| FR09 | GN | Gạch nợ bằng Cọc | Active |
+| FR10 | HK | Đẩy hậu kỳ theo đơn: ký hiệu + ID, nội dung + tổng tiền theo thuế suất, thông tin mẫu, đẩy HĐĐT | Active |
+| FR11 | HK | Tiền trả trước một lần mỗi đơn | Active |
+| — | TL | Điều chỉnh tính lương FPT Play SA (URD §B.IV) | Out-of-scope |
+<!-- Điền bởi analyze-requirements --init 16/10/2026. Mã FRxx = mã chức năng Scope test (TP §2.1a, chốt
+     14/10/2026); cột Module = tên thư mục analyze `02_analyze-requirements/v2.0/<Module>/`.
+     TL: QC lead chốt ngoài phạm vi 14/10/2026 — KHÔNG có thư mục analyze; 0 REQ/SC/TC là ĐÚNG
+     (health-check: xử lý như DEPRECATED, không báo coverage gap). -->
 
 ## Naming Conventions
 
@@ -128,6 +137,12 @@ req_notation: BR
 #               · BR-DP-01..03 (đồng bộ Paid) · BR-XL-01..05 (điểm chạm/phương thức) · BR-NT-01..04
 #               (nợ tạm) · BR-GN-01..05 (gạch nợ) · BR-VC-01..07 (EVC — 01, 06 đánh [Bỏ]) · BR-GC-01..07
 #               (gạch cọc) · BR-HK-01..10 (hậu kỳ) · BR-TL-01..04 (tính lương) + `RISK-01` (rủi ro, map như BR).
+#               ⚠️ Đếm trên đây là của URD rev 2.1. URD rev 2.2 (bản chính) còn 41 BR (đếm 16/10/2026):
+#               XHD §B.I 17 (BR-DB-01..05, 07 · BR-XHD-01..03, 05, 06, 08, 10, 12..14, 18) · GN §B.II 14
+#               (BR-DP-01 · BR-XL-01, 03 · BR-NT-01, 02, 04 · BR-GN-01, 03..05 · BR-GC-01..03 · BR-VC)
+#               · HK §B.III 6 (BR-HK-01..03, 05, 07, 09) · TL §B.IV 4. Số nhảy là có chủ đích (2.2 giữ ID 2.1).
+#               2.2 bỏ bảng "Mô tả Flow" (BƯỚC n) — chỉ có lưu đồ ảnh; requirement không có BR
+#               (bảng phạm vi §A.2/§A.3, phụ lục §D) ⇒ cột `Maps (Ref DOC)` = `—`, neo bằng `DOC-ID §section (L…)`.
 #               Bước flow (BƯỚC n) không có ID riêng ⇒ trỏ `DOC-ID §<chức năng> · bước n`.
 #               `OI-<n>` = open issue / câu hỏi cần PO-FTQ quyết (URD §V) — KHÔNG phải requirement,
 #               đi vào clarification, ⛔ không map làm REQ.

@@ -5,7 +5,7 @@
 
 **Danh sách DOC-ID ↔ file ↔ `Status` ↔ `Superseded by` — nguồn chuẩn DUY NHẤT, KHÔNG copy sang đây:**
 - `../../02_analyze-requirements/MASTER-MEMORY.md` **§2** — registry cross-version
-- `../../02_analyze-requirements/v2.0/MEMORY.md` **§2** — bản version-scoped
+- `../../02_analyze-requirements/v2.0/MEMORY.md` **frontmatter `doc_source:`** — bản version-scoped (router layout v2: file, md5, revision, loại)
 
 **Lấy lại file đã xoá:** `git show <commit-trước-khi-xoá>:'00_input/v2.0/<path>'`
 (blob vẫn nằm trong git history — KHÔNG rewrite history để "dọn" cho nhỏ).

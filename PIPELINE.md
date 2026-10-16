@@ -87,7 +87,7 @@ Thiếu prerequisite ⇒ skill báo `[MISSING]` và chỉ ra cần chạy gì tr
 | 0.5 | init-source-code | SKIPPED (no automation) |
 | 1 | init-project | COMPLETED |
 | 2 | create-test-plan | COMPLETED (07/10/2026 · cập nhật 13/10/2026 theo URD rev 2.2 — TP-master-InvoiceIssuance-v2.0.md bản 1.3) |
-| 3 | analyze-requirements | NOT_STARTED |
+| 3 | analyze-requirements | COMPLETED (16/10/2026 · INIT v2.0 — 3 module XHD / GN / HK) |
 | 4 | generate-tc | NOT_STARTED |
 | 4b | export-tc-rp | NOT_STARTED |
 | 5 | review-tc | NOT_STARTED |

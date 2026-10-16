@@ -80,3 +80,10 @@ Template bug: `~/.claude/skills/log-bug/assets/bug-report-template.md` (skill đ
 - **Exit criteria (= Quality Gates):** G1–G6 (G7 N/A; G8 bỏ 13/10/2026) — xem test plan §4
 - **Lịch:** (QC lead chốt 14/10) Clear nghiệp vụ 19–20/10 (4 QC) · Review + gen TC 21–22/10 · Update TC + setup 23/10 (2 task này không có HuyenNHK) · R1 26–30/10 · buffer 02–03/11 · R2 04–10/11 · buffer 11/11 · R3 recheck bug 12–13/11/2026 (4 QC) · 1.264 TC · effort lịch 65 md (estimate công thức 145 md với AI gen TC 80% — KHÔNG ĐÁP ỨNG theo tham số) · bản xuất 3 QC · 47 md (TP §6B)
 - **Doc readiness:** CONDITIONAL (lần rà 2, URD rev 2.2) · GAP mở 45 (3 Blocker · 18 Critical) · PM xác nhận trước 16/10/2026 (Clear nghiệp vụ 19/10/2026)
+
+## Analyze — v2.0
+- **Output:** `02_analyze-requirements/v2.0/` — layout **module-first v2**: router `MEMORY.md` + `XHD/`, `GN/`, `HK/` (mỗi module 6 file: `CHANGELOG`, `requirement_traceability`, `test_scenario_map`, `test_data_catalog`, `risk_assessment`) + `quotes/` (sidecar quote dài). TL ngoài phạm vi — không có thư mục.
+- **Kết quả INIT 16/10/2026:** 73 REQ · 180 SC (P1 138 · P2 40 · P3 2) · 49 CL (7 BLOCKING) · 21 RISK — số canonical ở frontmatter `counts:` file module; router §2 là bản dẫn xuất.
+- **DOC-ID:** `DOC-v2.0-01` URD 2.2 (chính) · `-02` URD 2.1 (tham chiếu) · `-03` PDF · `-04` mail PM · `-05` HT triển khai (xlsx) · `-FIG-01/02` ảnh màn Hệ thống Thông tin — registry ở `MASTER-MEMORY.md §2`.
+- **Tra quote:** `DOC_DIR=00_input/v2.0/Doc DOC_DEFAULT="Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx" scripts/doc/search-doc.sh "<từ khoá>"` — `L<n>` trong Source Location là số dòng của bản trích này.
+- **Bước tiếp:** resolve CL BLOCKING (router §2) → `/generate-tc --version v2.0` (hoặc `--module XHD|GN|HK`).
