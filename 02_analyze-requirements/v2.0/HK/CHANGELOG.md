@@ -44,6 +44,7 @@ updated: 2026-10-19
 | 2026-10-19 | SCOPE↓ | **Ký hiệu HĐĐT: chỉ test HĐ bán mới đầu U, không test đầu M** (và A). CL-HK-01 làm rõ một phần, **hết BLOCKING**; SC-HK-008, 009 (đổi thành "FPL đầu U", Negative→Functional), 010 hết chờ CL; SC-HK-020 còn chờ (bán thêm có dùng đầu U?) | QC owner 19/10/2026 | cl_blocking 2→1 · blocked_by_cl 7→5 |
 | 2026-10-19 | UPDATE | **Đóng CL-HK-01:** HĐ đơn bán thêm cũng dùng đầu U ⇒ SC-HK-020 hết chờ CL | QC owner 19/10/2026 | cl_open 6→5 · blocked_by_cl 5→4 |
 | 2026-10-19 | UPDATE | +CL-HK-11 (Open): ký hiệu HĐĐT verify ở đâu — tool Liệt kê cước chỉ hiển thị ID hóa đơn. SC-HK-008, 009, 010, 020 chờ điểm verify | QC owner 19/10/2026 | CL 10→11 · cl_open 5→6 · blocked_by_cl 4→8 |
+| 2026-10-19 | UPDATE | Dọn chữ cũ theo câu trả lời QC owner: Tổng quan + RISK-HK-01 (bảng map theo URD 2.1, chỉ đầu U, còn chờ CL-HK-11), RISK-HK-04 (bỏ SC-HK-019 — không test lỗi trên STG), RISK-HK-05 → Out-scope (CL-HK-02), REQ-HK-005 ghi chú, quy tắc đủ scenario + ghi chú SC-HK-020, §3 Nợ #4. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -60,4 +61,4 @@ updated: 2026-10-19
 | 1 | 🔴 REQ-HK-010 (dòng EVC, chiết khấu, thông tin theo mẫu) **chưa có SC** | Chỉ có tên, đặc tả chuyển D#6 — CL-HK-03 ⛔ (GAP-04 Blocker, TP đề xuất Out-scope) | PM chốt Out-scope ⇒ ghi `SCOPE↓` ở §1; nếu in-scope ⇒ `--update` thêm SC |
 | 2 | ✅ CL-HK-01, CL-HK-10 đã đóng 19/10/2026 — ký hiệu / ID theo URD 2.1, chỉ đầu U (bán mới + bán thêm) | — | — |
 | 3 | 🟡 8 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
-| 4 | 🟡 CL-HK-08 (mã tỉnh lấy theo đâu), CL-HK-09 (1 HĐ nhiều đơn) mới phát hiện, chưa có GAP | — | QC owner thêm vào danh sách gửi PM |
+| 4 | 🟡 CL-HK-09 (1 hóa đơn gồm nhiều đơn hàng?) chưa có GAP — câu vòng 2 trả lời lệch, đã đưa vào file câu hỏi vòng 3. ✅ CL-HK-08 đã đóng 19/10/2026 (mã tỉnh theo địa chỉ hợp đồng) | — | Hỏi BA vòng 3 |

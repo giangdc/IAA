@@ -590,14 +590,16 @@ updated: 2026-10-19
 
 ---
 
-### CL-XHD-33 · Phụ lục D của URD 2.2 trỏ chi tiết sang tài liệu không còn sử dụng — chưa có đặc tả
-📍 `DOC-v2.0-01 §D · L653` + `§D#1–#3 (L658-669)`  ·  Status: **Open** · *mới — 16/10/2026*
+### CL-XHD-33 · Phụ lục D của URD 2.2 trỏ chi tiết sang URD 2.1 — xác nhận hiệu lực + định nghĩa "mốc nghiệp vụ"
+📍 `DOC-v2.0-01 §D · L653` + `§D#1–#3 (L658-669)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
 
 > Các nội dung dưới đây không cần PO confirm và không còn nằm trong phần chính. Chi tiết xem URD v2.1.
 
 ↳ **Ghi chú:** Từ 16/10/2026 QC owner xác nhận URD 2.1 đã out, không dùng ⇒ các mục sau chưa có đặc tả: (1) D#1 cutover — cơ chế kiểm tra chéo luồng cũ / mới (SC-XHD-107, 108 đã deprecated; CL-XHD-24); (2) D#2 phương án chống phát hành trùng worker ↔ realtime (CL-XHD-23); (3) D#3 bản tin trễ qua ngày + mail cảnh báo (CL-XHD-22); (4) định nghĩa "mốc nghiệp vụ" của dòng DV / TB — BR-XHD-01 L384 và BR-XHD-02 L393 dùng nhưng 2.2 không định nghĩa. Phần GN (D#4) ở CL-GN-10; HK (D#5, D#6) ở CL-HK-10.
 
-**Câu hỏi cho BA:** URD 2.2 Phụ lục D ghi "Chi tiết xem URD v2.1" nhưng tài liệu này không còn được sử dụng. PO / SA cung cấp tài liệu thay thế cho các mục D#1–D#3 (cutover, chống phát hành trùng, bản tin trễ + mail cảnh báo), hoặc xác nhận mục nào ngoài phạm vi test v2.0? Đồng thời định nghĩa "mốc nghiệp vụ" của dòng DV và dòng TB (thời điểm thanh toán / thời điểm giao hàng?).
+**Câu hỏi cho BA:** URD 2.2 Phụ lục D ghi "Chi tiết xem URD v2.1" — QC đã dùng URD 2.1 cho D#1 cutover, D#2 phát hành trùng, D#3 bản tin trễ (xem CL-XHD-22, 23, 24). Cần PO / SA: (1) xác nhận URD 2.1 còn hiệu lực cho các mục này; (2) định nghĩa "mốc nghiệp vụ" của dòng DV và dòng TB (thời điểm thanh toán / thời điểm giao hàng hoàn tất?) — BR-XHD-01, 02 dùng nhưng URD không định nghĩa.
+
+🟡 **Làm rõ một phần 19/10/2026** — QC owner chốt dùng URD 2.1 (DOC-v2.0-02) cho Phụ lục D#1, 2, 3, 5, 6; **không** D#4, 7, 8, 9 ⇒ ghi chú gốc phía trên ("URD 2.1 đã out") không còn đúng. D#1–D#3 đã đối chiếu vào CL-XHD-22, 23, 24. Còn hỏi: PO / SA xác nhận hiệu lực của 2.1 cho các mục này + định nghĩa "mốc nghiệp vụ". Nguồn: QC owner 19/10/2026.
 
 ---
 

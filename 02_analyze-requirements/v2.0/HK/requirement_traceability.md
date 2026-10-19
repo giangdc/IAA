@@ -89,7 +89,7 @@ updated: 2026-10-16
 > Bảng map vùng miền và các đơn vị có đầu số riêng xem tài liệu kỹ thuật.
 > Đầu số sai là sai kê khai thuế, không chỉ lỗi hiển thị.
 
-↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1 ⇒ SC ký hiệu chờ bảng chốt (CL-HK-01 / GAP-17, CL-HK-10). Loại hóa đơn nào dùng đầu M / U / A chưa liệt kê; HĐ bán thêm dùng đầu nào chưa rõ. Đơn vị có đầu số riêng (URD 2.2 không liệt kê) chưa rõ in/out scope (CL-HK-02 / GAP-34). Severity cao: sai là sai kê khai thuế.
+↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1. Từ 19/10/2026: bảng map vùng × loại đầu lấy theo URD 2.1 BR-HK-03 (CL-HK-10); **chỉ test đầu U** cho HĐ bán mới và bán thêm, không test đầu M (CL-HK-01); đơn vị có đầu số riêng **ngoài scope test** (CL-HK-02), riêng dòng FPL của bảng map vẫn test. Điểm kiểm ký hiệu trên STG chờ CL-HK-11. Severity cao: sai là sai kê khai thuế.
 
 ---
 

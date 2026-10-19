@@ -33,7 +33,7 @@ updated: 2026-10-19
 >
 > **Trần (KHÔNG sinh SC):** display-only / Phase-2 / duplicate — ghi vào `CHANGELOG.md §3` như gap có chủ đích, không tạo SC rác.
 
-**Áp dụng cho HK:** fan-out theo **thành phần HĐ** (DV / TB) · **số lần phát hành** của đơn · **vùng × loại đầu** ký hiệu (bảng map chờ CL-HK-01) · **mức thuế suất** (5 lớp). REQ-HK-010 không sinh SC.
+**Áp dụng cho HK:** fan-out theo **thành phần HĐ** (DV / TB) · **số lần phát hành** của đơn · **vùng × đầu U** ký hiệu (bảng map URD 2.1; chỉ test đầu U — CL-HK-01) · **mức thuế suất** (5 lớp). REQ-HK-010 không sinh SC.
 
 ## Tổng quan
 - Tổng số scenarios: 20 (NEW: 20, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
@@ -235,7 +235,7 @@ updated: 2026-10-19
 
 > Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
 
-↳ **Ghi chú:** Phạm vi gồm đơn bán thêm (`DOC-v2.0-04`); ký hiệu của HĐ bán thêm chờ CL-HK-01.
+↳ **Ghi chú:** Phạm vi gồm đơn bán thêm (`DOC-v2.0-04`); HĐ bán thêm dùng **đầu U** như HĐ bán mới (CL-HK-01 đã đóng 19/10/2026).
 
 ---
 

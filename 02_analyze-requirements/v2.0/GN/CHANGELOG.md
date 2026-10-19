@@ -42,6 +42,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Ràng buộc §2 #1 đổi: dùng URD 2.1 cho Phụ lục D trừ D#4 (cấu hình EVC — QC owner: không đụng), 7, 8, 9 ⇒ GN **không đổi** REQ / SC / CL | QC owner chốt 19/10/2026 | Không |
 | 2026-10-19 | SCOPE↓ | Đối chiếu TP §2.2 (chỉ đọc, không sửa TP): **gạch nợ bằng EVC / voucher ngoài phạm vi** (#5). CL-GN-01, 08 → Out-scope; CL-GN-10 thu hẹp (bỏ ý nguồn / cấu hình EVC — D#4); **deprecated SC-GN-048** (Paid voucher dùng gạch nợ). Giữ SC-GN-045 (ranh giới), 046, 047 (chừa EVC lock — TP in-scope), nhánh Cọc 037, 038, 043 | QC owner 19/10/2026 + TP §2.2 #5 | SC 49→48 · deprecated 1→2 · P1 42→41 · cl_open 8→6 |
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo TP §2.2 #5 (chỉ đọc TP): RISK-GN-01 Status → Out-scope (bỏ SC-GN-048 khỏi cột SC); §3 Nợ #1, #2 (CL-GN-01, 08) → đóng Out-scope. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
+| 2026-10-19 | UPDATE | Dọn chữ cũ theo CL-GN-02: RISK-GN-02, 04 bỏ SC-GN-049 (không test lỗi / timeout trên STG); §3 Nợ #3 số SC chờ CL 5→3. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -59,5 +60,5 @@ updated: 2026-10-19
 |---|---|---|---|
 | 1 | ✅ CL-GN-01 Paid voucher — **Out-scope 19/10/2026** (TP §2.2 #5 gạch nợ bằng EVC / voucher); SC-GN-048 deprecated | Đóng | Không hỏi BA |
 | 2 | ✅ CL-GN-08 thứ tự đội EVC ↔ INVOICE — **Out-scope 19/10/2026** (TP §2.2 #5) | Đóng | Không hỏi BA |
-| 3 | 🟡 5 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
+| 3 | 🟡 3 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
 | 4 | 🟡 Mock API kênh thanh toán / đội EVC / consumer Kafka Out chưa có | TP Entry Criteria | Chuẩn bị trước R1 (26/10/2026) |
