@@ -55,6 +55,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Dọn chữ cũ: CL-XHD-33 viết lại theo quyết định dùng URD 2.1 cho Phụ lục D (Status → rõ một phần, câu hỏi khớp file vòng 3); §3 Nợ #5 số SC chờ CL 17→18. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | CL-XHD-34 làm rõ một phần: QC owner cập nhật flow test — HĐ dịch vụ xuất ngay khi thanh toán, HĐ thiết bị sau giao hàng / triển khai thành công, 1 đơn nhiều HĐ (khớp BR-XHD-03, 14). Còn hỏi tín hiệu kích hoạt HĐ TB (tín hiệu giao hàng theo phương thức hay trạng thái đơn hoàn tất). Flow ở `07_environments/environments.md` cập nhật. Không đổi SC | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | CL-XHD-34 làm rõ thêm: HĐ thiết bị kích hoạt bởi tín hiệu giao hàng từng phương thức (phiếu thi công / Vendor / quầy) — khớp BR-DB-02, 06; SC-XHD-074, 105 giữ nguyên. Còn hỏi duy nhất: TB hình thức "Không" lấy tín hiệu nào | QC owner 19/10/2026 | Không |
+| 2026-10-19 | UPDATE | CL-XHD-34: QC owner xác nhận thiết bị nào có tín hiệu giao hàng thì xuất HĐ thiết bị đó (không chờ cả đơn hoàn tất). Không đổi SC | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
