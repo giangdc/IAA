@@ -6,7 +6,7 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module XHD
   cl: 34
-  cl_open: 16
+  cl_open: 15
   cl_blocking: 3        # CL chặn sinh TC / execute (đánh dấu ⛔ BLOCKING)
   risk: 10
   risk_high: 6
@@ -194,7 +194,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-07 · PĐK: nhận diện hợp đồng tổ chức, nguồn trạng thái PĐK, cách tính "2 ngày cuối tháng", duyệt muộn
-📍 `DOC-v2.0-01 BR-XHD-03 · L400`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-44 (Critical), GAP-45 (Major), GAP-61 (Major)
+📍 `DOC-v2.0-01 BR-XHD-03 · L400`  ·  Status: **Resolved 19/10/2026** · GAP-44 (Critical), GAP-45 (Major), GAP-61 (Major)
 
 > Hợp đồng tổ chức: chỉ phát hành khi đã duyệt PĐK; hai ngày cuối tháng không xét điều kiện này. Quên duyệt PĐK thì không autobill. Khi có thay đổi hoặc dịch chuyển luồng duyệt PĐK/hợp đồng thì phải hiệu chỉnh lại điều kiện này.
 
@@ -209,6 +209,8 @@ updated: 2026-10-19
 🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — Hợp đồng tổ chức chưa duyệt PĐK ⇒ hệ thống **chặn** và ghi lỗi vào log; "không autobill" = **phải xuất hóa đơn tay** (xuất tay ngoài phạm vi TP) ⇒ hóa đơn bị chặn không tự phát hành ở đợt worker sau (SC-XHD-065, QC chỉ verify không phát hành). Quy tắc áp cho **cả đơn bán mới và đơn bán thêm**. Còn mở: đơn bán thêm xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới; trường trạng thái PĐK. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 🟡 **Làm rõ thêm 19/10/2026 (sau vòng 3)** — Chuẩn bị dữ liệu PĐK: cập nhật tình trạng PĐK ở menu *Báo cáo phiếu đăng ký › Duyệt HD › Chuyển tình trạng PDK*; kiểm tra trạng thái PĐK ở *Web admin › Chi tiết đơn hàng › Thông tin khác › Thông tin duyệt đơn*. Phạm vi: **mỗi kênh bán test 1 hợp đồng doanh nghiệp** (tổ chức). Tool ghi ở `07_environments/environments.md`. Còn mở (duy nhất): đơn bán thêm trên hợp đồng tổ chức xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới. Nguồn: QC owner 19/10/2026.
+
+✅ **RESOLVED 19/10/2026** — Đơn **bán thêm** trên hợp đồng tổ chức (doanh nghiệp) có **PĐK mới riêng**: phải duyệt PĐK mới đó thì hóa đơn của đơn bán thêm mới được xuất; PĐK đã duyệt từ lần bán mới **không** dùng cho đơn bán thêm. Chưa duyệt PĐK mới ⇒ chặn (trừ 2 ngày lịch cuối tháng), như đơn bán mới. Hết GAP-61. Nguồn: QC owner 19/10/2026.
 
 ---
 

@@ -60,6 +60,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-04:** delay 2 giờ kênh FPL áp cả dòng dịch vụ và dòng thiết bị — SC-XHD-050 ghi rõ | QC owner 19/10/2026 | cl_open 18→17 |
 | 2026-10-19 | UPDATE | CL-XHD-07 làm rõ thêm: tool cập nhật / kiểm tra trạng thái PĐK (thêm vào `07_environments/environments.md`); mỗi kênh bán test 1 hợp đồng doanh nghiệp. Còn mở: PĐK của đơn bán thêm | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-24:** cutover có test — đơn luồng cũ / mới, không mất / trùng hóa đơn (URD 2.1 BR-DB-08). SC-XHD-107, 108 hết chờ CL. Hệ quả đã biết BR-DB-08 L304 (thiết bị bị bỏ sót, quét tay — ngoài phạm vi) ghi rõ trong CL | QC owner 19/10/2026 | cl_open 17→16 · blocked_by_cl 9→7 |
+| 2026-10-19 | UPDATE | **Đóng CL-XHD-07:** đơn bán thêm trên hợp đồng tổ chức có PĐK mới riêng — phải duyệt PĐK mới mới xuất hóa đơn (hết GAP-61) | QC owner 19/10/2026 | cl_open 16→15 |
 
 ## 2. Ràng buộc còn hiệu lực
 
