@@ -14,7 +14,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p1: 12
   p2: 8
   p3: 0
-  blocked_by_cl: 7
+  blocked_by_cl: 6
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -59,12 +59,12 @@ updated: 2026-10-19
 | SC-HK-012 | Nội dung hiển thị | REQ-HK-007 | DOC-v2.0-01 BR-HK-05 (L588) | Dòng DV có số tháng sử dụng trên SPF | Chuẩn bị nội dung | Nội dung = tên dịch vụ + số tháng; không có "từ ngày – đến ngày"; không lấy nguyên tên gốc trên đơn | P1 | Functional | NEW |
 | SC-HK-013 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | Hóa đơn có dòng ở đủ 5 mức: KCT, 0%, 5%, 8%, 10% | Chuẩn bị tổng tiền | 5 dòng (thành tiền, thuế GTGT, tổng cộng mỗi mức) + 1 dòng tổng cộng chung = tổng các mức | P1 | Functional | NEW |
 | SC-HK-014 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | Hóa đơn chỉ có dòng **một** mức (10%) | Chuẩn bị tổng tiền | Chỉ in 1 dòng mức 10% + dòng tổng cộng chung; **không** in dòng KCT / 0% / 5% / 8% (CL-HK-04, 19/10/2026) | P2 | Boundary | NEW |
-| SC-HK-015 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn phát hành hóa đơn lần đầu | Nhánh tiền trả trước chạy | Hệ thống Dịch vụ nhận lệnh add tiền trả trước cho đơn; đơn được đánh dấu đã add | P1 | Integration | NEW |
+| SC-HK-015 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn phát hành **hóa đơn có dịch vụ trả trước** | Nhánh tiền trả trước chạy | Hệ thống Dịch vụ nhận lệnh add tiền trả trước (số tiền gói dịch vụ trả trước) vào **hợp đồng**; đơn được đánh dấu đã add — áp dụng cả đơn bán mới và bán thêm (CL-HK-07, 19/10/2026) | P1 | Integration | NEW |
 | SC-HK-016 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước ở hóa đơn 1 | Hóa đơn 2 của cùng đơn phát hành | **Không** add tiền trả trước lần 2 | P1 | Negative | NEW |
 | SC-HK-017 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước | Invoice Event của cùng hóa đơn bị gửi lặp | Không add lại (idempotent) | P2 | Negative | NEW |
 | SC-HK-018 | Đẩy hóa đơn điện tử | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | Hệ thống hóa đơn điện tử lỗi / timeout (mock) | Đẩy hóa đơn điện tử | (giả định TP: đẩy lại lần sau) — ⛔ chờ CL-HK-05 | P2 | Negative | NEW |
 | SC-HK-020 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | Hóa đơn của đơn **bán thêm** | Chuẩn bị ký hiệu | Dùng **đầu U** như hóa đơn bán mới — hai ký tự cuối theo vùng (vd Vùng 1 `QA`) (CL-HK-01, 19/10/2026) — điểm verify ký hiệu ⛔ chờ CL-HK-11 | P2 | Functional | NEW |
-| SC-HK-021 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn có **hóa đơn** đầu tiên chỉ gồm thiết bị (hóa đơn dịch vụ phát hành sau) | Hóa đơn TB phát hành | Tiền trả trước chỉ add **1 lần cho mỗi đơn hàng** (CL-HK-07); add ở hóa đơn thiết bị này hay hóa đơn dịch vụ sau ⛔ chờ CL-HK-07 | P2 | Functional | NEW |
+| SC-HK-021 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn có **hóa đơn** đầu tiên chỉ gồm thiết bị (hóa đơn dịch vụ phát hành sau) | Hóa đơn TB phát hành | **Không** add tiền trả trước ở hóa đơn chỉ gồm thiết bị; add 1 lần khi **hóa đơn có dịch vụ trả trước** phát hành (CL-HK-07, 19/10/2026) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
 
@@ -244,7 +244,7 @@ updated: 2026-10-19
 
 > Mỗi đơn chỉ add tiền trả trước một lần, kể cả khi đơn phát hành ở nhiều đợt hóa đơn.
 
-↳ **Ghi chú:** Nếu add ở hóa đơn đầu (chỉ TB) thì số tiền DV chưa có — CL-HK-07.
+↳ **Ghi chú:** Tiền trả trước add vào hợp đồng theo hóa đơn có dịch vụ trả trước; hóa đơn chỉ gồm thiết bị không add (CL-HK-07 resolved 19/10/2026).
 
 ## Scenarios — CARRIED (reference only)
 

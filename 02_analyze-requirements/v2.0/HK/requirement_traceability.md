@@ -125,7 +125,7 @@ updated: 2026-10-19
 
 > Mỗi đơn chỉ add tiền trả trước một lần, kể cả khi đơn phát hành ở nhiều đợt hóa đơn.
 
-↳ **Ghi chú:** "Mỗi đơn một lần" (per đơn), nhưng add ở đợt nào, số tiền nào, TB có add không: chưa rõ (CL-HK-07 / GAP-59). Đẩy Dịch vụ lỗi: CL-HK-06.
+↳ **Ghi chú:** "Mỗi đơn một lần": add số tiền gói dịch vụ trả trước vào hợp đồng, theo hóa đơn có dịch vụ trả trước; hóa đơn chỉ gồm thiết bị không add; đơn bán thêm giống bán mới (CL-HK-07 resolved 19/10/2026). Đẩy Dịch vụ lỗi: CL-HK-06.
 
 ---
 

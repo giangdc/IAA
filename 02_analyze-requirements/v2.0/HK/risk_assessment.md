@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 11
-  cl_open: 5
+  cl_open: 4
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -33,7 +33,7 @@ updated: 2026-10-19
 |---------|-------------|--------|----------|--------------|------------|---------------------|--------|--------|
 | RISK-HK-01 | HK / ký hiệu + ID hóa đơn điện tử | Bảng map vùng × loại đầu lấy theo URD 2.1 BR-HK-03; phạm vi chỉ đầu U (hóa đơn bán mới + bán thêm — CL-HK-01). Rủi ro còn lại: tool Liệt kê cước chỉ hiển thị ID hóa đơn ⇒ **chưa có chỗ kiểm ký hiệu** (2 ký tự cuối theo vùng); sai đầu số = sai kê khai thuế | High | DOC-v2.0-01 BR-HK-03 (L581-585), §C#1; DOC-v2.0-02 BR-HK-03, 04; GAP-17 | SC-HK-008, 009, 010, 011, 020 — 7 vùng × đầu U + FPL | Hỏi BA điểm verify ký hiệu (CL-HK-11); ID hóa đơn (SC-HK-011) verify trên Liệt kê cước | Open | SC-HK-008, SC-HK-009, SC-HK-010, SC-HK-011, SC-HK-020 · REQ-HK-005, REQ-HK-006 |
 | RISK-HK-02 | HK / dòng EVC + chiết khấu + thông tin mẫu | BR-HK-02 bắt chuẩn bị "dòng EVC" và "thông tin theo mẫu" nhưng không có rule ⇒ chưa có SC; nếu thiếu thì hóa đơn điện tử không được đẩy (BR-HK-02) — chặn cả luồng | High | DOC-v2.0-01 BR-HK-02 (L575), §D#6; GAP-04 (Blocker), GAP-35 | SC-HK-006, 007 (gián tiếp) | PM chốt Out-scope hoặc đặc tả (CL-HK-03, 04); TP đề xuất Out-scope | Open | SC-HK-006, SC-HK-007 · REQ-HK-004, REQ-HK-010 |
-| RISK-HK-03 | HK / tiền trả trước | "Một lần mỗi đơn" nhưng không rõ đợt nào, số tiền nào, TB có add không⇒ add sai số tiền hoặc thiếu tiền DV phát hành sau | Medium | DOC-v2.0-01 BR-HK-09 (L596); GAP-59 | SC-HK-015, 016, 021 | Resolve CL-HK-07; đơn DV + TB phát hành nhiều đợt | Open | SC-HK-015, SC-HK-016, SC-HK-021 · REQ-HK-009 |
+| RISK-HK-03 | HK / tiền trả trước | "Một lần mỗi đơn" nhưng không rõ đợt nào, số tiền nào, TB có add không⇒ add sai số tiền hoặc thiếu tiền DV phát hành sau | Medium | DOC-v2.0-01 BR-HK-09 (L596); GAP-59 | SC-HK-015, 016, 021 | CL-HK-07 đã chốt 19/10/2026 (add theo hóa đơn có dịch vụ trả trước); test đơn dịch vụ + thiết bị phát hành nhiều đợt | Open | SC-HK-015, SC-HK-016, SC-HK-021 · REQ-HK-009 |
 | RISK-HK-04 | HK / hệ thống ngoài | Hóa đơn điện tử, hệ thống Dịch vụ không sẵn trên STG; không có hành vi lỗi ⇒ không verify được "đã gen hóa đơn điện tử" / "đã add tiền" | Medium | TP §2.1b #24, #25; GAP-18, GAP-20 | SC-HK-006, 015, 018 | Mock/stub + xác nhận hành vi lỗi hóa đơn điện tử (CL-HK-05). Lỗi / timeout hệ thống Dịch vụ: **không test trên STG** — retry thủ công (CL-HK-06, SC-HK-019 deprecated 19/10/2026) | Open | SC-HK-006, SC-HK-015, SC-HK-018 · REQ-HK-001, REQ-HK-004, REQ-HK-009 |
 | RISK-HK-05 | HK / đơn vị có đầu số riêng | Đơn vị có đầu số / dãy số / mẫu riêng (vd FPL, FMC) *"thuộc luồng nghiệp vụ cũ"* (URD 2.1 BR-HK-10) ⇒ **ngoài scope test** (CL-HK-02, QC owner 19/10/2026). Riêng dòng FPL trong bảng map ký hiệu vẫn test (SC-HK-009) | Low | DOC-v2.0-01 BR-HK-03 (L583), §D#5; DOC-v2.0-02 BR-HK-10 (L810-812); GAP-34 | — | Không test đơn vị đầu số riêng | Out-scope | REQ-HK-005 |
 
@@ -47,7 +47,7 @@ updated: 2026-10-19
 > KHÔNG để trống. Vòng đời: `Open` → `Resolved` (khi đã cover) · `Open` → `Pending` (defer) · `→ Closed` (bỏ scope).
 
 ## Khuyến nghị tổng thể
-1. **Resolve blocker clarifications trước generate-tc** các scenario liên quan: CL-HK-03 (⛔ dòng EVC / chiết khấu), CL-HK-07 (tiền trả trước).
+1. **Resolve blocker clarifications trước generate-tc** các scenario liên quan: CL-HK-03 (⛔ dòng EVC / chiết khấu).
 2. **Ưu tiên test P1 high-risk:** SC-HK-004, 006..008, 011..013, 015, 016.
 3. **Performance / cần môi trường:** không có NFR; cần mock hóa đơn điện tử + hệ thống Dịch vụ (RISK-HK-04).
 4. **ID/text cleanup (non-blocking, cần trước automation):** không có.
@@ -148,7 +148,7 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-07 · Add tiền trả trước 1 lần / đơn nhiều đợt: đợt nào, số tiền nào, TB có add?
-📍 `DOC-v2.0-01 BR-HK-09 (L596)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-59 (Major), GAP-60 (Major)
+📍 `DOC-v2.0-01 BR-HK-09 (L596)`  ·  Status: **Resolved 19/10/2026** · GAP-59 (Major), GAP-60 (Major)
 
 **URD 2.2** — `L596`
 > Mỗi đơn chỉ add tiền trả trước một lần, kể cả khi đơn phát hành ở nhiều đợt hóa đơn.
@@ -160,6 +160,8 @@ updated: 2026-10-19
 🟡 **Làm rõ một phần 19/10/2026** — hóa đơn mua dịch vụ trả trước được add tiền trả trước = **số tiền gói dịch vụ trả trước KH đã đăng ký**. Tra cứu: Quản lý kế toán › Cước trả trước › Tra cứu new. Còn mở: đơn phát hành nhiều đợt thì add ở hóa đơn nào (hóa đơn chỉ TB?), đơn bán thêm có khác không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — **Mỗi đơn hàng chỉ add tiền trả trước 1 lần**, kể cả khi đơn phát hành nhiều đợt hóa đơn. Còn mở: add ở **hóa đơn** nào (hóa đơn đầu tiên của đơn — kể cả hóa đơn chỉ gồm thiết bị — hay hóa đơn có dịch vụ trả trước); đơn bán thêm có khác không. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Add tiền trả trước **1 lần cho mỗi đơn hàng**: số tiền gói dịch vụ trả trước được add vào **hợp đồng**, lấy theo **hóa đơn có dịch vụ trả trước** (không phải hóa đơn đầu tiên của đơn). Hóa đơn chỉ gồm thiết bị **không** add. Đơn **bán thêm áp dụng giống** đơn bán mới. SC-HK-015, 021 viết lại; SC-HK-021 hết chờ CL. Nguồn: QC owner 19/10/2026.
 
 ---
 
