@@ -490,6 +490,8 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA:** Gửi ma trận kênh × nhóm DV × {bán mới, bán thêm} thực bán; cặp nào không bán thì bỏ khỏi phạm vi test.
 
+⛔ **Ngoài scope test 19/10/2026** — câu *"Chi nhánh nào được bán sản phẩm dịch vụ nào do bên quản lý sản phẩm bổ sung thuộc tính"* thuộc **TP §2.2 #4** *"Thuộc tính chi nhánh nào được bán sản phẩm / dịch vụ nào"* ⇒ không sinh SC, không kiểm thuộc tính này. QC owner 19/10/2026. Câu hỏi ma trận kênh × nhóm DV vẫn giữ (phạm vi FR01).
+
 ---
 
 ### CL-XHD-27 · Danh mục HT triển khai (DOC-v2.0-05): map sang 3 nguồn tín hiệu; TB "Không" phát hành thế nào?

@@ -50,6 +50,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 2: **đóng** CL-XHD-20, 25, 28, 30 · **làm rõ một phần** CL-XHD-14, 15, 19, 27, 31, 32. SC-XHD-106 hết chờ CL (bán thêm = rule chung); SC-XHD-081, 095, 109, 046 cập nhật Then (vẫn chờ CL). Ghi chú chung: QC không xem được log ⇒ Then "ghi log" chỉ verify hành vi. Câu dính URD 2.1 (CL-XHD-22, 23, 24) **chưa cập nhật** — chờ QC owner chốt dùng 2.1 cho Phụ lục D | QC trả lời 19/10/2026 (file câu hỏi vòng 2) | cl_open 30→26 · blocked_by_cl 17→16 |
 | 2026-10-19 | UPDATE | **Dùng lại URD 2.1 cho Phụ lục D** (trừ D#4, 7, 8, 9): CL-XHD-22, 23, 24 làm rõ một phần theo RISK-01, BR-XHD-09, BR-DB-08 của 2.1 (CL-XHD-22 vẫn BLOCKING — mail chưa đặc tả); **SC-XHD-107, 108 dùng lại** (bỏ deprecated, vẫn chờ CL-XHD-24 về luồng cũ trên STG) | QC owner chốt 19/10/2026 | SC 109→111 · deprecated 2→0 · P2 23→25 · blocked_by_cl 16→18 |
 | 2026-10-19 | SCOPE↓ | Đánh dấu **ngoài scope test** theo TP §2.2 (chỉ đọc TP): **SC-XHD-098** (hủy đơn đã có HĐ — #2), **SC-XHD-100** (đổi chi nhánh, HĐ cũ không tự điều chỉnh — #3) → deprecated; REQ-XHD-033 không còn SC; REQ-XHD-034 giữ SC-XHD-099 | QC owner 19/10/2026 + TP §2.2 #2, #3 | SC 111→109 · deprecated 0→2 · P1 85→84 · P2 25→24 |
+| 2026-10-19 | UPDATE | Gắn nhãn **ngoài scope test** (TP §2.2 #4 — thuộc tính chi nhánh được bán SP / DV) tại REQ-XHD-034 và CL-XHD-26; vốn không có SC nào cho phần này. Không đổi REQ / SC / CL | QC owner 19/10/2026 + TP §2.2 #4 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 

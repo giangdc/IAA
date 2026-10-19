@@ -428,6 +428,8 @@ updated: 2026-10-16
 
 ⛔ **Một phần ngoài scope test 19/10/2026** — TP §2.2 #3 *"Điều chỉnh hóa đơn đã phát hành khi chi nhánh đổi giữa các lần phát hành"* ⇒ SC-XHD-100 deprecated; giữ SC-XHD-099 (chi nhánh = chi nhánh quản lý hợp đồng). QC owner 19/10/2026.
 
+⛔ **Ngoài scope test 19/10/2026** — câu *"Chi nhánh nào được bán sản phẩm dịch vụ nào do bên quản lý sản phẩm bổ sung thuộc tính"* thuộc **TP §2.2 #4** *"Thuộc tính chi nhánh nào được bán sản phẩm / dịch vụ nào"* ⇒ không sinh SC, không kiểm thuộc tính này. QC owner 19/10/2026.
+
 ---
 
 ### REQ-XHD-035 · Phát hành qua Billing System; ghi BillNumber, BillDate = ngày phát hành thực tế
