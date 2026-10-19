@@ -6,12 +6,12 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module GN
   req: 20
-  sc: 49
-  new: 49
+  sc: 48
+  new: 48
   modified: 0
   carried: 0
-  deprecated: 1
-  p1: 42
+  deprecated: 2
+  p1: 41
   p2: 6
   p3: 1
   blocked_by_cl: 3
@@ -36,7 +36,7 @@ updated: 2026-10-19
 **Áp dụng cho GN:** fan-out theo **3 điểm chạm** · **paymentstatus** (tạm / hoàn tất) × **kênh** (sàn / không sàn) · **luồng** (Paid / Cọc) · biên **Paid vs nợ** (<, =, >) · biên **cọc vs nợ**. Dữ liệu kênh sàn = Shopee (20), Tiktok (21) theo giả định CL-GN-03.
 
 ## Tổng quan
-- Tổng số scenarios: 49 (NEW: 49, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
+- Tổng số scenarios: 48 (NEW: 48, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:`.
 
 ## Scenarios — NEW & MODIFIED (chi tiết đầy đủ)
@@ -92,7 +92,6 @@ updated: 2026-10-19
 | SC-GN-045 | EVC | REQ-GN-019 | DOC-v2.0-01 BR-VC (L545) | Đơn có EVC (không lock), luồng Paid | Gạch nợ chạy | INVOICE **không** ghi Payment cho phần EVC; chỉ gạch tiền khách trên phần nợ còn lại | P1 | Negative | NEW |
 | SC-GN-046 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; EVC lock 300k; Paid khách 900k | Gạch tiền khách | Gạch = min(1.000k − 300k, 900k) = **700k**; Paid khách dư 200k giữ lại; phần 300k chừa ra | P1 | Functional | NEW |
 | SC-GN-047 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; lock **0**; Paid khách 500k / 1.000k | Gạch tiền khách | **Lock 0 ⇒ gạch như thường: 500k / 1.000k** | P2 | Boundary | NEW |
-| SC-GN-048 | Paid voucher | REQ-GN-012, REQ-GN-019 | DOC-v2.0-01 BR-DP-01 (L474) ↔ BR-VC (L545) | Đơn có Paid PaidType **voucher** Amount > 0 cùng OrderCode | Gạch nợ luồng Paid | Paid voucher **được dùng** gạch nợ như Paid tiền khách (CL-GN-01, 19/10/2026) | P1 | Functional | NEW |
 | SC-GN-050 | Bán thêm | REQ-GN-016, REQ-GN-018 | DOC-v2.0-04 mail PM ↔ DOC-v2.0-01 BR-GC-01 (L529) | Đơn **bán thêm** trên hợp đồng đang có cọc dư từ đơn trước, luồng Cọc | Gạch cọc | Dùng cọc còn lại của **hợp đồng** (không theo OrderCode) — điểm khác (nếu có) ⛔ chờ CL-GN-07 (CL-XHD-25 đã chốt: rule chung) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
@@ -524,16 +523,6 @@ updated: 2026-10-19
 
 ---
 
-##### SC-GN-048 · Paid voucher có bị loại?
-📍 `DOC-v2.0-01 §II.c BR-DP-01 · L474` ↔ `BR-VC · L545`
-
-> gồm cả voucher và tiền khách thanh toán
-> Phần gạch nợ bằng EVC do đội EVC thực hiện
-
-↳ **Ghi chú:** Nếu INVOICE dùng Paid voucher để gạch thì đội EVC gạch thêm ⇒ gạch trùng. TP giả định loại Paid voucher (CL-GN-01).
-
----
-
 ##### SC-GN-050 · Đơn bán thêm dùng cọc hợp đồng
 📍 `DOC-v2.0-01 §II.c BR-GC-01 · L529` + `DOC-v2.0-04 mail PM`
 
@@ -552,4 +541,5 @@ updated: 2026-10-19
 
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
+| SC-GN-048 | Paid voucher dùng gạch nợ | GN | v2.0 (19/10/2026) | TP §2.2 #5: gạch nợ bằng EVC / voucher ngoài phạm vi (CL-GN-01 Out-scope) |
 | SC-GN-049 | API EVC lỗi / timeout | GN | v2.0 (19/10/2026) | CL-GN-02: STG không test timeout; thực tế đội dự án retry thủ công, API lỗi ⇒ log bug |

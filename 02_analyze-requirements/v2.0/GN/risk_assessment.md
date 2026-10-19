@@ -6,7 +6,7 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module GN
   cl: 10
-  cl_open: 8
+  cl_open: 6
   cl_blocking: 0
   risk: 6
   risk_high: 3
@@ -58,7 +58,7 @@ updated: 2026-10-19
 > 1 CL = 1 heading `### CL-GN-NN · <câu hỏi ngắn>`. Dòng META mang `Status` (+ `⛔ BLOCKING`) và mã GAP. Khi resolved: **thêm** `✅ RESOLVED <ngày> — <kết luận>`, giữ phần phân tích cũ.
 
 ### CL-GN-01 · Paid voucher có bị loại khỏi gạch nợ của INVOICE không?
-📍 `DOC-v2.0-01 BR-DP-01 (L474)` ↔ `BR-GN-01 (L508)` ↔ `BR-VC (L545)`  ·  Status: **Open — đã rõ một phần 19/10/2026** (nhánh Paid có voucher) · GAP-40 (Critical)
+📍 `DOC-v2.0-01 BR-DP-01 (L474)` ↔ `BR-GN-01 (L508)` ↔ `BR-VC (L545)`  ·  Status: **Out-scope 19/10/2026** (nhánh Paid có voucher) · GAP-40 (Critical)
 
 **BR-DP-01 — đồng bộ cả voucher** — `L474`
 > Paid đồng bộ 1:1 từ Orderpaid theo OrderCode, gồm cả voucher và tiền khách thanh toán; mỗi Paid gán PaidType theo nguồn tiền.
@@ -78,6 +78,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Khi gạch nợ nhánh Paid, INVOICE dùng (a) chỉ Paid tiền khách hay (b) cả Paid voucher? Nếu (b): voucher nhóm nào (Payment Hub?) và đội EVC có bỏ qua khoản đó không?
 
 🟡 **Làm rõ một phần 19/10/2026** — Gạch nợ của INVOICE dùng **cả Paid voucher và các loại voucher giảm tiền** (không loại voucher) — bỏ giả định TP; SC-GN-048 đổi Then. Hết BLOCKING. Còn mở: đội EVC có bỏ qua khoản voucher này không (tránh gạch 2 lần). Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+⛔ **OUT-SCOPE 19/10/2026** — TP §2.2 #5 *"Gạch nợ bằng EVC / voucher"* ngoài phạm vi (BR-VC L545 *"Phần gạch nợ bằng EVC do đội EVC thực hiện"*); chỉ giữ phần INVOICE chừa EVC bị lock. QC owner 19/10/2026: phần gạch nợ EVC không test. Gạch nợ bằng Paid voucher thuộc phần này ⇒ SC-GN-048 deprecated, phần còn hỏi (đội EVC có bỏ qua voucher không) không hỏi BA. Đồng bộ Paid gồm dòng voucher (SC-GN-002) vẫn test.
 
 ---
 
@@ -167,7 +169,7 @@ updated: 2026-10-19
 ---
 
 ### CL-GN-08 · Nhánh Paid: thứ tự giữa đội EVC gạch EVC và INVOICE gạch tiền khách?
-📍 `DOC-v2.0-01 BR-VC (L545-546)`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-VC (L545-546)`  ·  Status: **Out-scope 19/10/2026** · *mới — 16/10/2026*
 
 **URD 2.2** — `L545-546`
 > Phần gạch nợ bằng EVC do đội EVC thực hiện; ISC tự quyết phương thức quản trị và xử lý voucher.
@@ -176,6 +178,8 @@ updated: 2026-10-19
 ↳ **Ghi chú:** 2.2 không giữ câu "gạch EVC trước". Nếu INVOICE gạch tiền khách trước khi đội EVC gạch (EVC không lock) ⇒ tiền khách cover luôn phần EVC, Paid khách bị dùng thừa, đội EVC không còn nợ để gạch. Chỉ phần **lock** được chừa ra theo 2.2.
 
 **Câu hỏi cho BA:** Ở nhánh Paid, INVOICE có phải chờ đội EVC gạch phần EVC (không lock) xong mới gạch tiền khách không? Nếu không, INVOICE có chừa phần EVC không lock không?
+
+⛔ **OUT-SCOPE 19/10/2026** — TP §2.2 #5 *"Gạch nợ bằng EVC / voucher"* ngoài phạm vi (BR-VC L545 *"Phần gạch nợ bằng EVC do đội EVC thực hiện"*); chỉ giữ phần INVOICE chừa EVC bị lock. QC owner 19/10/2026: phần gạch nợ EVC không test. Thứ tự đội EVC gạch EVC ↔ INVOICE gạch tiền khách thuộc phần đội EVC ⇒ không hỏi. SC-GN-045 (INVOICE không ghi Payment cho phần EVC) giữ làm kiểm ranh giới.
 
 ---
 
@@ -193,7 +197,7 @@ updated: 2026-10-19
 ---
 
 ### CL-GN-10 · Chi tiết gạch nợ URD 2.2 chuyển sang Phụ lục D#4 — chưa có đặc tả
-📍 `DOC-v2.0-01 §D#4 · L671-673`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 §D#4 · L671-673`  ·  Status: **Open — thu hẹp 19/10/2026** · *mới — 16/10/2026*
 
 > Cấu hình EVC: PaidType, Owner gạch, trần 50%, EVC bị lock chi tiết.
 > BR-VC-01 đến 07, BR-GC-04 đến 07
@@ -202,3 +206,5 @@ updated: 2026-10-19
 ↳ **Ghi chú:** Phụ lục D của URD 2.2 trỏ chi tiết về tài liệu không còn sử dụng ⇒ chưa có: danh mục PaidType; nguồn tổng EVC + tiền lock và loại EVC nào có lock (CL-GN-02); bảng tồn cọc và nơi ghi loại cọc của dịch vụ (CL-GN-07); nghĩa của "mỗi bill chỉ gạch một lần" (CL-GN-05); thứ tự đội EVC gạch (CL-GN-08). Phần URD 2.2 tự đủ, vẫn dùng: cọc theo hợp đồng (L529, L534), mỗi dịch vụ trừ đúng loại cọc, gom dòng Payment theo loại cọc (L539).
 
 **Câu hỏi cho BA:** Phụ lục D#4 của URD 2.2 chưa có đặc tả. PO / đội EVC cung cấp: (1) danh mục PaidType và mã voucher; (2) nguồn / API lấy tổng EVC và tiền lock, loại EVC nào có lock; (3) bảng / trường lưu tồn cọc và loại cọc của từng dịch vụ?
+
+🟡 **Thu hẹp 19/10/2026** — TP §2.2 #5 *"Gạch nợ bằng EVC / voucher"* ngoài phạm vi (BR-VC L545 *"Phần gạch nợ bằng EVC do đội EVC thực hiện"*); chỉ giữ phần INVOICE chừa EVC bị lock. QC owner 19/10/2026: phần gạch nợ EVC không test. Phụ lục D#4 (cấu hình EVC) không dùng (QC owner). Bỏ ý (2) nguồn / API EVC + loại EVC lock. Còn hỏi: (1) danh mục PaidType (để phân biệt Paid tiền khách / voucher khi đồng bộ — SC-GN-002); (3) bảng / trường lưu tồn cọc và loại cọc của từng dịch vụ.

@@ -40,6 +40,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Bổ sung tool verify vào `test_data_catalog.md` §Ghi chú chung (đường dẫn menu ở `07_environments/environments.md`). Không đổi REQ / SC / CL | QC owner cung cấp 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 2: **đóng** CL-GN-02, 03 · **làm rõ một phần** CL-GN-01 (hết BLOCKING: Paid voucher được dùng gạch nợ), 05, 07, 09. SC-GN-048 đổi Then (Negative→Functional, hết chờ CL); **deprecated SC-GN-049** (STG không test API EVC lỗi / timeout); SC-GN-030, 050 cập nhật ghi chú | QC trả lời 19/10/2026 (file câu hỏi vòng 2) | SC 50→49 (deprecated 1) · P2 7→6 · cl_open 10→8 · cl_blocking 1→0 · blocked_by_cl 5→3 |
 | 2026-10-19 | UPDATE | Ràng buộc §2 #1 đổi: dùng URD 2.1 cho Phụ lục D trừ D#4 (cấu hình EVC — QC owner: không đụng), 7, 8, 9 ⇒ GN **không đổi** REQ / SC / CL | QC owner chốt 19/10/2026 | Không |
+| 2026-10-19 | SCOPE↓ | Đối chiếu TP §2.2 (chỉ đọc, không sửa TP): **gạch nợ bằng EVC / voucher ngoài phạm vi** (#5). CL-GN-01, 08 → Out-scope; CL-GN-10 thu hẹp (bỏ ý nguồn / cấu hình EVC — D#4); **deprecated SC-GN-048** (Paid voucher dùng gạch nợ). Giữ SC-GN-045 (ranh giới), 046, 047 (chừa EVC lock — TP in-scope), nhánh Cọc 037, 038, 043 | QC owner 19/10/2026 + TP §2.2 #5 | SC 49→48 · deprecated 1→2 · P1 42→41 · cl_open 8→6 |
 
 ## 2. Ràng buộc còn hiệu lực
 
