@@ -74,8 +74,8 @@ Template bug: `~/.claude/skills/log-bug/assets/bug-report-template.md` (skill đ
 
 ## Test Plan — v2.0
 - **Document:** `01_test-plans/TP-master-InvoiceIssuance-v2.0.md`
-- **Scope IN:** XHD (đồng bộ đơn & xuất HĐ) · GN (gạch nợ) · HK (hậu kỳ, tiền trả trước) — cả đơn bán mới và bán thêm · Scope test 11 chức năng FR01–FR11 (mã phân tích F01–F29)
-- **Scope OUT:** xuất HĐ tay · TL — điều chỉnh tính lương FPT Play SA (gồm đối soát FHR) · điều chỉnh/hủy HĐ · gạch nợ EVC (đội EVC) · ServiceID 2, 22 · xử lý HĐ dư khi trùng · quét tay giai đoạn giao thoa · xuất bổ sung case-by-case · Performance/Security
+- **Scope IN:** XHD (đồng bộ đơn & xuất hóa đơn) · GN (gạch nợ) · HK (hậu kỳ, tiền trả trước) — cả đơn bán mới và bán thêm · Scope test 11 chức năng FR01–FR11 (mã phân tích F01–F29)
+- **Scope OUT:** xuất hóa đơn tay · TL — điều chỉnh tính lương FPT Play SA (gồm đối soát FHR) · điều chỉnh/hủy hóa đơn · gạch nợ EVC (đội EVC) · ServiceID 2, 22 · xử lý hóa đơn dư khi trùng · quét tay giai đoạn giao thoa · xuất bổ sung case-by-case · Performance/Security
 - **Approach:** Manual E2E (Kafka + dữ liệu bảng, mock/stub hệ thống ngoài) | Automation: không
 - **Exit criteria (= Quality Gates):** G1–G6 (G7 N/A; G8 bỏ 13/10/2026) — xem test plan §4
 - **Lịch:** (QC lead chốt 14/10) Clear nghiệp vụ 19–20/10 (4 QC) · Review + gen TC 21–22/10 · Update TC + setup 23/10 (2 task này không có HuyenNHK) · R1 26–30/10 · buffer 02–03/11 · R2 04–10/11 · buffer 11/11 · R3 recheck bug 12–13/11/2026 (4 QC) · 1.264 TC · effort lịch 65 md (estimate công thức 145 md với AI gen TC 80% — KHÔNG ĐÁP ỨNG theo tham số) · bản xuất 3 QC · 47 md (TP §6B)

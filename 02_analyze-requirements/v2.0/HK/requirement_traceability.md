@@ -39,7 +39,7 @@ updated: 2026-10-19
 
 ## 2. Requirement Source Detail (verbatim quotes — home của REQ quote)
 
-### REQ-HK-001 · Sau Invoice Event, hai nhánh hậu kỳ chạy song song: HĐĐT và tiền trả trước
+### REQ-HK-001 · Sau Invoice Event, hai nhánh hậu kỳ chạy song song: hóa đơn điện tử và tiền trả trước
 📍 `DOC-v2.0-01 §III.a "Mô tả" · L552-561`  ·  Clarif: `CL-HK-05`, `CL-HK-06`
 
 > Điều chỉnh cách đẩy thông tin hậu kỳ (tạo hóa đơn điện tử, add tiền trả trước) khi một đơn có thể có nhiều hóa đơn.
@@ -47,29 +47,29 @@ updated: 2026-10-19
 > (...)
 > Thông tin dịch vụ và tiền dịch vụ được đẩy đúng theo từng đơn hàng cấu thành hóa đơn; đã add tiền trả trước cho khách.
 
-↳ **Ghi chú:** Trigger = Invoice Event của XHD (REQ-XHD-037). Actor: INVOICE, hệ thống HĐĐT, hệ thống Dịch vụ (L555). Hai nhánh độc lập ⇒ một nhánh lỗi không chặn nhánh kia — **suy diễn của analyst**, URD không có hành vi lỗi (CL-HK-05, 06).
+↳ **Ghi chú:** Trigger = Invoice Event của XHD (REQ-XHD-037). Actor: INVOICE, hệ thống hóa đơn điện tử, hệ thống Dịch vụ (L555). Hai nhánh độc lập ⇒ một nhánh lỗi không chặn nhánh kia — **suy diễn của analyst**, URD không có hành vi lỗi (CL-HK-05, 06).
 
 ---
 
-### REQ-HK-002 · Đẩy hậu kỳ đúng phần đã xuất HĐ, không phân biệt DV hay TB
+### REQ-HK-002 · Đẩy hậu kỳ đúng phần đã xuất hóa đơn, không phân biệt DV hay TB
 📍 `DOC-v2.0-01 §III.c BR-HK-01 · L570`  ·  Clarif: —
 
 > Phần nào trên đơn đã xuất hóa đơn thì đẩy hậu kỳ đúng phần đó, không phân biệt dịch vụ hay thiết bị.
 
-↳ **Ghi chú:** Lớp EP: HĐ chỉ DV · HĐ chỉ TB · HĐ DV + TB.
+↳ **Ghi chú:** Lớp EP: hóa đơn chỉ DV · hóa đơn chỉ TB · hóa đơn DV + TB.
 
 ---
 
-### REQ-HK-003 · Mỗi lần phát hành chỉ đẩy phần vừa xuất, tách theo từng đơn cấu thành HĐ
+### REQ-HK-003 · Mỗi lần phát hành chỉ đẩy phần vừa xuất, tách theo từng đơn cấu thành hóa đơn
 📍 `DOC-v2.0-01 §III.c BR-HK-01 · L571`  ·  Clarif: `CL-HK-09`
 
 > Mỗi lần phát hành chỉ đẩy phần vừa xuất, tách theo từng đơn hàng cấu thành hóa đơn.
 
-↳ **Ghi chú:** Với 1 đơn n HĐ (REQ-XHD-038) mỗi HĐ đẩy hậu kỳ riêng, không đẩy lại phần cũ. "Từng đơn hàng cấu thành hóa đơn": 1 hóa đơn chỉ thuộc 1 đơn hàng, 1 hợp đồng có nhiều đơn hàng (CL-HK-09 resolved 19/10/2026).
+↳ **Ghi chú:** Với 1 đơn n hóa đơn (REQ-XHD-038) mỗi hóa đơn đẩy hậu kỳ riêng, không đẩy lại phần cũ. "Từng đơn hàng cấu thành hóa đơn": 1 hóa đơn chỉ thuộc 1 đơn hàng, 1 hợp đồng có nhiều đơn hàng (CL-HK-09 resolved 19/10/2026).
 
 ---
 
-### REQ-HK-004 · Chuẩn bị đủ thông tin rồi mới đẩy HĐĐT; chưa đủ thì chưa đẩy
+### REQ-HK-004 · Chuẩn bị đủ thông tin rồi mới đẩy hóa đơn điện tử; chưa đủ thì chưa đẩy
 📍 `DOC-v2.0-01 §III.c BR-HK-02 · L575-577`  ·  Clarif: `CL-HK-03`, `CL-HK-04`, `CL-HK-05`
 
 > INVOICE chuẩn bị đầy đủ các thông tin cần để tạo hóa đơn điện tử (ký hiệu, ID hóa đơn, nội dung hiển thị, dòng EVC, tổng tiền theo thuế suất, thông tin theo mẫu) rồi mới đẩy sang hệ thống HĐĐT.
@@ -80,7 +80,7 @@ updated: 2026-10-19
 
 ---
 
-### REQ-HK-005 · Ký hiệu HĐ điện tử theo quy định thuế; đầu số sai là sai kê khai
+### REQ-HK-005 · Ký hiệu hóa đơn điện tử theo quy định thuế; đầu số sai là sai kê khai
 📍 `DOC-v2.0-01 §III.c BR-HK-03 · L581, L583-584`  ·  Clarif: `CL-HK-01`, `CL-HK-02`
 
 **URD 2.2** — `DOC-v2.0-01 L581, L583-584`
@@ -89,16 +89,16 @@ updated: 2026-10-19
 > Bảng map vùng miền và các đơn vị có đầu số riêng xem tài liệu kỹ thuật.
 > Đầu số sai là sai kê khai thuế, không chỉ lỗi hiển thị.
 
-↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1. Từ 19/10/2026: bảng map vùng × loại đầu lấy theo URD 2.1 BR-HK-03 (CL-HK-10); **chỉ test đầu U** cho HĐ bán mới và bán thêm, không test đầu M (CL-HK-01); đơn vị có đầu số riêng **ngoài scope test** (CL-HK-02), riêng dòng FPL của bảng map vẫn test. Điểm kiểm ký hiệu trên STG chờ CL-HK-11. Severity cao: sai là sai kê khai thuế.
+↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1. Từ 19/10/2026: bảng map vùng × loại đầu lấy theo URD 2.1 BR-HK-03 (CL-HK-10); **chỉ test đầu U** cho hóa đơn bán mới và bán thêm, không test đầu M (CL-HK-01); đơn vị có đầu số riêng **ngoài scope test** (CL-HK-02), riêng dòng FPL của bảng map vẫn test. Điểm kiểm ký hiệu trên STG chờ CL-HK-11. Severity cao: sai là sai kê khai thuế.
 
 ---
 
-### REQ-HK-006 · ID HĐ = loại đầu + năm + mã tỉnh + số HĐ
+### REQ-HK-006 · ID hóa đơn = loại đầu + năm + mã tỉnh + số hóa đơn
 📍 `DOC-v2.0-01 §III.c BR-HK-03 · L582`  ·  Clarif: `CL-HK-08`
 
 > ID hóa đơn ghép từ loại đầu + năm + mã tỉnh + số hóa đơn.
 
-↳ **Ghi chú:** Định dạng theo URD 2.1 BR-HK-04 (CL-HK-10, 19/10/2026): năm 2 chữ số, mã tỉnh theo danh mục tỉnh thành, số HĐ = trường Số trên HĐĐT; mã tỉnh lấy theo địa chỉ hợp đồng (CL-HK-08).
+↳ **Ghi chú:** Định dạng theo URD 2.1 BR-HK-04 (CL-HK-10, 19/10/2026): năm 2 chữ số, mã tỉnh theo danh mục tỉnh thành, số hóa đơn = trường Số trên hóa đơn điện tử; mã tỉnh lấy theo địa chỉ hợp đồng (CL-HK-08).
 
 ---
 
@@ -107,7 +107,7 @@ updated: 2026-10-19
 
 > Hiển thị tên dịch vụ + số tháng sử dụng (lấy từ SPF); không hiển thị kỳ hạn từ ngày – đến ngày và không dùng bảng map.
 
-↳ **Ghi chú:** Kiểm trên dữ liệu đẩy sang HĐĐT (khác XHD REQ-XHD-036 kiểm trên HĐ Billing). "Không dùng bảng map" — nội dung dựng từ tên dịch vụ + số tháng.
+↳ **Ghi chú:** Kiểm trên dữ liệu đẩy sang hóa đơn điện tử (khác XHD REQ-XHD-036 kiểm trên hóa đơn Billing). "Không dùng bảng map" — nội dung dựng từ tên dịch vụ + số tháng.
 
 ---
 
@@ -129,7 +129,7 @@ updated: 2026-10-19
 
 ---
 
-### REQ-HK-010 · Dòng EVC, dòng chiết khấu, thông tin theo mẫu trên HĐĐT
+### REQ-HK-010 · Dòng EVC, dòng chiết khấu, thông tin theo mẫu trên hóa đơn điện tử
 📍 `DOC-v2.0-01 §III.c BR-HK-02 · L575` + `§D#6 · L678-681`  ·  Clarif: `CL-HK-03`, `CL-HK-04`
 
 **BR-HK-02 — chỉ nhắc tên** — `L575`

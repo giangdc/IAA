@@ -143,27 +143,27 @@ updated: 2026-10-19
 
 > Với đơn TMĐT, tín hiệu hoàn tất thanh toán là lúc SPF đánh dấu đơn "đã thanh toán"; cùng lúc đó Paid được ghi nhận ở trạng thái gạch nợ tạm.
 
-↳ **Ghi chú:** Điểm nối XHD ↔ GN cho kênh sàn (20, 21): cùng một mốc vừa kích hoạt xuất HĐ phần DV vừa sinh Paid tạm (gạch nợ tạm ở `GN/` REQ-GN-009). Hành vi Phase 1 giữ hay đổi chưa có căn cứ vì chưa nhận URD v1.0 (CL-XHD-31 / GAP-24).
+↳ **Ghi chú:** Điểm nối XHD ↔ GN cho kênh sàn (20, 21): cùng một mốc vừa kích hoạt xuất hóa đơn phần DV vừa sinh Paid tạm (gạch nợ tạm ở `GN/` REQ-GN-009). Hành vi Phase 1 giữ hay đổi chưa có căn cứ vì chưa nhận URD v1.0 (CL-XHD-31 / GAP-24).
 
 ---
 
-### REQ-XHD-006 · Thông tin khách xuất HĐ mặc định theo hợp đồng
+### REQ-XHD-006 · Thông tin khách xuất hóa đơn mặc định theo hợp đồng
 📍 `DOC-v2.0-01 §I.c BR-DB-03 · L355`  ·  Clarif: —
 
 > Mặc định lấy theo thông tin trên hợp đồng.
 
-↳ **Ghi chú:** Mọi kênh trừ ngoại lệ FPL (REQ-XHD-007): tên, địa chỉ, MST… in trên HĐ lấy từ hợp đồng, không lấy từ đơn hàng.
+↳ **Ghi chú:** Mọi kênh trừ ngoại lệ FPL (REQ-XHD-007): tên, địa chỉ, MST… in trên hóa đơn lấy từ hợp đồng, không lấy từ đơn hàng.
 
 ---
 
-### REQ-XHD-007 · FPL: khách chọn lấy HĐ và tự nhập thông tin trong tối đa 2 giờ
+### REQ-XHD-007 · FPL: khách chọn lấy hóa đơn và tự nhập thông tin trong tối đa 2 giờ
 📍 `DOC-v2.0-01 §I.c BR-DB-03 · L356-358`  ·  Clarif: `CL-XHD-02`, `CL-XHD-03`
 
 > Ngoại lệ: kênh bán FPL cho khách chọn có lấy hóa đơn hay không (ví dụ FPL).
 > Nếu khách chọn lấy hóa đơn thì dùng thông tin khách tự nhập: tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu.
 > Khách được nhập thông tin trong tối đa 2 giờ, tính từ thời điểm ghi nhận trên hệ thống của kênh.
 
-↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy hóa đơn" và "quá 2 giờ không nhập" ⇒ **không phát hành hóa đơn**; quá 2 giờ nút Xuất hóa đơn bị ẩn (CL-XHD-02 resolved 19/10/2026). Quy tắc bắt buộc nhập của kênh FPL: CL-XHD-03 (resolved 19/10/2026). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất HĐ (CL-XHD-04).
+↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy hóa đơn" và "quá 2 giờ không nhập" ⇒ **không phát hành hóa đơn**; quá 2 giờ nút Xuất hóa đơn bị ẩn (CL-XHD-02 resolved 19/10/2026). Quy tắc bắt buộc nhập của kênh FPL: CL-XHD-03 (resolved 19/10/2026). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất hóa đơn (CL-XHD-04).
 
 ---
 
@@ -172,7 +172,7 @@ updated: 2026-10-19
 
 > Cập nhật thông tin khách không kích hoạt phát hành hóa đơn; lần phát hành tiếp theo dùng thông tin mới nhất.
 
-↳ **Ghi chú:** 2 hành vi: (1) không phát sinh HĐ ngay khi cập nhật; (2) HĐ của đợt kế tiếp in thông tin mới. Không có sự kiện "cập nhật thông tin khách" từ SPF — thông tin khách lấy từ hợp đồng tại thời điểm phát hành (CL-XHD-01 resolved 19/10/2026).
+↳ **Ghi chú:** 2 hành vi: (1) không phát sinh hóa đơn ngay khi cập nhật; (2) hóa đơn của đợt kế tiếp in thông tin mới. Không có sự kiện "cập nhật thông tin khách" từ SPF — thông tin khách lấy từ hợp đồng tại thời điểm phát hành (CL-XHD-01 resolved 19/10/2026).
 
 ---
 
@@ -186,7 +186,7 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-010 · Ghi nhận theo lần đẩy cuối; chỉ xuất phần chưa có HĐ
+### REQ-XHD-010 · Ghi nhận theo lần đẩy cuối; chỉ xuất phần chưa có hóa đơn
 📍 `DOC-v2.0-01 §I.c BR-DB-05 · L366-369`  ·  Clarif: —
 
 > Một đơn có thể được đồng bộ nhiều lần; lần đẩy cuối là thông tin mới nhất.
@@ -214,17 +214,17 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-013 · Tín hiệu không khớp / TB đã có HĐ: không ghi nhận, log vào cột Note; không ràng buộc nguồn
+### REQ-XHD-013 · Tín hiệu không khớp / TB đã có hóa đơn: không ghi nhận, log vào cột Note; không ràng buộc nguồn
 📍 `DOC-v2.0-01 §I.c BR-DB-07 · L375-376`  ·  Clarif: `CL-XHD-19`
 
 > Nếu thiết bị đã có hóa đơn hoặc không khớp khóa thì không ghi nhận, chỉ ghi log nội dung tín hiệu vào cột Note.
 > Nguồn gửi được lưu lại để đối soát; không ràng buộc nguồn nào được báo cho phương thức triển khai nào.
 
-↳ **Ghi chú:** 2 nhánh negative (đã có HĐ · không khớp khóa) cùng đầu ra "log cột Note". Cột Note thuộc bảng nào, format ra sao: chưa đặc tả (CL-XHD-19 / GAP-27) ⇒ expected chỉ kiểm được "có log chứa nội dung tín hiệu". Nguồn bất kỳ báo cho phương thức bất kỳ đều hợp lệ.
+↳ **Ghi chú:** 2 nhánh negative (đã có hóa đơn · không khớp khóa) cùng đầu ra "log cột Note". Cột Note thuộc bảng nào, format ra sao: chưa đặc tả (CL-XHD-19 / GAP-27) ⇒ expected chỉ kiểm được "có log chứa nội dung tín hiệu". Nguồn bất kỳ báo cho phương thức bất kỳ đều hợp lệ.
 
 ---
 
-### REQ-XHD-014 · Lịch xuất HĐ dạng tham số: 2 đợt 12:00/12:05 và 18:00/18:05 cho mọi kênh khác FPL
+### REQ-XHD-014 · Lịch xuất hóa đơn dạng tham số: 2 đợt 12:00/12:05 và 18:00/18:05 cho mọi kênh khác FPL
 📍 `DOC-v2.0-01 §I.c BR-XHD-01 · L378-383`  ·  Clarif: —
 
 > Dùng chung một lịch cho mọi ngày và mọi kênh bán khác FPL
@@ -250,7 +250,7 @@ updated: 2026-10-19
 
 > Đơn đủ điều kiện sau giờ chốt cuối của ngày cuối tháng sẽ phát hành sang tháng sau, ảnh hưởng kỳ ghi nhận doanh thu.
 
-↳ **Ghi chú:** Câu này mâu thuẫn với realtime "xử lý ngay khi nhận" (BR-XHD-06): sau giờ chốt cuối thì realtime chạy ngay trong ngày ⇒ HĐ vẫn thuộc tháng này? (CL-XHD-06 / GAP-43). Test plan giả định realtime vẫn chạy. **Cập nhật 16/10/2026:** CL-XHD-06 chốt theo đúng câu này — sau giờ chốt cuối ngày cuối tháng không phát hành trong tháng; đợt phát hành ở tháng sau: CL-XHD-32.
+↳ **Ghi chú:** Câu này mâu thuẫn với realtime "xử lý ngay khi nhận" (BR-XHD-06): sau giờ chốt cuối thì realtime chạy ngay trong ngày ⇒ hóa đơn vẫn thuộc tháng này? (CL-XHD-06 / GAP-43). Test plan giả định realtime vẫn chạy. **Cập nhật 16/10/2026:** CL-XHD-06 chốt theo đúng câu này — sau giờ chốt cuối ngày cuối tháng không phát hành trong tháng; đợt phát hành ở tháng sau: CL-XHD-32.
 
 ---
 
@@ -280,7 +280,7 @@ updated: 2026-10-19
 
 > Dịch vụ: khi có tín hiệu "đã thanh toán" từ SPF. Thiết bị: khi có tín hiệu giao hàng hoàn tất của phương thức triển khai tương ứng (phiếu thi công, Vendor, quầy). Hai điều kiện xét độc lập và dùng chung cho mọi kênh bán.
 
-↳ **Ghi chú:** DV và TB có đường ra HĐ riêng. Hệ quả có chủ đích: DV chưa thanh toán thì không phát hành dù TB đã giao. 2.2 bỏ BR-XHD-04 (autobill TB theo phương thức, D#9) nhưng thuật ngữ #3 và câu này vẫn dùng "phương thức triển khai tương ứng" (CL-XHD-10 / GAP-54). **Cập nhật 16/10/2026:** CL-XHD-10 chốt — chỉ phát hành TB có trong tín hiệu (SC-XHD-110).
+↳ **Ghi chú:** DV và TB có đường ra hóa đơn riêng. Hệ quả có chủ đích: DV chưa thanh toán thì không phát hành dù TB đã giao. 2.2 bỏ BR-XHD-04 (autobill TB theo phương thức, D#9) nhưng thuật ngữ #3 và câu này vẫn dùng "phương thức triển khai tương ứng" (CL-XHD-10 / GAP-54). **Cập nhật 16/10/2026:** CL-XHD-10 chốt — chỉ phát hành TB có trong tín hiệu (SC-XHD-110).
 
 ---
 
@@ -298,7 +298,7 @@ updated: 2026-10-19
 
 > Kênh bán FPL: Xét delay 2h (lấy chuẩn theo thời gian tạo đơn)
 
-↳ **Ghi chú:** Đơn FPL chỉ đủ điều kiện phát hành khi đã qua 2 giờ kể từ tạo đơn — **suy diễn của analyst:** delay để chờ khách nhập thông tin HĐ (REQ-XHD-007). Áp cho DV hay cả TB, và mốc "tạo đơn" có trùng "thời điểm ghi nhận trên hệ thống của kênh" không: CL-XHD-04 / GAP-51.
+↳ **Ghi chú:** Đơn FPL chỉ đủ điều kiện phát hành khi đã qua 2 giờ kể từ tạo đơn — **suy diễn của analyst:** delay để chờ khách nhập thông tin hóa đơn (REQ-XHD-007). Áp cho DV hay cả TB, và mốc "tạo đơn" có trùng "thời điểm ghi nhận trên hệ thống của kênh" không: CL-XHD-04 / GAP-51.
 
 ---
 
@@ -307,7 +307,7 @@ updated: 2026-10-19
 
 > Hợp đồng tổ chức: chỉ phát hành khi đã duyệt PĐK; hai ngày cuối tháng không xét điều kiện này. Quên duyệt PĐK thì không autobill. Khi có thay đổi hoặc dịch chuyển luồng duyệt PĐK/hợp đồng thì phải hiệu chỉnh lại điều kiện này.
 
-↳ **Ghi chú:** 3 lớp: HĐ tổ chức đã duyệt · chưa duyệt ngày thường · chưa duyệt trong 2 ngày cuối tháng; HĐ cá nhân không xét. Chưa rõ: nhận diện HĐ tổ chức bằng trường nào, trạng thái PĐK lấy ở đâu, "2 ngày cuối tháng" tính theo lịch nào, duyệt muộn thì đợt sau có phát hành không (CL-XHD-07 / GAP-44, 45). Revision 2.2 nhắc "KH Chuỗi/Dự án (gộp vào BR-XHD-03)" nhưng không có nội dung (CL-XHD-09 / GAP-47). **Cập nhật 16/10/2026:** HĐ tổ chức = loại hình KH cấp 1 "Tổ chức", PĐK lấy từ SPF, 2 ngày lịch (CL-XHD-07 một phần); KH Chuỗi không có rule riêng (CL-XHD-09 ✅). **Chốt 19/10/2026 (CL-XHD-07):** hợp đồng tổ chức chưa duyệt PĐK ⇒ chặn, ghi log, phải xuất hóa đơn tay (không tự phát hành ở đợt sau); áp cả đơn bán mới và bán thêm.
+↳ **Ghi chú:** 3 lớp: hợp đồng tổ chức đã duyệt · chưa duyệt ngày thường · chưa duyệt trong 2 ngày cuối tháng; hợp đồng cá nhân không xét. Chưa rõ: nhận diện hợp đồng tổ chức bằng trường nào, trạng thái PĐK lấy ở đâu, "2 ngày cuối tháng" tính theo lịch nào, duyệt muộn thì đợt sau có phát hành không (CL-XHD-07 / GAP-44, 45). Revision 2.2 nhắc "KH Chuỗi/Dự án (gộp vào BR-XHD-03)" nhưng không có nội dung (CL-XHD-09 / GAP-47). **Cập nhật 16/10/2026:** hợp đồng tổ chức = loại hình KH cấp 1 "Tổ chức", PĐK lấy từ SPF, 2 ngày lịch (CL-XHD-07 một phần); KH Chuỗi không có rule riêng (CL-XHD-09 ✅). **Chốt 19/10/2026 (CL-XHD-07):** hợp đồng tổ chức chưa duyệt PĐK ⇒ chặn, ghi log, phải xuất hóa đơn tay (không tự phát hành ở đợt sau); áp cả đơn bán mới và bán thêm.
 
 ---
 
@@ -316,11 +316,11 @@ updated: 2026-10-19
 
 > Hợp đồng con: nhận diện hợp đồng con khi hợp đồng có gắn hợp đồng cha (hợp đồng dự án). Không phát hành hóa đơn trên hợp đồng con, cả thiết bị và dịch vụ.
 
-↳ **Ghi chú:** Negative 2 nhánh (DV, TB). Không phát hành rồi ghi nhận ra sao, HĐ cha có phát hành thay không: chưa đặc tả (CL-XHD-08 / GAP-46). **Cập nhật 16/10/2026:** nhận diện hợp đồng con qua tool tình trạng (có thông tin hợp đồng cha). **Chốt 19/10/2026 (CL-XHD-08):** dòng của hợp đồng con bị chặn, ghi log; QC chỉ verify không phát hành hóa đơn.
+↳ **Ghi chú:** Negative 2 nhánh (DV, TB). Không phát hành rồi ghi nhận ra sao, hợp đồng cha có phát hành hóa đơn thay không: chưa đặc tả (CL-XHD-08 / GAP-46). **Cập nhật 16/10/2026:** nhận diện hợp đồng con qua tool tình trạng (có thông tin hợp đồng cha). **Chốt 19/10/2026 (CL-XHD-08):** dòng của hợp đồng con bị chặn, ghi log; QC chỉ verify không phát hành hóa đơn.
 
 ---
 
-### REQ-XHD-024 · Gộp HĐ ở luồng worker theo đơn trong cùng đợt
+### REQ-XHD-024 · Gộp hóa đơn ở luồng worker theo đơn trong cùng đợt
 📍 `DOC-v2.0-01 §I.c BR-XHD-05 · L404-408`  ·  Clarif: —
 
 > Trong cùng một đợt, các dòng DV/TB đủ điều kiện của cùng một đơn gộp vào một hóa đơn.
@@ -337,7 +337,7 @@ updated: 2026-10-19
 > Mỗi tín hiệu chỉ phát hành đúng thành phần gắn với tín hiệu đó: tín hiệu thanh toán chỉ phát hành dịch vụ; tín hiệu giao hàng chỉ phát hành thiết bị của phương thức triển khai đó.
 > Xử lý ngay khi nhận, không chờ đợt worker kế tiếp.
 
-↳ **Ghi chú:** Ở realtime một đơn có thể ra nhiều HĐ nhỏ (mỗi tín hiệu 1 HĐ). Thành phần khác đã đủ điều kiện trước đó **không** được gộp kèm.
+↳ **Ghi chú:** Ở realtime một đơn có thể ra nhiều hóa đơn nhỏ (mỗi tín hiệu 1 hóa đơn). Thành phần khác đã đủ điều kiện trước đó **không** được gộp kèm.
 
 ---
 
@@ -350,7 +350,7 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-027 · Chống xuất trùng: mỗi dòng DV/TB chỉ xuất HĐ một lần
+### REQ-XHD-027 · Chống xuất trùng: mỗi dòng DV/TB chỉ xuất hóa đơn một lần
 📍 `DOC-v2.0-01 §I.c BR-XHD-08 · L416-421`  ·  Clarif: `CL-XHD-11`, `CL-XHD-12`, `CL-XHD-23`
 
 > Mỗi dòng DV/TB trên một đơn chỉ xuất hóa đơn một lần.
@@ -407,24 +407,24 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-033 · Hủy đơn khi đã có HĐ: hệ thống không tự hủy / điều chỉnh HĐ
+### REQ-XHD-033 · Hủy đơn khi đã có hóa đơn: hệ thống không tự hủy / điều chỉnh hóa đơn
 📍 `DOC-v2.0-01 §I.c BR-XHD-10 · L430`  ·  Clarif: —
 
 > Hủy đơn khi đã có hóa đơn: hệ thống không tự hủy hay điều chỉnh hóa đơn, xử lý theo quy trình riêng.
 
-↳ **Ghi chú:** Trong phạm vi test chỉ là kiểm **hệ thống không làm gì** với HĐ đã có (BillNumber giữ nguyên, không sinh HĐ điều chỉnh). Quy trình điều chỉnh/hủy riêng: ngoài phạm vi (TP §2.2 #2).
+↳ **Ghi chú:** Trong phạm vi test chỉ là kiểm **hệ thống không làm gì** với hóa đơn đã có (BillNumber giữ nguyên, không sinh hóa đơn điều chỉnh). Quy trình điều chỉnh/hủy riêng: ngoài phạm vi (TP §2.2 #2).
 
 ⛔ **Ngoài scope test 19/10/2026** — TP §2.2 #2 *"Điều chỉnh / hủy hóa đơn khi hủy đơn đã có hóa đơn"*. Không sinh SC (SC-XHD-098 deprecated). QC owner 19/10/2026.
 
 ---
 
-### REQ-XHD-034 · Chi nhánh xuất HĐ = chi nhánh quản lý hợp đồng tại thời điểm phát hành
+### REQ-XHD-034 · Chi nhánh xuất hóa đơn = chi nhánh quản lý hợp đồng tại thời điểm phát hành
 📍 `DOC-v2.0-01 §I.c BR-XHD-12 · L432-435`  ·  Clarif: —
 
 > Chi nhánh xuất hóa đơn là chi nhánh quản lý hợp đồng, xác định tại thời điểm phát hành và lưu trên tồn xuất hóa đơn
 > Chi nhánh nào được bán sản phẩm dịch vụ nào do bên quản lý sản phẩm bổ sung thuộc tính, nằm ngoài URD này.
 
-↳ **Ghi chú:** Bảng mapping chi nhánh theo (loại DV, kênh bán) không còn áp dụng (D#7) — gate G8 bỏ ngày 13/10/2026. Đổi chi nhánh quản lý HĐ giữa 2 lần phát hành ⇒ lần sau dùng chi nhánh mới; sửa HĐ cũ là nghiệp vụ Điều chỉnh, ngoài phạm vi.
+↳ **Ghi chú:** Bảng mapping chi nhánh theo (loại DV, kênh bán) không còn áp dụng (D#7) — gate G8 bỏ ngày 13/10/2026. Đổi chi nhánh quản lý hóa đơn giữa 2 lần phát hành ⇒ lần sau dùng chi nhánh mới; sửa hóa đơn cũ là nghiệp vụ Điều chỉnh, ngoài phạm vi.
 
 ⛔ **Một phần ngoài scope test 19/10/2026** — TP §2.2 #3 *"Điều chỉnh hóa đơn đã phát hành khi chi nhánh đổi giữa các lần phát hành"* ⇒ SC-XHD-100 deprecated; giữ SC-XHD-099 (chi nhánh = chi nhánh quản lý hợp đồng). QC owner 19/10/2026.
 
@@ -442,12 +442,12 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-036 · Nội dung HĐ = tên dịch vụ + số tháng sử dụng (từ SPF), không hiển thị từ ngày – đến ngày
+### REQ-XHD-036 · Nội dung hóa đơn = tên dịch vụ + số tháng sử dụng (từ SPF), không hiển thị từ ngày – đến ngày
 📍 `DOC-v2.0-01 §I.c BR-XHD-13 · L441`  ·  Clarif: `CL-XHD-28`
 
 > Nội dung hiển thị trên hóa đơn là tên dịch vụ + số tháng sử dụng (lấy từ SPF), không hiển thị kỳ hạn từ ngày – đến ngày.
 
-↳ **Ghi chú:** Cùng nội dung với BR-HK-05 (`HK/` REQ-HK-005) — ở XHD kiểm trên HĐ Billing, ở HK kiểm trên dữ liệu đẩy HĐĐT. Ảnh `DOC-v2.0-FIG-01` (ảnh: Chi tiết hóa đơn.png) (màn "Chi tiết của hóa đơn" hiện hữu) vẫn hiện "Cước phí từ ngày / Đến ngày" (CL-XHD-28).
+↳ **Ghi chú:** Cùng nội dung với BR-HK-05 (`HK/` REQ-HK-005) — ở XHD kiểm trên hóa đơn Billing, ở HK kiểm trên dữ liệu đẩy hóa đơn điện tử. Ảnh `DOC-v2.0-FIG-01` (ảnh: Chi tiết hóa đơn.png) (màn "Chi tiết của hóa đơn" hiện hữu) vẫn hiện "Cước phí từ ngày / Đến ngày" (CL-XHD-28).
 
 ---
 
@@ -470,13 +470,13 @@ updated: 2026-10-19
 
 ---
 
-### REQ-XHD-039 · Clear nội dung "thuê thiết bị đầu cuối" trên HĐ (DVKH HO)
+### REQ-XHD-039 · Clear nội dung "thuê thiết bị đầu cuối" trên hóa đơn (DVKH HO)
 📍 `DOC-v2.0-01 §I.c BR-XHD-18 · L449-452`  ·  Clarif: `CL-XHD-21`
 
 > Bổ sung chức năng cho phép DVKH HO chủ động xử lý với hợp đồng có yêu cầu clear nội dung "thuê thiết bị đầu cuối" trên hóa đơn.
 > Mới (kịp plan các chức năng chính sẽ thự hiện)
 
-↳ **Ghi chú:** Chỉ 1 câu: không rõ thao tác, có UI không, kết quả trên HĐ; "kịp plan" ⇒ chưa chắc thuộc v2.0 (CL-XHD-21 / GAP-53, Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`.
+↳ **Ghi chú:** Chỉ 1 câu: không rõ thao tác, có UI không, kết quả trên hóa đơn; "kịp plan" ⇒ chưa chắc thuộc v2.0 (CL-XHD-21 / GAP-53, Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`.
 
 ---
 
@@ -509,7 +509,7 @@ updated: 2026-10-19
 > RISK-01
 > PM và SA xử lý; mail cảnh báo là yêu cầu bắt buộc đã thống nhất.
 
-↳ **Ghi chú:** "Bắt buộc" nhưng không có điều kiện, lịch, người nhận, nội dung (CL-XHD-22 / GAP-02, 11 — Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`. Xuất HĐ bổ sung case-by-case: ngoài phạm vi (TP §2.2 #9).
+↳ **Ghi chú:** "Bắt buộc" nhưng không có điều kiện, lịch, người nhận, nội dung (CL-XHD-22 / GAP-02, 11 — Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`. Xuất hóa đơn bổ sung case-by-case: ngoài phạm vi (TP §2.2 #9).
 
 ---
 

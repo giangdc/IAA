@@ -110,15 +110,15 @@
 ## 9. Notes (quyết định cross-version — KHÔNG phải per-run count log)
 - **2026-10-13** — URD rev 2.2 là bản chính (PO confirm qua mail PM — DOC-v2.0-04); rev 2.1 giữ làm tham chiếu kỹ thuật, **2.2 thắng khi mâu thuẫn**.
 - **2026-10-16** — ⛔ **URD rev 2.1 không sử dụng** (QC owner: đã out) — thay quyết định 13/10. Chỉ URD 2.2 là căn cứ; SC dựng duy nhất trên 2.1 chuyển DEPRECATED (SC-XHD-107, 108 · SC-HK-009, 010).
-- **2026-10-19** — ⚠️ **URD rev 2.1 dùng lại, chỉ cho các mục Phụ lục D của 2.2 trỏ về** (QC owner) — thay quyết định 16/10: D#1 cutover, D#2 phát hành trùng, D#3 RISK-01, D#5 ký hiệu / ID HĐĐT, D#6 chiết khấu / mẫu. **Không dùng** D#4 (cấu hình EVC — QC owner: không đụng tới), D#7, D#8, D#9 (2.2 ghi không còn áp dụng / đã bỏ). Phần chính 2.2 thắng khi mâu thuẫn. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
-- **2026-10-19** — Ký hiệu HĐĐT v2.0: **chỉ test HĐ bán mới đầu U, không test đầu M** (QC owner) — CL-HK-01 hết BLOCKING; HĐ đơn bán thêm cũng dùng đầu U ⇒ CL-HK-01 đóng.
+- **2026-10-19** — ⚠️ **URD rev 2.1 dùng lại, chỉ cho các mục Phụ lục D của 2.2 trỏ về** (QC owner) — thay quyết định 16/10: D#1 cutover, D#2 phát hành trùng, D#3 RISK-01, D#5 ký hiệu / ID hóa đơn điện tử, D#6 chiết khấu / mẫu. **Không dùng** D#4 (cấu hình EVC — QC owner: không đụng tới), D#7, D#8, D#9 (2.2 ghi không còn áp dụng / đã bỏ). Phần chính 2.2 thắng khi mâu thuẫn. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
+- **2026-10-19** — Ký hiệu hóa đơn điện tử v2.0: **chỉ test hóa đơn bán mới đầu U, không test đầu M** (QC owner) — CL-HK-01 hết BLOCKING; hóa đơn đơn bán thêm cũng dùng đầu U ⇒ CL-HK-01 đóng.
 - **2026-10-19** — ⚠️ **Gạch nợ EVC / voucher VẪN TEST** (QC owner) — khác TP §2.2 #5 (QC owner xử lý TP, analyze không sửa TP); chờ BA liệt kê loại EVC / voucher (CL-GN-01, 08, 10). Từ vòng 3 (19/10/2026) Phụ lục D#4 lấy từ URD 2.1 BR-VC-01..07, BR-GC-04..07 (2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"), bỏ bước đánh dấu `[Bỏ]`.
-- **2026-10-19 (vòng 3)** — Phụ lục D#4 (EVC) **lấy từ URD 2.1** BR-VC-01..07, BR-GC-04..07 (2.2 D#4 ghi "Giữ nguyên (gộp nhóm BR-VC)"), bỏ bước 2.1 đánh dấu `[Bỏ]` — thay "không dùng D#4" ở các dòng trên. Viết đầy đủ **hóa đơn** / **hợp đồng**, không viết tắt "HĐ" (QC owner).
+- **2026-10-19 (vòng 3)** — Phụ lục D#4 (EVC) **lấy từ URD 2.1** BR-VC-01..07, BR-GC-04..07 (2.2 D#4 ghi "Giữ nguyên (gộp nhóm BR-VC)"), bỏ bước 2.1 đánh dấu `[Bỏ]` — thay "không dùng D#4" ở các dòng trên. Viết đầy đủ **hóa đơn** / **hợp đồng**, không viết tắt "hóa đơn" (QC owner).
 - **2026-10-13** — Phạm vi gồm **đơn bán mới + bán thêm** (mail PM); URD không phân biệt loại đơn ⇒ analyze giả định rule áp chung (CL-XHD-25).
 - **2026-10-14** — **TL (URD §B.IV) ngoài phạm vi** test v2.0 (QC lead chốt) ⇒ không có module `TL/` trong analyze.
 - **2026-10-16** — Analyze dùng **layout module-first v2** (INIT trên thư mục trống). Module = XHD / GN / HK, map mã chức năng FR01–FR11 ở `Project_rule.md §Module Codes`.
 - **2026-10-16** — File trả lời câu hỏi vòng 1 là câu trả lời của **QC**, không phải PO: CL chỉ đóng khi câu trả lời dựa được vào chữ URD 2.2; câu QC báo "không tìm thấy trong tài liệu" giữ Open và chuyển PO ở vòng 2.
-- **2026-10-16** — Tài liệu bổ sung `DOC-v2.0-05` (HT triển khai) và ảnh `DOC-v2.0-FIG-01/02` (màn Hệ thống Thông tin, HĐ 2025) **không phải URD** — chỉ làm dữ liệu / câu hỏi, không sinh rule.
+- **2026-10-16** — Tài liệu bổ sung `DOC-v2.0-05` (HT triển khai) và ảnh `DOC-v2.0-FIG-01/02` (màn Hệ thống Thông tin, hóa đơn 2025) **không phải URD** — chỉ làm dữ liệu / câu hỏi, không sinh rule.
 
 ## 10. Version Cutover — Compaction Rule
 > Khi mở version mới (v[N] → v[N+1]):

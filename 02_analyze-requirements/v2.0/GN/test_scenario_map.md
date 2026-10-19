@@ -51,43 +51,43 @@ updated: 2026-10-19
 | SC-GN-004 | Chống trùng Paid | REQ-GN-002 | DOC-v2.0-01 BR-DP-01 (L475) | Đã có Paid A | Đồng bộ dòng giống A nhưng **khác RefTransactionId** | Thêm Paid mới | P1 | Functional | NEW |
 | SC-GN-005 | Chống trùng Paid | REQ-GN-002 | DOC-v2.0-01 BR-DP-01 (L475) | Đã có Paid A | Đồng bộ dòng giống A nhưng **khác PaidType** | Thêm Paid mới | P2 | Functional | NEW |
 | SC-GN-006 | Chống trùng Paid | REQ-GN-002 | DOC-v2.0-01 BR-DP-01 (L475) | Đã có Paid A | Đồng bộ dòng giống A nhưng **khác Amount** | Thêm Paid mới | P2 | Functional | NEW |
-| SC-GN-007 | Đồng bộ Paid | REQ-GN-003 | DOC-v2.0-01 BR-DP-01 (L476) | Đơn **chưa có HĐ** | Paid hoàn tất đồng bộ về | Paid vẫn được ghi; không gạch (không có nợ); khi HĐ phát hành, điểm chạm (b) nhặt Paid lên gạch | P1 | Integration | NEW |
-| SC-GN-008 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | HĐ còn nợ, luồng Paid | Paid hoàn tất **đồng bộ xong** — điểm chạm (a) | Xử lý gạch nợ được kích hoạt ngay | P1 | Functional | NEW |
-| SC-GN-009 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | Paid hoàn tất đã có từ trước | HĐ **vừa phát hành** (Invoice Event) — điểm chạm (b) | Xử lý gạch nợ được kích hoạt sau khi xuất HĐ | P1 | Integration | NEW |
-| SC-GN-010 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | HĐ còn nợ, Paid đủ điều kiện nhưng lần xét trước bị dừng (vd API lỗi) | **Worker 30 phút** chạy — điểm chạm (c) | Gạch nợ được xử lý ở lần quét kế tiếp; chu kỳ 30 phút | P1 | Functional | NEW |
+| SC-GN-007 | Đồng bộ Paid | REQ-GN-003 | DOC-v2.0-01 BR-DP-01 (L476) | Đơn **chưa có hóa đơn** | Paid hoàn tất đồng bộ về | Paid vẫn được ghi; không gạch (không có nợ); khi hóa đơn phát hành, điểm chạm (b) nhặt Paid lên gạch | P1 | Integration | NEW |
+| SC-GN-008 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | Hóa đơn còn nợ, luồng Paid | Paid hoàn tất **đồng bộ xong** — điểm chạm (a) | Xử lý gạch nợ được kích hoạt ngay | P1 | Functional | NEW |
+| SC-GN-009 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | Paid hoàn tất đã có từ trước | Hóa đơn **vừa phát hành** (Invoice Event) — điểm chạm (b) | Xử lý gạch nợ được kích hoạt sau khi xuất hóa đơn | P1 | Integration | NEW |
+| SC-GN-010 | Điểm chạm | REQ-GN-004 | DOC-v2.0-01 BR-XL-01 (L480) | Hóa đơn còn nợ, Paid đủ điều kiện nhưng lần xét trước bị dừng (vd API lỗi) | **Worker 30 phút** chạy — điểm chạm (c) | Gạch nợ được xử lý ở lần quét kế tiếp; chu kỳ 30 phút | P1 | Functional | NEW |
 | SC-GN-011 | Lọc điểm chạm (a) | REQ-GN-005 | DOC-v2.0-01 BR-XL-01 (L482) | Đơn kênh **sàn** | Paid **tạm** đồng bộ xong | Đi tiếp xử lý nợ (dẫn tới gạch nợ tạm) | P1 | Functional | NEW |
 | SC-GN-012 | Lọc điểm chạm (a) | REQ-GN-005 | DOC-v2.0-01 BR-XL-01 (L482) | Đơn kênh **không sàn** (vd quầy) | Paid **tạm** đồng bộ xong | **Dừng** ngay, không lấy nợ, không gọi API | P1 | Negative | NEW |
 | SC-GN-013 | Lọc điểm chạm (a) | REQ-GN-005 | DOC-v2.0-01 BR-XL-01 (L482) | Đơn kênh bất kỳ | Paid **hoàn tất** đồng bộ xong | Đi tiếp xử lý nợ (gạch nợ thật) | P1 | Functional | NEW |
-| SC-GN-014 | Lấy nợ | REQ-GN-006 | DOC-v2.0-01 BR-XL-03 (L486) | HĐ **đã hết nợ** | Một điểm chạm kích hoạt | Dừng, không ghi Payment, chờ điểm chạm sau | P1 | Negative | NEW |
+| SC-GN-014 | Lấy nợ | REQ-GN-006 | DOC-v2.0-01 BR-XL-03 (L486) | Hóa đơn **đã hết nợ** | Một điểm chạm kích hoạt | Dừng, không ghi Payment, chờ điểm chạm sau | P1 | Negative | NEW |
 | SC-GN-015 | Phương thức gạch | REQ-GN-007 | DOC-v2.0-01 BR-XL-03 (L487) | Trường Paid/Cọc trên OrderBill **đã có** giá trị | Điểm chạm kích hoạt | Dùng giá trị có sẵn; **không** gọi API kênh thanh toán | P1 | Functional | NEW |
 | SC-GN-016 | Phương thức gạch | REQ-GN-007 | DOC-v2.0-01 BR-XL-03 (L487) | Trường Paid/Cọc **chưa có** | Điểm chạm kích hoạt | Gọi API kênh thanh toán; giá trị lưu vào OrderBill; lần sau không gọi lại | P1 | Integration | NEW |
 | SC-GN-017 | Phương thức gạch | REQ-GN-007 | DOC-v2.0-01 BR-XL-03 (L488) | Trường chưa có; API kênh thanh toán **lỗi / timeout** (mock) | Điểm chạm kích hoạt | Dừng, không gạch, **không retry** trong lần đó; điểm chạm sau gọi lại | P1 | Negative | NEW |
-| SC-GN-018 | Phân luồng Paid / Cọc | REQ-GN-008 | DOC-v2.0-01 BR-XL-03 (L489) | 2 HĐ: trường = "Paid" và trường = "Cọc" | Điểm chạm kích hoạt | HĐ "Paid" đi luồng Paid; HĐ "Cọc" đi luồng Cọc; mỗi đơn chỉ một luồng | P1 | Functional | NEW |
-| SC-GN-019 | Gạch nợ tạm | REQ-GN-009, REQ-GN-010 | DOC-v2.0-01 BR-NT-01 (L493), BR-NT-02 (L498-499) | Đơn kênh sàn (Shopee/Tiktok), HĐ còn nợ N, luồng Paid | Paid ở trạng thái **tạm** | Ghi 1 Payment phương thức **đặc biệt** = N (toàn bộ nợ còn lại); HĐ chuyển "Đã gạch nợ" | P1 | Functional | NEW |
-| SC-GN-020 | Gạch nợ tạm | REQ-GN-009 | DOC-v2.0-01 BR-NT-01 (L494) | Đơn kênh **không sàn**, HĐ còn nợ, Paid tạm | Điểm chạm (b) hoặc (c) kích hoạt (không qua bộ lọc a) | **Không** gạch nợ tạm; HĐ vẫn còn nợ, chờ Paid hoàn tất | P1 | Negative | NEW |
-| SC-GN-021 | Gạch nợ tạm | REQ-GN-008 | DOC-v2.0-01 BR-XL-03 (L489) | HĐ luồng **Cọc**, đơn kênh sàn, Paid tạm | Điểm chạm kích hoạt | Không có gạch nợ tạm ở nhánh Cọc | P1 | Negative | NEW |
-| SC-GN-022 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L503) | HĐ đã gạch nợ tạm (Payment đặc biệt) | Paid chuyển **hoàn tất** | Payment tạm bị gỡ trước (HĐ trở lại còn nợ), sau đó gạch nợ thật bằng Paid | P1 | Functional | NEW |
-| SC-GN-023 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L504) | HĐ **chưa** gạch nợ tạm | Paid hoàn tất | Gạch nợ thật luôn, không có bước gỡ | P1 | Functional | NEW |
-| SC-GN-025 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | HĐ còn nợ; Paid cùng OrderCode Amount = **0** và Paid Amount = **1** | Gạch nợ chạy | **Amount 0 không được dùng; Amount 1 được dùng** | P1 | Boundary | NEW |
-| SC-GN-026 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | HĐ của OrderCode X; Paid thuộc OrderCode **Y** | Gạch nợ chạy | Paid của Y không được dùng cho HĐ của X | P1 | Negative | NEW |
-| SC-GN-027 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L509) | HĐ **đã gạch đủ** | Điểm chạm kích hoạt lại (worker 30 phút) | Không gạch lần nữa; không có Payment trùng | P1 | Negative | NEW |
+| SC-GN-018 | Phân luồng Paid / Cọc | REQ-GN-008 | DOC-v2.0-01 BR-XL-03 (L489) | 2 hóa đơn: trường = "Paid" và trường = "Cọc" | Điểm chạm kích hoạt | Hóa đơn "Paid" đi luồng Paid; hóa đơn "Cọc" đi luồng Cọc; mỗi đơn chỉ một luồng | P1 | Functional | NEW |
+| SC-GN-019 | Gạch nợ tạm | REQ-GN-009, REQ-GN-010 | DOC-v2.0-01 BR-NT-01 (L493), BR-NT-02 (L498-499) | Đơn kênh sàn (Shopee/Tiktok), hóa đơn còn nợ N, luồng Paid | Paid ở trạng thái **tạm** | Ghi 1 Payment phương thức **đặc biệt** = N (toàn bộ nợ còn lại); hóa đơn chuyển "Đã gạch nợ" | P1 | Functional | NEW |
+| SC-GN-020 | Gạch nợ tạm | REQ-GN-009 | DOC-v2.0-01 BR-NT-01 (L494) | Đơn kênh **không sàn**, hóa đơn còn nợ, Paid tạm | Điểm chạm (b) hoặc (c) kích hoạt (không qua bộ lọc a) | **Không** gạch nợ tạm; hóa đơn vẫn còn nợ, chờ Paid hoàn tất | P1 | Negative | NEW |
+| SC-GN-021 | Gạch nợ tạm | REQ-GN-008 | DOC-v2.0-01 BR-XL-03 (L489) | Hóa đơn luồng **Cọc**, đơn kênh sàn, Paid tạm | Điểm chạm kích hoạt | Không có gạch nợ tạm ở nhánh Cọc | P1 | Negative | NEW |
+| SC-GN-022 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L503) | Hóa đơn đã gạch nợ tạm (Payment đặc biệt) | Paid chuyển **hoàn tất** | Payment tạm bị gỡ trước (hóa đơn trở lại còn nợ), sau đó gạch nợ thật bằng Paid | P1 | Functional | NEW |
+| SC-GN-023 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L504) | Hóa đơn **chưa** gạch nợ tạm | Paid hoàn tất | Gạch nợ thật luôn, không có bước gỡ | P1 | Functional | NEW |
+| SC-GN-025 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | Hóa đơn còn nợ; Paid cùng OrderCode Amount = **0** và Paid Amount = **1** | Gạch nợ chạy | **Amount 0 không được dùng; Amount 1 được dùng** | P1 | Boundary | NEW |
+| SC-GN-026 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | Hóa đơn của OrderCode X; Paid thuộc OrderCode **Y** | Gạch nợ chạy | Paid của Y không được dùng cho hóa đơn của X | P1 | Negative | NEW |
+| SC-GN-027 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L509) | Hóa đơn **đã gạch đủ** | Điểm chạm kích hoạt lại (worker 30 phút) | Không gạch lần nữa; không có Payment trùng | P1 | Negative | NEW |
 | SC-GN-028 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | Đơn có 3 bill 300k / 500k / 100k, luồng Paid, Paid 600k | Gạch nợ chạy | Thứ tự gạch 500k → 300k (gạch 100k) → 100k (chưa gạch); bill 500k hết nợ | P1 | Functional | NEW |
 | SC-GN-029 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L514) | Đơn có ≥2 bill, luồng **Cọc** | Gạch nợ chạy | Bill được xét từ cao xuống thấp | P1 | Functional | NEW |
 | SC-GN-030 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | 2 bill **bằng tiền nhau**, Paid chỉ đủ 1 bill | Gạch nợ chạy | Thứ tự — QC: ưu tiên BillNumber cao nhất ⛔ chờ BA xác nhận chỉ là tie-break (CL-GN-09) | P3 | Boundary | NEW |
-| SC-GN-031 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | HĐ nợ 500k; Paid 300k | Gạch nợ chạy | Gạch 300k; HĐ còn nợ 200k; Paid còn 0; dừng vì hết Paid | P1 | Boundary | NEW |
-| SC-GN-032 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | HĐ nợ 300k; Paid 500k | Gạch nợ chạy | Gạch 300k; HĐ hết nợ; **Paid dư 200k được giữ** | P1 | Boundary | NEW |
-| SC-GN-033 | Gạch từng phần | REQ-GN-014, REQ-GN-015 | DOC-v2.0-01 BR-GN-04 (L518) | HĐ nợ 500k; Paid 500k | Gạch nợ chạy | Gạch 500k; HĐ "Đã gạch nợ"; Paid còn 0 | P1 | Boundary | NEW |
-| SC-GN-034 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518) | Luồng Paid, HĐ còn nợ | Một lần gạch thực hiện | 3 đầu ra: dòng Payment ghi nhận · Paid bị trừ đúng số tiền · Kafka Out đẩy về kênh thanh toán | P1 | Integration | NEW |
-| SC-GN-035 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L520) | Luồng **Cọc**, HĐ còn nợ, đủ cọc | Gạch cọc thực hiện | Payment ghi; cọc bị trừ; **không** có Kafka Out | P1 | Negative | NEW |
-| SC-GN-036 | Trạng thái | REQ-GN-015 | DOC-v2.0-01 BR-GN-05 (L524) | HĐ tổng T | Σ Payment = **T − 1** rồi = **T** | **T − 1: chưa "Đã gạch nợ"; T: "Đã gạch nợ"** | P1 | Boundary | NEW |
-| SC-GN-037 | Cọc — đủ tiền | REQ-GN-016 | DOC-v2.0-01 BR-GC-01 (L529) | Bill nợ 1.000k; cọc HĐ 700k + EVC đơn 300k (gồm lock 100k) | Gạch cọc xét bill | Tổng = nợ ⇒ **đủ tiền** (biên "không nhỏ hơn"), đi tiếp kiểm cọc theo loại | P1 | Boundary | NEW |
+| SC-GN-031 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 500k; Paid 300k | Gạch nợ chạy | Gạch 300k; hóa đơn còn nợ 200k; Paid còn 0; dừng vì hết Paid | P1 | Boundary | NEW |
+| SC-GN-032 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 300k; Paid 500k | Gạch nợ chạy | Gạch 300k; hóa đơn hết nợ; **Paid dư 200k được giữ** | P1 | Boundary | NEW |
+| SC-GN-033 | Gạch từng phần | REQ-GN-014, REQ-GN-015 | DOC-v2.0-01 BR-GN-04 (L518) | Hóa đơn nợ 500k; Paid 500k | Gạch nợ chạy | Gạch 500k; hóa đơn "Đã gạch nợ"; Paid còn 0 | P1 | Boundary | NEW |
+| SC-GN-034 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518) | Luồng Paid, hóa đơn còn nợ | Một lần gạch thực hiện | 3 đầu ra: dòng Payment ghi nhận · Paid bị trừ đúng số tiền · Kafka Out đẩy về kênh thanh toán | P1 | Integration | NEW |
+| SC-GN-035 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L520) | Luồng **Cọc**, hóa đơn còn nợ, đủ cọc | Gạch cọc thực hiện | Payment ghi; cọc bị trừ; **không** có Kafka Out | P1 | Negative | NEW |
+| SC-GN-036 | Trạng thái | REQ-GN-015 | DOC-v2.0-01 BR-GN-05 (L524) | Hóa đơn tổng T | Σ Payment = **T − 1** rồi = **T** | **T − 1: chưa "Đã gạch nợ"; T: "Đã gạch nợ"** | P1 | Boundary | NEW |
+| SC-GN-037 | Cọc — đủ tiền | REQ-GN-016 | DOC-v2.0-01 BR-GC-01 (L529) | Bill nợ 1.000k; cọc hóa đơn 700k + EVC đơn 300k (gồm lock 100k) | Gạch cọc xét bill | Tổng = nợ ⇒ **đủ tiền** (biên "không nhỏ hơn"), đi tiếp kiểm cọc theo loại | P1 | Boundary | NEW |
 | SC-GN-038 | Cọc — đủ tiền | REQ-GN-016 | DOC-v2.0-01 BR-GC-01 (L529) | Bill nợ 1.000k; cọc + EVC = 999k | Gạch cọc xét bill | **Không** gạch bill | P1 | Negative | NEW |
-| SC-GN-039 | Cọc — theo loại | REQ-GN-017 | DOC-v2.0-01 BR-GC-02 (L534) | Bill có DV dùng loại cọc A và B; cọc HĐ đủ cả A và B | Gạch cọc | Bill được gạch | P1 | Functional | NEW |
+| SC-GN-039 | Cọc — theo loại | REQ-GN-017 | DOC-v2.0-01 BR-GC-02 (L534) | Bill có DV dùng loại cọc A và B; cọc hóa đơn đủ cả A và B | Gạch cọc | Bill được gạch | P1 | Functional | NEW |
 | SC-GN-040 | Cọc — theo loại | REQ-GN-017 | DOC-v2.0-01 BR-GC-02 (L535) | Bill dùng loại A và B; cọc loại B **thiếu** (dù tổng cọc đủ) | Gạch cọc | **Không gạch cả bill**, không gạch một phần loại A | P1 | Negative | NEW |
 | SC-GN-041 | Cọc — theo loại | REQ-GN-017 | DOC-v2.0-01 BR-GC-02 (L535) | Đơn 2 bill: bill 1 thiếu cọc loại B, bill 2 chỉ dùng loại A đủ | Gạch cọc | Bill 1 không gạch; bill 2 **vẫn** được gạch | P1 | Functional | NEW |
 | SC-GN-042 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L539) | Bill có 2 DV cùng loại cọc A + 1 DV loại cọc B | Gạch cọc | 2 dòng Payment (1 cho loại A gom 2 DV, 1 cho loại B); mỗi DV trừ đúng loại cọc | P1 | Functional | NEW |
 | SC-GN-043 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L540) | Bill nợ 1.000k, đội EVC đã gạch 200k | Gạch cọc | Trừ cọc trên **800k** còn lại; Payment + trừ cọc ghi theo BillNumber + số hợp đồng | P1 | Functional | NEW |
-| SC-GN-044 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L541) | Cọc HĐ dư sau khi gạch; HĐ đã gạch bằng cọc | Điểm chạm kích hoạt lại | Cọc dư giữ nguyên, không xử lý; HĐ không bị gạch lại | P2 | Negative | NEW |
+| SC-GN-044 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L541) | Cọc hóa đơn dư sau khi gạch; hóa đơn đã gạch bằng cọc | Điểm chạm kích hoạt lại | Cọc dư giữ nguyên, không xử lý; hóa đơn không bị gạch lại | P2 | Negative | NEW |
 | SC-GN-045 | EVC | REQ-GN-019 | DOC-v2.0-01 BR-VC (L545) | Đơn có EVC (không lock), luồng Paid | Gạch nợ chạy | INVOICE **không** ghi Payment cho phần EVC; chỉ gạch tiền khách trên phần nợ còn lại | P1 | Negative | NEW |
 | SC-GN-046 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; EVC lock 300k; Paid khách 900k | Gạch tiền khách | Gạch = min(1.000k − 300k, 900k) = **700k**; Paid khách dư 200k giữ lại; phần 300k chừa ra | P1 | Functional | NEW |
 | SC-GN-047 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; lock **0**; Paid khách 500k / 1.000k | Gạch tiền khách | **Lock 0 ⇒ gạch như thường: 500k / 1.000k** | P2 | Boundary | NEW |
@@ -152,7 +152,7 @@ updated: 2026-10-19
 
 ---
 
-##### SC-GN-007 · Paid về trước HĐ
+##### SC-GN-007 · Paid về trước hóa đơn
 📍 `DOC-v2.0-01 §II.c BR-DP-01 · L476`
 
 > Đồng bộ Paid là luồng độc lập với gạch nợ và luôn ghi nhận Paid kể cả khi hóa đơn chưa phát hành.

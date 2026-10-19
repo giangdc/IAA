@@ -31,8 +31,8 @@
 > ⚠️ QC **không có quyền xem log** (CL-XHD-15, CL-XHD-19, CL-HK-06) — verify bằng hành vi trên các tool trên, không verify cột Note / log.
 
 ## Flow QC test E2E (QC owner, cập nhật 19/10/2026)
-KH / nhân viên lên đơn hàng thành công → KH thanh toán, ký BBĐT → **xuất HĐ cho dịch vụ trước** → triển khai (nếu có) → giao hàng / triển khai thành công → cập nhật đơn hàng đã hoàn tất → **hệ thống gen tiếp HĐ cho thiết bị**. Một đơn hàng có thể có nhiều hóa đơn.
+KH / nhân viên lên đơn hàng thành công → KH thanh toán, ký BBĐT → **xuất hóa đơn cho dịch vụ trước** → triển khai (nếu có) → giao hàng / triển khai thành công → cập nhật đơn hàng đã hoàn tất → **hệ thống gen tiếp hóa đơn cho thiết bị**. Một đơn hàng có thể có nhiều hóa đơn.
 
-> ✅ Khớp URD 2.2 BR-XHD-03 (L396: DV khi có tín hiệu "đã thanh toán", TB khi giao hàng hoàn tất — xét độc lập) và BR-XHD-14 (1 đơn nhiều HĐ).
-> ✅ HĐ thiết bị được kích hoạt bởi **tín hiệu giao hàng của từng phương thức triển khai** (phiếu thi công / Vendor / quầy) — QC owner 19/10/2026, khớp BR-DB-02, BR-XHD-06 ⇒ đơn nhiều phương thức ra HĐ thiết bị theo từng phương thức.
+> ✅ Khớp URD 2.2 BR-XHD-03 (L396: DV khi có tín hiệu "đã thanh toán", TB khi giao hàng hoàn tất — xét độc lập) và BR-XHD-14 (1 đơn nhiều hóa đơn).
+> ✅ hóa đơn thiết bị được kích hoạt bởi **tín hiệu giao hàng của từng phương thức triển khai** (phiếu thi công / Vendor / quầy) — QC owner 19/10/2026, khớp BR-DB-02, BR-XHD-06 ⇒ đơn nhiều phương thức ra hóa đơn thiết bị theo từng phương thức.
 > ⚠️ Còn hỏi BA (CL-XHD-34): thiết bị hình thức triển khai "Không" (không có phiếu / Vendor / quầy) lấy tín hiệu nào để phát hành.

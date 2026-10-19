@@ -39,7 +39,7 @@ doc_source:
     modules: [XHD]
   - id: DOC-v2.0-FIG-01
     file: Design/Chi tiết hóa đơn.png
-    revision: "ảnh chụp màn Hệ thống Thông tin — HĐ U25SG00002918 (2025)"
+    revision: "ảnh chụp màn Hệ thống Thông tin — hóa đơn U25SG00002918 (2025)"
     md5: 7b01d992073d03f1ed5913fdadf11ff6
     kind: "KHÔNG PHẢI prototype — màn hiện hữu tab \"Chi tiết của Hóa đơn\""
     modules: [XHD, GN, HK]
@@ -82,9 +82,9 @@ updated: 2026-10-19
 
 | Module | Dir | Chức năng | DOC Source | Dải REQ | Dải SC |
 |---|---|---|---|---|---|
-| **XHD** | [`XHD/`](XHD/) | Đồng bộ đơn SPF → INVOICE (17 kênh × 20 nhóm DV, bán mới / bán thêm), tín hiệu giao hàng 3 nguồn, thông tin KH, lịch worker / realtime (gồm FPL), điều kiện phát hành (PĐK, hợp đồng con), gộp / tách HĐ, chống trùng, điều kiện hợp lệ, chi nhánh, phát hành Billing + Invoice Event, cutover — **FR01–FR06** | `DOC-v2.0-01` §A.2, §A.3, §B.I, §C, §D (+ `-02`, `-04`, `-05`, `-FIG-01`, `-FIG-02`) | `REQ-XHD-001..043` | `SC-XHD-001..109` |
+| **XHD** | [`XHD/`](XHD/) | Đồng bộ đơn SPF → INVOICE (17 kênh × 20 nhóm DV, bán mới / bán thêm), tín hiệu giao hàng 3 nguồn, thông tin KH, lịch worker / realtime (gồm FPL), điều kiện phát hành (PĐK, hợp đồng con), gộp / tách hóa đơn, chống trùng, điều kiện hợp lệ, chi nhánh, phát hành Billing + Invoice Event, cutover — **FR01–FR06** | `DOC-v2.0-01` §A.2, §A.3, §B.I, §C, §D (+ `-02`, `-04`, `-05`, `-FIG-01`, `-FIG-02`) | `REQ-XHD-001..043` | `SC-XHD-001..109` |
 | **GN** | [`GN/`](GN/) | Đồng bộ Paid, 3 điểm chạm, chọn Paid / Cọc, gạch nợ tạm / gỡ tạm (kênh sàn), gạch nợ thật bằng Paid (chừa EVC lock), gạch nợ bằng Cọc — **FR07–FR09** | `DOC-v2.0-01` §B.II (+ `-02`) | `REQ-GN-001..020` | `SC-GN-001..050` |
-| **HK** | [`HK/`](HK/) | Đẩy hậu kỳ theo đơn sau Invoice Event: ký hiệu + ID HĐĐT, nội dung, tổng tiền theo thuế suất, đẩy HĐĐT, tiền trả trước một lần mỗi đơn — **FR10–FR11** | `DOC-v2.0-01` §B.III, §C#1, §D#5–6 (+ `-02`) | `REQ-HK-001..010` | `SC-HK-001..021` |
+| **HK** | [`HK/`](HK/) | Đẩy hậu kỳ theo đơn sau Invoice Event: ký hiệu + ID hóa đơn điện tử, nội dung, tổng tiền theo thuế suất, đẩy hóa đơn điện tử, tiền trả trước một lần mỗi đơn — **FR10–FR11** | `DOC-v2.0-01` §B.III, §C#1, §D#5–6 (+ `-02`) | `REQ-HK-001..010` | `SC-HK-001..021` |
 
 > ⚠️ **Bẫy tra cứu:** ID (`SC-XHD-NNN`) **không** suy ra được tên thư mục, và thư mục thường **dùng lại qua nhiều sprint** ⇒ phân biệt **BẮT BUỘC bằng dải ID** ở bảng trên (khớp `id_range` trong frontmatter `CHANGELOG.md`).
 > ⛔ **TL (URD §B.IV — điều chỉnh tính lương FPT Play SA) ngoài phạm vi** (QC lead chốt 14/10/2026) — **không có thư mục `TL/`**, đừng dựng. Module Codes ghi `Out-of-scope`.
@@ -110,10 +110,10 @@ updated: 2026-10-19
 | **Tổng** | **73** | **177** | **177** | **0** | **0** | **5** | **138** | **37** | **2** | **55** | **21** | — |
 
 > ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 4, 5, 6; **không** D#7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). D#4 (EVC: BR-VC-01..07, BR-GC-04..07) dùng từ vòng 3 19/10/2026 vì 2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"; bỏ các bước 2.1 đánh dấu `[Bỏ]`. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
-> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy HĐ) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06).
-> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-XHD-033 (ngoài scope test — TP §2.2 #2), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
+> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy hóa đơn) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06).
+> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-XHD-033 (ngoài scope test — TP §2.2 #2), REQ-HK-010 (dòng EVC / chiết khấu / mẫu hóa đơn điện tử) — nợ ở `CHANGELOG.md §3` từng module.
 > ℹ️ 18 SC (XHD 9 · GN 2 · HK 7) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
-> 🔴 CL còn **OPEN**: 29/55 (**vòng 3 19/10/2026:** đóng CL-XHD-01, 02, 03, 08, 14, 15, 18, 26 · CL-GN-06, 07 · CL-HK-09 · làm rõ thêm CL-XHD-04, 07, 12, 27 · CL-GN-08, 10 (URD 2.1 dùng cho D#4) · CL-HK-07 · +CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho HĐ bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu HĐĐT · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (4):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-03 (dòng EVC / chiết khấu).
+> 🔴 CL còn **OPEN**: 29/55 (**vòng 3 19/10/2026:** đóng CL-XHD-01, 02, 03, 08, 14, 15, 18, 26 · CL-GN-06, 07 · CL-HK-09 · làm rõ thêm CL-XHD-04, 07, 12, 27 · CL-GN-08, 10 (URD 2.1 dùng cho D#4) · CL-HK-07 · +CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho hóa đơn bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu hóa đơn điện tử · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (4):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-03 (dòng EVC / chiết khấu).
 
 ### 🔑 Luật `counts` canonical (v2)
 

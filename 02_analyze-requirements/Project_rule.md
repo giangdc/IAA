@@ -7,7 +7,7 @@
 ## Project Info
 
 - **Tên project:** qc-invoice-issuance-architecture
-- **Tên đầy đủ:** Invoice Issuance Architecture — Phase 2 (xuất hóa đơn đa kênh, 1 đơn 1..n HĐ, gạch nợ Paid/Cọc)
+- **Tên đầy đủ:** Invoice Issuance Architecture — Phase 2 (xuất hóa đơn đa kênh, 1 đơn 1..n hóa đơn, gạch nợ Paid/Cọc)
 - **App type:** API
   <!-- Hệ thống backend event-driven: SPF → Kafka (Order Event / Invoice Event) → INVOICE
        (Invoice Consumer – Rule Engine – Worker phát hành) → Billing System. URD KHÔNG mô tả màn hình
@@ -41,16 +41,16 @@
 
 | Mã | Module | Tên chức năng | Status |
 |---|---|---|---|
-| FR01 | XHD | Đồng bộ đơn hàng SPF → INVOICE (17 kênh × 20 nhóm DV × bán mới / bán thêm), tín hiệu giao hàng 3 nguồn, thông tin khách xuất HĐ | Active |
-| FR02 | XHD | Lịch xuất HĐ + phân luồng worker / realtime (gồm kênh FPL) | Active |
+| FR01 | XHD | Đồng bộ đơn hàng SPF → INVOICE (17 kênh × 20 nhóm DV × bán mới / bán thêm), tín hiệu giao hàng 3 nguồn, thông tin khách xuất hóa đơn | Active |
+| FR02 | XHD | Lịch xuất hóa đơn + phân luồng worker / realtime (gồm kênh FPL) | Active |
 | FR03 | XHD | Điều kiện phát hành DV / TB (PĐK, hợp đồng con) + điều kiện hợp lệ | Active |
-| FR04 | XHD | Gộp / tách HĐ (1 đơn n HĐ) + chống phát hành trùng | Active |
-| FR05 | XHD | Phát hành HĐ qua Billing + Invoice Event + chi nhánh xuất HĐ | Active |
+| FR04 | XHD | Gộp / tách hóa đơn (1 đơn n hóa đơn) + chống phát hành trùng | Active |
+| FR05 | XHD | Phát hành hóa đơn qua Billing + Invoice Event + chi nhánh xuất hóa đơn | Active |
 | FR06 | XHD | Cutover v1 → v2 + kiểm tra chéo | Active |
 | FR07 | GN | Đồng bộ Paid + điểm chạm + xác định phương thức Paid / Cọc | Active |
 | FR08 | GN | Gạch nợ bằng Paid: gạch nợ tạm (kênh sàn), gạch nợ thật, chừa phần EVC bị lock | Active |
 | FR09 | GN | Gạch nợ bằng Cọc | Active |
-| FR10 | HK | Đẩy hậu kỳ theo đơn: ký hiệu + ID, nội dung + tổng tiền theo thuế suất, thông tin mẫu, đẩy HĐĐT | Active |
+| FR10 | HK | Đẩy hậu kỳ theo đơn: ký hiệu + ID, nội dung + tổng tiền theo thuế suất, thông tin mẫu, đẩy hóa đơn điện tử | Active |
 | FR11 | HK | Tiền trả trước một lần mỗi đơn | Active |
 | — | TL | Điều chỉnh tính lương FPT Play SA (URD §B.IV) | Out-of-scope |
 <!-- Điền bởi analyze-requirements --init 16/10/2026. Mã FRxx = mã chức năng Scope test (TP §2.1a, chốt
@@ -133,7 +133,7 @@ router_filename:    README.md      # README.md (mặc định) | INDEX.md — t�
 req_notation: BR
 # BR (custom) : URD đánh số Business Rule theo mẫu `BR-<NHÓM>-<NN>` — dùng NGUYÊN VĂN ID này cho cột
 #               `Maps (Ref DOC)` (traceability Schema A) và cột `Nguồn` (test-data-catalog).
-#               67 BR trong URD (đếm 07/10/2026): BR-DB-01..08 (đồng bộ đơn) · BR-XHD-01..14 (xuất HĐ)
+#               67 BR trong URD (đếm 07/10/2026): BR-DB-01..08 (đồng bộ đơn) · BR-XHD-01..14 (xuất hóa đơn)
 #               · BR-DP-01..03 (đồng bộ Paid) · BR-XL-01..05 (điểm chạm/phương thức) · BR-NT-01..04
 #               (nợ tạm) · BR-GN-01..05 (gạch nợ) · BR-VC-01..07 (EVC — 01, 06 đánh [Bỏ]) · BR-GC-01..07
 #               (gạch cọc) · BR-HK-01..10 (hậu kỳ) · BR-TL-01..04 (tính lương) + `RISK-01` (rủi ro, map như BR).

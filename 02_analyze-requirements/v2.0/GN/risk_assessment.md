@@ -33,7 +33,7 @@ updated: 2026-10-19
 |---------|-------------|--------|----------|--------------|------------|---------------------|--------|--------|
 | RISK-GN-01 | GN / EVC ↔ Paid voucher | Paid đồng bộ "gồm cả voucher"; INVOICE gạch nợ dùng cả Paid voucher (CL-GN-01 vòng 2) trong khi EVC do đội EVC gạch ⇒ nếu hai bên cùng gạch một khoản thì nợ khách bị trừ 2 lần | High | DOC-v2.0-01 BR-DP-01 (L474) ↔ BR-VC (L545) ↔ BR-GN-01 (L508); TP rủi ro #7 | SC-GN-045, 048 | Gạch nợ EVC / voucher **vẫn test** (QC owner 19/10/2026 — khác TP §2.2 #5); chờ BA liệt kê loại EVC / voucher và bên gạch (CL-GN-01, 08, 10) | Open | SC-GN-045, SC-GN-048 · REQ-GN-012, REQ-GN-019 |
 | RISK-GN-02 | GN / EVC lock | Nguồn tổng EVC + tiền lock không nêu ở 2.2, không có hành vi lỗi ⇒ công thức min(nợ − lock, Paid) và kiểm đủ tiền nhánh Cọc không tái hiện được nếu không có mock | High | DOC-v2.0-01 BR-VC (L546), BR-GC-01 (L529); GAP-16 | SC-GN-037, 038, 046, 047 | Dựng mock trả {tổng EVC, lock}. API EVC lỗi / timeout: **không test trên STG** — retry thủ công, lỗi ⇒ log bug (CL-GN-02, SC-GN-049 deprecated 19/10/2026) | Open | SC-GN-037, SC-GN-038, SC-GN-046, SC-GN-047 · REQ-GN-016, REQ-GN-020 |
-| RISK-GN-03 | GN / gạch nợ tạm kênh sàn | Gạch tạm → gỡ tạm → gạch thật đổi trạng thái HĐ 2 lần; sai thứ tự (gạch thật trước khi gỡ) ⇒ Σ Payment > tổng HĐ | High | DOC-v2.0-01 BR-NT-01..04 (L491-505) | SC-GN-019, 022, 023 | Test đủ chuỗi trạng thái trên Shopee + Tiktok | Open | SC-GN-019, SC-GN-022, SC-GN-023 · REQ-GN-009..011 |
+| RISK-GN-03 | GN / gạch nợ tạm kênh sàn | Gạch tạm → gỡ tạm → gạch thật đổi trạng thái hóa đơn 2 lần; sai thứ tự (gạch thật trước khi gỡ) ⇒ Σ Payment > tổng hóa đơn | High | DOC-v2.0-01 BR-NT-01..04 (L491-505) | SC-GN-019, 022, 023 | Test đủ chuỗi trạng thái trên Shopee + Tiktok | Open | SC-GN-019, SC-GN-022, SC-GN-023 · REQ-GN-009..011 |
 | RISK-GN-04 | GN / tích hợp | Cần mock API kênh thanh toán (trường Paid/Cọc), Kafka Out, đội EVC trên STG; payload chưa có | Medium | TP §2.1b #23; CL-XHD-29 | SC-GN-016, 017, 034 | Chuẩn bị mock/stub trước R1 (TP Entry Criteria); lỗi / timeout API ngoài không test trên STG (CL-GN-02) | Open | SC-GN-016, SC-GN-017, SC-GN-034 · REQ-GN-007, REQ-GN-014 |
 | RISK-GN-05 | GN / thứ tự bill + gạch từng phần | Đơn 1..n bill; sai thứ tự hoặc sai min() ⇒ gạch sai bill, Paid dư sai | Medium | DOC-v2.0-01 BR-GN-03, BR-GN-04 (L511-521) | SC-GN-028..033 | BVA đủ 3 biên Paid vs nợ; đơn ≥3 bill khác tiền | Resolved | SC-GN-028..033 · REQ-GN-013, REQ-GN-014 |
 | RISK-GN-06 | GN / cọc theo loại | Thiếu danh sách loại cọc ↔ dịch vụ ⇒ không dựng được dữ liệu "thiếu 1 loại"; gom Payment sai loại | Medium | DOC-v2.0-01 BR-GC-02, BR-GC-03 (L532-542) | SC-GN-039..043 | Xin danh mục loại cọc (CL-GN-07) | Open | SC-GN-039..043 · REQ-GN-017, REQ-GN-018 |
@@ -73,7 +73,7 @@ updated: 2026-10-19
 > 1 | Cuoc K+ | U25SG00002918 | 155,000 | System1 | (17/11/2025)
 > 2 | Cuoc K+ | U25SG00002918 | 10,000 | phieumuahang4 | Voucher(17/11/2025)
 
-↳ **Ghi chú:** Đọc đúng chữ thì INVOICE dùng mọi Paid Amount > 0, kể cả voucher ⇒ gạch trùng với đội EVC. Màn hiện hữu (HĐ 2025, trước Phase 2) cho thấy khoản voucher được ghi thành 1 dòng thanh toán riêng trên HĐ — không cho biết bên nào ghi. Cấu hình EVC (PaidType, Owner gạch) 2.2 chuyển D#4 — chưa có đặc tả (CL-GN-10). Mail PM "EVC cần test => theo rule URD" không trả lời điểm này. TP giả định loại Paid voucher (SC-GN-048).
+↳ **Ghi chú:** Đọc đúng chữ thì INVOICE dùng mọi Paid Amount > 0, kể cả voucher ⇒ gạch trùng với đội EVC. Màn hiện hữu (hóa đơn 2025, trước Phase 2) cho thấy khoản voucher được ghi thành 1 dòng thanh toán riêng trên hóa đơn — không cho biết bên nào ghi. Cấu hình EVC (PaidType, Owner gạch) 2.2 chuyển D#4 — chưa có đặc tả (CL-GN-10). Mail PM "EVC cần test => theo rule URD" không trả lời điểm này. TP giả định loại Paid voucher (SC-GN-048).
 
 **Câu hỏi cho BA:** Khi gạch nợ nhánh Paid, INVOICE dùng (a) chỉ Paid tiền khách hay (b) cả Paid voucher? Nếu (b): voucher nhóm nào (Payment Hub?) và đội EVC có bỏ qua khoản đó không?
 
@@ -146,12 +146,12 @@ updated: 2026-10-19
 
 ---
 
-### CL-GN-06 · Gỡ gạch tạm rồi Paid hoàn tất nhỏ hơn nợ: HĐ quay về "còn nợ" — có hệ quả / cảnh báo?
+### CL-GN-06 · Gỡ gạch tạm rồi Paid hoàn tất nhỏ hơn nợ: hóa đơn quay về "còn nợ" — có hệ quả / cảnh báo?
 📍 `DOC-v2.0-01 BR-NT-04 · L503`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 > Khi Paid chuyển sang thanh toán hoàn tất, nếu hóa đơn đã gạch nợ tạm thì gỡ Payment tạm trước (hóa đơn trở lại còn nợ) rồi mới gạch nợ thật.
 
-↳ **Ghi chú:** Sàn quyết toán có thể trừ phí ⇒ Paid hoàn tất < nợ. HĐ từ "Đã gạch nợ" về "còn nợ" — downstream (hậu kỳ, báo cáo) có bị ảnh hưởng? Phí TMĐT là một PaidType — có được dùng để gạch phần chênh không?
+↳ **Ghi chú:** Sàn quyết toán có thể trừ phí ⇒ Paid hoàn tất < nợ. Hóa đơn từ "Đã gạch nợ" về "còn nợ" — downstream (hậu kỳ, báo cáo) có bị ảnh hưởng? Phí TMĐT là một PaidType — có được dùng để gạch phần chênh không?
 
 **Câu hỏi cho BA:** Khi Paid quyết toán của sàn nhỏ hơn nợ, phần chênh xử lý thế nào (Paid phí TMĐT? để còn nợ?)
 

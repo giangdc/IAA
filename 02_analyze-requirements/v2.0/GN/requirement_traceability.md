@@ -67,12 +67,12 @@ updated: 2026-10-19
 
 ---
 
-### REQ-GN-003 · Đồng bộ Paid độc lập, luôn ghi nhận kể cả khi HĐ chưa phát hành
+### REQ-GN-003 · Đồng bộ Paid độc lập, luôn ghi nhận kể cả khi hóa đơn chưa phát hành
 📍 `DOC-v2.0-01 §II.c BR-DP-01 · L476`  ·  Clarif: —
 
 > Đồng bộ Paid là luồng độc lập với gạch nợ và luôn ghi nhận Paid kể cả khi hóa đơn chưa phát hành.
 
-↳ **Ghi chú:** Paid về trước HĐ ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên.
+↳ **Ghi chú:** Paid về trước hóa đơn ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên.
 
 ---
 
@@ -95,12 +95,12 @@ updated: 2026-10-19
 
 ---
 
-### REQ-GN-006 · Lấy nợ HĐ kèm trường gạch nợ Paid/Cọc; không có nợ thì dừng
+### REQ-GN-006 · Lấy nợ hóa đơn kèm trường gạch nợ Paid/Cọc; không có nợ thì dừng
 📍 `DOC-v2.0-01 §II.c BR-XL-03 · L486`  ·  Clarif: —
 
 > Lấy nợ hóa đơn kèm trường gạch nợ Paid/Cọc; không có nợ thì dừng, chờ điểm chạm sau.
 
-↳ **Ghi chú:** "Không có nợ" gồm HĐ đã gạch đủ và HĐ chưa phát hành.
+↳ **Ghi chú:** "Không có nợ" gồm hóa đơn đã gạch đủ và hóa đơn chưa phát hành.
 
 ---
 
@@ -133,13 +133,13 @@ updated: 2026-10-19
 
 ---
 
-### REQ-GN-010 · Cách ghi gạch nợ tạm: Payment phương thức đặc biệt = toàn bộ nợ còn lại; HĐ chuyển "Đã gạch nợ"
+### REQ-GN-010 · Cách ghi gạch nợ tạm: Payment phương thức đặc biệt = toàn bộ nợ còn lại; hóa đơn chuyển "Đã gạch nợ"
 📍 `DOC-v2.0-01 §II.c BR-NT-02 · L498-499`  ·  Clarif: `CL-GN-04`
 
 > Ghi Payment bằng phương thức thanh toán đặc biệt, số tiền bằng toàn bộ nợ còn lại.
 > Khoản này tính vào tổng Payment nên hóa đơn chuyển sang "Đã gạch nợ" ngay.
 
-↳ **Ghi chú:** Mã "phương thức thanh toán đặc biệt" chưa có (CL-GN-04). Số tiền = nợ **còn lại** (không phải tổng HĐ).
+↳ **Ghi chú:** Mã "phương thức thanh toán đặc biệt" chưa có (CL-GN-04). Số tiền = nợ **còn lại** (không phải tổng hóa đơn).
 
 ---
 
@@ -184,13 +184,13 @@ updated: 2026-10-19
 
 ---
 
-### REQ-GN-015 · Trạng thái "Đã gạch nợ" khi tổng Payment = tổng tiền HĐ (cả tạm và thật)
+### REQ-GN-015 · Trạng thái "Đã gạch nợ" khi tổng Payment = tổng tiền hóa đơn (cả tạm và thật)
 📍 `DOC-v2.0-01 §II.c BR-GN-05 · L524-525`  ·  Clarif: —
 
 > Khi tổng Payment bằng tổng tiền hóa đơn thì hóa đơn chuyển sang "Đã gạch nợ".
 > Áp dụng cho cả gạch nợ tạm và gạch nợ thật.
 
-↳ **Ghi chú:** Cũng là "Kết quả" của chức năng II (L465). Biên Σ Payment = tổng HĐ − 1 / = tổng HĐ.
+↳ **Ghi chú:** Cũng là "Kết quả" của chức năng II (L465). Biên Σ Payment = tổng hóa đơn − 1 / = tổng hóa đơn.
 
 ---
 
@@ -210,7 +210,7 @@ updated: 2026-10-19
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > Thiếu ở một loại thì không gạch cả bill đó, không gạch một phần; các bill khác của đơn vẫn xét bình thường.
 
-↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết HĐ. Map dịch vụ ↔ loại cọc không test; chỉ check có sinh đặt cọc, đơn bán thêm vẫn có cọc (CL-GN-07, 19/10/2026).
+↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết hóa đơn. Map dịch vụ ↔ loại cọc không test; chỉ check có sinh đặt cọc, đơn bán thêm vẫn có cọc (CL-GN-07, 19/10/2026).
 
 ---
 
