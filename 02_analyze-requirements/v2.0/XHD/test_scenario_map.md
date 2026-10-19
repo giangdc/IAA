@@ -6,15 +6,15 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module XHD
   req: 43
-  sc: 109
-  new: 109
+  sc: 111
+  new: 111
   modified: 0
   carried: 0
-  deprecated: 2
+  deprecated: 0
   p1: 85
-  p2: 23
+  p2: 25
   p3: 1
-  blocked_by_cl: 16      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
+  blocked_by_cl: 18      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -40,7 +40,7 @@ updated: 2026-10-19
 - **Thời gian** viết theo "giờ chốt đợt 1 / đợt cuối" — giá trị 12:00/18:00 chỉ là giá trị đang cấu hình (⛔ không hardcode trong TC).
 
 ## Tổng quan
-- Tổng số scenarios: 109 (NEW: 109, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
+- Tổng số scenarios: 111 (NEW: 111, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:` (p1 / p2 / p3).
 
 > ℹ️ **19/10/2026 — QC không có quyền xem log** (CL-XHD-15, CL-XHD-19): mọi Then "ghi log" / "ghi Note" chỉ verify phần hành vi (không phát hành / không ghi nhận) qua tool ở `07_environments/environments.md §Tool tra cứu`; phần log không verify.
@@ -157,6 +157,8 @@ updated: 2026-10-19
 | SC-XHD-104 | Phát hành Billing | REQ-XHD-035 | DOC-v2.0-01 BR-XHD-13 (L439) | Billing lỗi / timeout (mock) | Worker gọi phát hành | (giả định TP: dòng giữ BillNumber rỗng + log) — ⛔ chờ CL-XHD-18 | P2 | Negative | NEW |
 | SC-XHD-105 | 1 đơn n HĐ | REQ-XHD-038 | DOC-v2.0-01 BR-XHD-14 (L446-447) | Đơn có DV + TB ở 2 phương thức, đủ điều kiện ở 3 thời điểm khác đợt | Lần lượt các đợt / realtime chạy | Đơn có **3 BillNumber**; `OB_OrderBill` liên kết đủ 3; mỗi HĐ có thể nhiều dòng | P1 | Functional | NEW |
 | SC-XHD-106 | Bán thêm | REQ-XHD-040 | DOC-v2.0-04 mail PM | Hợp đồng đang hoạt động có đơn **bán thêm** (DV / TB) | Đơn đi qua các điều kiện phát hành như đơn bán mới | Xuất HĐ theo cùng rule đơn bán mới; HĐ gắn đúng đơn bán thêm (CL-XHD-25, 19/10/2026) | P1 | Functional | NEW |
+| SC-XHD-107 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L302) | Đơn đã ra HĐ ở luồng cũ (v1), kiểm tra chéo đang bật | Bản tin của đơn về luồng mới | Luồng mới **không** xử lý đơn — ⛔ chờ CL-XHD-24 (STG có luồng cũ không) | P2 | Regression | NEW |
+| SC-XHD-108 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L300) | Cả 2 luồng cùng đọc Kafka | 1 bản tin được luồng mới ghi | Luồng cũ không ghi bản tin đó (và ngược lại) — ⛔ chờ CL-XHD-24 | P2 | Regression | NEW |
 | SC-XHD-109 | HT triển khai | REQ-XHD-043 | DOC-v2.0-05 dòng 8 | Đơn có TB DeployType = "Không" (và đơn mix "Không" + TIN/PNC) | Không có / có phiếu thi công TINPNC | QC: xuất HĐ khi đơn hoàn tất — chưa có căn cứ URD ⛔ chờ CL-XHD-27, CL-XHD-34 | P2 | Functional | NEW |
 | SC-XHD-110 | Điều kiện phát hành | REQ-XHD-019, REQ-XHD-025 | DOC-v2.0-01 BR-XHD-06 (L412) ↔ BR-DB-07 (L374) | Đơn có **2 TB cùng phương thức** triển khai A; DV đã phát hành | Tín hiệu giao hàng hoàn tất của A chỉ mang **TB1** (giao thiếu TB2) | Chỉ TB1 phát hành; TB2 giữ BillNumber rỗng, chờ tín hiệu riêng (CL-XHD-10) | P1 | Functional | NEW |
 | SC-XHD-111 | Hợp lệ | REQ-XHD-031, REQ-XHD-015 | DOC-v2.0-01 BR-XHD-10 (L428) ↔ BR-XHD-01 (L384) | Dòng bị chặn trong ngày N vì thiếu thông tin | Thông tin được bổ sung **sau giờ chốt cuối ngày N** (hoặc ngày N+1) | Hệ thống **không** tự phát hành lại dòng ở các đợt sau (không giữ chờ — CL-XHD-17); dòng giữ BillNumber rỗng | P2 | Negative | NEW |
@@ -1129,6 +1131,24 @@ updated: 2026-10-19
 
 ---
 
+##### SC-XHD-107 · Cutover — kiểm tra chéo luồng cũ
+📍 `DOC-v2.0-02 §I.c BR-DB-08 · L302`
+
+> Trong giai đoạn đầu sau khi go-live, luồng mới kiểm tra chéo trên dữ liệu cũ ở MỨC ĐƠN HÀNG: nếu Đơn hàng đã ra hóa đơn ở luồng cũ thì luồng mới không xử lý đơn đó nữa.
+
+↳ **Ghi chú:** Nội dung từ URD 2.1 (2.2 chuyển Phụ lục D#1) — dùng lại 19/10/2026 (CL-XHD-24).
+
+---
+
+##### SC-XHD-108 · Cutover — một bản tin một luồng
+📍 `DOC-v2.0-02 §I.c BR-DB-08 · L300`
+
+> Kafka dùng chung một nguồn bản tin; mỗi bản tin chỉ được xử lý bởi một trong hai luồng — đã ghi qua luồng mới thì không ghi qua luồng cũ và ngược lại.
+
+↳ **Ghi chú:** Như SC-XHD-107.
+
+---
+
 ##### SC-XHD-109 · TB có HT triển khai "Không"
 📍 `DOC-v2.0-05 sheet "1. HT Triển khai" · STT 8`
 
@@ -1165,5 +1185,4 @@ updated: 2026-10-19
 
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
-| SC-XHD-107 | Cutover — đơn đã ra HĐ ở luồng cũ | XHD | v2.0 (16/10/2026) | URD 2.2 §D#1 chỉ nêu tên mục, không có hành vi ⇒ chờ CL-XHD-33, CL-XHD-24 |
-| SC-XHD-108 | Cutover — 2 luồng cùng đọc Kafka | XHD | v2.0 (16/10/2026) | Như SC-XHD-107 |
+| — | *(không có — SC-XHD-107, 108 dùng lại 19/10/2026 theo URD 2.1 §BR-DB-08)* | — | — | — |

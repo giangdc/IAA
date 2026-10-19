@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 10
-  cl_open: 8
+  cl_open: 6
   cl_blocking: 2
   risk: 5
   risk_high: 2
@@ -75,7 +75,7 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-02 · Đơn vị có đầu số / dãy số / mẫu riêng: trong hay ngoài phạm vi test?
-📍 `DOC-v2.0-01 BR-HK-03 (L583)` + `§D#5 (L674-677)`  ·  Status: **Open** · GAP-34 (Major)
+📍 `DOC-v2.0-01 BR-HK-03 (L583)` + `§D#5 (L674-677)`  ·  Status: **Resolved 19/10/2026** · GAP-34 (Major)
 
 > Bảng map vùng miền và các đơn vị có đầu số riêng xem tài liệu kỹ thuật.
 > (...)
@@ -87,16 +87,20 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA:** Đơn vị có đầu số riêng có thuộc phạm vi v2.0 không; nếu có thì danh sách + quy tắc.
 
+✅ **RESOLVED 19/10/2026** — Theo `DOC-v2.0-02` BR-HK-10 (L810-812): đơn vị có đầu số / dãy số / mẫu riêng (vd FPL, FMC) *"thuộc luồng nghiệp vụ cũ"*, danh sách *"[NỢ]… PO không cần chốt nội dung này"* ⇒ **ngoài phạm vi test v2.0**. Riêng dòng **FPL** trong bảng map ký hiệu (BR-HK-03 L784) vẫn test — SC-HK-009. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
 ---
 
 ### CL-HK-03 · Dòng EVC và dòng chiết khấu trên HĐĐT: Out-scope hay có đặc tả? ⛔ BLOCKING
-📍 `DOC-v2.0-01 BR-HK-02 (L575)` + `§D#6 (L678-681)`  ·  Status: **Open — ⛔ BLOCKING** (đẩy HĐĐT) · GAP-04 (Blocker)
+📍 `DOC-v2.0-01 BR-HK-02 (L575)` + `§D#6 (L678-681)`  ·  Status: **Open — đã rõ một phần 19/10/2026** (đẩy HĐĐT) · GAP-04 (Blocker)
 
 > INVOICE chuẩn bị đầy đủ các thông tin cần để tạo hóa đơn điện tử (ký hiệu, ID hóa đơn, nội dung hiển thị, dòng EVC, tổng tiền theo thuế suất, thông tin theo mẫu) rồi mới đẩy sang hệ thống HĐĐT.
 
 ↳ **Ghi chú:** BR-HK-02 bắt buộc có "dòng EVC" trước khi đẩy, nhưng không có rule. Mail PM "EVC cần test => theo rule URD" không làm rõ. TP đề xuất Out-scope (rủi ro TP #7). REQ-HK-010 chưa có SC.
 
 **Câu hỏi cho BA:** Dòng EVC / chiết khấu trên HĐĐT có trong phạm vi test v2.0? Nếu có: loại EVC nào được thể hiện, format dòng.
+
+🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02`: **dòng chiết khấu** chỉ có ở đơn đại lý FPT Play / Smart Home — BR-HK-06 L798 *"(hiện đi từ luồng đơn hàng không có)"* ⇒ **không test**. **Dòng EVC** (L725) *"Thêm DÒNG EVC trên hóa đơn nếu loại EVC đó thuộc nhóm được thể hiện"*; thông tin khác theo mẫu (BR-HK-08) chỉ có tên. Còn mở (**vẫn BLOCKING**, thu hẹp về dòng EVC): loại EVC nào thuộc nhóm được thể hiện + format dòng EVC. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
 
 ---
 
@@ -185,7 +189,7 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-10 · Ký hiệu, ID HĐĐT, đơn vị đầu số riêng: URD 2.2 chuyển sang Phụ lục D#5, D#6 — chưa có đặc tả
-📍 `DOC-v2.0-01 §D#5–#6 · L675-679`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 §D#5–#6 · L675-679`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 > Bảng map ký hiệu hóa đơn theo vùng miền; đơn vị có đầu số, dãy số, mẫu riêng.
 > BR-HK-03, 04, 10
@@ -196,3 +200,5 @@ updated: 2026-10-19
 ↳ **Ghi chú:** Chưa có bảng map vùng × loại đầu, map loại HĐ → loại đầu, định dạng ID, quy ước mã tỉnh. SC-HK-009, 010 deprecated; SC-HK-008, 011, 020 chờ. Có thể trả lời chung với CL-HK-01 (BLOCKING) khi PO gửi bảng chốt.
 
 **Câu hỏi cho BA:** Ngoài bảng map ký hiệu (CL-HK-01), cho QC định dạng ID HĐĐT: "năm" ghi 2 hay 4 chữ số, mã tỉnh theo danh mục nào, số HĐ có trùng số hóa đơn của Billing không; và danh sách đơn vị có đầu số / dãy số / mẫu riêng.
+
+✅ **RESOLVED 19/10/2026** — Theo `DOC-v2.0-02` BR-HK-03 (L767-785) + BR-HK-04 (L787-792): ký hiệu 7 ký tự `1K<yy>T<xx>` (vd `1K26TQA`), `<xx>` tra **bảng map vùng × loại đầu** (7 vùng + FPL; Vùng 5 dùng chung Vùng 1; FPL không có đầu M). ID HĐ = loại đầu + **năm 2 chữ số** + **mã tỉnh theo danh mục tỉnh thành** (không phải mã chi nhánh; lấy theo địa chỉ hợp đồng — CL-HK-08) + số HĐ **trùng trường Số (Invoice No) trên HĐĐT** — vd `U26HN01053692`. Đơn vị đầu số riêng: ngoài phạm vi (CL-HK-02). Loại HĐ nào dùng đầu M / U / A vẫn ở **CL-HK-01**. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).

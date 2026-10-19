@@ -13,6 +13,12 @@ doc_source:
     kind: URD — bản chính
     modules: [XHD, GN, HK]
     sections: "§A.1 Thông tin chung · §A.2 Kênh bán (L79-137) · §A.3 Nhóm DV (L138-260) · §A.5 Thuật ngữ (L277-320) · §B.I XHD (L323-452) · §B.II GN (L453-548) · §B.III HK (L549-597) · §B.IV TL — ngoài phạm vi (L598-634) · §C Điểm cần xác nhận (L635-651) · §D Phụ lục (L652-693)"
+  - id: DOC-v2.0-02
+    file: Doc/out-of-date/Invoice_Issuance_Architecture_v2_0_URD_v1_0.docx
+    revision: "URD rev 2.1 · 26/08/2026 · Vuongnd17 · bị 2.2 thay phần chính"
+    md5: b0f9d0800b248864a70fc2d4f9790f74
+    kind: "URD — chỉ dùng cho Phụ lục D của 2.2 (D#1, 2, 3, 5, 6; KHÔNG D#4, 7, 8, 9) — QC owner chốt 19/10/2026"
+    modules: [XHD, HK]
   - id: DOC-v2.0-03
     file: Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.pdf
     revision: "URD rev 2.2 bản PDF đính kèm mail PM 13/10/2026"
@@ -98,16 +104,16 @@ updated: 2026-10-19
 
 | Module | Req | SC | NEW | MOD | CARRIED | DEPR | P1 | P2 | P3 | CL | RISK | Risk Level |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|
-| XHD | 43 | 109 | 109 | 0 | 0 | 2 | 85 | 23 | 1 | 34 | 10 | High |
+| XHD | 43 | 111 | 111 | 0 | 0 | 0 | 85 | 25 | 1 | 34 | 10 | High |
 | GN | 20 | 49 | 49 | 0 | 0 | 1 | 42 | 6 | 1 | 10 | 6 | High |
-| HK | 10 | 18 | 18 | 0 | 0 | 3 | 12 | 6 | 0 | 10 | 5 | High |
-| **Tổng** | **73** | **176** | **176** | **0** | **0** | **6** | **139** | **35** | **2** | **54** | **21** | — |
+| HK | 10 | 20 | 20 | 0 | 0 | 1 | 12 | 8 | 0 | 10 | 5 | High |
+| **Tổng** | **73** | **180** | **180** | **0** | **0** | **2** | **139** | **39** | **2** | **54** | **21** | — |
 
-> ⛔ **URD 2.1 không sử dụng từ 16/10/2026** — 4 SC deprecated vì căn cứ chỉ có ở 2.1: SC-XHD-107, 108 (cutover) · SC-HK-009, 010 (bảng map ký hiệu).
+> ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 5, 6; **không** D#4 (EVC), 7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
 > ⛔ **19/10/2026** — deprecated thêm SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công.
-> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-041 (cutover — SC deprecated), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
-> ℹ️ 26 SC (XHD 16 · GN 3 · HK 7) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
-> 🔴 CL còn **OPEN**: 42/54 (+CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09). **BLOCKING (5):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-01 (ký hiệu HĐĐT) · CL-HK-03 (dòng EVC / chiết khấu).
+> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
+> ℹ️ 28 SC (XHD 18 · GN 3 · HK 7) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
+> 🔴 CL còn **OPEN**: 40/54 (+CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03). **BLOCKING (5):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-01 (ký hiệu HĐĐT) · CL-HK-03 (dòng EVC / chiết khấu).
 
 ### 🔑 Luật `counts` canonical (v2)
 

@@ -27,7 +27,7 @@ updated: 2026-10-16
 | REQ-HK-002 | BR-HK-01 | DOC-v2.0-01 §III.c (L570) | SC-HK-002, SC-HK-003 | — |
 | REQ-HK-003 | BR-HK-01 | DOC-v2.0-01 §III.c (L571) | SC-HK-004, SC-HK-005 | CL-HK-09 |
 | REQ-HK-004 | BR-HK-02 | DOC-v2.0-01 §III.c (L575-577) | SC-HK-006, SC-HK-007, SC-HK-018 | CL-HK-03, CL-HK-04, CL-HK-05 |
-| REQ-HK-005 | BR-HK-03 | DOC-v2.0-01 §III.c (L581, L583-584) | SC-HK-008, SC-HK-020 *(SC-HK-009, 010 deprecated 16/10/2026)* | CL-HK-01, CL-HK-02, CL-HK-10 |
+| REQ-HK-005 | BR-HK-03 | DOC-v2.0-01 §III.c (L581, L583-584) | SC-HK-008, SC-HK-009, SC-HK-010, SC-HK-020 | CL-HK-01, CL-HK-02, CL-HK-10 |
 | REQ-HK-006 | BR-HK-03 | DOC-v2.0-01 §III.c (L582) | SC-HK-011 | CL-HK-08 |
 | REQ-HK-007 | BR-HK-05 | DOC-v2.0-01 §III.c (L588) | SC-HK-012 | — |
 | REQ-HK-008 | BR-HK-07 | DOC-v2.0-01 §III.c (L592) | SC-HK-013, SC-HK-014 | — |
@@ -98,7 +98,7 @@ updated: 2026-10-16
 
 > ID hóa đơn ghép từ loại đầu + năm + mã tỉnh + số hóa đơn.
 
-↳ **Ghi chú:** Định dạng từng thành phần (năm 2 hay 4 số, mã tỉnh theo danh mục nào) chưa có (CL-HK-10). Mã tỉnh của cái gì (địa chỉ KH? chi nhánh hợp đồng?) chưa rõ (CL-HK-08).
+↳ **Ghi chú:** Định dạng theo URD 2.1 BR-HK-04 (CL-HK-10, 19/10/2026): năm 2 chữ số, mã tỉnh theo danh mục tỉnh thành, số HĐ = trường Số trên HĐĐT; mã tỉnh lấy theo địa chỉ hợp đồng (CL-HK-08).
 
 ---
 

@@ -6,13 +6,13 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module HK
   req: 10
-  sc: 18
-  new: 18
+  sc: 20
+  new: 20
   modified: 0
   carried: 0
-  deprecated: 3
+  deprecated: 1
   p1: 12
-  p2: 6
+  p2: 8
   p3: 0
   blocked_by_cl: 7
 status: ANALYZED
@@ -36,7 +36,7 @@ updated: 2026-10-19
 **Áp dụng cho HK:** fan-out theo **thành phần HĐ** (DV / TB) · **số lần phát hành** của đơn · **vùng × loại đầu** ký hiệu (bảng map chờ CL-HK-01) · **mức thuế suất** (5 lớp). REQ-HK-010 không sinh SC.
 
 ## Tổng quan
-- Tổng số scenarios: 18 (NEW: 18, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
+- Tổng số scenarios: 20 (NEW: 20, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:`.
 
 ## Scenarios — NEW & MODIFIED (chi tiết đầy đủ)
@@ -52,8 +52,10 @@ updated: 2026-10-19
 | SC-HK-005 | Phạm vi đẩy | REQ-HK-003 | DOC-v2.0-01 BR-HK-01 (L571) | HĐ cấu thành từ ≥2 đơn (nếu có) | Hậu kỳ chạy | Thông tin tách theo từng đơn — ⛔ chờ CL-HK-09 (có tồn tại HĐ nhiều đơn không) | P2 | Functional | NEW |
 | SC-HK-006 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | HĐ đủ thông tin (ký hiệu, ID, nội dung, tổng tiền theo thuế suất, …) | Hậu kỳ chạy | Dữ liệu được đẩy sang hệ thống HĐĐT; HĐĐT được gen | P1 | Integration | NEW |
 | SC-HK-007 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L576) | HĐ **thiếu** 1 thông tin (vd vùng của tỉnh không có trong bảng map ⇒ không ra ký hiệu) | Hậu kỳ chạy | **Chưa** đẩy sang HĐĐT; thời điểm đẩy lại ⛔ chờ CL-HK-05 | P1 | Negative | NEW |
-| SC-HK-008 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) · §C#1 | HĐ thuộc vùng V, loại đầu D | Chuẩn bị ký hiệu | Ký hiệu đúng bảng map vùng × loại đầu do DVKH HO chốt với FAF — ⛔ chờ CL-HK-01, CL-HK-10 | P1 | Functional | NEW |
-| SC-HK-011 | ID HĐ | REQ-HK-006 | DOC-v2.0-01 BR-HK-03 (L582) | HĐ có loại đầu D, năm N, tỉnh T, số HĐ S | Chuẩn bị ID | ID = loại đầu + năm + mã tỉnh + số HĐ — mã tỉnh theo **địa chỉ hợp đồng** (CL-HK-08); định dạng từng thành phần ⛔ chờ CL-HK-10 | P1 | Functional | NEW |
+| SC-HK-008 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-02 BR-HK-03 (L767-785) | HĐ thuộc vùng V, loại đầu D | Chuẩn bị ký hiệu | Ký hiệu 7 ký tự `1K<yy>T<xx>` với `<xx>` = map(V, D) theo bảng 7 vùng × {M, U, A} (URD 2.1) — loại HĐ → đầu ⛔ chờ CL-HK-01 | P1 | Functional | NEW |
+| SC-HK-009 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L784) | HĐ đơn vị **FPL** | Chuẩn bị ký hiệu | Đầu U → `PA`, đầu A → `PH`; FPL **không có đầu M** (HĐ FPL loại đầu M ⇒ hành vi ⛔ chờ CL-HK-01) | P2 | Negative | NEW |
+| SC-HK-010 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L781) | HĐ thuộc **Vùng 5** | Chuẩn bị ký hiệu | Dùng chung hai ký tự cuối với Vùng 1 (`HT` / `QA` / `HH`) | P2 | Functional | NEW |
+| SC-HK-011 | ID HĐ | REQ-HK-006 | DOC-v2.0-01 BR-HK-03 (L582) ↔ DOC-v2.0-02 BR-HK-04 (L787-792) | HĐ loại đầu U, năm 2026, hợp đồng địa chỉ Hà Nội, số HĐ 01053692 | Chuẩn bị ID | ID = `U26HN01053692` (loại đầu + năm 2 số + mã tỉnh theo **địa chỉ hợp đồng** + số HĐ); số HĐ trùng trường Số (Invoice No) trên HĐĐT | P1 | Functional | NEW |
 | SC-HK-012 | Nội dung hiển thị | REQ-HK-007 | DOC-v2.0-01 BR-HK-05 (L588) | Dòng DV có số tháng sử dụng trên SPF | Chuẩn bị nội dung | Nội dung = tên dịch vụ + số tháng; không có "từ ngày – đến ngày"; không lấy nguyên tên gốc trên đơn | P1 | Functional | NEW |
 | SC-HK-013 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | HĐ có dòng ở đủ 5 mức: KCT, 0%, 5%, 8%, 10% | Chuẩn bị tổng tiền | 5 dòng (thành tiền, thuế GTGT, tổng cộng mỗi mức) + 1 dòng tổng cộng chung = tổng các mức | P1 | Functional | NEW |
 | SC-HK-014 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | HĐ chỉ có dòng **một** mức (10%) | Chuẩn bị tổng tiền | Chỉ in 1 dòng mức 10% + dòng tổng cộng chung; **không** in dòng KCT / 0% / 5% / 8% (CL-HK-04, 19/10/2026) | P2 | Boundary | NEW |
@@ -132,21 +134,37 @@ updated: 2026-10-19
 ---
 
 ##### SC-HK-008 · Ký hiệu theo vùng × loại đầu
-📍 `DOC-v2.0-01 §III.c BR-HK-03 · L581`
+📍 `DOC-v2.0-02 §III.c BR-HK-03 · L767-785`
 
-> Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
+> QA — hai ký tự do người bán tự xác định, LẤY TỪ BẢNG MAP VÙNG MIỀN theo tổ hợp (vùng, loại đầu).
 
-↳ **Ghi chú:** Then chờ bảng chốt (CL-HK-01, CL-HK-10).
+↳ **Ghi chú:** Bảng map lấy từ URD 2.1 (2.2 chuyển Phụ lục D#5) — dùng lại 19/10/2026 (CL-HK-10). Dữ liệu ở `test_data_catalog.md`. Loại HĐ → đầu chờ CL-HK-01.
+---
+
+##### SC-HK-009 · FPL không có đầu M
+📍 `DOC-v2.0-02 §III.c BR-HK-03 · L784`
+
+> FPL: Đầu U = PA · Đầu A = PH (không có Đầu M)
+
+↳ **Ghi chú:** Dòng FPL của bảng map vẫn test (CL-HK-02: đơn vị đầu số riêng khác ngoài phạm vi).
+
+---
+
+##### SC-HK-010 · Vùng 5 dùng chung Vùng 1
+📍 `DOC-v2.0-02 §III.c BR-HK-03 · L781`
+
+> Vùng 5: Đầu M = HT · Đầu U = QA · Đầu A = HH (dùng chung đầu số với Vùng 1)
+
+↳ **Ghi chú:** Ca đặc biệt của bảng map.
 
 ---
 
 ##### SC-HK-011 · ID HĐ
-📍 `DOC-v2.0-01 §III.c BR-HK-03 · L582`
+📍 `DOC-v2.0-01 §III.c BR-HK-03 · L582` + `DOC-v2.0-02 BR-HK-04 · L788`
 
-> ID hóa đơn ghép từ loại đầu + năm + mã tỉnh + số hóa đơn.
+> ID hóa đơn được ghép từ bốn thành phần. Ví dụ U26HN01053692:
 
-↳ **Ghi chú:** Định dạng năm / mã tỉnh / số HĐ chờ CL-HK-10, CL-HK-08.
-
+↳ **Ghi chú:** Định dạng từ URD 2.1 BR-HK-04 (CL-HK-10); mã tỉnh theo địa chỉ hợp đồng (CL-HK-08).
 ---
 
 ##### SC-HK-012 · Nội dung hiển thị
@@ -238,6 +256,4 @@ updated: 2026-10-19
 
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
-| SC-HK-009 | FPL không có đầu M | HK | v2.0 (16/10/2026) | Không có căn cứ trong URD 2.2 (bảng map ký hiệu chưa chốt) ⇒ chờ CL-HK-01, CL-HK-02, CL-HK-10 |
-| SC-HK-010 | Vùng 5 dùng chung Vùng 1 | HK | v2.0 (16/10/2026) | Như SC-HK-009 |
 | SC-HK-019 | Hệ thống Dịch vụ lỗi / timeout | HK | v2.0 (19/10/2026) | CL-HK-06: thực tế retry thủ công, STG QC không check log ⇒ không dựng case lỗi |

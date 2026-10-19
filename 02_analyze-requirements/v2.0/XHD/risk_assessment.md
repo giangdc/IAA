@@ -422,7 +422,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-22 · Mail cảnh báo bản tin trễ qua ngày + phương án xử lý: thuộc v2.0? Đặc tả? ⛔ BLOCKING
-📍 `DOC-v2.0-01 §D#3 · L666-669`  ·  Status: **Open — ⛔ BLOCKING** · GAP-02 (Blocker), GAP-11 (Critical)
+📍 `DOC-v2.0-01 §D#3 · L666-669`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-02 (Blocker), GAP-11 (Critical)
 
 > Bản tin đồng bộ về chậm qua ngày, dòng không được luồng nào xử lý.
 > RISK-01
@@ -432,10 +432,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA:** Mail cảnh báo có trong v2.0? Điều kiện phát hiện, lịch gửi, người nhận, nội dung? Phương án xử lý dòng trễ đã chốt chưa?
 
+🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` RISK-01 (L428-442): dòng có mốc nghiệp vụ ngày N nhưng bản tin về ngày N+1 **không được worker lẫn realtime xử lý** (SC-XHD-045 giữ nguyên); xuất bổ sung là case-by-case (ngoài phạm vi TP); **mail cảnh báo là yêu cầu bắt buộc** — L436 *"Cần có hệ thống MAIL CẢNH BÁO để phát hiện các dòng rơi vào tình huống này. Đây là yêu cầu bắt buộc, không phụ thuộc phương án kỹ thuật được chọn."* ⇒ mail thuộc phạm vi v2.0. Còn mở (**vẫn BLOCKING** cho REQ-XHD-042): điều kiện phát hiện, lịch gửi, người nhận, nội dung mail; phương án kỹ thuật (mở rộng phạm vi quét / xuất bổ sung có kiểm soát) PM + SA chưa chốt. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
 ---
 
 ### CL-XHD-23 · Phương án chặn phát hành trùng worker ↔ realtime
-📍 `DOC-v2.0-01 §D#2 · L662-665`  ·  Status: **Open** · GAP-12 (Critical)
+📍 `DOC-v2.0-01 §D#2 · L662-665`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-12 (Critical)
 
 > Rủi ro phát hành hóa đơn trùng khi worker và realtime chạy song song.
 > BR-XHD-09
@@ -445,10 +447,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA:** Phương án đã chốt? Ngày có trên STG?
 
+🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` BR-XHD-09 (L370-378): race worker ↔ realtime là rủi ro đã biết (khoảng trống giữa kiểm `BillNumber IS NULL` và ghi BillNumber); ràng buộc L377 *"ưu tiên bảo đảm hóa đơn luôn được phát hành — cơ chế chặn trùng không được dẫn tới tình huống không ra được hóa đơn."* Còn mở: 2.1 vẫn ghi L378 *"[NỢ] Chờ PM và SA thống nhất phương án kỹ thuật"* ⇒ chưa có phương án / ngày lên STG — hỏi PM, SA. HĐ dư khi trùng: ngoài phạm vi (TP). Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
 ---
 
 ### CL-XHD-24 · Cutover v1 → v2: có test trên STG không? Dữ liệu luồng cũ?
-📍 `DOC-v2.0-01 §D#1 · L658-661`  ·  Status: **Open** · GAP-32 (Major)
+📍 `DOC-v2.0-01 §D#1 · L658-661`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-32 (Major)
 
 > Chuyển đổi hệ thống v1 sang v2 (cutover, giai đoạn giao thoa, quét tay bổ sung).
 > BR-DB-08
@@ -457,6 +461,8 @@ updated: 2026-10-19
 ↳ **Ghi chú:** TP giữ FR06 (P2, 18 TC). Out-scope ⇒ SC-XHD-107, 108 chuyển DEPRECATED và RISK-XHD-10 → Closed.
 
 **Câu hỏi cho BA:** Cutover có nằm trong phạm vi QC v2.0? Nếu có: STG có dữ liệu + service luồng cũ không?
+
+🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` BR-DB-08 (L297-305): v2.0 ghi hoàn toàn vào bảng mới, tắt service cũ khi go-live; mỗi bản tin Kafka chỉ một luồng xử lý (L300); giai đoạn giao thoa luồng mới kiểm tra chéo dữ liệu cũ **mức đơn hàng** — đơn đã ra HĐ ở luồng cũ thì luồng mới bỏ qua (L302); kiểm tra chéo là cấu hình bật / tắt. ⇒ **SC-XHD-107, 108 dùng lại** (bỏ deprecated). Quét tay bổ sung: ngoài phạm vi (TP). Còn mở: STG có dữ liệu + service luồng cũ để test không. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
 
 ---
 

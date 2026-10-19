@@ -69,7 +69,7 @@ updated: 2026-10-16
 | REQ-XHD-038 | BR-XHD-14 | DOC-v2.0-01 §I.c (L444-447) | SC-XHD-105 | — |
 | REQ-XHD-039 | BR-XHD-18 | DOC-v2.0-01 §I.c (L449-452) | — *(chờ đặc tả — CHANGELOG §3)* | CL-XHD-21 |
 | REQ-XHD-040 | — | DOC-v2.0-04 (mail PM) | SC-XHD-106 | CL-XHD-25 |
-| REQ-XHD-041 | — | DOC-v2.0-01 §D#1 (L658-661) | — *(SC-XHD-107, 108 deprecated 16/10/2026 — URD 2.2 không đặc tả hành vi)* | CL-XHD-24, CL-XHD-33 |
+| REQ-XHD-041 | — | DOC-v2.0-01 §D#1 (L658-661) | SC-XHD-107, SC-XHD-108 *(dùng lại 19/10/2026 — URD 2.1 BR-DB-08)* | CL-XHD-24, CL-XHD-33 |
 | REQ-XHD-042 | — | DOC-v2.0-01 §D#3 (L666-669) | — *(chờ đặc tả — CHANGELOG §3)* | CL-XHD-22, CL-XHD-33 |
 | REQ-XHD-043 | — | DOC-v2.0-05 sheet "1. HT Triển khai" · dòng 1–8 | SC-XHD-109 | CL-XHD-27 |
 
