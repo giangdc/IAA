@@ -30,7 +30,8 @@
 
 > ⚠️ QC **không có quyền xem log** (CL-XHD-15, CL-XHD-19, CL-HK-06) — verify bằng hành vi trên các tool trên, không verify cột Note / log.
 
-## Flow QC test E2E (QC owner, 19/10/2026)
-KH / nhân viên lên đơn hàng thành công → KH thanh toán, ký BBĐT → triển khai (nếu có) → triển khai thành công → cập nhật đơn hàng đã hoàn tất → hệ thống gen hóa đơn.
+## Flow QC test E2E (QC owner, cập nhật 19/10/2026)
+KH / nhân viên lên đơn hàng thành công → KH thanh toán, ký BBĐT → **xuất HĐ cho dịch vụ trước** → triển khai (nếu có) → giao hàng / triển khai thành công → cập nhật đơn hàng đã hoàn tất → **hệ thống gen tiếp HĐ cho thiết bị**. Một đơn hàng có thể có nhiều hóa đơn.
 
-> ⚠️ Lệch URD 2.2 — chờ QC owner xác nhận: URD `BR-XHD` L396 *"Dịch vụ: khi có tín hiệu "đã thanh toán" từ SPF. Thiết bị: khi có tín hiệu giao hàng hoàn tất của phương thức triển khai tương ứng (phiếu thi công, Vendor, quầy). Hai điều kiện xét độc lập"* — tức phần DV phát hành ngay khi thanh toán, không chờ đơn hoàn tất.
+> ✅ Khớp URD 2.2 BR-XHD-03 (L396: DV khi có tín hiệu "đã thanh toán", TB khi giao hàng hoàn tất — xét độc lập) và BR-XHD-14 (1 đơn nhiều HĐ).
+> ⚠️ Còn hỏi BA (CL-XHD-34): HĐ thiết bị kích hoạt bởi **tín hiệu giao hàng của từng phương thức triển khai** (BR-DB-02 — phiếu thi công / Vendor / quầy) hay bởi **trạng thái "đơn hàng hoàn tất"**? Đơn nhiều phương thức triển khai ra HĐ TB theo từng phương thức hay một lần khi đơn hoàn tất?

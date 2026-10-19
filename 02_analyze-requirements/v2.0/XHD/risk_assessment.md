@@ -604,7 +604,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-34 · Đơn DV kèm TB: DV phát hành ngay khi thanh toán hay chờ đơn hoàn tất? TB không triển khai lấy tín hiệu nào?
-📍 `DOC-v2.0-01 BR-XHD-03 (L396)` ↔ `§I.a (L326)` ↔ flow QC test (`07_environments/environments.md §Flow QC test E2E`)  ·  Status: **Open** · *mới — 19/10/2026, chưa có GAP*
+📍 `DOC-v2.0-01 BR-XHD-03 (L396)` ↔ `§I.a (L326)` ↔ flow QC test (`07_environments/environments.md §Flow QC test E2E`)  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 19/10/2026, chưa có GAP*
 
 **URD 2.2 §I.a** — `L326`
 > Dịch vụ phát hành khi hoàn tất thanh toán, thiết bị phát hành khi giao hàng hoàn tất.
@@ -618,3 +618,10 @@ updated: 2026-10-19
 ↳ **Ghi chú:** URD không có điều kiện "đơn hoàn tất": DV và TB xét độc lập ⇒ đơn DV + TB ra HĐ DV ngay khi thanh toán, HĐ TB khi có tín hiệu giao hàng (BR-XHD-05, 06, 14). Flow QC test và trả lời CL-XHD-27 vòng 2 ("xuất hóa đơn khi đơn hàng hoàn tất") lại cho HĐ chỉ gen sau khi đơn hoàn tất. Ngoài ra TB hình thức triển khai "Không" không có phiếu thi công / Vendor / quầy ⇒ không có nguồn tín hiệu theo BR-DB-02 (nối CL-XHD-27 ý 1). Nếu BA chốt "chờ đơn hoàn tất" ⇒ sửa Then của SC-XHD-037, 058, 071, 073, 105 và các SC phát hành DV / 1 đơn n HĐ.
 
 **Câu hỏi cho BA:** (1) Đơn có dịch vụ kèm thiết bị: phần dịch vụ được phát hành HĐ ngay khi KH thanh toán xong (theo BR-XHD-03 — DV và TB xét độc lập), hay phải chờ triển khai xong và đơn chuyển "hoàn tất" mới phát hành? (2) Nếu chờ đơn hoàn tất: áp cho mọi đơn hay chỉ đơn có thiết bị / có triển khai; đơn chỉ có dịch vụ có phải chờ không? (3) Thiết bị có hình thức triển khai "Không" (không có phiếu thi công / Vendor / quầy): tín hiệu nào kích hoạt phát hành — có phải trạng thái "đơn hoàn tất" từ SPF, gửi qua bản tin nào?
+
+🟡 **Làm rõ một phần 19/10/2026** — QC owner gửi flow cập nhật:
+> KHÁCH HÀNG/ NHÂN VIÊN LÊN ĐON HÀNG THÀNH CÔNG -> KHÁCH HÀNG THANH TOÁN , KÝ BBDT > xuất hoá đơn cho dịch vụ truớc >Triển khai (nếu có) > sau khi giao hàng/ triển khai thành công -> cập nhật đơn hàng đã hoàn tất -> hệ thống mới gen tiếp hóa đơn cho thiết bị
+> 1 ĐƠN HÀNG CÓ THỂ CÓ NHIỀU HÓA ĐƠN
+
+⇒ Đã chốt (1): **DV phát hành HĐ ngay khi KH thanh toán**, không chờ triển khai — khớp BR-XHD-03 (DV / TB xét độc lập); SC-XHD-037, 058, 071, 073, 105 giữ nguyên. (2) Chỉ **HĐ thiết bị** chờ giao hàng / triển khai thành công; 1 đơn nhiều HĐ (BR-XHD-14). Còn hỏi: HĐ TB kích hoạt bởi **tín hiệu giao hàng của từng phương thức** (BR-DB-02, BR-XHD-06) hay bởi **trạng thái "đơn hàng hoàn tất"**? Đơn nhiều phương thức triển khai ra HĐ TB theo từng phương thức (SC-XHD-074, 105) hay một lần khi đơn hoàn tất? TB hình thức "Không" có dùng trạng thái "đơn hoàn tất" làm tín hiệu không (nối CL-XHD-27)? Nguồn: QC owner 19/10/2026.
+
