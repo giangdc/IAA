@@ -8,7 +8,7 @@ doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #6–#9 · §B.II"
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Requirement Traceability — v2.0 · Module GN
@@ -33,7 +33,7 @@ updated: 2026-10-16
 | REQ-GN-008 | BR-XL-03 | DOC-v2.0-01 §II.c (L489) | SC-GN-018, SC-GN-021 | — |
 | REQ-GN-009 | BR-NT-01 | DOC-v2.0-01 §II.c (L493-494) | SC-GN-019, SC-GN-020 | CL-GN-03 |
 | REQ-GN-010 | BR-NT-02 | DOC-v2.0-01 §II.c (L498-499) | SC-GN-019 | CL-GN-04 |
-| REQ-GN-011 | BR-NT-04 | DOC-v2.0-01 §II.c (L503-504) | SC-GN-022, SC-GN-023, SC-GN-024 | CL-GN-04, CL-GN-06 |
+| REQ-GN-011 | BR-NT-04 | DOC-v2.0-01 §II.c (L503-504) | SC-GN-022, SC-GN-023 *(SC-GN-024 deprecated 19/10/2026)* | CL-GN-04, CL-GN-06 |
 | REQ-GN-012 | BR-GN-01 | DOC-v2.0-01 §II.c (L508-509) | SC-GN-025, SC-GN-026, SC-GN-027, SC-GN-048 | CL-GN-01, CL-GN-05 |
 | REQ-GN-013 | BR-GN-03 | DOC-v2.0-01 §II.c (L513-514) | SC-GN-028, SC-GN-029, SC-GN-030 | CL-GN-09 |
 | REQ-GN-014 | BR-GN-04 | DOC-v2.0-01 §II.c (L518-520) | SC-GN-031, SC-GN-032, SC-GN-033, SC-GN-034, SC-GN-035 | CL-GN-05 |
@@ -149,7 +149,7 @@ updated: 2026-10-16
 > Khi Paid chuyển sang thanh toán hoàn tất, nếu hóa đơn đã gạch nợ tạm thì gỡ Payment tạm trước (hóa đơn trở lại còn nợ) rồi mới gạch nợ thật.
 > Chưa gạch tạm thì gạch thật luôn.
 
-↳ **Ghi chú:** Chuyển trạng thái "Đã gạch nợ" → "còn nợ" → (gạch thật) → "Đã gạch nợ" nếu đủ tiền. Paid hoàn tất < nợ ⇒ HĐ kết thúc ở "còn nợ" — URD không nói có hệ quả gì (CL-GN-06).
+↳ **Ghi chú:** Chuyển trạng thái "Đã gạch nợ" → "còn nợ" → (gạch thật) → "Đã gạch nợ" nếu đủ tiền. Paid hoàn tất < nợ không xảy ra — phí sàn TMĐT đã tính vào tiền khách trả (CL-GN-06 resolved 19/10/2026; SC-GN-024 deprecated).
 
 ---
 
@@ -210,7 +210,7 @@ updated: 2026-10-16
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > Thiếu ở một loại thì không gạch cả bill đó, không gạch một phần; các bill khác của đơn vẫn xét bình thường.
 
-↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết HĐ. Danh sách loại cọc chưa có (CL-GN-07).
+↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết HĐ. Map dịch vụ ↔ loại cọc không test; chỉ check có sinh đặt cọc, đơn bán thêm vẫn có cọc (CL-GN-07, 19/10/2026).
 
 ---
 
@@ -232,7 +232,7 @@ updated: 2026-10-16
 > (...)
 > Chi tiết cấu hình EVC xem phụ lục.
 
-↳ **Ghi chú:** Ranh giới phạm vi: INVOICE **không** ghi Payment EVC. Gạch nợ EVC ngoài phạm vi test (TP §2.2 #5); mail PM "EVC cần test => theo rule URD" ⇒ chỉ test phần INVOICE (REQ-GN-019, 020). Cấu hình EVC (PaidType, Owner, trần 50%) ở phụ lục D#4 — đội EVC.
+↳ **Ghi chú:** Ranh giới phạm vi: INVOICE **không** ghi Payment EVC. Gạch nợ EVC / voucher **vẫn test** (QC owner 19/10/2026 — khác TP §2.2 #5). Cấu hình EVC (PaidType, Owner, trần 50%, lock) ở Phụ lục D#4 ⇒ lấy theo URD 2.1 BR-VC-01..07, BR-GC-04..07, bỏ bước đánh dấu `[Bỏ]`; gạch EVC do đội EVC thực hiện (CL-GN-10, 19/10/2026).
 
 ---
 

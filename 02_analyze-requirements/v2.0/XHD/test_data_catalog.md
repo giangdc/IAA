@@ -5,7 +5,7 @@ type: test_data_catalog
 version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Test Data Catalog — v2.0 · Module XHD
@@ -24,13 +24,13 @@ updated: 2026-10-16
 | Type dịch vụ (1–4) | Master | `{1, 2, 3, 4}` — nghĩa chưa định nghĩa (suy diễn: 1 Basic, 2 Thiết bị, 3 Extra, 4 Triển khai; QC rà 16/10: không có bảng mô tả, chờ PO) | — | — | DOC-v2.0-01 §A.3 · §C#2 (CL-XHD-13) |
 | ProductType (dòng chi tiết) | Fixture | `DV` · `TB` (SPF gắn) | rỗng / giá trị khác (→ chưa đặc tả) | — | BR-DB-04 |
 | Loại đơn | Fixture | `bán mới` · `bán thêm` (trên hợp đồng đang hoạt động) | — | — | DOC-v2.0-04 (mail PM) |
-| Sự kiện SPF | Runtime | `thanh toán` · `hủy đơn` (BR-DB-01) · `tạo đơn` · `cập nhật thông tin KH` (giả định TP, CL-XHD-01) | bản tin lỗi giải mã / thiếu trường (→ chưa đặc tả, CL-XHD-20) · bản tin lặp (→ không phát hành lại) | — | BR-DB-01 · BR-DB-05 |
+| Sự kiện SPF | Runtime | `thanh toán` · `hủy đơn` (BR-DB-01) (SPF chỉ gửi 2 sự kiện này — CL-XHD-01 resolved 19/10/2026; thông tin khách lấy từ hợp đồng) | bản tin lỗi giải mã / thiếu trường (→ chưa đặc tả, CL-XHD-20) · bản tin lặp (→ không phát hành lại) | — | BR-DB-01 · BR-DB-05 |
 | Nguồn tín hiệu giao hàng | Runtime | `phiếu thi công` ("Đã xử lý hoàn tất") · `Vendor` · `phiếu giao tại quầy` | phiếu thi công chưa "Đã xử lý hoàn tất" (→ không có tín hiệu) | — | BR-DB-02 |
 | Phương thức / HT triển khai (DeployType) | Master | `TIN/PNC` · `TIN/PNC giao hàng` · `FTI` (→ phiếu thi công) · `NCC-Samsung` · `NCC-Sony` · `NCC-Casper` (→ Vendor) · `Quầy` · `Sale` (→ quầy) — map là suy diễn | `Không` / None (→ không có tín hiệu, CL-XHD-27) | **đơn mix TIN/PNC + Quầy/Sale → gộp luồng TINPNC** | DOC-v2.0-05 · BR-DB-02 |
 | Khóa map tín hiệu giao hàng | Fixture | mã đơn + ServiceCode + SubserviceType + phương thức khớp TB chưa xuất | không khớp (→ không ghi nhận, log cột Note) · TB đã có BillNumber (→ log Note) | **khớp 3/4 (sai phương thức) → không khớp** | BR-DB-07 |
 | Khóa chống trùng | Fixture | DV: mã đơn + dịch vụ hóa đơn + gói dịch vụ · TB: + phương thức (2.2 — QC chốt 16/10; field dữ liệu chờ schema CL-XHD-29) | dòng đã có BillNumber (→ bỏ qua) | **2 TB cùng khóa DV, khác phương thức → 2 lần phát hành hợp lệ** | BR-XHD-08 (CL-XHD-11) |
 | Thông tin KH xuất HĐ — mặc định | Master | theo hợp đồng (tên, địa chỉ, MST…) | — | — | BR-DB-03 |
-| Thông tin KH FPL tự nhập | Fixture | tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu (định dạng chưa đặc tả) | khách chọn không lấy HĐ / không nhập (→ chưa đặc tả, CL-XHD-02) · kênh khác FPL (→ không có lựa chọn này) | **nhập lúc 2:00 (hợp lệ), 2:01 (chặn) kể từ thời điểm ghi nhận trên kênh** | BR-DB-03 (CL-XHD-03) |
+| Thông tin KH FPL tự nhập | Fixture | tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu — bắt buộc: công ty = tên công ty, địa chỉ, MST, email; cá nhân = họ tên, địa chỉ, email; mã quan hệ ngân sách, số hộ chiếu, mã định danh không bắt buộc (CL-XHD-03) | khách không bấm Xuất hóa đơn / không nhập trong 2 giờ (→ không phát hành hóa đơn, CL-XHD-02) · kênh khác FPL (→ không có lựa chọn này) | **nhập lúc 2:00 (hợp lệ), 2:01 (chặn) kể từ thời điểm ghi nhận trên kênh** | BR-DB-03 (CL-XHD-03) |
 | Lịch worker chung (tham số) | Master | `số đợt = 2` · đợt 1 `chốt 12:00 / chạy 12:05` · đợt 2 `chốt 18:00 / chạy 18:05` — ⛔ TC ghi "giờ chốt đợt N" | — | **mốc nghiệp vụ ngay trước giờ chốt (vào đợt) · đúng giờ chốt / sau (sang đợt sau)** | BR-XHD-01 |
 | Mốc nghiệp vụ dòng | Runtime | DV = thời điểm hoàn tất thanh toán · TB = thời điểm giao hàng (— URD 2.2 chưa định nghĩa, CL-XHD-33) | mốc thuộc ngày trước, bản tin về hôm sau (→ không luồng nào lấy, RISK-XHD-03) | **ngày cuối tháng sau giờ chốt cuối (→ không phát hành trong tháng, sang tháng sau; đợt phát hành CL-XHD-32)** | BR-XHD-01 |
 | Thời điểm nhận tín hiệu | Runtime | trước giờ chốt (→ worker) · giữa các đợt (→ worker đợt kế) · sau giờ chốt cuối (→ realtime) | — | **đúng giờ chốt cuối** | BR-XHD-02 · BR-DB-05 |
@@ -39,13 +39,13 @@ updated: 2026-10-16
 | Loại hợp đồng | Master | `cá nhân` · `tổ chức` = loại hình KH cấp 1 "Tổ chức" (QC chốt 16/10) | — | — | BR-XHD-03 (CL-XHD-07) |
 | Trạng thái PĐK (HĐ tổ chức) | Fixture | `đã duyệt` (trạng thái lấy từ SPF) | `chưa duyệt` (→ không autobill, trừ 2 ngày lịch cuối tháng) | **ngày cuối −2 (chặn) · cuối −1 và ngày cuối (không xét PĐK) — tháng 28/30/31 ngày** | BR-XHD-03 |
 | Hợp đồng cha / con | Fixture | hợp đồng không gắn hợp đồng cha | hợp đồng có gắn hợp đồng cha — kiểm bằng tool tình trạng (→ không phát hành DV + TB) | — | BR-XHD-03 |
-| Trạng thái đơn | Master | khác `hủy` / `đang cập nhật` | `hủy` · `đang cập nhật` (→ không phát hành + log) | — | BR-XHD-10 (CL-XHD-14) |
-| Trạng thái hợp đồng | Master | có hiệu lực (giá trị chưa định nghĩa) | không hiệu lực (→ không phát hành + log) | — | BR-XHD-10 (CL-XHD-14) |
+| Trạng thái đơn | Master | `Bình thường` | `Đã hủy` · `Đang cập nhật` = chưa có thông tin hợp đồng (→ không phát hành + log) | — | BR-XHD-10 (CL-XHD-14) |
+| Trạng thái hợp đồng | Master | `Bình thường` | `Tạm ngưng` · `Đã chấm dứt` · `Ngưng vì lý do thanh toán` (→ không phát hành + log) | — | BR-XHD-10 (CL-XHD-14) |
 | Sale Team · Sale Channel · Tên KH · Loại hình KH cấp 1 · cấp 2 · Địa chỉ xuất HĐ | Master | có giá trị | rỗng (→ không phát hành + log) | — | BR-XHD-10 |
 | LocationID | Master | `≥ 1` | `0`, âm (→ không phát hành + log) | **0 (chặn), 1 (hợp lệ)** | BR-XHD-10 |
-| ID dịch vụ · ID nhóm DV · ID gói DV · ID chính sách · ID câu lệnh giá · ID CTKM | Master | `≥ 1` | `0`, âm (→ không phát hành + log) | **0 (chặn), 1 (hợp lệ)** — đơn không KM ⛔ CL-XHD-15 | BR-XHD-10 |
+| ID dịch vụ · ID nhóm DV · ID gói DV · ID chính sách · ID câu lệnh giá · ID CTKM | Master | `≥ 1` | `0`, âm (→ không phát hành + log) | **0 (chặn), 1 (hợp lệ)** — riêng ID CTKM: đơn không có khuyến mãi vẫn phát hành (CL-XHD-15) | BR-XHD-10 |
 | Chi nhánh xuất HĐ | Master | chi nhánh quản lý hợp đồng tại thời điểm phát hành | — | **đổi chi nhánh quản lý giữa 2 lần phát hành** | BR-XHD-12 |
-| BillNumber | Runtime | Billing trả về, ghi vào `OB_OrderBill` | Billing lỗi / timeout (→ chưa đặc tả, CL-XHD-18) | — | BR-XHD-13 |
+| BillNumber | Runtime | Billing trả về, ghi vào `OB_OrderBill` | Billing lỗi / timeout (→ không phát hành, dev retry tay, CL-XHD-18) | — | BR-XHD-13 |
 | BillDate | Runtime | ngày phát hành thực tế | ngày = mốc nghiệp vụ khi khác ngày phát hành (→ sai) | **realtime qua nửa đêm: BillDate = ngày mới** | BR-XHD-13 |
 | Nội dung dòng HĐ | Runtime | tên dịch vụ + số tháng sử dụng (SPF) | có kỳ hạn "từ ngày – đến ngày" (→ sai) | — | BR-XHD-13 (CL-XHD-28) |
 | Số tháng sử dụng | Master | lấy từ SPF | — | — | BR-XHD-13 |

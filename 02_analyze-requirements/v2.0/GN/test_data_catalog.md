@@ -5,7 +5,7 @@ type: test_data_catalog
 version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Test Data Catalog — v2.0 · Module GN
@@ -32,7 +32,7 @@ updated: 2026-10-16
 | Σ Payment so với tổng HĐ | Runtime | Σ Payment = tổng HĐ (→ "Đã gạch nợ") | Σ Payment < tổng HĐ (→ còn nợ) | **T − 1 (còn nợ), T (Đã gạch nợ)** | BR-GN-05 |
 | Kafka Out | Runtime | 1 bản tin / lần gạch nhánh Paid (payload chưa có) | có Kafka Out ở nhánh Cọc (→ sai) | — | BR-GN-04 (CL-XHD-29) |
 | Cọc còn lại của hợp đồng (theo loại) | Fixture | tổng mọi loại + EVC (gồm lock) ≥ nợ bill; từng loại ≥ tiền DV dùng loại đó | tổng < nợ bill (→ không gạch) · thiếu 1 loại (→ không gạch cả bill) | **cọc + EVC = nợ bill (đủ), = nợ − 1 (không đủ)** | BR-GC-01 · BR-GC-02 |
-| Loại cọc của dịch vụ | Master | mỗi dịch vụ dùng một loại cọc (BR-GC-03 L539) — nơi lưu + danh mục chưa có (CL-GN-07, CL-GN-10) | — | — | BR-GC-03 (CL-GN-07) |
+| Loại cọc của dịch vụ | Master | mỗi dịch vụ dùng một loại cọc (BR-GC-03 L539) — **map dịch vụ ↔ loại cọc không test**, chỉ check có sinh đặt cọc (CL-GN-07, 19/10/2026) | — | — | BR-GC-03 (CL-GN-07) |
 | Payment nhánh Cọc | Runtime | 1 dòng / (BillNumber × loại cọc), trừ cọc theo BillNumber + số hợp đồng | — | — | BR-GC-03 (CL-GN-07) |
 | Tổng EVC + tiền lock của đơn | Fixture | từ API đội EVC (mock): `{tổng EVC, lock}` | API lỗi / timeout (→ chưa đặc tả, CL-GN-02) | **lock = 0 (gạch như thường)** | BR-VC · BR-GC-01 |
 | Số gạch tiền khách khi có lock | Runtime | `min(nợ bill − lock, Paid khách)` — vd nợ 1.000k, lock 300k, Paid 900k → 700k | — | **Paid khách = nợ − lock − 1 / = nợ − lock / = nợ − lock + 1** | BR-VC |

@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 11
-  cl_open: 6
+  cl_open: 5
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -159,6 +159,8 @@ updated: 2026-10-19
 
 🟡 **Làm rõ một phần 19/10/2026** — HĐ mua dịch vụ trả trước được add tiền trả trước = **số tiền gói dịch vụ trả trước KH đã đăng ký**. Tra cứu: Quản lý kế toán › Cước trả trước › Tra cứu new. Còn mở: đơn phát hành nhiều đợt thì add ở HĐ nào (HĐ chỉ TB?), đơn bán thêm có khác không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
+🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — **Mỗi đơn hàng chỉ add tiền trả trước 1 lần**, kể cả khi đơn phát hành nhiều đợt hóa đơn. Còn mở: add ở **hóa đơn** nào (hóa đơn đầu tiên của đơn — kể cả hóa đơn chỉ gồm thiết bị — hay hóa đơn có dịch vụ trả trước); đơn bán thêm có khác không. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-HK-08 · Mã tỉnh trong ID HĐ lấy theo đâu?
@@ -176,7 +178,7 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-09 · Một HĐ có thể gồm nhiều đơn hàng không? ("tách theo từng đơn hàng cấu thành hóa đơn")
-📍 `DOC-v2.0-01 BR-HK-01 (L571)` ↔ `BR-XHD-05 (L406)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-HK-01 (L571)` ↔ `BR-XHD-05 (L406)`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 **BR-HK-01** — `L571`
 > Mỗi lần phát hành chỉ đẩy phần vừa xuất, tách theo từng đơn hàng cấu thành hóa đơn.
@@ -189,6 +191,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Có trường hợp 1 HĐ gồm nhiều đơn ở v2.0 không? Nếu không, câu "tách theo từng đơn" chỉ áp cho HĐ luồng cũ?
 
 🟡 **Làm rõ một phần 19/10/2026** — QC trả lời "1 **hợp đồng** có nhiều hóa đơn do có nhiều đơn hàng" — lệch câu hỏi. Còn mở: 1 **hóa đơn** có gồm nhiều **đơn hàng** không (SC-HK-005). Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — **1 hóa đơn chỉ thuộc 1 đơn hàng** (không gồm nhiều đơn); 1 đơn hàng có 1 hoặc nhiều hóa đơn; 1 **hợp đồng** có nhiều đơn hàng. SC-HK-005 giữ (QC owner): hậu kỳ đẩy thông tin theo **đúng đơn hàng cấu thành hóa đơn**, không lẫn đơn khác cùng hợp đồng. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 

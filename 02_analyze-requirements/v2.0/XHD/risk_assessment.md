@@ -6,7 +6,7 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module XHD
   cl: 34
-  cl_open: 26
+  cl_open: 18
   cl_blocking: 3        # CL chặn sinh TC / execute (đánh dấu ⛔ BLOCKING)
   risk: 10
   risk_high: 6
@@ -62,7 +62,7 @@ updated: 2026-10-19
 > 1 CL = 1 heading `### CL-XHD-NN · <câu hỏi ngắn>`. Dòng META mang `Status` (+ `⛔ BLOCKING` nếu chặn sinh TC / execute) và mã GAP tương ứng. Khi resolved: **thêm** đoạn `✅ RESOLVED <ngày> — <kết luận>`, giữ nguyên phần phân tích cũ.
 
 ### CL-XHD-01 · BR-DB-01 chỉ còn 2 sự kiện, nhưng BR khác vẫn cần "tạo đơn" và "cập nhật thông tin khách"
-📍 `DOC-v2.0-01 BR-DB-01 (L345)` ↔ `BR-DB-03 (L359)` ↔ `BR-XHD-03 (L399)`  ·  Status: **Open** · GAP-42 (Critical)
+📍 `DOC-v2.0-01 BR-DB-01 (L345)` ↔ `BR-DB-03 (L359)` ↔ `BR-XHD-03 (L399)`  ·  Status: **Resolved 19/10/2026** · GAP-42 (Critical)
 
 **BR-DB-01** — `DOC-v2.0-01 §I.c · L345`
 > Áp dụng chung cho mọi kênh bán: thanh toán, hủy đơn hàng.
@@ -81,10 +81,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA (vòng 2):** Trước khi phát hành HĐ, SPF có gửi sang INVOICE (a) bản tin khi đơn được **tạo** và (b) bản tin khi KH **sửa thông tin** (tên, MST, địa chỉ xuất HĐ…) không? Nếu không có (a): "thời gian tạo đơn" dùng cho delay 2h FPL (BR-XHD-03) lấy từ trường nào của bản tin thanh toán? Nếu không có (b): "thông tin mới nhất" của BR-DB-03 lấy từ đâu tại thời điểm phát hành?
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — (a) SPF chỉ gửi 2 sự kiện **thanh toán** và **hủy đơn** (khác v2.1) — không có sự kiện tạo đơn / cập nhật thông tin khách. (b) Thông tin khách hàng trên hóa đơn lấy **từ hợp đồng** tại thời điểm phát hành (khách cập nhật thông tin thì hóa đơn phát hành sau dùng thông tin mới trên hợp đồng). (c) "Thời gian tạo đơn" (mốc delay 2h FPL) QC kiểm tra ở **Web admin** (thời gian tạo đơn hàng). SC-XHD-020 viết lại theo kết luận này. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-02 · FPL: khách không lấy HĐ, hoặc quá 2 giờ không nhập thì sao? "(ví dụ FPL)" có kênh khác không?
-📍 `DOC-v2.0-01 BR-DB-03 · L356-358`  ·  Status: **Open — đã rõ một phần 16/10/2026** · GAP-48 (Critical)
+📍 `DOC-v2.0-01 BR-DB-03 · L356-358`  ·  Status: **Resolved 19/10/2026** · GAP-48 (Critical)
 
 > Ngoại lệ: kênh bán FPL cho khách chọn có lấy hóa đơn hay không (ví dụ FPL).
 > (...)
@@ -98,10 +100,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA (vòng 2):** Trên kênh FPL, khách chọn lấy / không lấy HĐ và nhập thông tin ở bước nào (lúc đặt đơn hay sau khi đặt), INVOICE nhận lựa chọn này qua trường nào? Với 2 tình huống: (1) khách chọn **không** lấy HĐ — INVOICE vẫn phát hành HĐ với thông tin hợp đồng, hay không phát hành? (2) khách chọn lấy HĐ nhưng **hết 2 giờ** vẫn chưa nhập — phát hành với thông tin hợp đồng, hay không phát hành?
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Thao tác FPL: sau khi tạo đơn và thanh toán thành công, khách vào web FPL › *Thông tin cá nhân › Quản lý thanh toán và gói › Xuất hóa đơn* › bấm **Xuất hóa đơn** ⇒ form nhập thông tin (có validate). Quá 2 giờ nút **Xuất hóa đơn bị ẩn**. Trong 2 giờ khách **không bấm** xuất hóa đơn ⇒ **không phát hành hóa đơn**. SC-XHD-032, 033, 034 hết chờ CL. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-03 · 7 trường khách FPL tự nhập: bắt buộc, định dạng, ai kiểm tra?
-📍 `DOC-v2.0-01 BR-DB-03 · L357`  ·  Status: **Open** · GAP-49 (Major)
+📍 `DOC-v2.0-01 BR-DB-03 · L357`  ·  Status: **Resolved 19/10/2026** · GAP-49 (Major)
 
 > Nếu khách chọn lấy hóa đơn thì dùng thông tin khách tự nhập: tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu.
 
@@ -113,10 +117,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA (vòng 2):** Xác nhận kênh FPL kiểm tra dữ liệu khách nhập và INVOICE không kiểm lại? Nếu đúng, cho QC quy tắc kiểm tra của kênh FPL (trường bắt buộc, định dạng MST / email / SĐT) và nhờ đội dự án FPL hướng dẫn thao tác nhập trên STG.
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Kênh FPL kiểm tra dữ liệu khách nhập. Hóa đơn **công ty**: bắt buộc tên công ty, địa chỉ, MST, email; mã đơn vị quan hệ ngân sách không bắt buộc. Hóa đơn **cá nhân**: bắt buộc họ và tên, địa chỉ, email; số hộ chiếu và mã định danh cá nhân **không bắt buộc**. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-04 · Mốc delay 2h của FPL: "thời gian tạo đơn" hay "thời điểm ghi nhận trên hệ thống của kênh"? Áp cho DV hay cả TB?
-📍 `DOC-v2.0-01 BR-XHD-03 (L399)` ↔ `BR-DB-03 (L358)`  ·  Status: **Open — đã rõ một phần 16/10/2026** · GAP-51 (Major)
+📍 `DOC-v2.0-01 BR-XHD-03 (L399)` ↔ `BR-DB-03 (L358)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-51 (Major)
 
 **BR-XHD-03** — `L399`
 > Kênh bán FPL: Xét delay 2h (lấy chuẩn theo thời gian tạo đơn)
@@ -131,6 +137,8 @@ updated: 2026-10-19
 🟡 **Làm rõ một phần 16/10/2026** — Đã chốt: **hai mốc 2 giờ là hai việc khác nhau.** BR-DB-03 (L358) = thời hạn khách nhập thông tin, tính từ thời điểm ghi nhận trên hệ thống của kênh. BR-XHD-03 (L399) = delay xét xuất HĐ, tính từ thời gian tạo đơn. Còn mở: delay áp DV, TB hay cả hai; và nếu 2 mốc gốc lệch nhau thì HĐ có thể ra trước khi khách hết hạn nhập. Nguồn: QC trả lời 16/10/2026 vòng 1
 
 **Câu hỏi cho BA (vòng 2):** (1) Delay 2h xét xuất HĐ kênh FPL áp cho dòng DV, dòng TB hay cả hai? (2) "Thời điểm ghi nhận trên hệ thống của kênh" (mốc bắt đầu 2 giờ nhập thông tin) có trùng "thời gian tạo đơn" (mốc delay 2h) không? Nếu khác nhau, HĐ có thể phát hành khi khách vẫn còn thời gian nhập — khi đó dùng thông tin nào?
+
+🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — "Thời điểm ghi nhận trên hệ thống của kênh" (mốc 2 giờ khách nhập thông tin) **trùng** "thời gian tạo đơn" (mốc delay 2h xét xuất hóa đơn) ⇒ hai mốc cùng gốc, không có trường hợp hóa đơn ra trước khi khách hết hạn nhập. Mốc kiểm tra ở Web admin (CL-XHD-01). SC-XHD-050 hết chờ mốc tính. Còn mở: delay 2h áp cho dòng **dịch vụ**, dòng **thiết bị** hay cả hai — câu trả lời vòng 3 chỉ chép lại câu hỏi. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -184,7 +192,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-07 · PĐK: nhận diện HĐ tổ chức, nguồn trạng thái PĐK, cách tính "2 ngày cuối tháng", duyệt muộn
-📍 `DOC-v2.0-01 BR-XHD-03 · L400`  ·  Status: **Open — đã rõ một phần 16/10/2026** · GAP-44 (Critical), GAP-45 (Major), GAP-61 (Major)
+📍 `DOC-v2.0-01 BR-XHD-03 · L400`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-44 (Critical), GAP-45 (Major), GAP-61 (Major)
 
 > Hợp đồng tổ chức: chỉ phát hành khi đã duyệt PĐK; hai ngày cuối tháng không xét điều kiện này. Quên duyệt PĐK thì không autobill. Khi có thay đổi hoặc dịch chuyển luồng duyệt PĐK/hợp đồng thì phải hiệu chỉnh lại điều kiện này.
 
@@ -196,10 +204,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA (vòng 2):** (1) HĐ tổ chức bị chặn vì chưa duyệt PĐK, sau đó PĐK được duyệt: đợt worker sau có phát hành không, hay "không autobill" nghĩa là phải xuất tay? (2) Đơn bán thêm trên HĐ tổ chức: xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới cho đơn bán thêm? (3) Trạng thái PĐK nằm ở trường nào trong dữ liệu SPF gửi sang?
 
+🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — Hợp đồng tổ chức chưa duyệt PĐK ⇒ hệ thống **chặn** và ghi lỗi vào log; "không autobill" = **phải xuất hóa đơn tay** (xuất tay ngoài phạm vi TP) ⇒ hóa đơn bị chặn không tự phát hành ở đợt worker sau (SC-XHD-065, QC chỉ verify không phát hành). Quy tắc áp cho **cả đơn bán mới và đơn bán thêm**. Còn mở: đơn bán thêm xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới; trường trạng thái PĐK. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-08 · Hợp đồng con không phát hành: ghi nhận ra sao? HĐ cha có phát hành thay?
-📍 `DOC-v2.0-01 BR-XHD-03 · L401`  ·  Status: **Open — đã rõ một phần 16/10/2026** · GAP-46 (Major)
+📍 `DOC-v2.0-01 BR-XHD-03 · L401`  ·  Status: **Resolved 19/10/2026** · GAP-46 (Major)
 
 > Hợp đồng con: nhận diện hợp đồng con khi hợp đồng có gắn hợp đồng cha (hợp đồng dự án). Không phát hành hóa đơn trên hợp đồng con, cả thiết bị và dịch vụ.
 
@@ -210,6 +220,8 @@ updated: 2026-10-19
 🟡 **Làm rõ một phần 16/10/2026** — Đã chốt cách nhận diện khi chuẩn bị dữ liệu: vào tool tình trạng kiểm tra hợp đồng; có thông tin hợp đồng cha ⇒ là hợp đồng con. Còn mở: dòng bị chặn được ghi nhận thế nào, HĐ cha có xuất thay không. Nguồn: QC trả lời 16/10/2026 vòng 1
 
 **Câu hỏi cho BA (vòng 2):** Dòng DV / TB trên hợp đồng con bị chặn thì hệ thống ghi nhận thế nào (ghi log ở đâu, đánh cờ, hay để tồn)? Phần này có được xuất trên HĐ của hợp đồng cha (dự án) không, hay xuất theo quy trình khác?
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Sau khi tạo đơn, SPF gửi thông tin hợp đồng cho INVOICE; ở bước xét điều kiện phát hành, dòng thuộc **hợp đồng con của dự án bị chặn** và ghi lỗi vào log. QC không xem log ⇒ chỉ verify **không phát hành hóa đơn**. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -267,7 +279,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-12 · SubServiceType 31 trùng ở 2 dịch vụ Tổng đài Oncall
-📍 `DOC-v2.0-01 §A.3 (L191-192, L259)` + `§C#3 (L649-651)`  ·  Status: **Open** · §C#3 của URD
+📍 `DOC-v2.0-01 §A.3 (L191-192, L259)` + `§C#3 (L649-651)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · §C#3 của URD
 
 > 31 – Thiết bị Oncall (Type 2)
 > 31 – Thiết bị IP phone (Type 2)
@@ -281,6 +293,8 @@ updated: 2026-10-19
 🔎 **QC rà lại 16/10/2026:** QC xác nhận có dịch vụ "Thiết bị IP phone", nhưng chưa ai xác nhận SubServiceType 31 có đúng không. Vì khóa chống trùng đã chốt theo 2.2 (CL-XHD-11), rủi ro chuyển sang **khóa map tín hiệu BR-DB-07** (vẫn có SubserviceType): tín hiệu giao của Thiết bị Oncall có thể khớp nhầm dòng Thiết bị IP phone. ⇒ Vẫn Open. Nguồn: QC trả lời 16/10/2026 vòng 1
 
 **Câu hỏi cho BA (vòng 2):** SubServiceType của "Thiết bị IP phone" đúng là 31 (trùng "Thiết bị Oncall") không? Nếu đúng, tín hiệu giao hàng map theo mã đơn + ServiceCode + SubserviceType + phương thức (BR-DB-07) phân biệt 2 thiết bị này bằng gì?
+
+🟡 **Làm rõ một phần 19/10/2026 (vòng 3)** — SubServiceType của "Thiết bị IP phone" **đúng là 31**, trùng "Thiết bị Oncall". Còn mở: tín hiệu giao hàng map theo mã đơn + ServiceCode + SubserviceType + phương thức (BR-DB-07) phân biệt 2 thiết bị bằng gì — QC hỏi lại BA. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -300,7 +314,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-14 · "Hợp đồng có hiệu lực" và "đang cập nhật" là những giá trị trạng thái nào?
-📍 `DOC-v2.0-01 BR-XHD-10 · L425-426`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-13 (Critical)
+📍 `DOC-v2.0-01 BR-XHD-10 · L425-426`  ·  Status: **Resolved 19/10/2026** · GAP-13 (Critical)
 
 > Đơn không ở trạng thái hủy hoặc đang cập nhật.
 > Thông tin chung phải đủ: hợp đồng có hiệu lực, Sale Team, Sale Channel, tên khách hàng, loại hình khách hàng cấp 1 và cấp 2, địa chỉ xuất hóa đơn, LocationID > 0.
@@ -313,10 +327,12 @@ updated: 2026-10-19
 
 🟡 **Làm rõ một phần 19/10/2026** — Trạng thái hợp lệ: **đơn hàng = "Bình thường"** và **hợp đồng = "Bình thường"** (= "có hiệu lực"). Còn mở: danh sách giá trị trạng thái **bị chặn** (hủy, đang cập nhật, …) để dựng case âm SC-XHD-080..082. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Case âm cần có: trạng thái **hợp đồng** không hợp lệ: **Tạm ngưng**, **Đã chấm dứt**, **Ngưng vì lý do thanh toán**… (SC-XHD-082); trạng thái **đơn hàng** không hợp lệ: **Đã hủy** (SC-XHD-080) và **Đang cập nhật** = đơn chưa có thông tin hợp đồng (SC-XHD-081, QC owner giữ). Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-15 · Log khi không hợp lệ: ghi ở đâu, nội dung gì, thứ tự validate, nhiều lỗi cùng lúc? Đơn không có khuyến mãi?
-📍 `DOC-v2.0-01 BR-XHD-10 · L427-428`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-29 (Major), GAP-30 (Major)
+📍 `DOC-v2.0-01 BR-XHD-10 · L427-428`  ·  Status: **Resolved 19/10/2026** · GAP-29 (Major), GAP-30 (Major)
 
 > Chi tiết từng dịch vụ phải có các ID dịch vụ, nhóm dịch vụ, gói dịch vụ, chính sách, câu lệnh giá, chương trình khuyến mãi > 0.
 > Không hợp lệ thì không phát hành và ghi log; hệ thống không giữ chờ phát hành lại vì hóa đơn phải lập trong ngày.
@@ -328,6 +344,8 @@ updated: 2026-10-19
 🔎 **QC rà lại 16/10/2026:** Không tìm thấy mô tả trong tài liệu nào (URD 2.2, flow `DOC-v2.0-FIG-03` (ảnh: Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png)) ⇒ gap tài liệu, vẫn Open, chuyển PO. Nguồn: QC trả lời 16/10/2026 vòng 1
 
 🟡 **Làm rõ một phần 19/10/2026** — (1) QC **không có quyền xem log** ⇒ không verify nội dung / vị trí log, chỉ verify không phát hành. Điều kiện chi tiết dịch vụ xem trên **Web admin** (ID dịch vụ, nhóm DV, gói DV, chính sách, câu lệnh giá, CTKM > 0). Còn mở: (2) thứ tự validate; (3) đơn **không có KM** — theo chữ "chương trình khuyến mãi > 0" sẽ bị chặn, cần BA xác nhận (SC-XHD-095). Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — (2) Kiểm tra điều kiện **dừng ở lỗi đầu tiên**. (3) Đơn **không có chương trình khuyến mãi vẫn phát hành** hóa đơn ⇒ điều kiện "CTKM > 0" chỉ xét khi đơn có CTKM; SC-XHD-095 sửa Then. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -359,7 +377,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-18 · Billing lỗi / timeout: hệ thống làm gì?
-📍 `DOC-v2.0-01 BR-XHD-13 · L439`  ·  Status: **Open** · GAP-14 (Critical)
+📍 `DOC-v2.0-01 BR-XHD-13 · L439`  ·  Status: **Resolved 19/10/2026** · GAP-14 (Critical)
 
 > Phát hành qua Billing System, ghi BillNumber và BillDate vào giỏ tồn xuất hóa đơn
 
@@ -368,6 +386,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Retry? Giữ rỗng chờ đợt sau? Cảnh báo?
 
 🔎 **QC rà lại 16/10/2026:** Không tìm thấy mô tả trong tài liệu nào (URD 2.2, flow `DOC-v2.0-FIG-03` (ảnh: Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png)) ⇒ gap tài liệu, vẫn Open, chuyển PO. Nguồn: QC trả lời 16/10/2026 vòng 1
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Billing lỗi / timeout: hệ thống **ghi lỗi**, **dev retry bằng tay** (không có retry tự động). QC không xem log ⇒ SC-XHD-104 verify hóa đơn **không phát hành** (BillNumber rỗng). Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -449,6 +469,8 @@ updated: 2026-10-19
 
 🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` BR-XHD-09 (L370-378): race worker ↔ realtime là rủi ro đã biết (khoảng trống giữa kiểm `BillNumber IS NULL` và ghi BillNumber); ràng buộc L377 *"ưu tiên bảo đảm hóa đơn luôn được phát hành — cơ chế chặn trùng không được dẫn tới tình huống không ra được hóa đơn."* Còn mở: 2.1 vẫn ghi L378 *"[NỢ] Chờ PM và SA thống nhất phương án kỹ thuật"* ⇒ chưa có phương án / ngày lên STG — hỏi PM, SA. HĐ dư khi trùng: ngoài phạm vi (TP). Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
 
+🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC nhắc lại: xử lý hóa đơn dư khi trùng **không test** (quy trình điều chỉnh / thay thế riêng, ngoài phạm vi TP). Chưa trả lời: PM / SA đã chốt phương án chặn trùng worker ↔ realtime chưa; có test worker và realtime chạy song song không. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-XHD-24 · Cutover v1 → v2: có test trên STG không? Dữ liệu luồng cũ?
@@ -463,6 +485,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Cutover có nằm trong phạm vi QC v2.0? Nếu có: STG có dữ liệu + service luồng cũ không?
 
 🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` BR-DB-08 (L297-305): v2.0 ghi hoàn toàn vào bảng mới, tắt service cũ khi go-live; mỗi bản tin Kafka chỉ một luồng xử lý (L300); giai đoạn giao thoa luồng mới kiểm tra chéo dữ liệu cũ **mức đơn hàng** — đơn đã ra HĐ ở luồng cũ thì luồng mới bỏ qua (L302); kiểm tra chéo là cấu hình bật / tắt. ⇒ **SC-XHD-107, 108 dùng lại** (bỏ deprecated). Quét tay bổ sung: ngoài phạm vi (TP). Còn mở: STG có dữ liệu + service luồng cũ để test không. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
+🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC nhắc lại: quét tay bổ sung đơn bỏ sót giai đoạn giao thoa cutover **không test** (thao tác tay, ngoài phạm vi TP). Chưa trả lời: STG có dữ liệu + service luồng cũ để test kiểm tra chéo (SC-XHD-107, 108) không; ai bật cấu hình. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -480,7 +504,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-26 · Ma trận kênh × nhóm DV × loại đơn thực bán
-📍 `DOC-v2.0-01 §A.2 (L80)` + `§A.3 (L139)` + `BR-XHD-12 (L435)`  ·  Status: **Open** · GAP-62 (Major)
+📍 `DOC-v2.0-01 §A.2 (L80)` + `§A.3 (L139)` + `BR-XHD-12 (L435)`  ·  Status: **Resolved 19/10/2026** · GAP-62 (Major)
 
 > Tất cả kênh bán trong danh sách dưới đây thuộc phạm vi. Phase 1 đã triển khai Shopee và Tiktok.
 > (...)
@@ -491,6 +515,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Gửi ma trận kênh × nhóm DV × {bán mới, bán thêm} thực bán; cặp nào không bán thì bỏ khỏi phạm vi test.
 
 ⛔ **Ngoài scope test 19/10/2026** — câu *"Chi nhánh nào được bán sản phẩm dịch vụ nào do bên quản lý sản phẩm bổ sung thuộc tính"* thuộc **TP §2.2 #4** *"Thuộc tính chi nhánh nào được bán sản phẩm / dịch vụ nào"* ⇒ không sinh SC, không kiểm thuộc tính này. QC owner 19/10/2026. Câu hỏi ma trận kênh × nhóm DV vẫn giữ (phạm vi FR01).
+
+✅ **RESOLVED 19/10/2026 (vòng 3)** — QC lead chốt: viết TC **bán mới và bán thêm cho từng nhóm dịch vụ, cho từng kênh bán** (không cắt cặp nào khỏi phạm vi). Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -512,6 +538,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** (1) TB "Không" xuất HĐ theo đường nào? (2) Đơn mix: tín hiệu mang phương thức nào? (3) File này có phải danh mục chính thức của v2.0 không?
 
 🟡 **Làm rõ một phần 19/10/2026** — (1) TB / DV hình thức triển khai **"Không"** vẫn xuất HĐ **khi đơn hàng hoàn tất** — chưa có căn cứ URD, tách câu hỏi sang **CL-XHD-34**. Còn mở: (2) câu trả lời đơn mix bị cắt dở ("…hình thức Phiếu thi công:"); (3) file HT triển khai có phải danh mục chính thức không. Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — File "List HT Triển khai" (AnhNQ75, DOC-v2.0-05) là **danh mục chính thức của PO** (QC ghi "File List HT Triển khai (AnhNQ75) có phải danh mục chính thức của PO" — analyst hiểu là khẳng định). Còn mở (duy nhất): đơn mix hình thức triển khai — tín hiệu giao hàng mang phương thức nào trong khóa map (BR-DB-07). Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -570,6 +598,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Gửi URD v1.0 + liệt kê hành vi Phase 1 của Shopee/Tiktok giữ / đổi ở v2.0.
 
 🟡 **Làm rõ một phần 19/10/2026** — QC owner: hành vi Phase 1 của Shopee / TikTok Shop **vẫn test**. Còn mở: chưa có URD v1.0 / danh sách hành vi giữ – đổi ⇒ chưa có căn cứ viết expected. Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC dán phần Hiện trạng / Mục tiêu của URD: sau Phase 1 đã xuất hóa đơn tự động kênh TMĐT (Shopee, TikTok Shop), **1 đơn 1 hóa đơn**, gạch nợ **chỉ bằng tiền đặt cọc**; Phase 2 mở cho mọi kênh, lịch chung, thêm gạch nợ tạm cho TMĐT. Còn mở: danh sách hành vi Phase 1 được giữ / đổi để viết expected. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 

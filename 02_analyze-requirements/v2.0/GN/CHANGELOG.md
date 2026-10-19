@@ -44,6 +44,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo TP §2.2 #5 (chỉ đọc TP): RISK-GN-01 Status → Out-scope (bỏ SC-GN-048 khỏi cột SC); §3 Nợ #1, #2 (CL-GN-01, 08) → đóng Out-scope. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo CL-GN-02: RISK-GN-02, 04 bỏ SC-GN-049 (không test lỗi / timeout trên STG); §3 Nợ #3 số SC chờ CL 5→3. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | SCOPE↑ | **Hoàn tác SCOPE↓ cùng ngày:** QC owner chốt gạch nợ EVC / voucher **vẫn test**, chờ BA liệt kê loại EVC / voucher. Mở lại CL-GN-01, 08; CL-GN-10 hỏi lại đủ 3 ý; **SC-GN-048 dùng lại** (chờ CL-GN-01, 10); RISK-GN-01 về Open. Ghi rõ khác TP §2.2 #5 (không sửa TP) | QC owner 19/10/2026 | SC 48→49 · deprecated 2→1 · P1 41→42 · cl_open 6→8 · blocked_by_cl 3→4 |
+| 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-GN-06 (phí sàn đã tính vào tiền khách trả ⇒ Paid quyết toán không nhỏ hơn nợ — **deprecated SC-GN-024**), CL-GN-07 (không test map loại cọc; đơn bán thêm vẫn có cọc — SC-GN-050 hết chờ CL) · **làm rõ thêm** CL-GN-08 (INVOICE và đội EVC chạy cùng nhau), CL-GN-10 (**Phụ lục D#4 lấy từ URD 2.1** BR-VC-01..07, BR-GC-04..07, bỏ bước `[Bỏ]` — QC owner) · ghi nhận CL-GN-05 | QC trả lời 19/10/2026 (file câu hỏi vòng 3) + QC owner | SC 49→48 (deprecated 2) · P2 6→5 · cl_open 8→6 · blocked_by_cl 4→2 |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -53,7 +54,7 @@ updated: 2026-10-19
 | 2 | ⚠️ **Kênh sàn = {20 Shopee, 21 Tiktok}** là giả định (CL-GN-03) | 2.2 không đánh dấu kênh sàn; 2.1 L125 | BA thêm kênh ⇒ SC-GN-011, 012, 019, 020 thiếu lớp EP; gạch tạm sai kênh không bị phát hiện |
 | 3 | ⚠️ **Tài liệu tích hợp / payload Kafka Out / enum** dùng chung CL-XHD-29, RISK-XHD-01 — home ở `XHD/` | Layout v2 không có `_global/` | Mở CL trùng ở GN ⇒ 2 home, drift trạng thái |
 | 4 | ⚠️ Thuật ngữ thống nhất "**gỡ gạch nợ tạm**" (2.2) — không dùng "hất nợ tạm" / "xóa gạch nợ tạm" của 2.1 | BR-NT-04 L501 | TC / bug dùng 3 tên ⇒ khó trace, review-tc báo không nhất quán |
-| 5 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của URD 2.2** (QC owner 19/10/2026 — thay ràng buộc 16/10 "không sử dụng"), trừ D#4, 7, 8, 9. Với GN: **D#4 cấu hình EVC KHÔNG lấy từ URD 2.1** (QC owner: không đụng tới) ⇒ chi tiết EVC hỏi BA (CL-GN-10) | QC owner 19/10/2026 | Dựng TC EVC theo BR-VC / BR-GC của 2.1 ⇒ kiểm theo nội dung không được dùng |
+| 5 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của URD 2.2** (QC owner 19/10/2026 — thay ràng buộc 16/10 "không sử dụng"), trừ D#7, 8, 9. Với GN: **D#4 cấu hình EVC lấy từ URD 2.1 BR-VC-01..07, BR-GC-04..07** (từ vòng 3 19/10/2026 — 2.2 D#4 ghi "Giữ nguyên (gộp nhóm BR-VC)"), bỏ các bước 2.1 đánh dấu `[Bỏ]`; danh sách loại EVC / voucher vẫn hỏi BA (CL-GN-10) | QC owner 19/10/2026 | Dùng bước 2.1 đã đánh dấu `[Bỏ]` ⇒ TC kiểm theo nội dung đã bỏ |
 
 ## 3. Nợ đang mở
 

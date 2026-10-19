@@ -45,12 +45,13 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Đóng CL-HK-01:** HĐ đơn bán thêm cũng dùng đầu U ⇒ SC-HK-020 hết chờ CL | QC owner 19/10/2026 | cl_open 6→5 · blocked_by_cl 5→4 |
 | 2026-10-19 | UPDATE | +CL-HK-11 (Open): ký hiệu HĐĐT verify ở đâu — tool Liệt kê cước chỉ hiển thị ID hóa đơn. SC-HK-008, 009, 010, 020 chờ điểm verify | QC owner 19/10/2026 | CL 10→11 · cl_open 5→6 · blocked_by_cl 4→8 |
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo câu trả lời QC owner: Tổng quan + RISK-HK-01 (bảng map theo URD 2.1, chỉ đầu U, còn chờ CL-HK-11), RISK-HK-04 (bỏ SC-HK-019 — không test lỗi trên STG), RISK-HK-05 → Out-scope (CL-HK-02), REQ-HK-005 ghi chú, quy tắc đủ scenario + ghi chú SC-HK-020, §3 Nợ #4. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
+| 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-HK-09 (1 hóa đơn chỉ thuộc 1 đơn hàng; 1 hợp đồng có nhiều đơn hàng — SC-HK-005 giữ, viết lại Given / Then) · **làm rõ thêm** CL-HK-07 (mỗi đơn chỉ add tiền trả trước 1 lần; còn hỏi add ở hóa đơn nào) | QC trả lời 19/10/2026 (file câu hỏi vòng 3) | cl_open 6→5 · blocked_by_cl 8→7 |
 
 ## 2. Ràng buộc còn hiệu lực
 
 | # | Ràng buộc | Vì sao | Hệ quả nếu vi phạm |
 |---|---|---|---|
-| 1 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho các mục Phụ lục D của URD 2.2 trỏ về** (QC owner chốt 19/10/2026 — thay ràng buộc 16/10 "2.1 không sử dụng"): dùng D#1 cutover, D#2 chống phát hành trùng, D#3 RISK-01, D#5 ký hiệu / ID / đơn vị đầu số riêng, D#6 dòng chiết khấu / thông tin theo mẫu. ⛔ **Không dùng:** D#4 cấu hình EVC (QC owner: không đụng tới), D#7 mapping chi nhánh, D#8 câu hỏi mục V, D#9 autobill TB theo phương thức (2.2 ghi không còn áp dụng / đã bỏ). Phần chính 2.2 thắng khi mâu thuẫn. Chỉ cập nhật các CL QC owner chỉ định (CL-XHD-22, 23, 24 · CL-HK-02, 03, 10) | QC owner 19/10/2026 | Dùng 2.1 ngoài các mục trên (hoặc cho D#4) ⇒ TC kiểm theo nội dung đã bỏ, bug bị bác |
+| 1 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho các mục Phụ lục D của URD 2.2 trỏ về** (QC owner chốt 19/10/2026 — thay ràng buộc 16/10 "2.1 không sử dụng"): dùng D#1 cutover, D#2 chống phát hành trùng, D#3 RISK-01, D#4 cấu hình EVC (từ vòng 3 19/10/2026 — 2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"; bỏ bước 2.1 đánh dấu `[Bỏ]`), D#5 ký hiệu / ID / đơn vị đầu số riêng, D#6 dòng chiết khấu / thông tin theo mẫu. ⛔ **Không dùng:** D#7 mapping chi nhánh, D#8 câu hỏi mục V, D#9 autobill TB theo phương thức (2.2 ghi không còn áp dụng / đã bỏ). Phần chính 2.2 thắng khi mâu thuẫn. Chỉ cập nhật các CL QC owner chỉ định (CL-XHD-22, 23, 24 · CL-HK-02, 03, 10) | QC owner 19/10/2026 | Dùng 2.1 ngoài các mục trên ⇒ TC kiểm theo nội dung đã bỏ, bug bị bác |
 | 2 | ⚠️ **Tiền trả trước: "mỗi đơn một lần" (2.2) thắng "một lần với 1 dịch vụ" (2.1)** | Quy tắc 2.2 thắng | Viết TC per dịch vụ ⇒ expected add nhiều lần, FAIL oan |
 | 3 | ⚠️ **API spec HĐĐT / hệ thống Dịch vụ** dùng chung CL-XHD-29 / RISK-XHD-01 — home ở `XHD/` | Layout v2 không có `_global/` | Mở CL trùng ở HK ⇒ 2 home, drift |
 
@@ -61,4 +62,4 @@ updated: 2026-10-19
 | 1 | 🔴 REQ-HK-010 (dòng EVC, chiết khấu, thông tin theo mẫu) **chưa có SC** | Chỉ có tên, đặc tả chuyển D#6 — CL-HK-03 ⛔ (GAP-04 Blocker, TP đề xuất Out-scope) | PM chốt Out-scope ⇒ ghi `SCOPE↓` ở §1; nếu in-scope ⇒ `--update` thêm SC |
 | 2 | ✅ CL-HK-01, CL-HK-10 đã đóng 19/10/2026 — ký hiệu / ID theo URD 2.1, chỉ đầu U (bán mới + bán thêm) | — | — |
 | 3 | 🟡 8 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
-| 4 | 🟡 CL-HK-09 (1 hóa đơn gồm nhiều đơn hàng?) chưa có GAP — câu vòng 2 trả lời lệch, đã đưa vào file câu hỏi vòng 3. ✅ CL-HK-08 đã đóng 19/10/2026 (mã tỉnh theo địa chỉ hợp đồng) | — | Hỏi BA vòng 3 |
+| 4 | ✅ CL-HK-09 đã đóng 19/10/2026 vòng 3 (1 hóa đơn chỉ thuộc 1 đơn hàng) · ✅ CL-HK-08 đã đóng 19/10/2026 (mã tỉnh theo địa chỉ hợp đồng) | — | — |

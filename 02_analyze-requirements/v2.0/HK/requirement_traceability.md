@@ -8,7 +8,7 @@ doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #12 · §B.III · §C#1 · §D#5, #6"
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Requirement Traceability — v2.0 · Module HK
@@ -65,7 +65,7 @@ updated: 2026-10-16
 
 > Mỗi lần phát hành chỉ đẩy phần vừa xuất, tách theo từng đơn hàng cấu thành hóa đơn.
 
-↳ **Ghi chú:** Với 1 đơn n HĐ (REQ-XHD-038) mỗi HĐ đẩy hậu kỳ riêng, không đẩy lại phần cũ. "Từng đơn hàng cấu thành hóa đơn" ngụ ý 1 HĐ có thể gồm nhiều đơn — trái với gộp theo đơn ở XHD (BR-XHD-05) (CL-HK-09).
+↳ **Ghi chú:** Với 1 đơn n HĐ (REQ-XHD-038) mỗi HĐ đẩy hậu kỳ riêng, không đẩy lại phần cũ. "Từng đơn hàng cấu thành hóa đơn": 1 hóa đơn chỉ thuộc 1 đơn hàng, 1 hợp đồng có nhiều đơn hàng (CL-HK-09 resolved 19/10/2026).
 
 ---
 

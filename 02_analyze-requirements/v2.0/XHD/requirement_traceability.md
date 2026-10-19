@@ -12,7 +12,7 @@ doc_source:
   - id: DOC-v2.0-05
     section: "sheet \"1. HT Triển khai\""
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Requirement Traceability — v2.0 · Module XHD
@@ -103,7 +103,7 @@ updated: 2026-10-16
 > | 20 | Shopee | Shopee | Đã triển khai ver1.0Có điều chinh ver2.0 |
 > | 21 | Tiktok | Tiktok | Đã triển khai v1.0Có điều chỉnh v2.0 |
 
-↳ **Ghi chú:** 17 kênh có đơn SPF đều phải xuất HĐ tự động. Kênh 20, 21 là luồng Phase 1 ⇒ vừa là test mới vừa là **hồi quy**. URD chỉ liệt kê kênh và nhóm DV riêng rẽ, **không có ma trận kênh nào bán nhóm DV nào** (CL-XHD-26 / GAP-62) ⇒ test plan đang giả định đủ 17 × 20 × 2 loại đơn. Implicit: SaleChannelID ngoài 17 giá trị trên (vd 3, 5, 6, 8) không thuộc phạm vi — URD không nói hệ thống xử lý chúng ra sao.
+↳ **Ghi chú:** 17 kênh có đơn SPF đều phải xuất hóa đơn tự động. QC lead chốt test bán mới + bán thêm cho mọi nhóm dịch vụ × mọi kênh (CL-XHD-26, 19/10/2026). Kênh 20, 21 là luồng Phase 1 ⇒ vừa là test mới vừa là **hồi quy**. URD chỉ liệt kê kênh và nhóm DV riêng rẽ, **không có ma trận kênh nào bán nhóm DV nào** (CL-XHD-26 / GAP-62) ⇒ test plan đang giả định đủ 17 × 20 × 2 loại đơn. Implicit: SaleChannelID ngoài 17 giá trị trên (vd 3, 5, 6, 8) không thuộc phạm vi — URD không nói hệ thống xử lý chúng ra sao.
 
 ---
 
@@ -124,7 +124,7 @@ updated: 2026-10-16
 
 > Áp dụng chung cho mọi kênh bán: thanh toán, hủy đơn hàng.
 
-↳ **Ghi chú:** 2.2 chỉ còn **2 sự kiện**. Nhưng BR-DB-03 vẫn nói "Cập nhật thông tin khách" và BR-XHD-03 lấy mốc "thời gian tạo đơn" ⇒ doc tự mâu thuẫn (CL-XHD-01 / GAP-42). Test chắc chắn được 2 sự kiện ghi trong BR; 2 sự kiện còn lại chờ CL-XHD-01.
+↳ **Ghi chú:** 2.2 chỉ còn **2 sự kiện**. Nhưng BR-DB-03 vẫn nói "Cập nhật thông tin khách" và BR-XHD-03 lấy mốc "thời gian tạo đơn" ⇒ doc tự mâu thuẫn (CL-XHD-01 / GAP-42). Test chắc chắn được 2 sự kiện ghi trong BR; 2 sự kiện còn lại chờ CL-XHD-01. **Chốt 19/10/2026 (CL-XHD-01):** SPF chỉ gửi thanh toán, hủy đơn; thông tin khách lấy từ hợp đồng lúc phát hành; thời gian tạo đơn xem trên Web admin.
 
 ---
 
@@ -163,7 +163,7 @@ updated: 2026-10-16
 > Nếu khách chọn lấy hóa đơn thì dùng thông tin khách tự nhập: tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu.
 > Khách được nhập thông tin trong tối đa 2 giờ, tính từ thời điểm ghi nhận trên hệ thống của kênh.
 
-↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy HĐ" và "quá 2 giờ không nhập" **không có đầu ra** (CL-XHD-02 / GAP-48). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất HĐ (CL-XHD-04).
+↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy hóa đơn" và "quá 2 giờ không nhập" ⇒ **không phát hành hóa đơn**; quá 2 giờ nút Xuất hóa đơn bị ẩn (CL-XHD-02 resolved 19/10/2026). Quy tắc bắt buộc nhập của kênh FPL: CL-XHD-03 (resolved 19/10/2026). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất HĐ (CL-XHD-04).
 
 ---
 
@@ -172,7 +172,7 @@ updated: 2026-10-16
 
 > Cập nhật thông tin khách không kích hoạt phát hành hóa đơn; lần phát hành tiếp theo dùng thông tin mới nhất.
 
-↳ **Ghi chú:** 2 hành vi: (1) không phát sinh HĐ ngay khi cập nhật; (2) HĐ của đợt kế tiếp in thông tin mới. Nguồn của sự kiện "cập nhật thông tin khách" không còn trong BR-DB-01 (CL-XHD-01).
+↳ **Ghi chú:** 2 hành vi: (1) không phát sinh HĐ ngay khi cập nhật; (2) HĐ của đợt kế tiếp in thông tin mới. Không có sự kiện "cập nhật thông tin khách" từ SPF — thông tin khách lấy từ hợp đồng tại thời điểm phát hành (CL-XHD-01 resolved 19/10/2026).
 
 ---
 
@@ -307,7 +307,7 @@ updated: 2026-10-16
 
 > Hợp đồng tổ chức: chỉ phát hành khi đã duyệt PĐK; hai ngày cuối tháng không xét điều kiện này. Quên duyệt PĐK thì không autobill. Khi có thay đổi hoặc dịch chuyển luồng duyệt PĐK/hợp đồng thì phải hiệu chỉnh lại điều kiện này.
 
-↳ **Ghi chú:** 3 lớp: HĐ tổ chức đã duyệt · chưa duyệt ngày thường · chưa duyệt trong 2 ngày cuối tháng; HĐ cá nhân không xét. Chưa rõ: nhận diện HĐ tổ chức bằng trường nào, trạng thái PĐK lấy ở đâu, "2 ngày cuối tháng" tính theo lịch nào, duyệt muộn thì đợt sau có phát hành không (CL-XHD-07 / GAP-44, 45). Revision 2.2 nhắc "KH Chuỗi/Dự án (gộp vào BR-XHD-03)" nhưng không có nội dung (CL-XHD-09 / GAP-47). **Cập nhật 16/10/2026:** HĐ tổ chức = loại hình KH cấp 1 "Tổ chức", PĐK lấy từ SPF, 2 ngày lịch (CL-XHD-07 một phần); KH Chuỗi không có rule riêng (CL-XHD-09 ✅).
+↳ **Ghi chú:** 3 lớp: HĐ tổ chức đã duyệt · chưa duyệt ngày thường · chưa duyệt trong 2 ngày cuối tháng; HĐ cá nhân không xét. Chưa rõ: nhận diện HĐ tổ chức bằng trường nào, trạng thái PĐK lấy ở đâu, "2 ngày cuối tháng" tính theo lịch nào, duyệt muộn thì đợt sau có phát hành không (CL-XHD-07 / GAP-44, 45). Revision 2.2 nhắc "KH Chuỗi/Dự án (gộp vào BR-XHD-03)" nhưng không có nội dung (CL-XHD-09 / GAP-47). **Cập nhật 16/10/2026:** HĐ tổ chức = loại hình KH cấp 1 "Tổ chức", PĐK lấy từ SPF, 2 ngày lịch (CL-XHD-07 một phần); KH Chuỗi không có rule riêng (CL-XHD-09 ✅). **Chốt 19/10/2026 (CL-XHD-07):** hợp đồng tổ chức chưa duyệt PĐK ⇒ chặn, ghi log, phải xuất hóa đơn tay (không tự phát hành ở đợt sau); áp cả đơn bán mới và bán thêm.
 
 ---
 
@@ -316,7 +316,7 @@ updated: 2026-10-16
 
 > Hợp đồng con: nhận diện hợp đồng con khi hợp đồng có gắn hợp đồng cha (hợp đồng dự án). Không phát hành hóa đơn trên hợp đồng con, cả thiết bị và dịch vụ.
 
-↳ **Ghi chú:** Negative 2 nhánh (DV, TB). Không phát hành rồi ghi nhận ra sao, HĐ cha có phát hành thay không: chưa đặc tả (CL-XHD-08 / GAP-46). **Cập nhật 16/10/2026:** nhận diện hợp đồng con qua tool tình trạng (có thông tin hợp đồng cha).
+↳ **Ghi chú:** Negative 2 nhánh (DV, TB). Không phát hành rồi ghi nhận ra sao, HĐ cha có phát hành thay không: chưa đặc tả (CL-XHD-08 / GAP-46). **Cập nhật 16/10/2026:** nhận diện hợp đồng con qua tool tình trạng (có thông tin hợp đồng cha). **Chốt 19/10/2026 (CL-XHD-08):** dòng của hợp đồng con bị chặn, ghi log; QC chỉ verify không phát hành hóa đơn.
 
 ---
 
@@ -367,7 +367,7 @@ updated: 2026-10-16
 
 > Đơn không ở trạng thái hủy hoặc đang cập nhật.
 
-↳ **Ghi chú:** Giá trị trạng thái "đang cập nhật" cụ thể là gì: chưa định nghĩa (CL-XHD-14 / GAP-13).
+↳ **Ghi chú:** Trạng thái đơn không hợp lệ: **Đã hủy**, **Đang cập nhật** (đơn chưa có thông tin hợp đồng) (CL-XHD-14 resolved 19/10/2026).
 
 ---
 
@@ -376,7 +376,7 @@ updated: 2026-10-16
 
 > Thông tin chung phải đủ: hợp đồng có hiệu lực, Sale Team, Sale Channel, tên khách hàng, loại hình khách hàng cấp 1 và cấp 2, địa chỉ xuất hóa đơn, LocationID > 0.
 
-↳ **Ghi chú:** 8 rule, mỗi rule 1 SC (EP). LocationID có biên `> 0`. "Hợp đồng có hiệu lực" chưa có danh sách trạng thái (CL-XHD-14).
+↳ **Ghi chú:** 8 rule, mỗi rule 1 SC (EP). LocationID có biên `> 0`. Hợp đồng không hợp lệ: Tạm ngưng, Đã chấm dứt, Ngưng vì lý do thanh toán… (CL-XHD-14 resolved 19/10/2026).
 
 ---
 
@@ -385,7 +385,7 @@ updated: 2026-10-16
 
 > Chi tiết từng dịch vụ phải có các ID dịch vụ, nhóm dịch vụ, gói dịch vụ, chính sách, câu lệnh giá, chương trình khuyến mãi > 0.
 
-↳ **Ghi chú:** 6 rule biên `> 0` (0 chặn, 1 hợp lệ). **Suy diễn của analyst:** "chương trình khuyến mãi > 0" bắt buộc cả đơn không có khuyến mãi — đúng như chữ của URD nhưng dễ chặn nhầm đơn không KM; nêu ở CL-XHD-15.
+↳ **Ghi chú:** 6 rule biên `> 0` (0 chặn, 1 hợp lệ). Đơn **không có chương trình khuyến mãi vẫn phát hành** (CL-XHD-15 resolved 19/10/2026).
 
 ---
 
@@ -394,7 +394,7 @@ updated: 2026-10-16
 
 > Không hợp lệ thì không phát hành và ghi log; hệ thống không giữ chờ phát hành lại vì hóa đơn phải lập trong ngày.
 
-↳ **Ghi chú:** Log ở đâu, nội dung gì, thứ tự validate và cách log nhiều lỗi: chưa đặc tả (CL-XHD-15 / GAP-29, 30). Dòng bị chặn chỉ được phát hành trong cùng ngày, qua ngày không phát hành lại (CL-XHD-17 ✅ — SC-XHD-096, SC-XHD-111).
+↳ **Ghi chú:** Kiểm tra dừng ở lỗi đầu tiên (CL-XHD-15 resolved 19/10/2026); QC không xem log ⇒ chỉ verify không phát hành. Dòng bị chặn chỉ được phát hành trong cùng ngày, qua ngày không phát hành lại (CL-XHD-17 ✅ — SC-XHD-096, SC-XHD-111).
 
 ---
 
@@ -438,7 +438,7 @@ updated: 2026-10-16
 > Phát hành qua Billing System, ghi BillNumber và BillDate vào giỏ tồn xuất hóa đơn
 > BillDate là ngày phát hành thực tế.
 
-↳ **Ghi chú:** BillDate không lùi về mốc nghiệp vụ. Billing lỗi / timeout: không có hành vi (CL-XHD-18 / GAP-14).
+↳ **Ghi chú:** BillDate không lùi về mốc nghiệp vụ. Billing lỗi / timeout: hệ thống ghi lỗi, dev retry bằng tay (CL-XHD-18 resolved 19/10/2026).
 
 ---
 

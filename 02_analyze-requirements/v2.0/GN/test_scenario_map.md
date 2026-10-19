@@ -6,15 +6,15 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module GN
   req: 20
-  sc: 49
-  new: 49
+  sc: 48
+  new: 48
   modified: 0
   carried: 0
-  deprecated: 1
+  deprecated: 2
   p1: 42
-  p2: 6
+  p2: 5
   p3: 1
-  blocked_by_cl: 4
+  blocked_by_cl: 2
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -68,7 +68,6 @@ updated: 2026-10-19
 | SC-GN-021 | Gạch nợ tạm | REQ-GN-008 | DOC-v2.0-01 BR-XL-03 (L489) | HĐ luồng **Cọc**, đơn kênh sàn, Paid tạm | Điểm chạm kích hoạt | Không có gạch nợ tạm ở nhánh Cọc | P1 | Negative | NEW |
 | SC-GN-022 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L503) | HĐ đã gạch nợ tạm (Payment đặc biệt) | Paid chuyển **hoàn tất** | Payment tạm bị gỡ trước (HĐ trở lại còn nợ), sau đó gạch nợ thật bằng Paid | P1 | Functional | NEW |
 | SC-GN-023 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L504) | HĐ **chưa** gạch nợ tạm | Paid hoàn tất | Gạch nợ thật luôn, không có bước gỡ | P1 | Functional | NEW |
-| SC-GN-024 | Gỡ gạch nợ tạm | REQ-GN-011 | DOC-v2.0-01 BR-NT-04 (L503) | HĐ đã gạch tạm nợ N | Paid hoàn tất với Amount **< N** | Gỡ tạm; gạch thật = Amount; HĐ kết thúc ở "còn nợ" (N − Amount) — hệ quả ⛔ chờ CL-GN-06 | P2 | Boundary | NEW |
 | SC-GN-025 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | HĐ còn nợ; Paid cùng OrderCode Amount = **0** và Paid Amount = **1** | Gạch nợ chạy | **Amount 0 không được dùng; Amount 1 được dùng** | P1 | Boundary | NEW |
 | SC-GN-026 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | HĐ của OrderCode X; Paid thuộc OrderCode **Y** | Gạch nợ chạy | Paid của Y không được dùng cho HĐ của X | P1 | Negative | NEW |
 | SC-GN-027 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L509) | HĐ **đã gạch đủ** | Điểm chạm kích hoạt lại (worker 30 phút) | Không gạch lần nữa; không có Payment trùng | P1 | Negative | NEW |
@@ -93,7 +92,7 @@ updated: 2026-10-19
 | SC-GN-046 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; EVC lock 300k; Paid khách 900k | Gạch tiền khách | Gạch = min(1.000k − 300k, 900k) = **700k**; Paid khách dư 200k giữ lại; phần 300k chừa ra | P1 | Functional | NEW |
 | SC-GN-047 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; lock **0**; Paid khách 500k / 1.000k | Gạch tiền khách | **Lock 0 ⇒ gạch như thường: 500k / 1.000k** | P2 | Boundary | NEW |
 | SC-GN-048 | Paid voucher | REQ-GN-012, REQ-GN-019 | DOC-v2.0-01 BR-DP-01 (L474) ↔ BR-VC (L545) | Đơn có Paid PaidType **voucher** Amount > 0 cùng OrderCode | Gạch nợ luồng Paid | Paid voucher **được dùng** gạch nợ như Paid tiền khách (CL-GN-01 vòng 2) — loại EVC / voucher nào INVOICE gạch ⛔ chờ CL-GN-01, CL-GN-10 | P1 | Functional | NEW |
-| SC-GN-050 | Bán thêm | REQ-GN-016, REQ-GN-018 | DOC-v2.0-04 mail PM ↔ DOC-v2.0-01 BR-GC-01 (L529) | Đơn **bán thêm** trên hợp đồng đang có cọc dư từ đơn trước, luồng Cọc | Gạch cọc | Dùng cọc còn lại của **hợp đồng** (không theo OrderCode) — điểm khác (nếu có) ⛔ chờ CL-GN-07 (CL-XHD-25 đã chốt: rule chung) | P2 | Functional | NEW |
+| SC-GN-050 | Bán thêm | REQ-GN-016, REQ-GN-018 | DOC-v2.0-04 mail PM ↔ DOC-v2.0-01 BR-GC-01 (L529) | Đơn **bán thêm** trên hợp đồng đang có cọc dư từ đơn trước, luồng Cọc | Gạch cọc | Đơn bán thêm **có sinh đặt cọc**; dùng cọc còn lại của **hợp đồng** (không theo OrderCode); loại cọc cụ thể không test (CL-GN-07, 19/10/2026; CL-XHD-25: rule chung) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
 
@@ -304,15 +303,6 @@ updated: 2026-10-19
 > Chưa gạch tạm thì gạch thật luôn.
 
 ↳ **Ghi chú:** Không phát sinh thao tác gỡ.
-
----
-
-##### SC-GN-024 · Paid hoàn tất nhỏ hơn nợ đã gạch tạm
-📍 `DOC-v2.0-01 §II.c BR-NT-04 · L503`
-
-> (hóa đơn trở lại còn nợ) rồi mới gạch nợ thật.
-
-↳ **Ghi chú:** Ca sàn quyết toán thiếu (phí sàn?) — kết quả cuối "còn nợ" có hệ quả gì: CL-GN-06.
 
 ---
 
@@ -553,3 +543,4 @@ updated: 2026-10-19
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
 | SC-GN-049 | API EVC lỗi / timeout | GN | v2.0 (19/10/2026) | CL-GN-02: STG không test timeout; thực tế đội dự án retry thủ công, API lỗi ⇒ log bug |
+| SC-GN-024 | Paid hoàn tất nhỏ hơn nợ đã gạch tạm | GN | v2.0 (19/10/2026) | CL-GN-06: phí sàn TMĐT đã tính vào tiền khách trả ⇒ không có trường hợp Paid quyết toán của sàn nhỏ hơn nợ |

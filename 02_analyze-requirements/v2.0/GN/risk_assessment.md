@@ -6,7 +6,7 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module GN
   cl: 10
-  cl_open: 8
+  cl_open: 6
   cl_blocking: 0
   risk: 6
   risk_high: 3
@@ -33,7 +33,7 @@ updated: 2026-10-19
 |---------|-------------|--------|----------|--------------|------------|---------------------|--------|--------|
 | RISK-GN-01 | GN / EVC ↔ Paid voucher | Paid đồng bộ "gồm cả voucher"; INVOICE gạch nợ dùng cả Paid voucher (CL-GN-01 vòng 2) trong khi EVC do đội EVC gạch ⇒ nếu hai bên cùng gạch một khoản thì nợ khách bị trừ 2 lần | High | DOC-v2.0-01 BR-DP-01 (L474) ↔ BR-VC (L545) ↔ BR-GN-01 (L508); TP rủi ro #7 | SC-GN-045, 048 | Gạch nợ EVC / voucher **vẫn test** (QC owner 19/10/2026 — khác TP §2.2 #5); chờ BA liệt kê loại EVC / voucher và bên gạch (CL-GN-01, 08, 10) | Open | SC-GN-045, SC-GN-048 · REQ-GN-012, REQ-GN-019 |
 | RISK-GN-02 | GN / EVC lock | Nguồn tổng EVC + tiền lock không nêu ở 2.2, không có hành vi lỗi ⇒ công thức min(nợ − lock, Paid) và kiểm đủ tiền nhánh Cọc không tái hiện được nếu không có mock | High | DOC-v2.0-01 BR-VC (L546), BR-GC-01 (L529); GAP-16 | SC-GN-037, 038, 046, 047 | Dựng mock trả {tổng EVC, lock}. API EVC lỗi / timeout: **không test trên STG** — retry thủ công, lỗi ⇒ log bug (CL-GN-02, SC-GN-049 deprecated 19/10/2026) | Open | SC-GN-037, SC-GN-038, SC-GN-046, SC-GN-047 · REQ-GN-016, REQ-GN-020 |
-| RISK-GN-03 | GN / gạch nợ tạm kênh sàn | Gạch tạm → gỡ tạm → gạch thật đổi trạng thái HĐ 2 lần; sai thứ tự (gạch thật trước khi gỡ) ⇒ Σ Payment > tổng HĐ; sàn quyết toán thiếu ⇒ HĐ quay về "còn nợ" | High | DOC-v2.0-01 BR-NT-01..04 (L491-505) | SC-GN-019, 022, 023, 024 | Test đủ chuỗi trạng thái trên Shopee + Tiktok; hỏi CL-GN-06 cho ca thiếu | Open | SC-GN-019, SC-GN-022, SC-GN-023, SC-GN-024 · REQ-GN-009..011 |
+| RISK-GN-03 | GN / gạch nợ tạm kênh sàn | Gạch tạm → gỡ tạm → gạch thật đổi trạng thái HĐ 2 lần; sai thứ tự (gạch thật trước khi gỡ) ⇒ Σ Payment > tổng HĐ | High | DOC-v2.0-01 BR-NT-01..04 (L491-505) | SC-GN-019, 022, 023 | Test đủ chuỗi trạng thái trên Shopee + Tiktok | Open | SC-GN-019, SC-GN-022, SC-GN-023 · REQ-GN-009..011 |
 | RISK-GN-04 | GN / tích hợp | Cần mock API kênh thanh toán (trường Paid/Cọc), Kafka Out, đội EVC trên STG; payload chưa có | Medium | TP §2.1b #23; CL-XHD-29 | SC-GN-016, 017, 034 | Chuẩn bị mock/stub trước R1 (TP Entry Criteria); lỗi / timeout API ngoài không test trên STG (CL-GN-02) | Open | SC-GN-016, SC-GN-017, SC-GN-034 · REQ-GN-007, REQ-GN-014 |
 | RISK-GN-05 | GN / thứ tự bill + gạch từng phần | Đơn 1..n bill; sai thứ tự hoặc sai min() ⇒ gạch sai bill, Paid dư sai | Medium | DOC-v2.0-01 BR-GN-03, BR-GN-04 (L511-521) | SC-GN-028..033 | BVA đủ 3 biên Paid vs nợ; đơn ≥3 bill khác tiền | Resolved | SC-GN-028..033 · REQ-GN-013, REQ-GN-014 |
 | RISK-GN-06 | GN / cọc theo loại | Thiếu danh sách loại cọc ↔ dịch vụ ⇒ không dựng được dữ liệu "thiếu 1 loại"; gom Payment sai loại | Medium | DOC-v2.0-01 BR-GC-02, BR-GC-03 (L532-542) | SC-GN-039..043 | Xin danh mục loại cọc (CL-GN-07) | Open | SC-GN-039..043 · REQ-GN-017, REQ-GN-018 |
@@ -142,10 +142,12 @@ updated: 2026-10-19
 
 🟡 **Làm rõ một phần 19/10/2026** — QC: số tiền gạch phải bằng số tiền cần thanh toán; gạch xong bill chuyển "Đã thanh toán" ⇒ không gạch nữa. Còn mở: câu trả lời chưa nói bill **mới gạch một phần** (BR-GN-04 "Gạch từng phần… nhỏ nhất của số dư Paid và nợ còn lại") có được gạch tiếp khi có Paid mới không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
+🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC: BR-GN-01 là điều kiện Paid dùng để gạch nợ; BR-GN-04 là gạch từng phần và điều kiện dừng; 1 đơn hàng có nhiều Bill, **mỗi Bill gạch 1 lần**, gạch lần lượt đến khi hết Paid (tiền khách đã thanh toán). Còn mở: Bill đã gạch một phần (Paid hết trước khi hết nợ) có được gạch tiếp khi có Paid mới về không. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-GN-06 · Gỡ gạch tạm rồi Paid hoàn tất nhỏ hơn nợ: HĐ quay về "còn nợ" — có hệ quả / cảnh báo?
-📍 `DOC-v2.0-01 BR-NT-04 · L503`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-NT-04 · L503`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 > Khi Paid chuyển sang thanh toán hoàn tất, nếu hóa đơn đã gạch nợ tạm thì gỡ Payment tạm trước (hóa đơn trở lại còn nợ) rồi mới gạch nợ thật.
 
@@ -153,10 +155,12 @@ updated: 2026-10-19
 
 **Câu hỏi cho BA:** Khi Paid quyết toán của sàn nhỏ hơn nợ, phần chênh xử lý thế nào (Paid phí TMĐT? để còn nợ?)
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Phí sàn TMĐT đã tính vào tiền đơn hàng khách trả ⇒ **không có trường hợp** Paid quyết toán của sàn nhỏ hơn nợ. **SC-GN-024 deprecated** (QC owner 19/10/2026). Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-GN-07 · Danh mục loại cọc ↔ dịch vụ; đơn bán thêm dùng cọc nào?
-📍 `DOC-v2.0-01 BR-GC-02 (L534)` + `BR-GC-03 (L539)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-60 (Major) cho phần bán thêm
+📍 `DOC-v2.0-01 BR-GC-02 (L534)` + `BR-GC-03 (L539)`  ·  Status: **Resolved 19/10/2026** · GAP-60 (Major) cho phần bán thêm
 
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > (...)
@@ -168,10 +172,12 @@ updated: 2026-10-19
 
 🟡 **Làm rõ một phần 19/10/2026** — Đơn bán mới và bán thêm đều có cọc; loại cọc: **đặt cọc trừ dần, đặt cọc hợp đồng, đặt cọc thiết bị**. Tra cứu: Quản lý kế toán › Tiền đặt cọc › Tra cứu. Còn mở: map dịch vụ ↔ loại cọc; đơn bán thêm dùng chung cọc còn lại của hợp đồng không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
+✅ **RESOLVED 19/10/2026 (vòng 3)** — Map dịch vụ ↔ loại cọc **không test**; chỉ check **có sinh đặt cọc**. Đơn **bán thêm vẫn có đặt cọc**. SC-GN-050 hết chờ CL. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
 ---
 
 ### CL-GN-08 · Nhánh Paid: thứ tự giữa đội EVC gạch EVC và INVOICE gạch tiền khách?
-📍 `DOC-v2.0-01 BR-VC (L545-546)`  ·  Status: **Open — mở lại 19/10/2026** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-VC (L545-546)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
 
 **URD 2.2** — `L545-546`
 > Phần gạch nợ bằng EVC do đội EVC thực hiện; ISC tự quyết phương thức quản trị và xử lý voucher.
@@ -184,6 +190,8 @@ updated: 2026-10-19
 ⛔ **OUT-SCOPE 19/10/2026** — TP §2.2 #5 *"Gạch nợ bằng EVC / voucher"* ngoài phạm vi (BR-VC L545 *"Phần gạch nợ bằng EVC do đội EVC thực hiện"*); chỉ giữ phần INVOICE chừa EVC bị lock. QC owner 19/10/2026: phần gạch nợ EVC không test. Thứ tự đội EVC gạch EVC ↔ INVOICE gạch tiền khách thuộc phần đội EVC ⇒ không hỏi. SC-GN-045 (INVOICE không ghi Payment cho phần EVC) giữ làm kiểm ranh giới.
 
 🔄 **MỞ LẠI 19/10/2026** — QC owner: phần **gạch nợ EVC / voucher VẪN TEST**, chờ BA liệt kê các loại EVC / voucher. Ghi nhận ⛔ OUT-SCOPE / thu hẹp phía trên **bị hủy**. ⚠️ Khác TP §2.2 #5 (TP chưa cập nhật — QC owner xử lý TP, analyze không sửa TP). Câu hỏi gốc giữ nguyên (thứ tự đội EVC gạch EVC ↔ INVOICE gạch tiền khách).
+
+🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — INVOICE và đội EVC **thực hiện cùng nhau** ở các bước: gạch nợ tạm, gỡ tạm, gạch thật, kiểm tra đủ tiền rồi trừ cọc. Phần EVC theo URD 2.1 D#4 (CL-GN-10): EVC do đội EVC gạch; INVOICE chừa phần EVC bị lock — tiền gạch = Min(nợ Bill − tiền lock, Paid khách thanh toán) (2.1 BR-VC-07). Còn mở: thứ tự cụ thể — INVOICE có chờ đội EVC gạch xong mới gạch tiền khách không. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 ---
 
@@ -201,7 +209,7 @@ updated: 2026-10-19
 ---
 
 ### CL-GN-10 · Chi tiết gạch nợ URD 2.2 chuyển sang Phụ lục D#4 — chưa có đặc tả
-📍 `DOC-v2.0-01 §D#4 · L671-673`  ·  Status: **Open — mở lại 19/10/2026** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 §D#4 · L671-673`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
 
 > Cấu hình EVC: PaidType, Owner gạch, trần 50%, EVC bị lock chi tiết.
 > BR-VC-01 đến 07, BR-GC-04 đến 07
@@ -214,3 +222,5 @@ updated: 2026-10-19
 🟡 **Thu hẹp 19/10/2026** — TP §2.2 #5 *"Gạch nợ bằng EVC / voucher"* ngoài phạm vi (BR-VC L545 *"Phần gạch nợ bằng EVC do đội EVC thực hiện"*); chỉ giữ phần INVOICE chừa EVC bị lock. QC owner 19/10/2026: phần gạch nợ EVC không test. Phụ lục D#4 (cấu hình EVC) không dùng (QC owner). Bỏ ý (2) nguồn / API EVC + loại EVC lock. Còn hỏi: (1) danh mục PaidType (để phân biệt Paid tiền khách / voucher khi đồng bộ — SC-GN-002); (3) bảng / trường lưu tồn cọc và loại cọc của từng dịch vụ.
 
 🔄 **MỞ LẠI 19/10/2026** — QC owner: phần **gạch nợ EVC / voucher VẪN TEST**, chờ BA liệt kê các loại EVC / voucher. Ghi nhận ⛔ OUT-SCOPE / thu hẹp phía trên **bị hủy**. ⚠️ Khác TP §2.2 #5 (TP chưa cập nhật — QC owner xử lý TP, analyze không sửa TP). Hỏi lại đủ 3 ý (Phụ lục D#4 vẫn **không** lấy từ URD 2.1 — hỏi BA): (1) danh mục loại EVC / voucher (PaidType, mã voucher); (2) loại EVC nào có lock + nguồn tổng EVC và tiền lock; (3) bảng / trường lưu tồn cọc và loại cọc của dịch vụ.
+
+🟡 **Làm rõ một phần 19/10/2026 (vòng 3)** — URD 2.2 D#4 ghi "Giữ nguyên (gộp nhóm BR-VC)" so với 2.1 ⇒ **dùng URD 2.1 (DOC-v2.0-02) BR-VC-01..07, BR-GC-04..07** cho cấu hình / quy tắc EVC; bỏ các bước 2.1 đánh dấu `[Bỏ]`; gạch EVC do **đội EVC** thực hiện. Theo 2.1: hiện chỉ **EVC Loyalty FTEL** có khoản bị lock; tổng EVC + tiền lock lấy qua API đội EVC. Ý (3) tồn cọc / loại cọc **bỏ** (CL-GN-07: không test map loại cọc). Còn mở: danh sách loại EVC / voucher (PaidType, mã voucher) để dựng dữ liệu — chờ BA. Nguồn: QC trả lời 19/10/2026 vòng 3 + QC owner chốt dùng 2.1 cho D#4.

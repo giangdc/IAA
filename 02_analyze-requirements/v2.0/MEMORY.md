@@ -17,7 +17,7 @@ doc_source:
     file: Doc/out-of-date/Invoice_Issuance_Architecture_v2_0_URD_v1_0.docx
     revision: "URD rev 2.1 · 26/08/2026 · Vuongnd17 · bị 2.2 thay phần chính"
     md5: b0f9d0800b248864a70fc2d4f9790f74
-    kind: "URD — chỉ dùng cho Phụ lục D của 2.2 (D#1, 2, 3, 5, 6; KHÔNG D#4, 7, 8, 9) — QC owner chốt 19/10/2026"
+    kind: "URD — chỉ dùng cho Phụ lục D của 2.2 (D#1, 2, 3, 4, 5, 6; KHÔNG D#7, 8, 9) — QC owner chốt 19/10/2026"
     modules: [XHD, HK]
   - id: DOC-v2.0-03
     file: Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.pdf
@@ -105,15 +105,15 @@ updated: 2026-10-19
 | Module | Req | SC | NEW | MOD | CARRIED | DEPR | P1 | P2 | P3 | CL | RISK | Risk Level |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|
 | XHD | 43 | 109 | 109 | 0 | 0 | 2 | 84 | 24 | 1 | 34 | 10 | High |
-| GN | 20 | 49 | 49 | 0 | 0 | 1 | 42 | 6 | 1 | 10 | 6 | High |
+| GN | 20 | 48 | 48 | 0 | 0 | 2 | 42 | 5 | 1 | 10 | 6 | High |
 | HK | 10 | 20 | 20 | 0 | 0 | 1 | 12 | 8 | 0 | 11 | 5 | High |
-| **Tổng** | **73** | **178** | **178** | **0** | **0** | **4** | **138** | **38** | **2** | **55** | **21** | — |
+| **Tổng** | **73** | **177** | **177** | **0** | **0** | **5** | **138** | **37** | **2** | **55** | **21** | — |
 
-> ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 5, 6; **không** D#4 (EVC), 7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
-> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy HĐ) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công.
+> ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 4, 5, 6; **không** D#7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). D#4 (EVC: BR-VC-01..07, BR-GC-04..07) dùng từ vòng 3 19/10/2026 vì 2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"; bỏ các bước 2.1 đánh dấu `[Bỏ]`. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
+> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy HĐ) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06).
 > ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-XHD-033 (ngoài scope test — TP §2.2 #2), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
-> ℹ️ 30 SC (XHD 18 · GN 4 · HK 8) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
-> 🔴 CL còn **OPEN**: 40/55 (+CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho HĐ bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu HĐĐT · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (4):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-03 (dòng EVC / chiết khấu).
+> ℹ️ 18 SC (XHD 9 · GN 2 · HK 7) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
+> 🔴 CL còn **OPEN**: 29/55 (**vòng 3 19/10/2026:** đóng CL-XHD-01, 02, 03, 08, 14, 15, 18, 26 · CL-GN-06, 07 · CL-HK-09 · làm rõ thêm CL-XHD-04, 07, 12, 27 · CL-GN-08, 10 (URD 2.1 dùng cho D#4) · CL-HK-07 · +CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho HĐ bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu HĐĐT · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (4):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-03 (dòng EVC / chiết khấu).
 
 ### 🔑 Luật `counts` canonical (v2)
 
