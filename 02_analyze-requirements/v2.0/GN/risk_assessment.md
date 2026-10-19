@@ -6,7 +6,7 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module GN
   cl: 10
-  cl_open: 5
+  cl_open: 6
   cl_blocking: 0
   risk: 6
   risk_high: 3
@@ -127,7 +127,7 @@ updated: 2026-10-19
 ---
 
 ### CL-GN-05 · "Mỗi bill chỉ gạch một lần" vs gạch từng phần — bill gạch thiếu có được gạch tiếp khi có Paid mới?
-📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Open — chờ BA xác nhận 19/10/2026** · *mới — 16/10/2026*
 
 **BR-GN-01** — `L509`
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
@@ -147,6 +147,8 @@ updated: 2026-10-19
 ✅ **RESOLVED 19/10/2026 (sau vòng 3)** — QC owner: Bill chỉ được gạch khi số gạch = nhỏ nhất của số dư Paid và nợ còn lại **bằng đúng nợ còn lại** (Paid đủ trả hết nợ Bill). Paid nhỏ hơn nợ ⇒ **không gạch**, Paid giữ lại; khi Paid tích lũy đủ nợ thì mới gạch (vd Bill nợ 500.000, Paid 300.000 ⇒ không gạch; Paid đủ 500.000 ⇒ gạch 500.000). Mỗi Bill gạch 1 lần. ⚠️ Khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner. SC-GN-031 viết lại Then. Nguồn: QC owner 19/10/2026.
 
 ✅ **Bổ sung 19/10/2026** — Đơn nhiều Bill: Bill thiếu tiền bị **bỏ qua**, hệ thống xét tiếp Bill nhỏ hơn. Vd 3 Bill 500.000 / 300.000 / 100.000, Paid 600.000 ⇒ gạch Bill 500.000; Bill 300.000 không gạch (Paid còn 100.000 < nợ); gạch Bill 100.000 (= Paid còn). SC-GN-028 viết lại. Nguồn: QC owner 19/10/2026.
+
+🔄 **MỞ LẠI 19/10/2026** — Hai ghi nhận ✅ phía trên là **cách hiểu của QC owner**, cần hỏi lại BA. Câu hỏi: (1) Bill nợ 500.000, Paid 300.000: không gạch và chờ Paid đủ, hay gạch 300.000 như BR-GN-04 "gạch từng phần = nhỏ nhất của số dư Paid và nợ còn lại"? (2) Đơn 3 Bill 500.000 / 300.000 / 100.000, Paid 600.000: Bill 300.000 thiếu tiền thì bỏ qua để gạch Bill 100.000, hay dừng? SC-GN-028, 031 giữ Then theo cách hiểu QC owner, đánh dấu ⛔ chờ BA. Nguồn: QC owner 19/10/2026.
 
 ---
 

@@ -47,6 +47,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-GN-06 (phí sàn đã tính vào tiền khách trả ⇒ Paid quyết toán không nhỏ hơn nợ — **deprecated SC-GN-024**), CL-GN-07 (không test map loại cọc; đơn bán thêm vẫn có cọc — SC-GN-050 hết chờ CL) · **làm rõ thêm** CL-GN-08 (INVOICE và đội EVC chạy cùng nhau), CL-GN-10 (**Phụ lục D#4 lấy từ URD 2.1** BR-VC-01..07, BR-GC-04..07, bỏ bước `[Bỏ]` — QC owner) · ghi nhận CL-GN-05 | QC trả lời 19/10/2026 (file câu hỏi vòng 3) + QC owner | SC 49→48 (deprecated 2) · P2 6→5 · cl_open 8→6 · blocked_by_cl 4→2 |
 | 2026-10-19 | UPDATE | **Đóng CL-GN-05:** Bill chỉ gạch khi Paid đủ nợ còn lại; Paid thiếu ⇒ không gạch, chờ Paid đủ (khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner). SC-GN-031 viết lại Then | QC owner 19/10/2026 | cl_open 6→5 |
 | 2026-10-19 | UPDATE | CL-GN-05 bổ sung: đơn nhiều Bill — Bill thiếu tiền bị bỏ qua, xét tiếp Bill nhỏ hơn. SC-GN-028 viết lại Then (500k gạch · 300k không gạch · 100k gạch) | QC owner 19/10/2026 | Không |
+| 2026-10-19 | UPDATE | **Mở lại CL-GN-05:** quy tắc "chỉ gạch khi Paid đủ nợ còn lại" + bỏ qua Bill thiếu tiền là cách hiểu của QC owner, chờ BA xác nhận. SC-GN-028, 031 giữ Then, đánh dấu ⛔ chờ CL-GN-05 | QC owner 19/10/2026 | cl_open 5→6 · blocked_by_cl 2→4 |
 
 ## 2. Ràng buộc còn hiệu lực
 
