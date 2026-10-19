@@ -51,6 +51,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Dùng lại URD 2.1 cho Phụ lục D** (trừ D#4, 7, 8, 9): CL-XHD-22, 23, 24 làm rõ một phần theo RISK-01, BR-XHD-09, BR-DB-08 của 2.1 (CL-XHD-22 vẫn BLOCKING — mail chưa đặc tả); **SC-XHD-107, 108 dùng lại** (bỏ deprecated, vẫn chờ CL-XHD-24 về luồng cũ trên STG) | QC owner chốt 19/10/2026 | SC 109→111 · deprecated 2→0 · P2 23→25 · blocked_by_cl 16→18 |
 | 2026-10-19 | SCOPE↓ | Đánh dấu **ngoài scope test** theo TP §2.2 (chỉ đọc TP): **SC-XHD-098** (hủy đơn đã có HĐ — #2), **SC-XHD-100** (đổi chi nhánh, HĐ cũ không tự điều chỉnh — #3) → deprecated; REQ-XHD-033 không còn SC; REQ-XHD-034 giữ SC-XHD-099 | QC owner 19/10/2026 + TP §2.2 #2, #3 | SC 111→109 · deprecated 0→2 · P1 85→84 · P2 25→24 |
 | 2026-10-19 | UPDATE | Gắn nhãn **ngoài scope test** (TP §2.2 #4 — thuộc tính chi nhánh được bán SP / DV) tại REQ-XHD-034 và CL-XHD-26; vốn không có SC nào cho phần này. Không đổi REQ / SC / CL | QC owner 19/10/2026 + TP §2.2 #4 | Không |
+| 2026-10-19 | UPDATE | Dọn chữ cũ theo TP §2.2 (chỉ đọc TP): REQ-XHD-041 + RISK-XHD-10 ghi kiểm tra chéo cutover trong scope (URD 2.1 BR-DB-08, SC-XHD-107, 108), **quét tay bổ sung ngoài scope test (TP #8)**; §3 Nợ #6 CL-XHD-30 → ngoài scope (TP #6). Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -74,5 +75,5 @@ updated: 2026-10-19
 | 3 | 🔴 CL-XHD-29 tài liệu tích hợp (payload / schema / enum) chặn setup data + execute | GAP-07 chưa trả lời | Xin SDD trước setup 23/10/2026; chưa có ⇒ verify định tính |
 | 4 | 🟡 CL-XHD-11 khóa chống trùng — đã chốt theo 2.2 (16/10/2026), còn field dữ liệu | Hết BLOCKING; field chờ schema CL-XHD-29 | Có schema ⇒ điền field vào `test_data_catalog` |
 | 5 | 🟡 17 SC có Then `⛔ chờ CL-…` / `(giả định TP)` (đếm ở `counts.blocked_by_cl`) | Theo giả định của TP §2.4 | Khi CL resolved: `--update` sửa Then, ghi 1 dòng UPDATE ở §1 |
-| 6 | 🟡 CL-XHD-30 (đơn ngoài 17 kênh / ServiceID 2, 22) — chưa có SC negative | Chờ BA: bỏ qua hay vẫn xuất | Nếu "bỏ qua" ⇒ thêm SC negative qua `--update` |
+| 6 | ✅ CL-XHD-30 đơn ngoài 17 kênh / ServiceID 2, 22 — **ngoài scope test** (TP §2.2 #6 + QC trả lời vòng 2 "bỏ qua không test") ⇒ không thêm SC negative | Đóng 19/10/2026 | — |
 | 7 | 🟡 CL-XHD-27, CL-XHD-28 mới phát hiện khi analyze (chưa có GAP-ID) | Chưa đưa vào DOC-READINESS / TP §2.4 | QC owner thêm vào danh sách gửi PM (create-test-plan `--update`) |

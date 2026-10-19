@@ -495,7 +495,9 @@ updated: 2026-10-16
 **URD 2.2 — phụ lục D** — `DOC-v2.0-01 §D#1`
 > Chuyển đổi hệ thống v1 sang v2 (cutover, giai đoạn giao thoa, quét tay bổ sung).
 
-↳ **Ghi chú:** URD 2.2 chỉ có tên mục §D#1, không đủ viết Then; SC-XHD-107, 108 deprecated 16/10/2026 (CL-XHD-33). Test plan giữ in-scope (FR06, P2) nhưng chờ PM xác nhận có test trên STG không (CL-XHD-24 / GAP-32). Quét tay bổ sung đơn bị miss: ngoài phạm vi (TP §2.2 #8).
+↳ **Ghi chú:** URD 2.2 chỉ có tên mục §D#1; cơ chế lấy theo URD 2.1 BR-DB-08 (dùng cho Phụ lục D từ 19/10/2026) ⇒ **kiểm tra chéo + mỗi bản tin một luồng: trong scope** (FR06, P2) — SC-XHD-107, 108 dùng lại 19/10/2026, còn chờ PM xác nhận STG có luồng cũ (CL-XHD-24 / GAP-32).
+
+⛔ **Ngoài scope test** — quét tay bổ sung đơn bị bỏ sót giai đoạn giao thoa: **TP §2.2 #8** *"Quét tay bổ sung đơn bị bỏ sót trong giai đoạn giao thoa cutover"* ⇒ không sinh SC.
 
 ---
 
