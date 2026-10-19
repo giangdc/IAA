@@ -19,7 +19,7 @@ updated: 2026-10-16
 | Field | Loại data | Valid | Invalid | Boundary | Nguồn |
 |-------|-----------|-------|---------|----------|-------|
 | Orderpaid → Paid (OrderCode) | Fixture | 1 Orderpaid / OrderCode, nhiều dòng detail = nhiều đợt thanh toán | — | — | BR-DP-01 (CL-GN-01) |
-| PaidType | Master | tiền khách · các loại voucher (BR-DP-01 L474) — enum chưa có (CL-GN-10); voucher chỉ dùng cho đồng bộ Paid, gạch nợ bằng voucher ngoài phạm vi | — | — | BR-DP-01 (CL-GN-10) |
+| PaidType | Master | tiền khách · các loại voucher (BR-DP-01 L474) — enum + danh sách loại EVC / voucher chờ BA (CL-GN-01, CL-GN-10); Paid voucher được dùng gạch nợ (CL-GN-01 vòng 2) | — | — | BR-DP-01 (CL-GN-01, CL-GN-10) |
 | Khóa trùng Paid | Fixture | trùng đủ `OrderCode + RefTransactionId + PaidType + Amount` (→ cập nhật paymentstatus) | khác 1 trong 3 trường RefTransactionId / PaidType / Amount (→ thêm mới) | — | BR-DP-01 |
 | paymentstatus | Master | `gạch nợ tạm` · `thanh toán hoàn tất` (giá trị enum chưa có) | trạng thái khác (→ dừng ở điểm chạm a, CL-GN-04) | — | BR-XL-01 · §A.5 #6 |
 | Điểm chạm | Runtime | `(a) đồng bộ Paid xong` · `(b) sau khi xuất HĐ` · `(c) worker 30 phút` | — | **chu kỳ worker = 30 phút** | BR-XL-01 |

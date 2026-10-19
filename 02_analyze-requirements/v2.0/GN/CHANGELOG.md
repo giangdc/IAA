@@ -43,22 +43,23 @@ updated: 2026-10-19
 | 2026-10-19 | SCOPE↓ | Đối chiếu TP §2.2 (chỉ đọc, không sửa TP): **gạch nợ bằng EVC / voucher ngoài phạm vi** (#5). CL-GN-01, 08 → Out-scope; CL-GN-10 thu hẹp (bỏ ý nguồn / cấu hình EVC — D#4); **deprecated SC-GN-048** (Paid voucher dùng gạch nợ). Giữ SC-GN-045 (ranh giới), 046, 047 (chừa EVC lock — TP in-scope), nhánh Cọc 037, 038, 043 | QC owner 19/10/2026 + TP §2.2 #5 | SC 49→48 · deprecated 1→2 · P1 42→41 · cl_open 8→6 |
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo TP §2.2 #5 (chỉ đọc TP): RISK-GN-01 Status → Out-scope (bỏ SC-GN-048 khỏi cột SC); §3 Nợ #1, #2 (CL-GN-01, 08) → đóng Out-scope. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo CL-GN-02: RISK-GN-02, 04 bỏ SC-GN-049 (không test lỗi / timeout trên STG); §3 Nợ #3 số SC chờ CL 5→3. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
+| 2026-10-19 | SCOPE↑ | **Hoàn tác SCOPE↓ cùng ngày:** QC owner chốt gạch nợ EVC / voucher **vẫn test**, chờ BA liệt kê loại EVC / voucher. Mở lại CL-GN-01, 08; CL-GN-10 hỏi lại đủ 3 ý; **SC-GN-048 dùng lại** (chờ CL-GN-01, 10); RISK-GN-01 về Open. Ghi rõ khác TP §2.2 #5 (không sửa TP) | QC owner 19/10/2026 | SC 48→49 · deprecated 2→1 · P1 41→42 · cl_open 6→8 · blocked_by_cl 3→4 |
 
 ## 2. Ràng buộc còn hiệu lực
 
 | # | Ràng buộc | Vì sao | Hệ quả nếu vi phạm |
 |---|---|---|---|
-| 1 | ⛔ **Gạch nợ bằng EVC ngoài phạm vi** — chỉ test phần INVOICE: không ghi Payment EVC (SC-GN-045) và chừa tiền lock (SC-GN-046, 047) | BR-VC L545; TP §2.2 #5; mail PM "EVC cần test => theo rule URD" | Viết TC kiểm trần 50% / Config EVC (D#4) ⇒ test hệ thống của đội EVC, FAIL không thuộc INVOICE |
+| 1 | ⚠️ **Gạch nợ EVC / voucher VẪN TEST** (QC owner 19/10/2026) — **khác TP §2.2 #5** (TP ghi ngoài phạm vi; QC owner xử lý TP, analyze không sửa TP). Loại EVC / voucher và bên gạch chờ BA (CL-GN-01, 08, 10). Phụ lục D#4 vẫn không lấy từ URD 2.1 | QC owner 19/10/2026 | Bỏ case EVC / voucher ⇒ hở phạm vi QC owner yêu cầu |
 | 2 | ⚠️ **Kênh sàn = {20 Shopee, 21 Tiktok}** là giả định (CL-GN-03) | 2.2 không đánh dấu kênh sàn; 2.1 L125 | BA thêm kênh ⇒ SC-GN-011, 012, 019, 020 thiếu lớp EP; gạch tạm sai kênh không bị phát hiện |
 | 3 | ⚠️ **Tài liệu tích hợp / payload Kafka Out / enum** dùng chung CL-XHD-29, RISK-XHD-01 — home ở `XHD/` | Layout v2 không có `_global/` | Mở CL trùng ở GN ⇒ 2 home, drift trạng thái |
 | 4 | ⚠️ Thuật ngữ thống nhất "**gỡ gạch nợ tạm**" (2.2) — không dùng "hất nợ tạm" / "xóa gạch nợ tạm" của 2.1 | BR-NT-04 L501 | TC / bug dùng 3 tên ⇒ khó trace, review-tc báo không nhất quán |
-| 5 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của URD 2.2** (QC owner 19/10/2026 — thay ràng buộc 16/10 "không sử dụng"), trừ D#4, 7, 8, 9. Với GN: **D#4 cấu hình EVC KHÔNG dùng** (QC owner: không đụng tới) ⇒ phần EVC vẫn chỉ theo 2.2, CL-GN-10 giữ nguyên | QC owner 19/10/2026 | Dựng TC EVC theo BR-VC / BR-GC của 2.1 ⇒ kiểm theo nội dung không được dùng |
+| 5 | ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của URD 2.2** (QC owner 19/10/2026 — thay ràng buộc 16/10 "không sử dụng"), trừ D#4, 7, 8, 9. Với GN: **D#4 cấu hình EVC KHÔNG lấy từ URD 2.1** (QC owner: không đụng tới) ⇒ chi tiết EVC hỏi BA (CL-GN-10) | QC owner 19/10/2026 | Dựng TC EVC theo BR-VC / BR-GC của 2.1 ⇒ kiểm theo nội dung không được dùng |
 
 ## 3. Nợ đang mở
 
 | # | Nợ | Trạng thái | Đích xử lý |
 |---|---|---|---|
-| 1 | ✅ CL-GN-01 Paid voucher — **Out-scope 19/10/2026** (TP §2.2 #5 gạch nợ bằng EVC / voucher); SC-GN-048 deprecated | Đóng | Không hỏi BA |
-| 2 | ✅ CL-GN-08 thứ tự đội EVC ↔ INVOICE — **Out-scope 19/10/2026** (TP §2.2 #5) | Đóng | Không hỏi BA |
-| 3 | 🟡 3 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
+| 1 | 🔴 CL-GN-01 + CL-GN-10: danh sách loại EVC / voucher, bên gạch (INVOICE / đội EVC) — chặn expected SC-GN-048 | Mở lại 19/10/2026 (QC owner: gạch nợ EVC vẫn test) | Hỏi BA vòng 3 |
+| 2 | 🔴 CL-GN-08 thứ tự đội EVC ↔ INVOICE ở nhánh Paid | Mở lại 19/10/2026 | Hỏi BA vòng 3 |
+| 3 | 🟡 4 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
 | 4 | 🟡 Mock API kênh thanh toán / đội EVC / consumer Kafka Out chưa có | TP Entry Criteria | Chuẩn bị trước R1 (26/10/2026) |
