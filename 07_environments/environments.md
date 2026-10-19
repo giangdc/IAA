@@ -34,4 +34,5 @@
 KH / nhân viên lên đơn hàng thành công → KH thanh toán, ký BBĐT → **xuất HĐ cho dịch vụ trước** → triển khai (nếu có) → giao hàng / triển khai thành công → cập nhật đơn hàng đã hoàn tất → **hệ thống gen tiếp HĐ cho thiết bị**. Một đơn hàng có thể có nhiều hóa đơn.
 
 > ✅ Khớp URD 2.2 BR-XHD-03 (L396: DV khi có tín hiệu "đã thanh toán", TB khi giao hàng hoàn tất — xét độc lập) và BR-XHD-14 (1 đơn nhiều HĐ).
-> ⚠️ Còn hỏi BA (CL-XHD-34): HĐ thiết bị kích hoạt bởi **tín hiệu giao hàng của từng phương thức triển khai** (BR-DB-02 — phiếu thi công / Vendor / quầy) hay bởi **trạng thái "đơn hàng hoàn tất"**? Đơn nhiều phương thức triển khai ra HĐ TB theo từng phương thức hay một lần khi đơn hoàn tất?
+> ✅ HĐ thiết bị được kích hoạt bởi **tín hiệu giao hàng của từng phương thức triển khai** (phiếu thi công / Vendor / quầy) — QC owner 19/10/2026, khớp BR-DB-02, BR-XHD-06 ⇒ đơn nhiều phương thức ra HĐ thiết bị theo từng phương thức.
+> ⚠️ Còn hỏi BA (CL-XHD-34): thiết bị hình thức triển khai "Không" (không có phiếu / Vendor / quầy) lấy tín hiệu nào để phát hành.

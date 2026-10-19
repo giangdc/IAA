@@ -54,6 +54,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo TP §2.2 (chỉ đọc TP): REQ-XHD-041 + RISK-XHD-10 ghi kiểm tra chéo cutover trong scope (URD 2.1 BR-DB-08, SC-XHD-107, 108), **quét tay bổ sung ngoài scope test (TP #8)**; §3 Nợ #6 CL-XHD-30 → ngoài scope (TP #6). Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | Dọn chữ cũ: CL-XHD-33 viết lại theo quyết định dùng URD 2.1 cho Phụ lục D (Status → rõ một phần, câu hỏi khớp file vòng 3); §3 Nợ #5 số SC chờ CL 17→18. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | CL-XHD-34 làm rõ một phần: QC owner cập nhật flow test — HĐ dịch vụ xuất ngay khi thanh toán, HĐ thiết bị sau giao hàng / triển khai thành công, 1 đơn nhiều HĐ (khớp BR-XHD-03, 14). Còn hỏi tín hiệu kích hoạt HĐ TB (tín hiệu giao hàng theo phương thức hay trạng thái đơn hoàn tất). Flow ở `07_environments/environments.md` cập nhật. Không đổi SC | QC owner 19/10/2026 | Không |
+| 2026-10-19 | UPDATE | CL-XHD-34 làm rõ thêm: HĐ thiết bị kích hoạt bởi tín hiệu giao hàng từng phương thức (phiếu thi công / Vendor / quầy) — khớp BR-DB-02, 06; SC-XHD-074, 105 giữ nguyên. Còn hỏi duy nhất: TB hình thức "Không" lấy tín hiệu nào | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
