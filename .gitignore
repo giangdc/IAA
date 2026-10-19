@@ -26,3 +26,6 @@ daily-runs/
 
 # sync-online: thư mục nháp (candidates.json, draft, snapshot sheet) — KHÔNG track
 03_test-cases/*/.sync-online/
+
+# File trả lời câu hỏi làm rõ — giữ local, không đưa lên git
+00_input/v2.0/Doc/InvoiceIssuance_v2.0_Cau-hoi-lam-ro_vong-2_2026-10-16 (1).xlsx
