@@ -5,8 +5,8 @@ type: risk_assessment
 version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
-  cl: 10
-  cl_open: 5
+  cl: 11
+  cl_open: 6
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -206,3 +206,16 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Ngoài bảng map ký hiệu (CL-HK-01), cho QC định dạng ID HĐĐT: "năm" ghi 2 hay 4 chữ số, mã tỉnh theo danh mục nào, số HĐ có trùng số hóa đơn của Billing không; và danh sách đơn vị có đầu số / dãy số / mẫu riêng.
 
 ✅ **RESOLVED 19/10/2026** — Theo `DOC-v2.0-02` BR-HK-03 (L767-785) + BR-HK-04 (L787-792): ký hiệu 7 ký tự `1K<yy>T<xx>` (vd `1K26TQA`), `<xx>` tra **bảng map vùng × loại đầu** (7 vùng + FPL; Vùng 5 dùng chung Vùng 1; FPL không có đầu M). ID HĐ = loại đầu + **năm 2 chữ số** + **mã tỉnh theo danh mục tỉnh thành** (không phải mã chi nhánh; lấy theo địa chỉ hợp đồng — CL-HK-08) + số HĐ **trùng trường Số (Invoice No) trên HĐĐT** — vd `U26HN01053692`. Đơn vị đầu số riêng: ngoài phạm vi (CL-HK-02). Loại HĐ nào dùng đầu M / U / A vẫn ở **CL-HK-01**. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
+---
+
+### CL-HK-11 · Ký hiệu HĐĐT verify ở đâu? Tool hóa đơn chỉ hiển thị ID hóa đơn
+📍 `DOC-v2.0-01 BR-HK-03 (L581-582)` ↔ `07_environments/environments.md §Tool tra cứu`  ·  Status: **Open** · *mới — 19/10/2026, chưa có GAP*
+
+> Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
+> ID hóa đơn ghép từ loại đầu + năm + mã tỉnh + số hóa đơn.
+
+↳ **Ghi chú:** QC owner 19/10/2026: tool tra cứu hóa đơn (Quản lý kế toán › Liệt kê cước) **chỉ hiển thị ID hóa đơn**, không hiển thị ký hiệu HĐĐT (`1K<yy>T<xx>`) ⇒ SC-HK-008, 009, 010, 020 có expected nhưng **chưa có điểm verify**. ID hóa đơn (SC-HK-011) verify được trên tool này.
+
+**Câu hỏi cho BA:** Ký hiệu hóa đơn điện tử (vd `1K26TQA`) QC kiểm tra ở đâu trên STG — màn / tool nào của hệ thống HĐĐT, file PDF / XML HĐĐT, portal tra cứu hóa đơn, hay dữ liệu đẩy sang HĐĐT? QC cần quyền gì để xem? Nếu STG không có hệ thống HĐĐT thật thì ký hiệu verify bằng cách nào?
+

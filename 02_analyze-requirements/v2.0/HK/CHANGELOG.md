@@ -16,7 +16,7 @@ doc_source:
 id_range:
   req: REQ-HK-001..010
   sc: "SC-HK-001..021 (NEW)"
-  cl: CL-HK-01..10
+  cl: CL-HK-01..11
   risk: RISK-HK-01..05
 status: ANALYZED
 updated: 2026-10-19
@@ -43,6 +43,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Dùng lại URD 2.1 cho Phụ lục D#5, D#6:** đóng CL-HK-02 (đơn vị đầu số riêng ngoài phạm vi) + CL-HK-10 (ký hiệu `1K<yy>T<xx>`, ID HĐ năm 2 số + mã tỉnh + số Invoice No); CL-HK-03 làm rõ một phần (chiết khấu không test; vẫn BLOCKING cho dòng EVC). **SC-HK-009, 010 dùng lại**; SC-HK-008 có bảng map (loại HĐ → đầu vẫn chờ CL-HK-01); SC-HK-011 hết chờ CL; test data ký hiệu / ID / mã tỉnh điền theo 2.1 | QC owner chốt 19/10/2026 | SC 18→20 · deprecated 3→1 · P2 6→8 · cl_open 8→6 · blocked_by_cl 7 (011 −1, 009 +1) |
 | 2026-10-19 | SCOPE↓ | **Ký hiệu HĐĐT: chỉ test HĐ bán mới đầu U, không test đầu M** (và A). CL-HK-01 làm rõ một phần, **hết BLOCKING**; SC-HK-008, 009 (đổi thành "FPL đầu U", Negative→Functional), 010 hết chờ CL; SC-HK-020 còn chờ (bán thêm có dùng đầu U?) | QC owner 19/10/2026 | cl_blocking 2→1 · blocked_by_cl 7→5 |
 | 2026-10-19 | UPDATE | **Đóng CL-HK-01:** HĐ đơn bán thêm cũng dùng đầu U ⇒ SC-HK-020 hết chờ CL | QC owner 19/10/2026 | cl_open 6→5 · blocked_by_cl 5→4 |
+| 2026-10-19 | UPDATE | +CL-HK-11 (Open): ký hiệu HĐĐT verify ở đâu — tool Liệt kê cước chỉ hiển thị ID hóa đơn. SC-HK-008, 009, 010, 020 chờ điểm verify | QC owner 19/10/2026 | CL 10→11 · cl_open 5→6 · blocked_by_cl 4→8 |
 
 ## 2. Ràng buộc còn hiệu lực
 
