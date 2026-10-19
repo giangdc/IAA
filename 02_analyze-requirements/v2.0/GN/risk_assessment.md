@@ -146,6 +146,8 @@ updated: 2026-10-19
 
 ✅ **RESOLVED 19/10/2026 (sau vòng 3)** — QC owner: Bill chỉ được gạch khi số gạch = nhỏ nhất của số dư Paid và nợ còn lại **bằng đúng nợ còn lại** (Paid đủ trả hết nợ Bill). Paid nhỏ hơn nợ ⇒ **không gạch**, Paid giữ lại; khi Paid tích lũy đủ nợ thì mới gạch (vd Bill nợ 500.000, Paid 300.000 ⇒ không gạch; Paid đủ 500.000 ⇒ gạch 500.000). Mỗi Bill gạch 1 lần. ⚠️ Khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner. SC-GN-031 viết lại Then. Nguồn: QC owner 19/10/2026.
 
+✅ **Bổ sung 19/10/2026** — Đơn nhiều Bill: Bill thiếu tiền bị **bỏ qua**, hệ thống xét tiếp Bill nhỏ hơn. Vd 3 Bill 500.000 / 300.000 / 100.000, Paid 600.000 ⇒ gạch Bill 500.000; Bill 300.000 không gạch (Paid còn 100.000 < nợ); gạch Bill 100.000 (= Paid còn). SC-GN-028 viết lại. Nguồn: QC owner 19/10/2026.
+
 ---
 
 ### CL-GN-06 · Gỡ gạch tạm rồi Paid hoàn tất nhỏ hơn nợ: hóa đơn quay về "còn nợ" — có hệ quả / cảnh báo?
