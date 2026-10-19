@@ -14,7 +14,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p1: 12
   p2: 8
   p3: 0
-  blocked_by_cl: 5
+  blocked_by_cl: 4
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -63,7 +63,7 @@ updated: 2026-10-19
 | SC-HK-016 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước ở HĐ1 | HĐ2 của cùng đơn phát hành | **Không** add tiền trả trước lần 2 | P1 | Negative | NEW |
 | SC-HK-017 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước | Invoice Event của cùng HĐ bị gửi lặp | Không add lại (idempotent) | P2 | Negative | NEW |
 | SC-HK-018 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | Hệ thống HĐĐT lỗi / timeout (mock) | Đẩy HĐĐT | (giả định TP: đẩy lại lần sau) — ⛔ chờ CL-HK-05 | P2 | Negative | NEW |
-| SC-HK-020 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | HĐ của đơn **bán thêm** | Chuẩn bị ký hiệu | HĐ bán thêm có dùng đầu U như HĐ bán mới không ⛔ chờ CL-HK-01 (v2.0 chỉ test đầu U) | P2 | Functional | NEW |
+| SC-HK-020 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | HĐ của đơn **bán thêm** | Chuẩn bị ký hiệu | Dùng **đầu U** như HĐ bán mới — hai ký tự cuối theo vùng (vd Vùng 1 `QA`) (CL-HK-01, 19/10/2026) | P2 | Functional | NEW |
 | SC-HK-021 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn có HĐ đầu tiên **chỉ gồm TB** (DV phát hành sau) | HĐ TB phát hành | Có / không add tiền trả trước ở HĐ này ⛔ chờ CL-HK-07 (giả định TP: add ở đợt có DV, toàn bộ tiền DV) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)

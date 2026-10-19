@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 10
-  cl_open: 6
+  cl_open: 5
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -57,7 +57,7 @@ updated: 2026-10-19
 > 1 CL = 1 heading `### CL-HK-NN · <câu hỏi ngắn>`. Dòng META mang `Status` (+ `⛔ BLOCKING`) và mã GAP. Khi resolved: **thêm** `✅ RESOLVED <ngày> — <kết luận>`, giữ phần phân tích cũ.
 
 ### CL-HK-01 · Ký hiệu HĐĐT bản chốt + bảng map; loại HĐ nào dùng đầu M / U / A (kể cả bán thêm)?
-📍 `DOC-v2.0-01 BR-HK-03 (L581, L585)` + `§C#1 (L640-643)`  ·  Status: **Open — đã rõ một phần 19/10/2026** (hết BLOCKING) · GAP-17 (Critical)
+📍 `DOC-v2.0-01 BR-HK-03 (L581, L585)` + `§C#1 (L640-643)`  ·  Status: **Resolved 19/10/2026** · GAP-17 (Critical)
 
 > Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
 > (...)
@@ -73,6 +73,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Gửi bản chốt ký hiệu + bảng map vùng × đầu; liệt kê loại HĐ (cước, bán mới, bán thêm, thiết bị…) dùng đầu nào.
 
 🟡 **Làm rõ một phần 19/10/2026** — Phạm vi test v2.0: **chỉ loại HĐ bán mới, đầu U**; **không test đầu M** (và đầu A). Bảng map lấy theo URD 2.1 BR-HK-03 (CL-HK-10) ⇒ ký hiệu đầu U: V1 `QA` · V2 `EA` · V3 `GA` · V4 `MA` · V5 `QA` · V6 `OA` · V7 `YA` · FPL `PA`. Hết BLOCKING; SC-HK-008, 009, 010 hết chờ CL. Còn mở: HĐ của đơn **bán thêm** có tính là HĐ bán mới (đầu U) không (SC-HK-020). Nguồn: QC owner 19/10/2026.
+
+✅ **RESOLVED 19/10/2026** — HĐ của đơn **bán thêm cũng dùng đầu U** (như bán mới) ⇒ SC-HK-020 hết chờ CL. Nguồn: QC owner 19/10/2026.
 
 ---
 

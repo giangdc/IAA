@@ -92,7 +92,7 @@
 | 0.5 | init-source-code | SKIPPED | — | — | — | Không automation |
 | 1 | init-project | COMPLETED | 2026-10-07 | — | CLAUDE.md/PIPELINE.md/COMMANDS.md | — |
 | 2 | create-test-plan | COMPLETED | 2026-10-14 | v2.0 | `01_test-plans/TP-master-InvoiceIssuance-v2.0.md` (bản 1.3) + DOC-READINESS + Excel/Email | Doc readiness CONDITIONAL — 45 GAP mở |
-| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 180 SC active (2 deprecated) · 54 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D |
+| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 180 SC active (2 deprecated) · 54 CL (39 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D |
 | 4 | generate-tc | NOT_STARTED | — | — | — | Nên resolve CL BLOCKING trước (router §2) |
 | 4b | export-tc-rp | NOT_STARTED | — | — | — | renderer deliverable FPT — chạy sau consolidate |
 | 4c | review-tc-ba | NOT_STARTED | — | — | — | vòng feedback BA trên sheet — chỉ khi project review TC online |
@@ -111,7 +111,7 @@
 - **2026-10-13** — URD rev 2.2 là bản chính (PO confirm qua mail PM — DOC-v2.0-04); rev 2.1 giữ làm tham chiếu kỹ thuật, **2.2 thắng khi mâu thuẫn**.
 - **2026-10-16** — ⛔ **URD rev 2.1 không sử dụng** (QC owner: đã out) — thay quyết định 13/10. Chỉ URD 2.2 là căn cứ; SC dựng duy nhất trên 2.1 chuyển DEPRECATED (SC-XHD-107, 108 · SC-HK-009, 010).
 - **2026-10-19** — ⚠️ **URD rev 2.1 dùng lại, chỉ cho các mục Phụ lục D của 2.2 trỏ về** (QC owner) — thay quyết định 16/10: D#1 cutover, D#2 phát hành trùng, D#3 RISK-01, D#5 ký hiệu / ID HĐĐT, D#6 chiết khấu / mẫu. **Không dùng** D#4 (cấu hình EVC — QC owner: không đụng tới), D#7, D#8, D#9 (2.2 ghi không còn áp dụng / đã bỏ). Phần chính 2.2 thắng khi mâu thuẫn. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
-- **2026-10-19** — Ký hiệu HĐĐT v2.0: **chỉ test HĐ bán mới đầu U, không test đầu M** (QC owner) — CL-HK-01 hết BLOCKING.
+- **2026-10-19** — Ký hiệu HĐĐT v2.0: **chỉ test HĐ bán mới đầu U, không test đầu M** (QC owner) — CL-HK-01 hết BLOCKING; HĐ đơn bán thêm cũng dùng đầu U ⇒ CL-HK-01 đóng.
 - **2026-10-13** — Phạm vi gồm **đơn bán mới + bán thêm** (mail PM); URD không phân biệt loại đơn ⇒ analyze giả định rule áp chung (CL-XHD-25).
 - **2026-10-14** — **TL (URD §B.IV) ngoài phạm vi** test v2.0 (QC lead chốt) ⇒ không có module `TL/` trong analyze.
 - **2026-10-16** — Analyze dùng **layout module-first v2** (INIT trên thư mục trống). Module = XHD / GN / HK, map mã chức năng FR01–FR11 ở `Project_rule.md §Module Codes`.

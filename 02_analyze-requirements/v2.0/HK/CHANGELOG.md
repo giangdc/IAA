@@ -42,6 +42,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 2: **đóng** CL-HK-06, 08 · **làm rõ một phần** CL-HK-07, 09. **Deprecated SC-HK-019** (STG không test lỗi hệ thống Dịch vụ); SC-HK-011 ghi mã tỉnh theo địa chỉ hợp đồng. Câu dính URD 2.1 (CL-HK-02, 03, 10) **chưa cập nhật** | QC trả lời 19/10/2026 (file câu hỏi vòng 2) | SC 19→18 (deprecated 3) · P2 7→6 · cl_open 10→8 · blocked_by_cl 8→7 |
 | 2026-10-19 | UPDATE | **Dùng lại URD 2.1 cho Phụ lục D#5, D#6:** đóng CL-HK-02 (đơn vị đầu số riêng ngoài phạm vi) + CL-HK-10 (ký hiệu `1K<yy>T<xx>`, ID HĐ năm 2 số + mã tỉnh + số Invoice No); CL-HK-03 làm rõ một phần (chiết khấu không test; vẫn BLOCKING cho dòng EVC). **SC-HK-009, 010 dùng lại**; SC-HK-008 có bảng map (loại HĐ → đầu vẫn chờ CL-HK-01); SC-HK-011 hết chờ CL; test data ký hiệu / ID / mã tỉnh điền theo 2.1 | QC owner chốt 19/10/2026 | SC 18→20 · deprecated 3→1 · P2 6→8 · cl_open 8→6 · blocked_by_cl 7 (011 −1, 009 +1) |
 | 2026-10-19 | SCOPE↓ | **Ký hiệu HĐĐT: chỉ test HĐ bán mới đầu U, không test đầu M** (và A). CL-HK-01 làm rõ một phần, **hết BLOCKING**; SC-HK-008, 009 (đổi thành "FPL đầu U", Negative→Functional), 010 hết chờ CL; SC-HK-020 còn chờ (bán thêm có dùng đầu U?) | QC owner 19/10/2026 | cl_blocking 2→1 · blocked_by_cl 7→5 |
+| 2026-10-19 | UPDATE | **Đóng CL-HK-01:** HĐ đơn bán thêm cũng dùng đầu U ⇒ SC-HK-020 hết chờ CL | QC owner 19/10/2026 | cl_open 6→5 · blocked_by_cl 5→4 |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -56,6 +57,6 @@ updated: 2026-10-19
 | # | Nợ | Trạng thái | Đích xử lý |
 |---|---|---|---|
 | 1 | 🔴 REQ-HK-010 (dòng EVC, chiết khấu, thông tin theo mẫu) **chưa có SC** | Chỉ có tên, đặc tả chuyển D#6 — CL-HK-03 ⛔ (GAP-04 Blocker, TP đề xuất Out-scope) | PM chốt Out-scope ⇒ ghi `SCOPE↓` ở §1; nếu in-scope ⇒ `--update` thêm SC |
-| 2 | 🟡 CL-HK-01 còn hỏi HĐ bán thêm có dùng đầu U không (SC-HK-020) — ký hiệu / ID đã có theo URD 2.1, phạm vi chỉ đầu U (19/10/2026) | GAP-17 | Hỏi BA trước generate-tc 21/10/2026 |
+| 2 | ✅ CL-HK-01, CL-HK-10 đã đóng 19/10/2026 — ký hiệu / ID theo URD 2.1, chỉ đầu U (bán mới + bán thêm) | — | — |
 | 3 | 🟡 8 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
 | 4 | 🟡 CL-HK-08 (mã tỉnh lấy theo đâu), CL-HK-09 (1 HĐ nhiều đơn) mới phát hiện, chưa có GAP | — | QC owner thêm vào danh sách gửi PM |

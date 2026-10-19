@@ -23,7 +23,7 @@ updated: 2026-10-16
 | Số lần phát hành của đơn | Fixture | 1 · ≥2 (DV và TB khác đợt) | — | **lần 2 chỉ đẩy phần vừa xuất** | BR-HK-01 · BR-XHD-14 |
 | Ký hiệu HĐĐT | Runtime | `1K<yy>T<xx>` — HĐ bán mới đầu U, vd `1K26TQA` (Vùng 1) | ký hiệu sai bảng map (→ sai kê khai) | — | BR-HK-03 L581 · DOC-v2.0-02 BR-HK-03 (CL-HK-01, CL-HK-10) |
 | Vùng × loại đầu → 2 ký tự cuối | Master | V1: M=`HT` U=`QA` A=`HH` · V2: `ET`/`EA`/`EH` · V3: `GT`/`GA`/`GH` · V4: `MT`/`MA`/`MH` · V5 = V1 · V6: `OT`/`OA`/`OH` · V7: `YT`/`YA`/`YH` · FPL: U=`PA` A=`PH` (không có M) | đầu số sai bảng (→ sai kê khai thuế) | **Vùng 5 (dùng chung V1) · FPL đầu M (không có)** | DOC-v2.0-02 BR-HK-03 L776-784 (CL-HK-10) |
-| Loại đầu | Master | **`U` — HĐ bán mới** (phạm vi test v2.0); `M`, `A` không test | — | — | BR-HK-03 (CL-HK-01, QC owner 19/10/2026) |
+| Loại đầu | Master | **`U` — HĐ bán mới và bán thêm** (phạm vi test v2.0); `M`, `A` không test | — | — | BR-HK-03 (CL-HK-01, QC owner 19/10/2026) |
 | ID HĐ | Runtime | loại đầu + năm 2 số + mã tỉnh + số HĐ — vd `U26HN01053692` | mã chi nhánh thay mã tỉnh (→ sai) | — | BR-HK-03 L582 · DOC-v2.0-02 BR-HK-04 L787-792 (CL-HK-08, CL-HK-10) |
 | Mã tỉnh | Master | theo danh mục tỉnh thành, lấy theo **địa chỉ hợp đồng** (vd `HN` = Hà Nội) — QC tự backup danh mục | mã chi nhánh (→ sai) | — | BR-HK-03 L582 · DOC-v2.0-02 BR-HK-04 L791 (CL-HK-08) |
 | Nội dung dòng hàng | Runtime | tên dịch vụ + số tháng (SPF) | có "từ ngày – đến ngày" · tên gốc trên đơn (→ sai) | — | BR-HK-05 |
