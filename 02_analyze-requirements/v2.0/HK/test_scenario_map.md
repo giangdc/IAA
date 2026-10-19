@@ -14,7 +14,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p1: 12
   p2: 8
   p3: 0
-  blocked_by_cl: 7
+  blocked_by_cl: 5
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -52,9 +52,9 @@ updated: 2026-10-19
 | SC-HK-005 | Phạm vi đẩy | REQ-HK-003 | DOC-v2.0-01 BR-HK-01 (L571) | HĐ cấu thành từ ≥2 đơn (nếu có) | Hậu kỳ chạy | Thông tin tách theo từng đơn — ⛔ chờ CL-HK-09 (có tồn tại HĐ nhiều đơn không) | P2 | Functional | NEW |
 | SC-HK-006 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | HĐ đủ thông tin (ký hiệu, ID, nội dung, tổng tiền theo thuế suất, …) | Hậu kỳ chạy | Dữ liệu được đẩy sang hệ thống HĐĐT; HĐĐT được gen | P1 | Integration | NEW |
 | SC-HK-007 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L576) | HĐ **thiếu** 1 thông tin (vd vùng của tỉnh không có trong bảng map ⇒ không ra ký hiệu) | Hậu kỳ chạy | **Chưa** đẩy sang HĐĐT; thời điểm đẩy lại ⛔ chờ CL-HK-05 | P1 | Negative | NEW |
-| SC-HK-008 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-02 BR-HK-03 (L767-785) | HĐ thuộc vùng V, loại đầu D | Chuẩn bị ký hiệu | Ký hiệu 7 ký tự `1K<yy>T<xx>` với `<xx>` = map(V, D) theo bảng 7 vùng × {M, U, A} (URD 2.1) — loại HĐ → đầu ⛔ chờ CL-HK-01 | P1 | Functional | NEW |
-| SC-HK-009 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L784) | HĐ đơn vị **FPL** | Chuẩn bị ký hiệu | Đầu U → `PA`, đầu A → `PH`; FPL **không có đầu M** (HĐ FPL loại đầu M ⇒ hành vi ⛔ chờ CL-HK-01) | P2 | Negative | NEW |
-| SC-HK-010 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L781) | HĐ thuộc **Vùng 5** | Chuẩn bị ký hiệu | Dùng chung hai ký tự cuối với Vùng 1 (`HT` / `QA` / `HH`) | P2 | Functional | NEW |
+| SC-HK-008 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-02 BR-HK-03 (L767-785) | HĐ **bán mới** (đầu U) thuộc vùng V | Chuẩn bị ký hiệu | Ký hiệu 7 ký tự `1K<yy>T<xx>`, `<xx>` theo đầu U: V1 `QA` · V2 `EA` · V3 `GA` · V4 `MA` · V6 `OA` · V7 `YA` (vd `1K26TQA`) — chỉ test đầu U (CL-HK-01) | P1 | Functional | NEW |
+| SC-HK-009 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L784) | HĐ bán mới (đầu U) đơn vị **FPL** | Chuẩn bị ký hiệu | Hai ký tự cuối = `PA` (đầu U của FPL) | P2 | Functional | NEW |
+| SC-HK-010 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L781) | HĐ bán mới (đầu U) thuộc **Vùng 5** | Chuẩn bị ký hiệu | Dùng chung Vùng 1: hai ký tự cuối = `QA` | P2 | Functional | NEW |
 | SC-HK-011 | ID HĐ | REQ-HK-006 | DOC-v2.0-01 BR-HK-03 (L582) ↔ DOC-v2.0-02 BR-HK-04 (L787-792) | HĐ loại đầu U, năm 2026, hợp đồng địa chỉ Hà Nội, số HĐ 01053692 | Chuẩn bị ID | ID = `U26HN01053692` (loại đầu + năm 2 số + mã tỉnh theo **địa chỉ hợp đồng** + số HĐ); số HĐ trùng trường Số (Invoice No) trên HĐĐT | P1 | Functional | NEW |
 | SC-HK-012 | Nội dung hiển thị | REQ-HK-007 | DOC-v2.0-01 BR-HK-05 (L588) | Dòng DV có số tháng sử dụng trên SPF | Chuẩn bị nội dung | Nội dung = tên dịch vụ + số tháng; không có "từ ngày – đến ngày"; không lấy nguyên tên gốc trên đơn | P1 | Functional | NEW |
 | SC-HK-013 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | HĐ có dòng ở đủ 5 mức: KCT, 0%, 5%, 8%, 10% | Chuẩn bị tổng tiền | 5 dòng (thành tiền, thuế GTGT, tổng cộng mỗi mức) + 1 dòng tổng cộng chung = tổng các mức | P1 | Functional | NEW |
@@ -63,7 +63,7 @@ updated: 2026-10-19
 | SC-HK-016 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước ở HĐ1 | HĐ2 của cùng đơn phát hành | **Không** add tiền trả trước lần 2 | P1 | Negative | NEW |
 | SC-HK-017 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước | Invoice Event của cùng HĐ bị gửi lặp | Không add lại (idempotent) | P2 | Negative | NEW |
 | SC-HK-018 | Đẩy HĐĐT | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | Hệ thống HĐĐT lỗi / timeout (mock) | Đẩy HĐĐT | (giả định TP: đẩy lại lần sau) — ⛔ chờ CL-HK-05 | P2 | Negative | NEW |
-| SC-HK-020 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | HĐ của đơn **bán thêm** | Chuẩn bị ký hiệu | Loại đầu (M / U / A) của HĐ bán thêm ⛔ chờ CL-HK-01 | P2 | Functional | NEW |
+| SC-HK-020 | Ký hiệu HĐ | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | HĐ của đơn **bán thêm** | Chuẩn bị ký hiệu | HĐ bán thêm có dùng đầu U như HĐ bán mới không ⛔ chờ CL-HK-01 (v2.0 chỉ test đầu U) | P2 | Functional | NEW |
 | SC-HK-021 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn có HĐ đầu tiên **chỉ gồm TB** (DV phát hành sau) | HĐ TB phát hành | Có / không add tiền trả trước ở HĐ này ⛔ chờ CL-HK-07 (giả định TP: add ở đợt có DV, toàn bộ tiền DV) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
@@ -138,15 +138,15 @@ updated: 2026-10-19
 
 > QA — hai ký tự do người bán tự xác định, LẤY TỪ BẢNG MAP VÙNG MIỀN theo tổ hợp (vùng, loại đầu).
 
-↳ **Ghi chú:** Bảng map lấy từ URD 2.1 (2.2 chuyển Phụ lục D#5) — dùng lại 19/10/2026 (CL-HK-10). Dữ liệu ở `test_data_catalog.md`. Loại HĐ → đầu chờ CL-HK-01.
+↳ **Ghi chú:** Bảng map lấy từ URD 2.1 (2.2 chuyển Phụ lục D#5) — dùng lại 19/10/2026 (CL-HK-10). Dữ liệu ở `test_data_catalog.md`. Phạm vi v2.0 chỉ HĐ bán mới đầu U (CL-HK-01, 19/10/2026).
 ---
 
-##### SC-HK-009 · FPL không có đầu M
+##### SC-HK-009 · FPL đầu U
 📍 `DOC-v2.0-02 §III.c BR-HK-03 · L784`
 
 > FPL: Đầu U = PA · Đầu A = PH (không có Đầu M)
 
-↳ **Ghi chú:** Dòng FPL của bảng map vẫn test (CL-HK-02: đơn vị đầu số riêng khác ngoài phạm vi).
+↳ **Ghi chú:** Dòng FPL của bảng map vẫn test (CL-HK-02: đơn vị đầu số riêng khác ngoài phạm vi). Chỉ test đầu U; "không có đầu M" không test (CL-HK-01, 19/10/2026).
 
 ---
 

@@ -7,7 +7,7 @@ module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 10
   cl_open: 6
-  cl_blocking: 2
+  cl_blocking: 1
   risk: 5
   risk_high: 2
 status: ANALYZED
@@ -47,7 +47,7 @@ updated: 2026-10-19
 > KHÔNG để trống. Vòng đời: `Open` → `Resolved` (khi đã cover) · `Open` → `Pending` (defer) · `→ Closed` (bỏ scope).
 
 ## Khuyến nghị tổng thể
-1. **Resolve blocker clarifications trước generate-tc** các scenario liên quan: CL-HK-01 (⛔ ký hiệu), CL-HK-03 (⛔ dòng EVC / chiết khấu), CL-HK-07 (tiền trả trước).
+1. **Resolve blocker clarifications trước generate-tc** các scenario liên quan: CL-HK-03 (⛔ dòng EVC / chiết khấu), CL-HK-07 (tiền trả trước).
 2. **Ưu tiên test P1 high-risk:** SC-HK-004, 006..008, 011..013, 015, 016.
 3. **Performance / cần môi trường:** không có NFR; cần mock HĐĐT + hệ thống Dịch vụ (RISK-HK-04).
 4. **ID/text cleanup (non-blocking, cần trước automation):** không có.
@@ -56,8 +56,8 @@ updated: 2026-10-19
 
 > 1 CL = 1 heading `### CL-HK-NN · <câu hỏi ngắn>`. Dòng META mang `Status` (+ `⛔ BLOCKING`) và mã GAP. Khi resolved: **thêm** `✅ RESOLVED <ngày> — <kết luận>`, giữ phần phân tích cũ.
 
-### CL-HK-01 · Ký hiệu HĐĐT bản chốt + bảng map; loại HĐ nào dùng đầu M / U / A (kể cả bán thêm)? ⛔ BLOCKING
-📍 `DOC-v2.0-01 BR-HK-03 (L581, L585)` + `§C#1 (L640-643)`  ·  Status: **Open — ⛔ BLOCKING** (ký hiệu + ID) · GAP-17 (Critical)
+### CL-HK-01 · Ký hiệu HĐĐT bản chốt + bảng map; loại HĐ nào dùng đầu M / U / A (kể cả bán thêm)?
+📍 `DOC-v2.0-01 BR-HK-03 (L581, L585)` + `§C#1 (L640-643)`  ·  Status: **Open — đã rõ một phần 19/10/2026** (hết BLOCKING) · GAP-17 (Critical)
 
 > Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
 > (...)
@@ -71,6 +71,8 @@ updated: 2026-10-19
 ↳ **Ghi chú:** SC-HK-008, 011, 020 chờ bảng chốt; SC-HK-009, 010 deprecated 16/10/2026. Chưa có bảng loại HĐ → loại đầu.
 
 **Câu hỏi cho BA:** Gửi bản chốt ký hiệu + bảng map vùng × đầu; liệt kê loại HĐ (cước, bán mới, bán thêm, thiết bị…) dùng đầu nào.
+
+🟡 **Làm rõ một phần 19/10/2026** — Phạm vi test v2.0: **chỉ loại HĐ bán mới, đầu U**; **không test đầu M** (và đầu A). Bảng map lấy theo URD 2.1 BR-HK-03 (CL-HK-10) ⇒ ký hiệu đầu U: V1 `QA` · V2 `EA` · V3 `GA` · V4 `MA` · V5 `QA` · V6 `OA` · V7 `YA` · FPL `PA`. Hết BLOCKING; SC-HK-008, 009, 010 hết chờ CL. Còn mở: HĐ của đơn **bán thêm** có tính là HĐ bán mới (đầu U) không (SC-HK-020). Nguồn: QC owner 19/10/2026.
 
 ---
 
