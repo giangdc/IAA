@@ -6,13 +6,13 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module XHD
   req: 43
-  sc: 111
-  new: 111
+  sc: 109
+  new: 109
   modified: 0
   carried: 0
-  deprecated: 0
-  p1: 85
-  p2: 25
+  deprecated: 2
+  p1: 84
+  p2: 24
   p3: 1
   blocked_by_cl: 18      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
@@ -40,7 +40,7 @@ updated: 2026-10-19
 - **Thời gian** viết theo "giờ chốt đợt 1 / đợt cuối" — giá trị 12:00/18:00 chỉ là giá trị đang cấu hình (⛔ không hardcode trong TC).
 
 ## Tổng quan
-- Tổng số scenarios: 111 (NEW: 111, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
+- Tổng số scenarios: 109 (NEW: 109, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:` (p1 / p2 / p3).
 
 > ℹ️ **19/10/2026 — QC không có quyền xem log** (CL-XHD-15, CL-XHD-19): mọi Then "ghi log" / "ghi Note" chỉ verify phần hành vi (không phát hành / không ghi nhận) qua tool ở `07_environments/environments.md §Tool tra cứu`; phần log không verify.
@@ -148,9 +148,7 @@ updated: 2026-10-19
 | SC-XHD-095 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID chương trình khuyến mãi = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** (đơn không KM ⇒ theo chữ URD bị chặn, ⛔ chờ BA xác nhận CL-XHD-15) | P1 | Boundary | NEW |
 | SC-XHD-096 | Hợp lệ | REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L428) | Dòng bị chặn ở đợt 1 vì thiếu thông tin | Thông tin được bổ sung trước giờ chốt đợt 2 | Đợt 2 cùng ngày phát hành dòng (worker quét dòng chưa xuất có mốc nghiệp vụ trong ngày — L384); không có hàng chờ phát hành lại | P2 | Functional | NEW |
 | SC-XHD-097 | Job cảnh báo | REQ-XHD-032 | DOC-v2.0-01 BR-XHD-10 (L429) | Có đơn thiếu thông tin trước giờ chốt | Job cảnh báo chạy | Job chạy chu kỳ 15 phút; đầu ra cảnh báo ⛔ chờ CL-XHD-16 | P3 | Functional | NEW |
-| SC-XHD-098 | Hủy đơn đã có HĐ | REQ-XHD-033 | DOC-v2.0-01 BR-XHD-10 (L430) | Đơn đã có BillNumber | SPF phát sự kiện hủy đơn | HĐ giữ nguyên: không tự hủy, không sinh HĐ điều chỉnh; Paid/Payment không bị hệ thống đảo | P1 | Negative | NEW |
 | SC-XHD-099 | Chi nhánh | REQ-XHD-034 | DOC-v2.0-01 BR-XHD-12 (L434) | Hợp đồng do chi nhánh X quản lý | HĐ được phát hành | Chi nhánh xuất HĐ = X, lưu trên tồn xuất HĐ (`OB_OrderBill`) | P1 | Functional | NEW |
-| SC-XHD-100 | Chi nhánh | REQ-XHD-034 | DOC-v2.0-01 BR-XHD-12 (L434) | Đơn đã phát hành HĐ lần 1 khi hợp đồng thuộc chi nhánh X | Đổi chi nhánh quản lý sang Y rồi phát hành phần còn lại | HĐ lần 2 thuộc Y; HĐ lần 1 vẫn X (không tự điều chỉnh) | P2 | Functional | NEW |
 | SC-XHD-101 | Phát hành Billing | REQ-XHD-035 | DOC-v2.0-01 BR-XHD-13 (L439-440) | Dòng đủ điều kiện, mốc nghiệp vụ ngày N | Phát hành vào ngày N (hoặc N+1 với realtime qua nửa đêm) | Billing trả BillNumber; ghi BillNumber + BillDate = **ngày phát hành thực tế** vào tồn xuất HĐ | P1 | Integration | NEW |
 | SC-XHD-102 | Nội dung HĐ | REQ-XHD-036 | DOC-v2.0-01 BR-XHD-13 (L441) | Dòng DV có số tháng sử dụng trên SPF | HĐ được phát hành | Nội dung dòng = tên dịch vụ + số tháng; **không** có kỳ hạn từ ngày – đến ngày | P1 | Functional | NEW |
 | SC-XHD-103 | Invoice Event | REQ-XHD-037 | DOC-v2.0-01 BR-XHD-13 (L442) | HĐ vừa phát hành thành công | Sau khi ghi BillNumber | Invoice Event được gửi lên Kafka (kích hoạt điểm chạm b của GN và hậu kỳ HK) | P1 | Integration | NEW |
@@ -336,7 +334,7 @@ updated: 2026-10-19
 > Áp dụng chung cho mọi kênh bán: thanh toán, hủy đơn hàng.
 > Đơn không ở trạng thái hủy hoặc đang cập nhật.
 
-↳ **Ghi chú:** Hủy đơn khi **chưa** có HĐ ⇒ trạng thái hủy chặn phát hành. Hủy khi **đã** có HĐ là SC-XHD-098.
+↳ **Ghi chú:** Hủy đơn khi **chưa** có HĐ ⇒ trạng thái hủy chặn phát hành. Hủy khi **đã** có HĐ: ngoài scope test (TP §2.2 #2 — SC-XHD-098 deprecated 19/10/2026).
 
 ---
 
@@ -1048,30 +1046,12 @@ updated: 2026-10-19
 
 ---
 
-##### SC-XHD-098 · Hủy đơn đã có HĐ
-📍 `DOC-v2.0-01 §I.c BR-XHD-10 · L430`
-
-> Hủy đơn khi đã có hóa đơn: hệ thống không tự hủy hay điều chỉnh hóa đơn, xử lý theo quy trình riêng.
-
-↳ **Ghi chú:** Kiểm "không có tác dụng phụ".
-
----
-
 ##### SC-XHD-099 · Chi nhánh theo hợp đồng
 📍 `DOC-v2.0-01 §I.c BR-XHD-12 · L434`
 
 > Chi nhánh xuất hóa đơn là chi nhánh quản lý hợp đồng, xác định tại thời điểm phát hành và lưu trên tồn xuất hóa đơn
 
 ↳ **Ghi chú:** Verify cột chi nhánh trên `OB_OrderBill` (glossary L313).
-
----
-
-##### SC-XHD-100 · Đổi chi nhánh giữa 2 lần phát hành
-📍 `DOC-v2.0-01 §I.c BR-XHD-12 · L434`
-
-> xác định tại thời điểm phát hành
-
-↳ **Ghi chú:** Lấy theo thời điểm, không theo lúc tạo đơn.
 
 ---
 
@@ -1185,4 +1165,5 @@ updated: 2026-10-19
 
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
-| — | *(không có — SC-XHD-107, 108 dùng lại 19/10/2026 theo URD 2.1 §BR-DB-08)* | — | — | — |
+| SC-XHD-098 | Hủy đơn đã có HĐ — HĐ không tự hủy / điều chỉnh | XHD | v2.0 (19/10/2026) | ⛔ **Ngoài scope test — TP §2.2 #2** *"Điều chỉnh / hủy hóa đơn khi hủy đơn đã có hóa đơn"* (BR-XHD-10 L430: xử lý theo quy trình riêng). QC owner 19/10/2026 |
+| SC-XHD-100 | Đổi chi nhánh giữa 2 lần phát hành — HĐ cũ không tự điều chỉnh | XHD | v2.0 (19/10/2026) | ⛔ **Ngoài scope test — TP §2.2 #3** *"Điều chỉnh hóa đơn đã phát hành khi chi nhánh đổi giữa các lần phát hành"*. QC owner 19/10/2026 |

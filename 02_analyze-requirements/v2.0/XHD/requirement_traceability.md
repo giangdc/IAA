@@ -61,8 +61,8 @@ updated: 2026-10-16
 | REQ-XHD-030 | BR-XHD-10 | DOC-v2.0-01 §I.c (L427) | SC-XHD-090..095 | CL-XHD-15 |
 | REQ-XHD-031 | BR-XHD-10 | DOC-v2.0-01 §I.c (L428) | SC-XHD-080..096, SC-XHD-111 | CL-XHD-15, CL-XHD-17 ✅ |
 | REQ-XHD-032 | BR-XHD-10 | DOC-v2.0-01 §I.c (L429) | SC-XHD-097 | CL-XHD-16 |
-| REQ-XHD-033 | BR-XHD-10 | DOC-v2.0-01 §I.c (L430) | SC-XHD-098 | — |
-| REQ-XHD-034 | BR-XHD-12 | DOC-v2.0-01 §I.c (L432-435) | SC-XHD-099, SC-XHD-100 | — |
+| REQ-XHD-033 | BR-XHD-10 | DOC-v2.0-01 §I.c (L430) | — *(⛔ ngoài scope test — TP §2.2 #2; SC-XHD-098 deprecated 19/10/2026)* | — |
+| REQ-XHD-034 | BR-XHD-12 | DOC-v2.0-01 §I.c (L432-435) | SC-XHD-099 *(SC-XHD-100 ⛔ ngoài scope test — TP §2.2 #3, deprecated 19/10/2026)* | — |
 | REQ-XHD-035 | BR-XHD-13 | DOC-v2.0-01 §I.c (L437-440) | SC-XHD-101, SC-XHD-104 | CL-XHD-18 |
 | REQ-XHD-036 | BR-XHD-13 | DOC-v2.0-01 §I.c (L441) | SC-XHD-102 | CL-XHD-28 |
 | REQ-XHD-037 | BR-XHD-13 | DOC-v2.0-01 §I.c (L442) | SC-XHD-103 | CL-XHD-29 |
@@ -414,6 +414,8 @@ updated: 2026-10-16
 
 ↳ **Ghi chú:** Trong phạm vi test chỉ là kiểm **hệ thống không làm gì** với HĐ đã có (BillNumber giữ nguyên, không sinh HĐ điều chỉnh). Quy trình điều chỉnh/hủy riêng: ngoài phạm vi (TP §2.2 #2).
 
+⛔ **Ngoài scope test 19/10/2026** — TP §2.2 #2 *"Điều chỉnh / hủy hóa đơn khi hủy đơn đã có hóa đơn"*. Không sinh SC (SC-XHD-098 deprecated). QC owner 19/10/2026.
+
 ---
 
 ### REQ-XHD-034 · Chi nhánh xuất HĐ = chi nhánh quản lý hợp đồng tại thời điểm phát hành
@@ -423,6 +425,8 @@ updated: 2026-10-16
 > Chi nhánh nào được bán sản phẩm dịch vụ nào do bên quản lý sản phẩm bổ sung thuộc tính, nằm ngoài URD này.
 
 ↳ **Ghi chú:** Bảng mapping chi nhánh theo (loại DV, kênh bán) không còn áp dụng (D#7) — gate G8 bỏ ngày 13/10/2026. Đổi chi nhánh quản lý HĐ giữa 2 lần phát hành ⇒ lần sau dùng chi nhánh mới; sửa HĐ cũ là nghiệp vụ Điều chỉnh, ngoài phạm vi.
+
+⛔ **Một phần ngoài scope test 19/10/2026** — TP §2.2 #3 *"Điều chỉnh hóa đơn đã phát hành khi chi nhánh đổi giữa các lần phát hành"* ⇒ SC-XHD-100 deprecated; giữ SC-XHD-099 (chi nhánh = chi nhánh quản lý hợp đồng). QC owner 19/10/2026.
 
 ---
 
