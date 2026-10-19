@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 11
-  cl_open: 2
+  cl_open: 1
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -109,7 +109,7 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-04 · Danh sách trường theo từng mẫu hóa đơn điện tử; mức thuế suất không phát sinh có in dòng 0?
-📍 `DOC-v2.0-01 §D#6 (L679)` + `BR-HK-07 (L592)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-35 (Major)
+📍 `DOC-v2.0-01 §D#6 (L679)` + `BR-HK-07 (L592)`  ·  Status: **Resolved 19/10/2026** · GAP-35 (Major)
 
 > Dòng chiết khấu; thông tin khác theo mẫu hóa đơn.
 > (...)
@@ -120,6 +120,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Gửi mẫu hóa đơn điện tử (trường bắt buộc); mức thuế không có dòng chi tiết thì có in không?
 
 🟡 **Làm rõ một phần 19/10/2026** — Đã chốt: mức thuế suất không có dòng chi tiết thì **không in** — hóa đơn chỉ mua dịch vụ thuế 10% ⇒ chỉ in dòng 10% + dòng tổng cộng (không in dòng KCT / 0% / 5% / 8% giá trị 0). Còn mở: mẫu hóa đơn điện tử + danh sách trường bắt buộc theo mẫu (chặn expected SC-HK-006). Nguồn: QC trả lời 19/10/2026 vòng 2
+
+✅ **RESOLVED 19/10/2026** — **Sửa lại ý vòng 2:** "chỉ in dòng 10% và dòng tổng cộng" là nói về **chi tiết hóa đơn** (dòng hàng), không phải phần tổng theo thuế suất (QC owner hiểu nhầm câu hỏi). Theo mẫu hóa đơn `DOC-v2.0-06` (U26SG00002067): phần tổng **in đủ 5 dòng** KCT / 0% / 5% / 8% / 10%, mức không phát sinh **để trống**, rồi dòng tổng cộng chung. Trường theo mẫu: người bán (tên chi nhánh, MST, địa chỉ, điện thoại / fax) · ký hiệu, số (Invoice No), ID hóa đơn, ngày lập · người mua (tên, ID khách hàng, MST, mã định danh, số hộ chiếu, mã đơn vị quan hệ ngân sách, địa chỉ, đồng tiền thanh toán) · dòng hàng (STT, tên hàng hóa / dịch vụ, ĐVT, số lượng, đơn giá, thành tiền, thuế suất, thuế GTGT, tổng cộng) · tổng theo 5 mức thuế suất + tổng cộng + số tiền bằng chữ · nhân viên thực hiện, ngày chuyển đổi, chữ ký số người bán. SC-HK-014 viết lại; SC-HK-006 có danh sách trường. Nguồn: QC owner 19/10/2026 + DOC-v2.0-06.
 
 ---
 

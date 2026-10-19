@@ -29,7 +29,7 @@ updated: 2026-10-16
 | Nội dung dòng hàng | Runtime | tên dịch vụ + số tháng (SPF) | có "từ ngày – đến ngày" · tên gốc trên đơn (→ sai) | — | BR-HK-05 |
 | Mức thuế suất | Master | `{KCT, 0%, 5%, 8%, 10%}` | — | **Hóa đơn chỉ 1 mức · hóa đơn đủ 5 mức** | BR-HK-07 |
 | Dòng tổng theo thuế suất | Runtime | mỗi mức: thành tiền + thuế GTGT + tổng cộng; dòng tổng cộng chung = Σ các mức | — | — | BR-HK-07 |
-| Dòng EVC / chiết khấu / thông tin theo mẫu | Master | *(chưa đặc tả — REQ-HK-010)* | — | — | BR-HK-02 · §D#6 (CL-HK-03, CL-HK-04) |
+| Dòng EVC / chiết khấu / thông tin theo mẫu | Master | thông tin theo mẫu: theo DOC-v2.0-06 (CL-HK-04); dòng EVC *(chưa đặc tả — CL-HK-03)*; chiết khấu không test | — | — | BR-HK-02 · §D#6 (CL-HK-03, CL-HK-04) |
 | Cờ đã add tiền trả trước (theo đơn) | Runtime | chưa add (→ add) · đã add (→ bỏ qua) | — | **Hóa đơn 2 cùng đơn → không add · hóa đơn chỉ thiết bị → không add (add theo hóa đơn có dịch vụ trả trước)** | BR-HK-09 (CL-HK-07) |
 | Hệ thống hóa đơn điện tử / Dịch vụ (mock) | Fixture | phản hồi thành công | lỗi / timeout (→ không tự đẩy lại, báo dev retry thủ công — CL-HK-05, CL-HK-06) | — | §III.a |
 

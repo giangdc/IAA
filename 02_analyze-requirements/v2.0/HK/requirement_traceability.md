@@ -116,7 +116,7 @@ updated: 2026-10-19
 
 > Gom tổng tiền theo từng mức thuế suất (không chịu thuế, 0%, 5%, 8%, 10%), mỗi mức một dòng gồm thành tiền, thuế GTGT và tổng cộng; sau đó là dòng tổng cộng chung.
 
-↳ **Ghi chú:** EP 5 mức thuế suất. Mức không có dòng chi tiết thì **không in** — QC trả lời CL-HK-04 19/10/2026 (khớp suy diễn trước đó).
+↳ **Ghi chú:** EP 5 mức thuế suất. Phần tổng **in đủ 5 dòng** mức thuế, mức không phát sinh **để trống** — theo mẫu DOC-v2.0-06 (CL-HK-04 resolved 19/10/2026; sửa ý vòng 2 "không in").
 
 ---
 

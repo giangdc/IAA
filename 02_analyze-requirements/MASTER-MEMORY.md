@@ -26,6 +26,7 @@
 | DOC-v2.0-03 | v2.0 | `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.pdf` | URD rev 2.2 bản PDF PO confirm — nội dung = DOC-v2.0-01, không trích dẫn | Active | — | XHD, GN, HK |
 | DOC-v2.0-04 | v2.0 | `00_input/v2.0/Doc/Mail_PM-LeLTM_2026-10-13_PO-confirm-URD-v2.2.png` | Mail PM — xác nhận phạm vi (bổ sung) | Active | — | XHD, GN, HK |
 | DOC-v2.0-05 | v2.0 | `00_input/v2.0/Doc/AnhNQ75-List HT Triển khai.xlsx` | Danh mục hình thức triển khai (bổ sung — URD thắng khi mâu thuẫn) | Active | — | XHD |
+| DOC-v2.0-06 | v2.0 | `00_input/v2.0/Doc/U26SG00002067.pdf` | Mẫu hóa đơn điện tử (bản in chuyển đổi, ngày 06/08/2026) — trường theo mẫu + phần tổng theo thuế suất (bổ sung) | Active | — | HK |
 | DOC-v2.0-FIG-01 | v2.0 | `00_input/v2.0/Design/Chi tiết hóa đơn.png` | Ảnh màn hiện hữu "Chi tiết của Hóa đơn" (không phải prototype) | Active | — | XHD, GN, HK |
 | DOC-v2.0-FIG-02 | v2.0 | `00_input/v2.0/Design/Danh sách hóa đơn của Hợp đồng.png` | Ảnh màn hiện hữu "Liệt kê cước của thuê bao" (không phải prototype) | Active | — | XHD |
 | DOC-v2.0-FIG-03 | v2.0 | `00_input/v2.0/Doc/Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png` | Flow §B.I.b (XHD) — ảnh nhúng trong DOC-v2.0-01 sau L337, trùng pixel | Active | — | XHD |
@@ -92,7 +93,7 @@
 | 0.5 | init-source-code | SKIPPED | — | — | — | Không automation |
 | 1 | init-project | COMPLETED | 2026-10-07 | — | CLAUDE.md/PIPELINE.md/COMMANDS.md | — |
 | 2 | create-test-plan | COMPLETED | 2026-10-14 | v2.0 | `01_test-plans/TP-master-InvoiceIssuance-v2.0.md` (bản 1.3) + DOC-READINESS + Excel/Email | Doc readiness CONDITIONAL — 45 GAP mở |
-| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 177 SC active (5 deprecated) · 55 CL (25 Open · 4 BLOCKING) |
+| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 177 SC active (5 deprecated) · 55 CL (24 Open · 4 BLOCKING) |
 | 4 | generate-tc | NOT_STARTED | — | — | — | Nên resolve CL BLOCKING trước (router §2) |
 | 4b | export-tc-rp | NOT_STARTED | — | — | — | renderer deliverable FPT — chạy sau consolidate |
 | 4c | review-tc-ba | NOT_STARTED | — | — | — | vòng feedback BA trên sheet — chỉ khi project review TC online |
