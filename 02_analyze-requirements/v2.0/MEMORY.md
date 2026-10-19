@@ -110,10 +110,10 @@ updated: 2026-10-19
 
 | Module | Req | SC | NEW | MOD | CARRIED | DEPR | P1 | P2 | P3 | CL | RISK | Risk Level |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|
-| XHD | 43 | 109 | 109 | 0 | 0 | 2 | 84 | 24 | 1 | 34 | 10 | High |
+| XHD | 43 | 111 | 111 | 0 | 0 | 2 | 85 | 25 | 1 | 34 | 10 | High |
 | GN | 20 | 48 | 48 | 0 | 0 | 2 | 42 | 5 | 1 | 10 | 6 | High |
 | HK | 10 | 20 | 20 | 0 | 0 | 1 | 12 | 8 | 0 | 11 | 5 | High |
-| **Tổng** | **73** | **177** | **177** | **0** | **0** | **5** | **138** | **37** | **2** | **55** | **21** | — |
+| **Tổng** | **73** | **179** | **179** | **0** | **0** | **5** | **139** | **38** | **2** | **55** | **21** | — |
 
 > ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 4, 5, 6; **không** D#7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). D#4 (EVC: BR-VC-01..07, BR-GC-04..07) dùng từ vòng 3 19/10/2026 vì 2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"; bỏ các bước 2.1 đánh dấu `[Bỏ]`. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
 > ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy hóa đơn) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06).

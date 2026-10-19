@@ -6,13 +6,13 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module XHD
   req: 43
-  sc: 109
-  new: 109
+  sc: 111
+  new: 111
   modified: 0
   carried: 0
   deprecated: 2
-  p1: 84
-  p2: 24
+  p1: 85
+  p2: 25
   p3: 1
   blocked_by_cl: 7      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
@@ -40,7 +40,7 @@ updated: 2026-10-19
 - **Thời gian** viết theo "giờ chốt đợt 1 / đợt cuối" — giá trị 12:00/18:00 chỉ là giá trị đang cấu hình (⛔ không hardcode trong TC).
 
 ## Tổng quan
-- Tổng số scenarios: 109 (NEW: 109, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
+- Tổng số scenarios: 111 (NEW: 111, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:` (p1 / p2 / p3).
 
 > ℹ️ **19/10/2026 — QC không có quyền xem log** (CL-XHD-15, CL-XHD-19): mọi Then "ghi log" / "ghi Note" chỉ verify phần hành vi (không phát hành / không ghi nhận) qua tool ở `07_environments/environments.md §Tool tra cứu`; phần log không verify.
@@ -160,6 +160,8 @@ updated: 2026-10-19
 | SC-XHD-109 | HT triển khai | REQ-XHD-043 | DOC-v2.0-05 dòng 8 | Đơn có TB DeployType = "Không" (và đơn mix "Không" + TIN/PNC) | Không có / có phiếu thi công TINPNC | QC: xuất hóa đơn khi đơn hoàn tất — chưa có căn cứ URD ⛔ chờ CL-XHD-27, CL-XHD-34 | P2 | Functional | NEW |
 | SC-XHD-110 | Điều kiện phát hành | REQ-XHD-019, REQ-XHD-025 | DOC-v2.0-01 BR-XHD-06 (L412) ↔ BR-DB-07 (L374) | Đơn có **2 TB cùng phương thức** triển khai A; DV đã phát hành | Tín hiệu giao hàng hoàn tất của A chỉ mang **TB1** (giao thiếu TB2) | Chỉ TB1 phát hành; TB2 giữ BillNumber rỗng, chờ tín hiệu riêng (CL-XHD-10) | P1 | Functional | NEW |
 | SC-XHD-111 | Hợp lệ | REQ-XHD-031, REQ-XHD-015 | DOC-v2.0-01 BR-XHD-10 (L428) ↔ BR-XHD-01 (L384) | Dòng bị chặn trong ngày N vì thiếu thông tin | Thông tin được bổ sung **sau giờ chốt cuối ngày N** (hoặc ngày N+1) | Hệ thống **không** tự phát hành lại dòng ở các đợt sau (không giữ chờ — CL-XHD-17); dòng giữ BillNumber rỗng | P2 | Negative | NEW |
+| SC-XHD-112 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng doanh nghiệp (tổ chức) đã duyệt PĐK ở lần bán mới; **đơn bán thêm** có PĐK mới **chưa duyệt**, ngày thường | Dòng của đơn bán thêm đủ điều kiện, worker chạy | **Không** xuất hóa đơn cho đơn bán thêm — PĐK của lần bán mới không dùng cho đơn bán thêm (CL-XHD-07, 19/10/2026) | P1 | Negative | NEW |
+| SC-XHD-113 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng doanh nghiệp (tổ chức); **đơn bán thêm** có PĐK mới **đã duyệt**, ngày thường | Dòng của đơn bán thêm đủ điều kiện, worker chạy | Hóa đơn của đơn bán thêm được phát hành (CL-XHD-07, 19/10/2026) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
 
@@ -1154,6 +1156,24 @@ updated: 2026-10-19
 > Không hợp lệ thì không phát hành và ghi log; hệ thống không giữ chờ phát hành lại vì hóa đơn phải lập trong ngày.
 
 ↳ **Ghi chú:** Qua ngày thì không phát hành lại (CL-XHD-17). Thêm 16/10/2026.
+
+##### SC-XHD-112 · Đơn bán thêm — PĐK mới chưa duyệt
+📍 `DOC-v2.0-01 §I.c BR-XHD-03 · L400`
+
+> Quên duyệt PĐK thì không autobill.
+
+↳ **Ghi chú:** Đơn bán thêm có PĐK mới riêng; PĐK đã duyệt từ lần bán mới không dùng (CL-XHD-07, QC owner 19/10/2026). Đổi / xem trạng thái PĐK: `07_environments/environments.md §Tool tra cứu`.
+
+---
+
+##### SC-XHD-113 · Đơn bán thêm — PĐK mới đã duyệt
+📍 `DOC-v2.0-01 §I.c BR-XHD-03 · L400`
+
+> Quên duyệt PĐK thì không autobill.
+
+↳ **Ghi chú:** Cặp positive của SC-XHD-112 (CL-XHD-07, QC owner 19/10/2026).
+
+---
 
 ## Scenarios — CARRIED (reference only)
 

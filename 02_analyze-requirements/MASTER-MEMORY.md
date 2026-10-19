@@ -9,7 +9,7 @@
 ## 1. Version Registry
 | Version | Release Date | Input Folder | Analyze Folder | Status | Tổng DOC | Tổng SC (all) | Tổng SC (new+mod) | Parent |
 |---------|-------------|-------------|----------------|--------|----------|--------------|-------------------|--------|
-| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 9 | 177 | 177 | v1.0 (Phase 1 — chưa có trong workspace) |
+| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 9 | 179 | 179 | v1.0 (Phase 1 — chưa có trong workspace) |
 
 ## 2. DOC ID Registry (Global)
 > **`Status`** — trạng thái của FILE, không phải của yêu cầu:
@@ -53,7 +53,7 @@
 **Phải test (new + modified):**
 | SC ID | Type | Lý do |
 |-------|------|-------|
-| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (177 active · 5 deprecated) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
+| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (179 active · 5 deprecated) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
 
 **Nên regression (carried — high risk):**
 | SC ID | Type | Lý do |
@@ -93,7 +93,7 @@
 | 0.5 | init-source-code | SKIPPED | — | — | — | Không automation |
 | 1 | init-project | COMPLETED | 2026-10-07 | — | CLAUDE.md/PIPELINE.md/COMMANDS.md | — |
 | 2 | create-test-plan | COMPLETED | 2026-10-14 | v2.0 | `01_test-plans/TP-master-InvoiceIssuance-v2.0.md` (bản 1.3) + DOC-READINESS + Excel/Email | Doc readiness CONDITIONAL — 45 GAP mở |
-| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 177 SC active (5 deprecated) · 55 CL (22 Open · 4 BLOCKING) |
+| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 179 SC active (5 deprecated) · 55 CL (22 Open · 4 BLOCKING) |
 | 4 | generate-tc | NOT_STARTED | — | — | — | Nên resolve CL BLOCKING trước (router §2) |
 | 4b | export-tc-rp | NOT_STARTED | — | — | — | renderer deliverable FPT — chạy sau consolidate |
 | 4c | review-tc-ba | NOT_STARTED | — | — | — | vòng feedback BA trên sheet — chỉ khi project review TC online |

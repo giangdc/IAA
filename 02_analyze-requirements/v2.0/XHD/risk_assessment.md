@@ -210,7 +210,7 @@ updated: 2026-10-19
 
 🟡 **Làm rõ thêm 19/10/2026 (sau vòng 3)** — Chuẩn bị dữ liệu PĐK: cập nhật tình trạng PĐK ở menu *Báo cáo phiếu đăng ký › Duyệt HD › Chuyển tình trạng PDK*; kiểm tra trạng thái PĐK ở *Web admin › Chi tiết đơn hàng › Thông tin khác › Thông tin duyệt đơn*. Phạm vi: **mỗi kênh bán test 1 hợp đồng doanh nghiệp** (tổ chức). Tool ghi ở `07_environments/environments.md`. Còn mở (duy nhất): đơn bán thêm trên hợp đồng tổ chức xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới. Nguồn: QC owner 19/10/2026.
 
-✅ **RESOLVED 19/10/2026** — Đơn **bán thêm** trên hợp đồng tổ chức (doanh nghiệp) có **PĐK mới riêng**: phải duyệt PĐK mới đó thì hóa đơn của đơn bán thêm mới được xuất; PĐK đã duyệt từ lần bán mới **không** dùng cho đơn bán thêm. Chưa duyệt PĐK mới ⇒ chặn (trừ 2 ngày lịch cuối tháng), như đơn bán mới. Hết GAP-61. Nguồn: QC owner 19/10/2026.
+✅ **RESOLVED 19/10/2026** — Đơn **bán thêm** trên hợp đồng tổ chức (doanh nghiệp) có **PĐK mới riêng**: phải duyệt PĐK mới đó thì hóa đơn của đơn bán thêm mới được xuất; PĐK đã duyệt từ lần bán mới **không** dùng cho đơn bán thêm. Chưa duyệt PĐK mới ⇒ chặn (trừ 2 ngày lịch cuối tháng), như đơn bán mới. Hết GAP-61. Thêm SC-XHD-112 (chưa duyệt), 113 (đã duyệt). Nguồn: QC owner 19/10/2026.
 
 ---
 

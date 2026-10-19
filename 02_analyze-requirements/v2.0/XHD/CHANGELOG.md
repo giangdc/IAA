@@ -61,6 +61,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | CL-XHD-07 làm rõ thêm: tool cập nhật / kiểm tra trạng thái PĐK (thêm vào `07_environments/environments.md`); mỗi kênh bán test 1 hợp đồng doanh nghiệp. Còn mở: PĐK của đơn bán thêm | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-24:** cutover có test — đơn luồng cũ / mới, không mất / trùng hóa đơn (URD 2.1 BR-DB-08). SC-XHD-107, 108 hết chờ CL. Hệ quả đã biết BR-DB-08 L304 (thiết bị bị bỏ sót, quét tay — ngoài phạm vi) ghi rõ trong CL | QC owner 19/10/2026 | cl_open 17→16 · blocked_by_cl 9→7 |
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-07:** đơn bán thêm trên hợp đồng tổ chức có PĐK mới riêng — phải duyệt PĐK mới mới xuất hóa đơn (hết GAP-61) | QC owner 19/10/2026 | cl_open 16→15 |
+| 2026-10-19 | UPDATE | **Thêm SC-XHD-112, 113** (CL-XHD-07): đơn bán thêm trên hợp đồng doanh nghiệp — PĐK mới chưa duyệt ⇒ không xuất hóa đơn (P1 Negative); đã duyệt ⇒ phát hành (P2 Functional) | QC owner 19/10/2026 | SC 109→111 · P1 84→85 · P2 24→25 |
 
 ## 2. Ràng buộc còn hiệu lực
 
