@@ -492,7 +492,7 @@ updated: 2026-10-19
 
 🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC nhắc lại: quét tay bổ sung đơn bỏ sót giai đoạn giao thoa cutover **không test** (thao tác tay, ngoài phạm vi TP). Chưa trả lời: STG có dữ liệu + service luồng cũ để test kiểm tra chéo (SC-XHD-107, 108) không; ai bật cấu hình. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
-✅ **RESOLVED 19/10/2026** — Cutover **có test**. Input: đơn ở luồng cũ / luồng mới; output: **không mất, không trùng hóa đơn** khi chuyển. Căn cứ URD 2.1 (DOC-v2.0-02): BR-DB-08 (L297-305 — mỗi bản tin chỉ 1 luồng xử lý; luồng mới kiểm tra chéo mức đơn hàng, đơn đã ra hóa đơn ở luồng cũ thì bỏ qua) + BR-XHD-09 (L370-378 — QC owner dẫn: chặn phát hành trùng). SC-XHD-107, 108 hết chờ CL. ⚠️ Lưu ý: BR-DB-08 L304 ghi hệ quả đã biết — đơn đã ra hóa đơn dịch vụ ở luồng cũ, giao thiết bị sau go-live ⇒ phần thiết bị **bị bỏ sót**, quét tay bổ sung (ngoài phạm vi TP) ⇒ case này kỳ vọng "bỏ sót", không phải lỗi. Nguồn: QC owner 19/10/2026.
+✅ **RESOLVED 19/10/2026** — Cutover **có test**. Input: đơn ở luồng cũ / luồng mới; output: **không mất, không trùng hóa đơn** khi chuyển. Căn cứ URD 2.1 (DOC-v2.0-02): BR-DB-08 (L297-305 — mỗi bản tin chỉ 1 luồng xử lý; luồng mới kiểm tra chéo mức đơn hàng, đơn đã ra hóa đơn ở luồng cũ thì bỏ qua). SC-XHD-107, 108 hết chờ CL. ⚠️ Lưu ý: BR-DB-08 L304 ghi hệ quả đã biết — đơn đã ra hóa đơn dịch vụ ở luồng cũ, giao thiết bị sau go-live ⇒ phần thiết bị **bị bỏ sót**, quét tay bổ sung (ngoài phạm vi TP) ⇒ case này kỳ vọng "bỏ sót", không phải lỗi. Nguồn: QC owner 19/10/2026.
 
 ---
 
