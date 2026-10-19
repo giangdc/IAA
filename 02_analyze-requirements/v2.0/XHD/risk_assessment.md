@@ -208,6 +208,8 @@ updated: 2026-10-19
 
 🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — Hợp đồng tổ chức chưa duyệt PĐK ⇒ hệ thống **chặn** và ghi lỗi vào log; "không autobill" = **phải xuất hóa đơn tay** (xuất tay ngoài phạm vi TP) ⇒ hóa đơn bị chặn không tự phát hành ở đợt worker sau (SC-XHD-065, QC chỉ verify không phát hành). Quy tắc áp cho **cả đơn bán mới và đơn bán thêm**. Còn mở: đơn bán thêm xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới; trường trạng thái PĐK. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
+🟡 **Làm rõ thêm 19/10/2026 (sau vòng 3)** — Chuẩn bị dữ liệu PĐK: cập nhật tình trạng PĐK ở menu *Báo cáo phiếu đăng ký › Duyệt HD › Chuyển tình trạng PDK*; kiểm tra trạng thái PĐK ở *Web admin › Chi tiết đơn hàng › Thông tin khác › Thông tin duyệt đơn*. Phạm vi: **mỗi kênh bán test 1 hợp đồng doanh nghiệp** (tổ chức). Tool ghi ở `07_environments/environments.md`. Còn mở (duy nhất): đơn bán thêm trên hợp đồng tổ chức xét PĐK của hợp đồng (đã duyệt từ lần bán mới) hay cần PĐK mới. Nguồn: QC owner 19/10/2026.
+
 ---
 
 ### CL-XHD-08 · Hợp đồng con không phát hành: ghi nhận ra sao? Hợp đồng cha có phát hành hóa đơn thay?

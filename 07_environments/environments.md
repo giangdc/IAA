@@ -27,6 +27,8 @@
 | Gạch nợ hóa đơn bằng tay | Quản lý kế toán › Gạch nợ bổ sung TT online | GN | Thao tác tay — ⚠️ không dùng thay cho gạch nợ tự động khi verify luồng INVOICE |
 | Tra cứu đặt cọc | Quản lý kế toán › Tiền đặt cọc › Tra cứu | GN | Tồn cọc theo hợp đồng / loại cọc (nhánh Cọc) |
 | Tra cứu tiền trả trước | Quản lý kế toán › Cước trả trước › Tra cứu new | HK | Verify add tiền trả trước (BR-HK-09) |
+| Cập nhật tình trạng PĐK | Báo cáo phiếu đăng ký › Duyệt HD › Chuyển tình trạng PDK | XHD | Chuẩn bị hợp đồng doanh nghiệp đã / chưa duyệt PĐK (BR-XHD-03, CL-XHD-07) |
+| Kiểm tra trạng thái PĐK | Web admin › Chi tiết đơn hàng › Thông tin khác › Thông tin duyệt đơn | XHD | Mỗi kênh bán test 1 hợp đồng doanh nghiệp (CL-XHD-07) |
 
 > ⚠️ QC **không có quyền xem log** (CL-XHD-15, CL-XHD-19, CL-HK-06) — verify bằng hành vi trên các tool trên, không verify cột Note / log.
 

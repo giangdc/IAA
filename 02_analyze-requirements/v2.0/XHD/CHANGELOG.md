@@ -58,6 +58,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | CL-XHD-34: QC owner xác nhận thiết bị nào có tín hiệu giao hàng thì xuất hóa đơn thiết bị đó (không chờ cả đơn hoàn tất). Không đổi SC | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-XHD-01 (SPF chỉ gửi thanh toán / hủy đơn; thông tin khách lấy từ hợp đồng; thời gian tạo đơn xem trên Web admin), 02 (khách không bấm Xuất hóa đơn trong 2 giờ ⇒ không phát hành), 03 (trường bắt buộc FPL), 08, 14 (trạng thái không hợp lệ), 15 (dừng ở lỗi đầu; đơn không có khuyến mãi vẫn phát hành), 18 (Billing lỗi ⇒ dev retry tay), 26 · **làm rõ thêm** CL-XHD-04 (2 mốc 2 giờ trùng nhau), 07 (chưa duyệt PĐK ⇒ xuất tay), 12, 27 (file HT Triển khai là danh mục chính thức) · ghi nhận CL-XHD-23, 24, 31. SC-XHD-020, 032, 033, 034, 050, 065, 080, 081 (QC owner giữ: đơn chưa có thông tin hợp đồng), 082, 095, 104 viết lại Then | QC trả lời 19/10/2026 (file câu hỏi vòng 3) | cl_open 26→18 · blocked_by_cl 18→9 |
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-04:** delay 2 giờ kênh FPL áp cả dòng dịch vụ và dòng thiết bị — SC-XHD-050 ghi rõ | QC owner 19/10/2026 | cl_open 18→17 |
+| 2026-10-19 | UPDATE | CL-XHD-07 làm rõ thêm: tool cập nhật / kiểm tra trạng thái PĐK (thêm vào `07_environments/environments.md`); mỗi kênh bán test 1 hợp đồng doanh nghiệp. Còn mở: PĐK của đơn bán thêm | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
