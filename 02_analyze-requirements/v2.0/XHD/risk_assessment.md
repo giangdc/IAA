@@ -6,7 +6,7 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module XHD
   cl: 34
-  cl_open: 18
+  cl_open: 17
   cl_blocking: 3        # CL chặn sinh TC / execute (đánh dấu ⛔ BLOCKING)
   risk: 10
   risk_high: 6
@@ -122,7 +122,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-04 · Mốc delay 2h của FPL: "thời gian tạo đơn" hay "thời điểm ghi nhận trên hệ thống của kênh"? Áp cho DV hay cả TB?
-📍 `DOC-v2.0-01 BR-XHD-03 (L399)` ↔ `BR-DB-03 (L358)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-51 (Major)
+📍 `DOC-v2.0-01 BR-XHD-03 (L399)` ↔ `BR-DB-03 (L358)`  ·  Status: **Resolved 19/10/2026** · GAP-51 (Major)
 
 **BR-XHD-03** — `L399`
 > Kênh bán FPL: Xét delay 2h (lấy chuẩn theo thời gian tạo đơn)
@@ -139,6 +139,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA (vòng 2):** (1) Delay 2h xét xuất hóa đơn kênh FPL áp cho dòng DV, dòng TB hay cả hai? (2) "Thời điểm ghi nhận trên hệ thống của kênh" (mốc bắt đầu 2 giờ nhập thông tin) có trùng "thời gian tạo đơn" (mốc delay 2h) không? Nếu khác nhau, hóa đơn có thể phát hành khi khách vẫn còn thời gian nhập — khi đó dùng thông tin nào?
 
 🟡 **Làm rõ thêm 19/10/2026 (vòng 3)** — "Thời điểm ghi nhận trên hệ thống của kênh" (mốc 2 giờ khách nhập thông tin) **trùng** "thời gian tạo đơn" (mốc delay 2h xét xuất hóa đơn) ⇒ hai mốc cùng gốc, không có trường hợp hóa đơn ra trước khi khách hết hạn nhập. Mốc kiểm tra ở Web admin (CL-XHD-01). SC-XHD-050 hết chờ mốc tính. Còn mở: delay 2h áp cho dòng **dịch vụ**, dòng **thiết bị** hay cả hai — câu trả lời vòng 3 chỉ chép lại câu hỏi. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
+✅ **RESOLVED 19/10/2026 (sau vòng 3)** — Delay 2 giờ xét xuất hóa đơn kênh FPL áp cho **cả dòng dịch vụ và dòng thiết bị**. Mốc = thời gian tạo đơn (Web admin), trùng thời điểm ghi nhận của kênh. SC-XHD-050 áp cả 2 loại dòng. Nguồn: QC owner 19/10/2026.
 
 ---
 

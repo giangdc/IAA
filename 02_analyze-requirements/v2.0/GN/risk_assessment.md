@@ -6,7 +6,7 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module GN
   cl: 10
-  cl_open: 6
+  cl_open: 5
   cl_blocking: 0
   risk: 6
   risk_high: 3
@@ -127,7 +127,7 @@ updated: 2026-10-19
 ---
 
 ### CL-GN-05 · "Mỗi bill chỉ gạch một lần" vs gạch từng phần — bill gạch thiếu có được gạch tiếp khi có Paid mới?
-📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 **BR-GN-01** — `L509`
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
@@ -143,6 +143,8 @@ updated: 2026-10-19
 🟡 **Làm rõ một phần 19/10/2026** — QC: số tiền gạch phải bằng số tiền cần thanh toán; gạch xong bill chuyển "Đã thanh toán" ⇒ không gạch nữa. Còn mở: câu trả lời chưa nói bill **mới gạch một phần** (BR-GN-04 "Gạch từng phần… nhỏ nhất của số dư Paid và nợ còn lại") có được gạch tiếp khi có Paid mới không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC: BR-GN-01 là điều kiện Paid dùng để gạch nợ; BR-GN-04 là gạch từng phần và điều kiện dừng; 1 đơn hàng có nhiều Bill, **mỗi Bill gạch 1 lần**, gạch lần lượt đến khi hết Paid (tiền khách đã thanh toán). Còn mở: Bill đã gạch một phần (Paid hết trước khi hết nợ) có được gạch tiếp khi có Paid mới về không. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
+✅ **RESOLVED 19/10/2026 (sau vòng 3)** — QC owner: Bill chỉ được gạch khi số gạch = nhỏ nhất của số dư Paid và nợ còn lại **bằng đúng nợ còn lại** (Paid đủ trả hết nợ Bill). Paid nhỏ hơn nợ ⇒ **không gạch**, Paid giữ lại; khi Paid tích lũy đủ nợ thì mới gạch (vd Bill nợ 500.000, Paid 300.000 ⇒ không gạch; Paid đủ 500.000 ⇒ gạch 500.000). Mỗi Bill gạch 1 lần. ⚠️ Khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner. SC-GN-031 viết lại Then. Nguồn: QC owner 19/10/2026.
 
 ---
 

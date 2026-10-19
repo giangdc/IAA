@@ -74,7 +74,7 @@ updated: 2026-10-19
 | SC-GN-028 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | Đơn có 3 bill 300k / 500k / 100k, luồng Paid, Paid 600k | Gạch nợ chạy | Thứ tự gạch 500k → 300k (gạch 100k) → 100k (chưa gạch); bill 500k hết nợ | P1 | Functional | NEW |
 | SC-GN-029 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L514) | Đơn có ≥2 bill, luồng **Cọc** | Gạch nợ chạy | Bill được xét từ cao xuống thấp | P1 | Functional | NEW |
 | SC-GN-030 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | 2 bill **bằng tiền nhau**, Paid chỉ đủ 1 bill | Gạch nợ chạy | Thứ tự — QC: ưu tiên BillNumber cao nhất ⛔ chờ BA xác nhận chỉ là tie-break (CL-GN-09) | P3 | Boundary | NEW |
-| SC-GN-031 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 500k; Paid 300k | Gạch nợ chạy | Gạch 300k; hóa đơn còn nợ 200k; Paid còn 0; dừng vì hết Paid | P1 | Boundary | NEW |
+| SC-GN-031 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 500k; Paid 300k | Gạch nợ chạy | **Không gạch** (Paid 300k < nợ 500k); hóa đơn còn nợ 500k; Paid 300k giữ lại — khi Paid tích lũy đủ 500k thì gạch 500k (CL-GN-05, 19/10/2026) | P1 | Boundary | NEW |
 | SC-GN-032 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 300k; Paid 500k | Gạch nợ chạy | Gạch 300k; hóa đơn hết nợ; **Paid dư 200k được giữ** | P1 | Boundary | NEW |
 | SC-GN-033 | Gạch từng phần | REQ-GN-014, REQ-GN-015 | DOC-v2.0-01 BR-GN-04 (L518) | Hóa đơn nợ 500k; Paid 500k | Gạch nợ chạy | Gạch 500k; hóa đơn "Đã gạch nợ"; Paid còn 0 | P1 | Boundary | NEW |
 | SC-GN-034 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518) | Luồng Paid, hóa đơn còn nợ | Một lần gạch thực hiện | 3 đầu ra: dòng Payment ghi nhận · Paid bị trừ đúng số tiền · Kafka Out đẩy về kênh thanh toán | P1 | Integration | NEW |
@@ -366,7 +366,7 @@ updated: 2026-10-19
 > Mỗi lần gạch = nhỏ nhất của số dư Paid và nợ còn lại
 > Dừng khi hết nợ hoặc hết Paid
 
-↳ **Ghi chú:** Biên dưới.
+↳ **Ghi chú:** Biên dưới. QC owner: chỉ gạch khi Paid đủ nợ còn lại (CL-GN-05, 19/10/2026).
 
 ---
 

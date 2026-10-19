@@ -159,7 +159,7 @@ updated: 2026-10-19
 > Chỉ lấy dòng Paid có Amount > 0 và cùng OrderCode với hóa đơn.
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
 
-↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần" mâu thuẫn bề ngoài với gạch từng phần BR-GN-04 (bill gạch thiếu, Paid mới về thì gạch tiếp?) — chưa rõ (CL-GN-05).
+↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần": Bill chỉ gạch khi Paid đủ nợ còn lại; Paid thiếu ⇒ không gạch, chờ Paid đủ (CL-GN-05, QC owner 19/10/2026).
 
 ---
 
@@ -180,7 +180,7 @@ updated: 2026-10-19
 > Dừng khi hết nợ hoặc hết Paid; Paid dư được giữ lại.
 > Nhánh Cọc không đẩy Kafka Out.
 
-↳ **Ghi chú:** BVA Paid < nợ / = nợ / > nợ. 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out (payload chưa có — CL-XHD-29).
+↳ **Ghi chú:** BVA Paid < nợ / = nợ / > nợ — QC owner: Paid < nợ ⇒ không gạch, chờ Paid đủ (CL-GN-05, 19/10/2026; khác cách đọc chữ "gạch từng phần"). 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out (payload chưa có — CL-XHD-29).
 
 ---
 

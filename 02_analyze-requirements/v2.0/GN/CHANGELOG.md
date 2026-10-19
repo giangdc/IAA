@@ -45,6 +45,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo CL-GN-02: RISK-GN-02, 04 bỏ SC-GN-049 (không test lỗi / timeout trên STG); §3 Nợ #3 số SC chờ CL 5→3. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | SCOPE↑ | **Hoàn tác SCOPE↓ cùng ngày:** QC owner chốt gạch nợ EVC / voucher **vẫn test**, chờ BA liệt kê loại EVC / voucher. Mở lại CL-GN-01, 08; CL-GN-10 hỏi lại đủ 3 ý; **SC-GN-048 dùng lại** (chờ CL-GN-01, 10); RISK-GN-01 về Open. Ghi rõ khác TP §2.2 #5 (không sửa TP) | QC owner 19/10/2026 | SC 48→49 · deprecated 2→1 · P1 41→42 · cl_open 6→8 · blocked_by_cl 3→4 |
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-GN-06 (phí sàn đã tính vào tiền khách trả ⇒ Paid quyết toán không nhỏ hơn nợ — **deprecated SC-GN-024**), CL-GN-07 (không test map loại cọc; đơn bán thêm vẫn có cọc — SC-GN-050 hết chờ CL) · **làm rõ thêm** CL-GN-08 (INVOICE và đội EVC chạy cùng nhau), CL-GN-10 (**Phụ lục D#4 lấy từ URD 2.1** BR-VC-01..07, BR-GC-04..07, bỏ bước `[Bỏ]` — QC owner) · ghi nhận CL-GN-05 | QC trả lời 19/10/2026 (file câu hỏi vòng 3) + QC owner | SC 49→48 (deprecated 2) · P2 6→5 · cl_open 8→6 · blocked_by_cl 4→2 |
+| 2026-10-19 | UPDATE | **Đóng CL-GN-05:** Bill chỉ gạch khi Paid đủ nợ còn lại; Paid thiếu ⇒ không gạch, chờ Paid đủ (khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner). SC-GN-031 viết lại Then | QC owner 19/10/2026 | cl_open 6→5 |
 
 ## 2. Ràng buộc còn hiệu lực
 

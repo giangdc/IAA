@@ -100,7 +100,7 @@ updated: 2026-10-19
 | SC-XHD-047 | Lịch FPL | REQ-XHD-017 | DOC-v2.0-01 BR-XHD-01 (L387) | Đơn FPL đã qua delay 2h, đủ điều kiện | Tới mốc worker FPL kế tiếp (2h/lần) | Đơn được phát hành ở mốc đó (chu kỳ 2 giờ, đợt cuối 22:05 — BR-XHD-01; giờ các đợt trước 22:05 ⛔ chờ CL-XHD-05, giả định TP 0:05, 2:05 …) | P1 | Functional | NEW |
 | SC-XHD-048 | Lịch FPL | REQ-XHD-017 | DOC-v2.0-01 BR-XHD-01 (L388) | Đơn FPL tạo trong ngày bị lỡ 2 mốc trước do delay | Tới mốc 22:05 | Mốc 22:05 quét toàn bộ 0h–22h, phát hành các đơn còn sót | P1 | Functional | NEW |
 | SC-XHD-049 | Delay FPL | REQ-XHD-021 | DOC-v2.0-01 BR-XHD-03 (L399) | Đơn FPL đủ điều kiện nhưng mới tạo < 2 giờ | Worker FPL chạy | Đơn **chưa** phát hành ở mốc này; chờ mốc sau | P1 | Negative | NEW |
-| SC-XHD-050 | Delay FPL | REQ-XHD-021 | DOC-v2.0-01 BR-XHD-03 (L399) | Đơn FPL, khách đã bấm Xuất hóa đơn và nhập thông tin; thời gian tạo đơn (Web admin) cách mốc chạy **1:59 / 2:00 / 2:01** | Worker FPL chạy | **1:59 chưa phát hành hóa đơn; 2:00 và 2:01 phát hành** (mốc = thời gian tạo đơn, trùng thời điểm ghi nhận của kênh — CL-XHD-04, 19/10/2026; áp dòng dịch vụ / thiết bị: CL-XHD-04 còn hỏi) | P2 | Boundary | NEW |
+| SC-XHD-050 | Delay FPL | REQ-XHD-021 | DOC-v2.0-01 BR-XHD-03 (L399) | Đơn FPL, khách đã bấm Xuất hóa đơn và nhập thông tin; thời gian tạo đơn (Web admin) cách mốc chạy **1:59 / 2:00 / 2:01** | Worker FPL chạy | **1:59 chưa phát hành hóa đơn; 2:00 và 2:01 phát hành** (mốc = thời gian tạo đơn, trùng thời điểm ghi nhận của kênh ; áp **cả dòng dịch vụ và dòng thiết bị** — CL-XHD-04, 19/10/2026) | P2 | Boundary | NEW |
 | SC-XHD-051 | Realtime FPL | REQ-XHD-026 | DOC-v2.0-01 BR-XHD-06 (L414) | Đơn FPL | Tín hiệu đến **sau 22h** | Xử lý ngay ở realtime | P1 | Functional | NEW |
 | SC-XHD-052 | Realtime FPL | REQ-XHD-026 | DOC-v2.0-01 BR-XHD-06 (L414) | Đơn FPL | Tín hiệu đến **sau giờ chốt cuối chung nhưng trước 22h** | **Không** đi realtime; đi worker FPL (mốc kế tiếp / 22:05) | P1 | Negative | NEW |
 | SC-XHD-053 | Delay FPL | REQ-XHD-014, REQ-XHD-021 | DOC-v2.0-01 BR-XHD-01 (L380) | Đơn kênh **khác FPL** mới tạo < 2 giờ, đủ điều kiện | Worker đợt chung chạy | Đơn phát hành bình thường — delay 2h và lịch 2h/lần chỉ áp FPL | P2 | Negative | NEW |
@@ -615,7 +615,7 @@ updated: 2026-10-19
 
 > Kênh bán FPL: Xét delay 2h (lấy chuẩn theo thời gian tạo đơn)
 
-↳ **Ghi chú:** Biên 1:59 / 2:00 / 2:01 — "đủ 2h" được hiểu là ≥ 2h (suy diễn). Mốc = thời gian tạo đơn xem trên Web admin, trùng thời điểm ghi nhận của kênh (CL-XHD-04, 19/10/2026). Khách không bấm Xuất hóa đơn trong 2 giờ ⇒ không phát hành (CL-XHD-02).
+↳ **Ghi chú:** Biên 1:59 / 2:00 / 2:01 — "đủ 2h" được hiểu là ≥ 2h (suy diễn). Mốc = thời gian tạo đơn xem trên Web admin, trùng thời điểm ghi nhận của kênh; áp cả dòng dịch vụ và dòng thiết bị (CL-XHD-04, 19/10/2026). Khách không bấm Xuất hóa đơn trong 2 giờ ⇒ không phát hành (CL-XHD-02).
 
 ---
 

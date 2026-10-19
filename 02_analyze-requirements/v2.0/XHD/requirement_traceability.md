@@ -298,7 +298,7 @@ updated: 2026-10-19
 
 > Kênh bán FPL: Xét delay 2h (lấy chuẩn theo thời gian tạo đơn)
 
-↳ **Ghi chú:** Đơn FPL chỉ đủ điều kiện phát hành khi đã qua 2 giờ kể từ tạo đơn — **suy diễn của analyst:** delay để chờ khách nhập thông tin hóa đơn (REQ-XHD-007). Áp cho DV hay cả TB, và mốc "tạo đơn" có trùng "thời điểm ghi nhận trên hệ thống của kênh" không: CL-XHD-04 / GAP-51.
+↳ **Ghi chú:** Đơn FPL chỉ đủ điều kiện phát hành khi đã qua 2 giờ kể từ tạo đơn — **suy diễn của analyst:** delay để chờ khách nhập thông tin hóa đơn (REQ-XHD-007). **Chốt 19/10/2026 (CL-XHD-04):** áp cả dòng dịch vụ và dòng thiết bị; mốc "tạo đơn" trùng "thời điểm ghi nhận trên hệ thống của kênh".
 
 ---
 
