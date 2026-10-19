@@ -42,7 +42,7 @@ updated: 2026-10-16
   - **Runtime** = sinh khi chạy (ký hiệu, ID hóa đơn, payload đẩy, cờ đã add) — không cố định trước.
 - Boundary values (in **đậm**) là ứng viên chính cho BVA ở generate-tc.
 - Bảng map ký hiệu lấy theo URD 2.1 BR-HK-03 (dùng cho Phụ lục D#5 từ 19/10/2026). Phạm vi test chỉ hóa đơn bán mới đầu U (CL-HK-01) — cột M, A của bảng map chỉ để tham chiếu. Dòng chiết khấu không test (CL-HK-03).
-- Tool verify (`07_environments/environments.md §Tool tra cứu`): tiền trả trước → **Quản lý kế toán › Cước trả trước › Tra cứu new**; hóa đơn → **Quản lý kế toán › Liệt kê cước**.
+- Tool verify (`07_environments/environments.md §Tool tra cứu`): tiền trả trước → **Quản lý kế toán › Cước trả trước › Tra cứu new**; hóa đơn → **Quản lý kế toán › Liệt kê cước**; ký hiệu hóa đơn điện tử → cột **Chuyển đổi hóa đơn** › icon máy in ⇒ **biên bản điện tử** (CL-HK-11).
 
 ### Quy ước cell (giữ nhất quán)
 - **Loại data:** đúng 1 trong `Master` / `Fixture` / `Runtime` (xem Ghi chú chung). Field lấy từ danh mục hệ thống → `Master`; field test nhập/tạo → `Fixture`; field hệ thống tự sinh → `Runtime`.

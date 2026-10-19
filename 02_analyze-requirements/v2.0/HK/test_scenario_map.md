@@ -14,7 +14,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p1: 12
   p2: 8
   p3: 0
-  blocked_by_cl: 6
+  blocked_by_cl: 2
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -52,9 +52,9 @@ updated: 2026-10-19
 | SC-HK-005 | Phạm vi đẩy | REQ-HK-003 | DOC-v2.0-01 BR-HK-01 (L571) | **Hợp đồng** có ≥2 đơn hàng, mỗi đơn có **hóa đơn** riêng (1 hóa đơn chỉ thuộc 1 đơn hàng — CL-HK-09) | Hậu kỳ chạy | Thông tin đẩy hậu kỳ của mỗi hóa đơn chỉ gồm dữ liệu của **đơn hàng cấu thành hóa đơn đó**, không lẫn đơn khác cùng hợp đồng (CL-HK-09, 19/10/2026) | P2 | Functional | NEW |
 | SC-HK-006 | Đẩy hóa đơn điện tử | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | Hóa đơn đủ thông tin (ký hiệu, ID, nội dung, tổng tiền theo thuế suất, …) | Hậu kỳ chạy | Dữ liệu được đẩy sang hệ thống hóa đơn điện tử; hóa đơn điện tử được gen | P1 | Integration | NEW |
 | SC-HK-007 | Đẩy hóa đơn điện tử | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L576) | Hóa đơn **thiếu** 1 thông tin (vd vùng của tỉnh không có trong bảng map ⇒ không ra ký hiệu) | Hậu kỳ chạy | **Chưa** đẩy sang hóa đơn điện tử; thời điểm đẩy lại ⛔ chờ CL-HK-05 | P1 | Negative | NEW |
-| SC-HK-008 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-02 BR-HK-03 (L767-785) | Hóa đơn **bán mới** (đầu U) thuộc vùng V | Chuẩn bị ký hiệu | Ký hiệu 7 ký tự `1K<yy>T<xx>`, `<xx>` theo đầu U: V1 `QA` · V2 `EA` · V3 `GA` · V4 `MA` · V6 `OA` · V7 `YA` (vd `1K26TQA`) — chỉ test đầu U (CL-HK-01) — điểm verify ký hiệu ⛔ chờ CL-HK-11 | P1 | Functional | NEW |
-| SC-HK-009 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L784) | Hóa đơn bán mới (đầu U) đơn vị **FPL** | Chuẩn bị ký hiệu | Hai ký tự cuối = `PA` (đầu U của FPL) — điểm verify ký hiệu ⛔ chờ CL-HK-11 | P2 | Functional | NEW |
-| SC-HK-010 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L781) | Hóa đơn bán mới (đầu U) thuộc **Vùng 5** | Chuẩn bị ký hiệu | Dùng chung Vùng 1: hai ký tự cuối = `QA` — điểm verify ký hiệu ⛔ chờ CL-HK-11 | P2 | Functional | NEW |
+| SC-HK-008 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-02 BR-HK-03 (L767-785) | Hóa đơn **bán mới** (đầu U) thuộc vùng V | Chuẩn bị ký hiệu | Ký hiệu 7 ký tự `1K<yy>T<xx>`, `<xx>` theo đầu U: V1 `QA` · V2 `EA` · V3 `GA` · V4 `MA` · V6 `OA` · V7 `YA` (vd `1K26TQA`) — chỉ test đầu U (CL-HK-01) — verify trên biên bản điện tử (cột Chuyển đổi hóa đơn › icon máy in — CL-HK-11) | P1 | Functional | NEW |
+| SC-HK-009 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L784) | Hóa đơn bán mới (đầu U) đơn vị **FPL** | Chuẩn bị ký hiệu | Hai ký tự cuối = `PA` (đầu U của FPL) — verify trên biên bản điện tử (cột Chuyển đổi hóa đơn › icon máy in — CL-HK-11) | P2 | Functional | NEW |
+| SC-HK-010 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-02 BR-HK-03 (L781) | Hóa đơn bán mới (đầu U) thuộc **Vùng 5** | Chuẩn bị ký hiệu | Dùng chung Vùng 1: hai ký tự cuối = `QA` — verify trên biên bản điện tử (cột Chuyển đổi hóa đơn › icon máy in — CL-HK-11) | P2 | Functional | NEW |
 | SC-HK-011 | ID hóa đơn | REQ-HK-006 | DOC-v2.0-01 BR-HK-03 (L582) ↔ DOC-v2.0-02 BR-HK-04 (L787-792) | Hóa đơn loại đầu U, năm 2026, hợp đồng địa chỉ Hà Nội, số hóa đơn 01053692 | Chuẩn bị ID | ID = `U26HN01053692` (loại đầu + năm 2 số + mã tỉnh theo **địa chỉ hợp đồng** + số hóa đơn); số hóa đơn trùng trường Số (Invoice No) trên hóa đơn điện tử | P1 | Functional | NEW |
 | SC-HK-012 | Nội dung hiển thị | REQ-HK-007 | DOC-v2.0-01 BR-HK-05 (L588) | Dòng DV có số tháng sử dụng trên SPF | Chuẩn bị nội dung | Nội dung = tên dịch vụ + số tháng; không có "từ ngày – đến ngày"; không lấy nguyên tên gốc trên đơn | P1 | Functional | NEW |
 | SC-HK-013 | Tổng tiền theo thuế suất | REQ-HK-008 | DOC-v2.0-01 BR-HK-07 (L592) | Hóa đơn có dòng ở đủ 5 mức: KCT, 0%, 5%, 8%, 10% | Chuẩn bị tổng tiền | 5 dòng (thành tiền, thuế GTGT, tổng cộng mỗi mức) + 1 dòng tổng cộng chung = tổng các mức | P1 | Functional | NEW |
@@ -63,7 +63,7 @@ updated: 2026-10-19
 | SC-HK-016 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước ở hóa đơn 1 | Hóa đơn 2 của cùng đơn phát hành | **Không** add tiền trả trước lần 2 | P1 | Negative | NEW |
 | SC-HK-017 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn đã add tiền trả trước | Invoice Event của cùng hóa đơn bị gửi lặp | Không add lại (idempotent) | P2 | Negative | NEW |
 | SC-HK-018 | Đẩy hóa đơn điện tử | REQ-HK-004 | DOC-v2.0-01 BR-HK-02 (L575) | Hệ thống hóa đơn điện tử lỗi / timeout (mock) | Đẩy hóa đơn điện tử | (giả định TP: đẩy lại lần sau) — ⛔ chờ CL-HK-05 | P2 | Negative | NEW |
-| SC-HK-020 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | Hóa đơn của đơn **bán thêm** | Chuẩn bị ký hiệu | Dùng **đầu U** như hóa đơn bán mới — hai ký tự cuối theo vùng (vd Vùng 1 `QA`) (CL-HK-01, 19/10/2026) — điểm verify ký hiệu ⛔ chờ CL-HK-11 | P2 | Functional | NEW |
+| SC-HK-020 | Ký hiệu hóa đơn | REQ-HK-005 | DOC-v2.0-01 BR-HK-03 (L581) ↔ DOC-v2.0-04 | Hóa đơn của đơn **bán thêm** | Chuẩn bị ký hiệu | Dùng **đầu U** như hóa đơn bán mới — hai ký tự cuối theo vùng (vd Vùng 1 `QA`) (CL-HK-01, 19/10/2026) — verify trên biên bản điện tử (cột Chuyển đổi hóa đơn › icon máy in — CL-HK-11) | P2 | Functional | NEW |
 | SC-HK-021 | Tiền trả trước | REQ-HK-009 | DOC-v2.0-01 BR-HK-09 (L596) | Đơn có **hóa đơn** đầu tiên chỉ gồm thiết bị (hóa đơn dịch vụ phát hành sau) | Hóa đơn TB phát hành | **Không** add tiền trả trước ở hóa đơn chỉ gồm thiết bị; add 1 lần khi **hóa đơn có dịch vụ trả trước** phát hành (CL-HK-07, 19/10/2026) | P2 | Functional | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)

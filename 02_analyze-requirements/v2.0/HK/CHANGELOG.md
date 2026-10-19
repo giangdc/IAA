@@ -47,6 +47,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | Dọn chữ cũ theo câu trả lời QC owner: Tổng quan + RISK-HK-01 (bảng map theo URD 2.1, chỉ đầu U, còn chờ CL-HK-11), RISK-HK-04 (bỏ SC-HK-019 — không test lỗi trên STG), RISK-HK-05 → Out-scope (CL-HK-02), REQ-HK-005 ghi chú, quy tắc đủ scenario + ghi chú SC-HK-020, §3 Nợ #4. Không đổi REQ / SC / CL | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | QC trả lời CL vòng 3: **đóng** CL-HK-09 (1 hóa đơn chỉ thuộc 1 đơn hàng; 1 hợp đồng có nhiều đơn hàng — SC-HK-005 giữ, viết lại Given / Then) · **làm rõ thêm** CL-HK-07 (mỗi đơn chỉ add tiền trả trước 1 lần; còn hỏi add ở hóa đơn nào) | QC trả lời 19/10/2026 (file câu hỏi vòng 3) | cl_open 6→5 · blocked_by_cl 8→7 |
 | 2026-10-19 | UPDATE | **Đóng CL-HK-07:** tiền trả trước add 1 lần / đơn vào **hợp đồng**, lấy theo **hóa đơn có dịch vụ trả trước** (hóa đơn chỉ thiết bị không add); đơn bán thêm giống bán mới. SC-HK-015, 021 viết lại Then; SC-HK-021 hết chờ CL | QC owner 19/10/2026 | cl_open 5→4 · blocked_by_cl 7→6 |
+| 2026-10-19 | UPDATE | **Đóng CL-HK-11:** ký hiệu hóa đơn điện tử kiểm trên biên bản điện tử (Danh sách hóa đơn › cột Chuyển đổi hóa đơn › icon máy in) — SC-HK-008, 009, 010, 020 hết chờ CL; tool thêm vào `07_environments/environments.md` | QC owner 19/10/2026 | cl_open 4→3 · blocked_by_cl 6→2 |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -62,5 +63,5 @@ updated: 2026-10-19
 |---|---|---|---|
 | 1 | 🔴 REQ-HK-010 (dòng EVC, chiết khấu, thông tin theo mẫu) **chưa có SC** | Chỉ có tên, đặc tả chuyển D#6 — CL-HK-03 ⛔ (GAP-04 Blocker, TP đề xuất Out-scope) | PM chốt Out-scope ⇒ ghi `SCOPE↓` ở §1; nếu in-scope ⇒ `--update` thêm SC |
 | 2 | ✅ CL-HK-01, CL-HK-10 đã đóng 19/10/2026 — ký hiệu / ID theo URD 2.1, chỉ đầu U (bán mới + bán thêm) | — | — |
-| 3 | 🟡 6 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
+| 3 | 🟡 2 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
 | 4 | ✅ CL-HK-09 đã đóng 19/10/2026 vòng 3 (1 hóa đơn chỉ thuộc 1 đơn hàng) · ✅ CL-HK-08 đã đóng 19/10/2026 (mã tỉnh theo địa chỉ hợp đồng) | — | — |
