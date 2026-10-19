@@ -6,7 +6,7 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module XHD
   cl: 34
-  cl_open: 17
+  cl_open: 16
   cl_blocking: 3        # CL chặn sinh TC / execute (đánh dấu ⛔ BLOCKING)
   risk: 10
   risk_high: 6
@@ -40,7 +40,7 @@ updated: 2026-10-19
 | RISK-XHD-07 | XHD / thời gian | Nhiều SC phụ thuộc giờ chốt, cuối tháng, qua nửa đêm ⇒ khó tái hiện trên STG nếu không chỉnh được giờ hệ thống / tham số lịch | Medium | DOC-v2.0-01 BR-XHD-01 (L381-385); TP §3.2 | SC-XHD-041..046, 054..056, 063, 064 | Xác nhận với dev cách chỉnh tham số lịch + giờ hệ thống STG trước R1 | Open | SC-XHD-041..046, SC-XHD-054..056, SC-XHD-063, SC-XHD-064 · REQ-XHD-014..016 |
 | RISK-XHD-08 | XHD / ma trận kênh × DV | 17 kênh × 20 nhóm × 2 loại đơn = 680 tổ hợp, không có ma trận kênh nào bán nhóm nào; mỗi kênh cần tài khoản / cách tạo đơn trên STG | Medium | DOC-v2.0-01 §A.2, §A.3; TP §2.3 GAP-62 | SC-XHD-001..017 | Xin ma trận thực bán (CL-XHD-26); ưu tiên Shopee/Tiktok (hồi quy) + FPL | Open | SC-XHD-001..017 · REQ-XHD-001, REQ-XHD-002 |
 | RISK-XHD-09 | XHD / hồi quy Phase 1 | Chưa nhận URD v1.0 ⇒ không biết hành vi TMĐT nào giữ / đổi; "Có điều chỉnh ver2.0" không liệt kê điều chỉnh | Medium | DOC-v2.0-01 §A.2 (L133, L137), §A.4 #2 | SC-XHD-016, 017, 029, 060 | Xin URD v1.0 (CL-XHD-31); chưa có thì chỉ test theo URD 2.2 | Open | SC-XHD-016, SC-XHD-017, SC-XHD-029, SC-XHD-060 · REQ-XHD-005, REQ-XHD-020 |
-| RISK-XHD-10 | XHD / cutover v1 → v2 | Đơn dở dang lúc go-live có thể bị bỏ sót hoặc phát hành lại; cơ chế theo URD 2.1 BR-DB-08 (kiểm tra chéo mức đơn hàng, mỗi bản tin một luồng); STG có luồng cũ để test chưa rõ. ⛔ Quét tay bổ sung đơn bị bỏ sót: ngoài scope test (TP §2.2 #8) | Medium | DOC-v2.0-01 §D#1 (L658-661) · DOC-v2.0-02 BR-DB-08 (L297-305) | SC-XHD-107, 108 | PM xác nhận STG có luồng cũ (CL-XHD-24); quét tay không test | Open | SC-XHD-107, SC-XHD-108 · REQ-XHD-041 |
+| RISK-XHD-10 | XHD / cutover v1 → v2 | Đơn dở dang lúc go-live có thể bị bỏ sót hoặc phát hành lại; cơ chế theo URD 2.1 BR-DB-08 (kiểm tra chéo mức đơn hàng, mỗi bản tin một luồng); cutover có test (CL-XHD-24, 19/10/2026). ⛔ Quét tay bổ sung đơn bị bỏ sót: ngoài scope test (TP §2.2 #8) | Medium | DOC-v2.0-01 §D#1 (L658-661) · DOC-v2.0-02 BR-DB-08 (L297-305) | SC-XHD-107, 108 | PM xác nhận STG có luồng cũ (CL-XHD-24); quét tay không test | Open | SC-XHD-107, SC-XHD-108 · REQ-XHD-041 |
 
 > Risk ID format: `RISK-<MODULE>-<NN>` (vd `RISK-PV-01`). Severity = High / Medium / Low (có thể Medium-High).
 > **Solution:** biện pháp giảm thiểu hoặc hướng xử lý cụ thể (vd "resolve C-XXX trước generate-tc", "thêm negative TC cho MSG", "defer tới khi có env"). Chưa có → `—` (nhưng High/Medium nên có).
@@ -478,7 +478,7 @@ updated: 2026-10-19
 ---
 
 ### CL-XHD-24 · Cutover v1 → v2: có test trên STG không? Dữ liệu luồng cũ?
-📍 `DOC-v2.0-01 §D#1 · L658-661`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-32 (Major)
+📍 `DOC-v2.0-01 §D#1 · L658-661`  ·  Status: **Resolved 19/10/2026** · GAP-32 (Major)
 
 > Chuyển đổi hệ thống v1 sang v2 (cutover, giai đoạn giao thoa, quét tay bổ sung).
 > BR-DB-08
@@ -491,6 +491,8 @@ updated: 2026-10-19
 🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02` BR-DB-08 (L297-305): v2.0 ghi hoàn toàn vào bảng mới, tắt service cũ khi go-live; mỗi bản tin Kafka chỉ một luồng xử lý (L300); giai đoạn giao thoa luồng mới kiểm tra chéo dữ liệu cũ **mức đơn hàng** — đơn đã ra hóa đơn ở luồng cũ thì luồng mới bỏ qua (L302); kiểm tra chéo là cấu hình bật / tắt. ⇒ **SC-XHD-107, 108 dùng lại** (bỏ deprecated). Quét tay bổ sung: ngoài phạm vi (TP). Còn mở: STG có dữ liệu + service luồng cũ để test không. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
 
 🟡 **Ghi nhận 19/10/2026 (vòng 3)** — QC nhắc lại: quét tay bổ sung đơn bỏ sót giai đoạn giao thoa cutover **không test** (thao tác tay, ngoài phạm vi TP). Chưa trả lời: STG có dữ liệu + service luồng cũ để test kiểm tra chéo (SC-XHD-107, 108) không; ai bật cấu hình. Nguồn: QC trả lời 19/10/2026 vòng 3.
+
+✅ **RESOLVED 19/10/2026** — Cutover **có test**. Input: đơn ở luồng cũ / luồng mới; output: **không mất, không trùng hóa đơn** khi chuyển. Căn cứ URD 2.1 (DOC-v2.0-02): BR-DB-08 (L297-305 — mỗi bản tin chỉ 1 luồng xử lý; luồng mới kiểm tra chéo mức đơn hàng, đơn đã ra hóa đơn ở luồng cũ thì bỏ qua) + BR-XHD-09 (L370-378 — QC owner dẫn: chặn phát hành trùng). SC-XHD-107, 108 hết chờ CL. ⚠️ Lưu ý: BR-DB-08 L304 ghi hệ quả đã biết — đơn đã ra hóa đơn dịch vụ ở luồng cũ, giao thiết bị sau go-live ⇒ phần thiết bị **bị bỏ sót**, quét tay bổ sung (ngoài phạm vi TP) ⇒ case này kỳ vọng "bỏ sót", không phải lỗi. Nguồn: QC owner 19/10/2026.
 
 ---
 

@@ -14,7 +14,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p1: 84
   p2: 24
   p3: 1
-  blocked_by_cl: 9      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
+  blocked_by_cl: 7      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
 updated: 2026-10-19
 ---
@@ -155,8 +155,8 @@ updated: 2026-10-19
 | SC-XHD-104 | Phát hành Billing | REQ-XHD-035 | DOC-v2.0-01 BR-XHD-13 (L439) | Billing lỗi / timeout (mock) | Worker gọi phát hành | **Không phát hành** (BillNumber rỗng); hệ thống ghi lỗi, dev retry bằng tay — không retry tự động (CL-XHD-18, 19/10/2026) | P2 | Negative | NEW |
 | SC-XHD-105 | 1 đơn n hóa đơn | REQ-XHD-038 | DOC-v2.0-01 BR-XHD-14 (L446-447) | Đơn có DV + TB ở 2 phương thức, đủ điều kiện ở 3 thời điểm khác đợt | Lần lượt các đợt / realtime chạy | Đơn có **3 BillNumber**; `OB_OrderBill` liên kết đủ 3; mỗi hóa đơn có thể nhiều dòng | P1 | Functional | NEW |
 | SC-XHD-106 | Bán thêm | REQ-XHD-040 | DOC-v2.0-04 mail PM | Hợp đồng đang hoạt động có đơn **bán thêm** (DV / TB) | Đơn đi qua các điều kiện phát hành như đơn bán mới | Xuất hóa đơn theo cùng rule đơn bán mới; hóa đơn gắn đúng đơn bán thêm (CL-XHD-25, 19/10/2026) | P1 | Functional | NEW |
-| SC-XHD-107 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L302) | Đơn đã ra hóa đơn ở luồng cũ (v1), kiểm tra chéo đang bật | Bản tin của đơn về luồng mới | Luồng mới **không** xử lý đơn — ⛔ chờ CL-XHD-24 (STG có luồng cũ không) | P2 | Regression | NEW |
-| SC-XHD-108 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L300) | Cả 2 luồng cùng đọc Kafka | 1 bản tin được luồng mới ghi | Luồng cũ không ghi bản tin đó (và ngược lại) — ⛔ chờ CL-XHD-24 | P2 | Regression | NEW |
+| SC-XHD-107 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L302) | Đơn đã ra hóa đơn ở luồng cũ (v1), kiểm tra chéo đang bật | Bản tin của đơn về luồng mới | Luồng mới **không** xử lý đơn ⇒ không trùng hóa đơn (CL-XHD-24, 19/10/2026) | P2 | Regression | NEW |
+| SC-XHD-108 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L300) | Cả 2 luồng cùng đọc Kafka | 1 bản tin được luồng mới ghi | Luồng cũ không ghi bản tin đó (và ngược lại) ⇒ không mất, không trùng hóa đơn (CL-XHD-24, 19/10/2026) | P2 | Regression | NEW |
 | SC-XHD-109 | HT triển khai | REQ-XHD-043 | DOC-v2.0-05 dòng 8 | Đơn có TB DeployType = "Không" (và đơn mix "Không" + TIN/PNC) | Không có / có phiếu thi công TINPNC | QC: xuất hóa đơn khi đơn hoàn tất — chưa có căn cứ URD ⛔ chờ CL-XHD-27, CL-XHD-34 | P2 | Functional | NEW |
 | SC-XHD-110 | Điều kiện phát hành | REQ-XHD-019, REQ-XHD-025 | DOC-v2.0-01 BR-XHD-06 (L412) ↔ BR-DB-07 (L374) | Đơn có **2 TB cùng phương thức** triển khai A; DV đã phát hành | Tín hiệu giao hàng hoàn tất của A chỉ mang **TB1** (giao thiếu TB2) | Chỉ TB1 phát hành; TB2 giữ BillNumber rỗng, chờ tín hiệu riêng (CL-XHD-10) | P1 | Functional | NEW |
 | SC-XHD-111 | Hợp lệ | REQ-XHD-031, REQ-XHD-015 | DOC-v2.0-01 BR-XHD-10 (L428) ↔ BR-XHD-01 (L384) | Dòng bị chặn trong ngày N vì thiếu thông tin | Thông tin được bổ sung **sau giờ chốt cuối ngày N** (hoặc ngày N+1) | Hệ thống **không** tự phát hành lại dòng ở các đợt sau (không giữ chờ — CL-XHD-17); dòng giữ BillNumber rỗng | P2 | Negative | NEW |
