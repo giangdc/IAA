@@ -6,7 +6,7 @@ version: v2.0
 module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   cl: 11
-  cl_open: 3
+  cl_open: 2
   cl_blocking: 1
   risk: 5
   risk_high: 2
@@ -124,13 +124,15 @@ updated: 2026-10-19
 ---
 
 ### CL-HK-05 · Đẩy hóa đơn điện tử lỗi / chưa đủ thông tin: khi nào đẩy lại? Có đánh dấu / retry?
-📍 `DOC-v2.0-01 BR-HK-02 · L576`  ·  Status: **Open** · GAP-18 (Critical)
+📍 `DOC-v2.0-01 BR-HK-02 · L576`  ·  Status: **Resolved 19/10/2026** · GAP-18 (Critical)
 
 > Chưa đủ thì chưa đẩy.
 
 ↳ **Ghi chú:** Không có trigger đẩy lại, không có hành vi lỗi. TP giả định "đẩy lại lần sau" (SC-HK-007, 018).
 
 **Câu hỏi cho BA:** Khi chưa đủ thông tin hoặc hóa đơn điện tử lỗi: dòng được đánh dấu gì, ai / job nào đẩy lại, có cảnh báo?
+
+✅ **RESOLVED 19/10/2026** — Đẩy hóa đơn điện tử lỗi ⇒ **báo dev retry thủ công**; hệ thống không tự đẩy lại. SC-HK-007, 018 verify: hóa đơn **chưa** được đẩy sang hệ thống hóa đơn điện tử (không có retry tự động). Nguồn: QC owner 19/10/2026.
 
 ---
 

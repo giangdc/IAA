@@ -47,7 +47,7 @@ updated: 2026-10-19
 > (...)
 > Thông tin dịch vụ và tiền dịch vụ được đẩy đúng theo từng đơn hàng cấu thành hóa đơn; đã add tiền trả trước cho khách.
 
-↳ **Ghi chú:** Trigger = Invoice Event của XHD (REQ-XHD-037). Actor: INVOICE, hệ thống hóa đơn điện tử, hệ thống Dịch vụ (L555). Hai nhánh độc lập ⇒ một nhánh lỗi không chặn nhánh kia — **suy diễn của analyst**, URD không có hành vi lỗi (CL-HK-05, 06).
+↳ **Ghi chú:** Trigger = Invoice Event của XHD (REQ-XHD-037). Actor: INVOICE, hệ thống hóa đơn điện tử, hệ thống Dịch vụ (L555). Hai nhánh độc lập ⇒ một nhánh lỗi không chặn nhánh kia — **suy diễn của analyst**, Lỗi ⇒ dev retry thủ công (CL-HK-05, 06).
 
 ---
 
@@ -76,7 +76,7 @@ updated: 2026-10-19
 > Chưa đủ thì chưa đẩy.
 > Hệ thống HĐĐT không truy vấn ngược dữ liệu đơn hàng.
 
-↳ **Ghi chú:** 6 nhóm thông tin; 3 nhóm có rule ở 2.2 (ký hiệu + ID — REQ-HK-005, 006; nội dung — REQ-HK-007; tổng tiền — REQ-HK-008), 2 nhóm (dòng EVC, thông tin theo mẫu) chỉ có tên (REQ-HK-010). "Chưa đủ thì chưa đẩy" ⇒ khi nào đẩy lại? URD không nói (CL-HK-05).
+↳ **Ghi chú:** 6 nhóm thông tin; 3 nhóm có rule ở 2.2 (ký hiệu + ID — REQ-HK-005, 006; nội dung — REQ-HK-007; tổng tiền — REQ-HK-008), 2 nhóm (dòng EVC, thông tin theo mẫu) chỉ có tên (REQ-HK-010). "Chưa đủ thì chưa đẩy"; lỗi ⇒ báo dev retry thủ công (CL-HK-05, 19/10/2026).
 
 ---
 
