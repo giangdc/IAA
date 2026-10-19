@@ -5,13 +5,13 @@ type: risk_assessment
 version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module GN
-  cl: 9
-  cl_open: 9
-  cl_blocking: 1
+  cl: 10
+  cl_open: 8
+  cl_blocking: 0
   risk: 6
   risk_high: 3
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Risk Assessment — v2.0 · Module GN
@@ -51,14 +51,14 @@ updated: 2026-10-16
 1. **Resolve blocker clarifications trước generate-tc** các scenario liên quan: CL-GN-01 (⛔ Paid voucher), CL-GN-02, CL-GN-08 (ranh giới EVC), CL-GN-03 (kênh sàn).
 2. **Ưu tiên test P1 high-risk:** SC-GN-011..013, 017, 019, 022, 023, 031..034, 040, 046 (+ hồi quy Shopee/Tiktok qua SC-GN-019, 022).
 3. **Performance / cần môi trường:** không có NFR; mock API kênh thanh toán + đội EVC + consumer Kafka Out là điều kiện chạy (RISK-GN-04).
-4. **ID/text cleanup (non-blocking, cần trước automation):** 2.2 gọi "gỡ gạch nợ tạm", 2.1 gọi "hất nợ tạm" / "xóa gạch nợ tạm" — TC dùng thống nhất "gỡ gạch nợ tạm".
+4. **ID/text cleanup (non-blocking, cần trước automation):** TC dùng thống nhất thuật ngữ "gỡ gạch nợ tạm" của URD 2.2.
 
 ## Clarifications (home CL — layout v2)
 
 > 1 CL = 1 heading `### CL-GN-NN · <câu hỏi ngắn>`. Dòng META mang `Status` (+ `⛔ BLOCKING`) và mã GAP. Khi resolved: **thêm** `✅ RESOLVED <ngày> — <kết luận>`, giữ phần phân tích cũ.
 
-### CL-GN-01 · Paid voucher có bị loại khỏi gạch nợ của INVOICE không? ⛔ BLOCKING
-📍 `DOC-v2.0-01 BR-DP-01 (L474)` ↔ `BR-GN-01 (L508)` ↔ `BR-VC (L545)`  ·  Status: **Open — ⛔ BLOCKING** (nhánh Paid có voucher) · GAP-40 (Critical)
+### CL-GN-01 · Paid voucher có bị loại khỏi gạch nợ của INVOICE không?
+📍 `DOC-v2.0-01 BR-DP-01 (L474)` ↔ `BR-GN-01 (L508)` ↔ `BR-VC (L545)`  ·  Status: **Open — đã rõ một phần 19/10/2026** (nhánh Paid có voucher) · GAP-40 (Critical)
 
 **BR-DP-01 — đồng bộ cả voucher** — `L474`
 > Paid đồng bộ 1:1 từ Orderpaid theo OrderCode, gồm cả voucher và tiền khách thanh toán; mỗi Paid gán PaidType theo nguồn tiền.
@@ -69,43 +69,43 @@ updated: 2026-10-16
 **BR-VC — EVC do đội EVC gạch** — `L545`
 > Phần gạch nợ bằng EVC do đội EVC thực hiện; ISC tự quyết phương thức quản trị và xử lý voucher.
 
-**Màn hiện hữu — Payment gồm cả voucher** — `DOC-v2.0-FIG-01` bảng "Liệt kê các khoản đã thanh toán"
+**Màn hiện hữu — Payment gồm cả voucher** — `DOC-v2.0-FIG-01` (ảnh: Chi tiết hóa đơn.png) bảng "Liệt kê các khoản đã thanh toán"
 > 1 | Cuoc K+ | U25SG00002918 | 155,000 | System1 | (17/11/2025)
 > 2 | Cuoc K+ | U25SG00002918 | 10,000 | phieumuahang4 | Voucher(17/11/2025)
 
-↳ **Ghi chú:** Đọc đúng chữ thì INVOICE dùng mọi Paid Amount > 0, kể cả voucher ⇒ gạch trùng với đội EVC. Màn hiện hữu (HĐ 2025, trước Phase 2) cho thấy khoản voucher được ghi thành 1 dòng thanh toán riêng trên HĐ — không cho biết bên nào ghi. 2.1 có nhóm Payment Hub (voucher thẻ, gateway) với Owner = INVOICE (L629) — 2.2 chuyển D#4. Mail PM "EVC cần test => theo rule URD" không trả lời điểm này. TP giả định loại Paid voucher (SC-GN-048).
+↳ **Ghi chú:** Đọc đúng chữ thì INVOICE dùng mọi Paid Amount > 0, kể cả voucher ⇒ gạch trùng với đội EVC. Màn hiện hữu (HĐ 2025, trước Phase 2) cho thấy khoản voucher được ghi thành 1 dòng thanh toán riêng trên HĐ — không cho biết bên nào ghi. Cấu hình EVC (PaidType, Owner gạch) 2.2 chuyển D#4 — chưa có đặc tả (CL-GN-10). Mail PM "EVC cần test => theo rule URD" không trả lời điểm này. TP giả định loại Paid voucher (SC-GN-048).
 
 **Câu hỏi cho BA:** Khi gạch nợ nhánh Paid, INVOICE dùng (a) chỉ Paid tiền khách hay (b) cả Paid voucher? Nếu (b): voucher nhóm nào (Payment Hub?) và đội EVC có bỏ qua khoản đó không?
+
+🟡 **Làm rõ một phần 19/10/2026** — Gạch nợ của INVOICE dùng **cả Paid voucher và các loại voucher giảm tiền** (không loại voucher) — bỏ giả định TP; SC-GN-048 đổi Then. Hết BLOCKING. Còn mở: đội EVC có bỏ qua khoản voucher này không (tránh gạch 2 lần). Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 ---
 
 ### CL-GN-02 · Nguồn tổng tiền EVC + tiền lock; API lỗi / timeout xử lý ra sao?
-📍 `DOC-v2.0-01 BR-VC (L546)` + `BR-GC-01 (L529)` ↔ `DOC-v2.0-02 §II đối tượng "Tiền EVC của đơn hàng" (L475-476)`  ·  Status: **Open** · GAP-16 (Critical)
+📍 `DOC-v2.0-01 BR-VC (L546)` + `BR-GC-01 (L529)`  ·  Status: **Resolved 19/10/2026** · GAP-16 (Critical)
 
 **URD 2.2** — `L546`
 > Với EVC bị lock (khách chưa ký hợp đồng), INVOICE chừa phần lock khi gạch tiền khách: số gạch = nhỏ nhất của (nợ bill trừ tiền lock) và Paid khách thanh toán.
 
-**URD 2.1 — nguồn dữ liệu** — `DOC-v2.0-02 L476`
-> Lấy qua API của đội EVC, truyền mã đơn hàng, hóa đơn, hợp đồng và list dịch vụ trên hóa đơn; nhận về TỔNG tiền EVC và phần bị LOCK (do khách chưa ký hợp đồng).
-
-↳ **Ghi chú:** 2.2 không nói nguồn; 2.1 nói API đội EVC nhưng không có hành vi lỗi. TP giả định lỗi xử lý như BR-XL-03 (dừng, không retry) — SC-GN-049.
+↳ **Ghi chú:** URD 2.2 không nói nguồn và không có hành vi lỗi. TP giả định lỗi xử lý như BR-XL-03 (dừng, không retry) — SC-GN-049.
 
 **Câu hỏi cho BA:** Xác nhận nguồn = API đội EVC (spec?) và hành vi khi API lỗi / timeout.
+
+✅ **RESOLVED 19/10/2026** — Thực tế đội dự án **retry thủ công**; STG **không test** timeout; API EVC lỗi ⇒ log bug. SC-GN-049 deprecated. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 ---
 
 ### CL-GN-03 · "Kênh sàn" gồm những SaleChannelID nào?
-📍 `DOC-v2.0-01 BR-NT-01 (L493)` ↔ `§A.2 (L79-137)` ↔ `DOC-v2.0-02 TN #11 (L125)`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-NT-01 (L493)` ↔ `§A.2 (L79-137)`  ·  Status: **Resolved 19/10/2026** · *mới — 16/10/2026*
 
 **URD 2.2** — `L493`
 > Chỉ gạch nợ tạm khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh bán qua sàn (khách thanh toán với sàn nên tiền chưa chắc về công ty).
 
-**URD 2.1** — `DOC-v2.0-02 L125`
-> Áp dụng khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh bán qua Sàn TMĐT (Tiktok, Shopee)
-
-↳ **Ghi chú:** §A.2 không có cột đánh dấu kênh sàn. Momo (17), MBBank (12), TGDD (14), API (7) cũng là kênh khách thanh toán qua bên thứ ba — không rõ có tính là sàn. Giả định {20, 21} theo 2.1.
+↳ **Ghi chú:** §A.2 không có cột đánh dấu kênh sàn. Momo (17), MBBank (12), TGDD (14), API (7) cũng là kênh khách thanh toán qua bên thứ ba — không rõ có tính là sàn. Giả định {20, 21} theo URD 2.2 §A.1 L59 ("kênh TMĐT (Shopee, TikTok Shop)").
 
 **Câu hỏi cho BA:** Kênh sàn (được gạch nợ tạm) = chỉ Shopee (20) + Tiktok (21)? Có kênh nào khác?
+
+✅ **RESOLVED 19/10/2026** — Kênh sàn (được gạch nợ tạm) = **chỉ Shopee (20) và TikTok Shop (21)**. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 ---
 
@@ -123,7 +123,7 @@ updated: 2026-10-16
 ---
 
 ### CL-GN-05 · "Mỗi bill chỉ gạch một lần" vs gạch từng phần — bill gạch thiếu có được gạch tiếp khi có Paid mới?
-📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-GN-01 (L509)` ↔ `BR-GN-04 (L518-519)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026*
 
 **BR-GN-01** — `L509`
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
@@ -132,9 +132,11 @@ updated: 2026-10-16
 > Mỗi lần gạch = nhỏ nhất của số dư Paid và nợ còn lại; ghi Payment, trừ Paid, đẩy Kafka Out về kênh thanh toán.
 > Dừng khi hết nợ hoặc hết Paid; Paid dư được giữ lại.
 
-↳ **Ghi chú:** Đọc đúng chữ thì bill gạch thiếu ở SC-GN-031 sẽ không bao giờ được gạch tiếp. 2.1 L611 ghi "(idempotent)" ⇒ suy diễn: không gạch lại cùng khoản Paid, còn Paid mới vẫn gạch tiếp được.
+↳ **Ghi chú:** Đọc đúng chữ thì bill gạch thiếu ở SC-GN-031 sẽ không bao giờ được gạch tiếp. Suy diễn của analyst: "một lần" nghĩa là không gạch lại cùng khoản Paid, còn Paid mới vẫn gạch tiếp được — cần xác nhận.
 
 **Câu hỏi cho BA:** Bill đã gạch một phần, khi Paid mới về (đợt thanh toán sau) có được gạch tiếp không?
+
+🟡 **Làm rõ một phần 19/10/2026** — QC: số tiền gạch phải bằng số tiền cần thanh toán; gạch xong bill chuyển "Đã thanh toán" ⇒ không gạch nữa. Còn mở: câu trả lời chưa nói bill **mới gạch một phần** (BR-GN-04 "Gạch từng phần… nhỏ nhất của số dư Paid và nợ còn lại") có được gạch tiếp khi có Paid mới không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 ---
 
@@ -143,34 +145,33 @@ updated: 2026-10-16
 
 > Khi Paid chuyển sang thanh toán hoàn tất, nếu hóa đơn đã gạch nợ tạm thì gỡ Payment tạm trước (hóa đơn trở lại còn nợ) rồi mới gạch nợ thật.
 
-↳ **Ghi chú:** Sàn quyết toán có thể trừ phí ⇒ Paid hoàn tất < nợ. HĐ từ "Đã gạch nợ" về "còn nợ" — downstream (hậu kỳ, báo cáo) có bị ảnh hưởng? Phí TMĐT là một PaidType (2.1 L472) — có được dùng để gạch phần chênh không?
+↳ **Ghi chú:** Sàn quyết toán có thể trừ phí ⇒ Paid hoàn tất < nợ. HĐ từ "Đã gạch nợ" về "còn nợ" — downstream (hậu kỳ, báo cáo) có bị ảnh hưởng? Phí TMĐT là một PaidType — có được dùng để gạch phần chênh không?
 
 **Câu hỏi cho BA:** Khi Paid quyết toán của sàn nhỏ hơn nợ, phần chênh xử lý thế nào (Paid phí TMĐT? để còn nợ?)
 
 ---
 
 ### CL-GN-07 · Danh mục loại cọc ↔ dịch vụ; đơn bán thêm dùng cọc nào?
-📍 `DOC-v2.0-01 BR-GC-02 (L534)` + `BR-GC-03 (L539)`  ·  Status: **Open** · GAP-60 (Major) cho phần bán thêm
+📍 `DOC-v2.0-01 BR-GC-02 (L534)` + `BR-GC-03 (L539)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · GAP-60 (Major) cho phần bán thêm
 
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > (...)
 > Mỗi dịch vụ trừ đúng loại cọc của nó; nhiều dịch vụ cùng loại cọc gom thành một dòng Payment.
 
-↳ **Ghi chú:** 2.1 L468: "Loại cọc tương ứng dịch vụ đã ghi sẵn trên từng dòng chi tiết hóa đơn". Cần danh mục để dựng SC-GN-039..042. SubServiceType 25 "Đặt cọc thuê bao" (§A.3) có liên quan không?
+↳ **Ghi chú:** URD 2.2 không nói loại cọc của dịch vụ lưu ở đâu. Cần danh mục để dựng SC-GN-039..042. SubServiceType 25 "Đặt cọc thuê bao" (§A.3) có liên quan không?
 
 **Câu hỏi cho BA:** Danh mục loại cọc + dịch vụ dùng loại nào; đơn bán thêm có dùng chung cọc của hợp đồng không?
+
+🟡 **Làm rõ một phần 19/10/2026** — Đơn bán mới và bán thêm đều có cọc; loại cọc: **đặt cọc trừ dần, đặt cọc hợp đồng, đặt cọc thiết bị**. Tra cứu: Quản lý kế toán › Tiền đặt cọc › Tra cứu. Còn mở: map dịch vụ ↔ loại cọc; đơn bán thêm dùng chung cọc còn lại của hợp đồng không. Nguồn: QC trả lời 19/10/2026 vòng 2.
 
 ---
 
 ### CL-GN-08 · Nhánh Paid: thứ tự giữa đội EVC gạch EVC và INVOICE gạch tiền khách?
-📍 `DOC-v2.0-01 BR-VC (L545-546)` ↔ `DOC-v2.0-02 BR-GN-03 (L615)`  ·  Status: **Open** · *mới — 16/10/2026*
+📍 `DOC-v2.0-01 BR-VC (L545-546)`  ·  Status: **Open** · *mới — 16/10/2026*
 
 **URD 2.2** — `L545-546`
 > Phần gạch nợ bằng EVC do đội EVC thực hiện; ISC tự quyết phương thức quản trị và xử lý voucher.
 > Với EVC bị lock (khách chưa ký hợp đồng), INVOICE chừa phần lock khi gạch tiền khách
-
-**URD 2.1** — `DOC-v2.0-02 L615`
-> Ở nhánh Paid, trong mỗi bill gạch EVC TRƯỚC rồi mới gạch tiền khách hàng thanh toán; xong bill hiện tại mới chuyển sang bill tiếp theo.
 
 ↳ **Ghi chú:** 2.2 không giữ câu "gạch EVC trước". Nếu INVOICE gạch tiền khách trước khi đội EVC gạch (EVC không lock) ⇒ tiền khách cover luôn phần EVC, Paid khách bị dùng thừa, đội EVC không còn nợ để gạch. Chỉ phần **lock** được chừa ra theo 2.2.
 
@@ -179,10 +180,25 @@ updated: 2026-10-16
 ---
 
 ### CL-GN-09 · Hai bill bằng tiền nhau: thứ tự gạch?
-📍 `DOC-v2.0-01 BR-GN-03 · L513`  ·  Status: **Open** · *mới — 16/10/2026* (Low)
+📍 `DOC-v2.0-01 BR-GN-03 · L513`  ·  Status: **Open — đã rõ một phần 19/10/2026** · *mới — 16/10/2026* (Low)
 
 > Một đơn có 1..n bill; gạch từng bill, theo số tiền từ cao xuống thấp.
 
 ↳ **Ghi chú:** Chỉ ảnh hưởng khi Paid / cọc không đủ cho cả 2 bill. SC-GN-030 để P3.
 
 **Câu hỏi cho BA:** Bill bằng tiền thì ưu tiên theo BillDate / BillNumber?
+
+🟡 **Làm rõ một phần 19/10/2026** — QC: 1 đơn nhiều bill ⇒ ưu tiên bill có **BillNumber cao nhất**. Còn mở: xác nhận đây **chỉ là tie-break khi 2 bill bằng tiền** — nếu là quy tắc chung thì trái BR-GN-03 ("theo số tiền từ cao xuống thấp"). Nguồn: QC trả lời 19/10/2026 vòng 2.
+
+---
+
+### CL-GN-10 · Chi tiết gạch nợ URD 2.2 chuyển sang Phụ lục D#4 — chưa có đặc tả
+📍 `DOC-v2.0-01 §D#4 · L671-673`  ·  Status: **Open** · *mới — 16/10/2026*
+
+> Cấu hình EVC: PaidType, Owner gạch, trần 50%, EVC bị lock chi tiết.
+> BR-VC-01 đến 07, BR-GC-04 đến 07
+> Đội EVC thực hiện; một số bước đã đánh dấu bỏ.
+
+↳ **Ghi chú:** Phụ lục D của URD 2.2 trỏ chi tiết về tài liệu không còn sử dụng ⇒ chưa có: danh mục PaidType; nguồn tổng EVC + tiền lock và loại EVC nào có lock (CL-GN-02); bảng tồn cọc và nơi ghi loại cọc của dịch vụ (CL-GN-07); nghĩa của "mỗi bill chỉ gạch một lần" (CL-GN-05); thứ tự đội EVC gạch (CL-GN-08). Phần URD 2.2 tự đủ, vẫn dùng: cọc theo hợp đồng (L529, L534), mỗi dịch vụ trừ đúng loại cọc, gom dòng Payment theo loại cọc (L539).
+
+**Câu hỏi cho BA:** Phụ lục D#4 của URD 2.2 chưa có đặc tả. PO / đội EVC cung cấp: (1) danh mục PaidType và mã voucher; (2) nguồn / API lấy tổng EVC và tiền lock, loại EVC nào có lock; (3) bảng / trường lưu tồn cọc và loại cọc của từng dịch vụ?

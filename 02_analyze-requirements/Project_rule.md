@@ -26,7 +26,7 @@
 - **Sprint hiện tại:** —
 - **Ngôn ngữ viết TC:** Tiếng Việt (tech terms / keyword / enum status giữ tiếng Anh)
 - **Automation:** Không (manual + vibe-test). `10_source-code/` chưa scaffold.
-- **Tài liệu gốc:** `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx` (URD rev 2.2 — bản chính từ 13/10/2026; rev 2.1 `…v2_0_URD_v1_0.docx` giữ cùng thư mục làm tham chiếu kỹ thuật vì Phụ lục D của 2.2 trỏ về, 2.2 thắng khi mâu thuẫn)
+- **Tài liệu gốc:** `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx` (URD rev 2.2 — bản chính từ 13/10/2026)
   <!-- Revision history trong doc: 1.0 (25/02/2026, Phase 1) · 2.0 (10/07/2026, Phase 2) ·
        2.1 (26/08/2026, cập nhật theo MoM 19.08.2026) · 2.2 (08/10/2026, rút gọn theo PO: gộp BR,
        thêm BR-XHD-18, chốt worker 12h/18h, thêm A.2/A.3). Author Vuongnd17 · Reviewer Leltm.

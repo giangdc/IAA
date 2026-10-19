@@ -11,7 +11,7 @@
 - **Ngôn ngữ viết TC:** Tiếng Việt
 - **Automation:** Không (manual + vibe-test)
 - **Jira:** https://foxproject.atlassian.net — `project_key` TBD · `mcp_axis: connector` (bật Atlassian qua `/mcp`)
-- **Tài liệu gốc:** `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx` (URD rev 2.2; phần kỹ thuật tham chiếu rev 2.1 `…v2_0_URD_v1_0.docx` cùng thư mục) — requirement đánh số `BR-<NHÓM>-<NN>` (`req_notation: BR`)
+- **Tài liệu gốc:** `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx` (URD rev 2.2 — căn cứ duy nhất) — requirement đánh số `BR-<NHÓM>-<NN>` (`req_notation: BR`)
 
 > **PIPELINE.md** và **COMMANDS.md** ở root — tester đọc `COMMANDS.md` để biết cách gọi skill.
 
@@ -82,8 +82,8 @@ Template bug: `~/.claude/skills/log-bug/assets/bug-report-template.md` (skill đ
 - **Doc readiness:** CONDITIONAL (lần rà 2, URD rev 2.2) · GAP mở 45 (3 Blocker · 18 Critical) · PM xác nhận trước 16/10/2026 (Clear nghiệp vụ 19/10/2026)
 
 ## Analyze — v2.0
-- **Output:** `02_analyze-requirements/v2.0/` — layout **module-first v2**: router `MEMORY.md` + `XHD/`, `GN/`, `HK/` (mỗi module 6 file: `CHANGELOG`, `requirement_traceability`, `test_scenario_map`, `test_data_catalog`, `risk_assessment`) + `quotes/` (sidecar quote dài). TL ngoài phạm vi — không có thư mục.
-- **Kết quả INIT 16/10/2026:** 73 REQ · 180 SC (P1 138 · P2 40 · P3 2) · 49 CL (7 BLOCKING) · 21 RISK — số canonical ở frontmatter `counts:` file module; router §2 là bản dẫn xuất.
-- **DOC-ID:** `DOC-v2.0-01` URD 2.2 (chính) · `-02` URD 2.1 (tham chiếu) · `-03` PDF · `-04` mail PM · `-05` HT triển khai (xlsx) · `-FIG-01/02` ảnh màn Hệ thống Thông tin — registry ở `MASTER-MEMORY.md §2`.
+- **Output:** `02_analyze-requirements/v2.0/` — layout **module-first v2**: router `MEMORY.md` + `XHD/`, `GN/`, `HK/` (mỗi module 6 file: `CHANGELOG`, `requirement_traceability`, `test_scenario_map`, `test_data_catalog`, `risk_assessment`). TL ngoài phạm vi — không có thư mục.
+- **Kết quả INIT 16/10/2026:** 73 REQ · 180 SC (P1 138 · P2 40 · P3 2) · 49 CL (7 BLOCKING) · 21 RISK. **UPDATE 16/10/2026** (QC trả lời CL vòng 1 + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING). **UPDATE 19/10/2026** (QC trả lời CL vòng 2): 176 SC active (6 deprecated) · 54 CL (42 Open · 5 BLOCKING) · tool verify ở `07_environments/environments.md` — số canonical ở frontmatter `counts:` file module; router §2 là bản dẫn xuất.
+- **DOC-ID:** `DOC-v2.0-01` URD 2.2 (chính) · `-03` PDF · `-04` mail PM · `-05` HT triển khai (xlsx) · `-FIG-01/02` ảnh màn Hệ thống Thông tin · `-FIG-03/04/05` flow XHD / GN / HK của URD — registry ở `MASTER-MEMORY.md §2`.
 - **Tra quote:** `DOC_DIR=00_input/v2.0/Doc DOC_DEFAULT="Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx" scripts/doc/search-doc.sh "<từ khoá>"` — `L<n>` trong Source Location là số dòng của bản trích này.
 - **Bước tiếp:** resolve CL BLOCKING (router §2) → `/generate-tc --version v2.0` (hoặc `--module XHD|GN|HK`).

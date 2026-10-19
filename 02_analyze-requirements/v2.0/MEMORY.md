@@ -13,12 +13,6 @@ doc_source:
     kind: URD — bản chính
     modules: [XHD, GN, HK]
     sections: "§A.1 Thông tin chung · §A.2 Kênh bán (L79-137) · §A.3 Nhóm DV (L138-260) · §A.5 Thuật ngữ (L277-320) · §B.I XHD (L323-452) · §B.II GN (L453-548) · §B.III HK (L549-597) · §B.IV TL — ngoài phạm vi (L598-634) · §C Điểm cần xác nhận (L635-651) · §D Phụ lục (L652-693)"
-  - id: DOC-v2.0-02
-    file: Doc/Invoice_Issuance_Architecture_v2_0_URD_v1_0.docx
-    revision: "URD rev 2.1 · 26/08/2026 · Vuongnd17 · bị 2.2 thay phần chính"
-    md5: b0f9d0800b248864a70fc2d4f9790f74
-    kind: URD — tham chiếu kỹ thuật (Phụ lục D của 2.2 trỏ về); 2.2 thắng khi mâu thuẫn
-    modules: [XHD, GN, HK]
   - id: DOC-v2.0-03
     file: Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.pdf
     revision: "URD rev 2.2 bản PDF đính kèm mail PM 13/10/2026"
@@ -49,8 +43,26 @@ doc_source:
     md5: 837b08b547cd55c16efdc1ff73e98c69
     kind: "KHÔNG PHẢI prototype — màn hiện hữu tab \"Báo cáo tổng hợp\""
     modules: [XHD]
+  - id: DOC-v2.0-FIG-03
+    file: "Doc/Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png"
+    revision: "ảnh flow §B.I.b nhúng trong DOC-v2.0-01 (sau L337) — trùng pixel"
+    md5: 3e2e9b4b5600e32eb9f5949a4eb281a9
+    kind: "Flow URD 2.2 (một phần DOC-v2.0-01)"
+    modules: [XHD]
+  - id: DOC-v2.0-FIG-04
+    file: "Doc/FLOW GẠCH NỢ HÓA ĐƠN – ĐỒNG BỘ PAID.png"
+    revision: "ảnh flow §B.II.b nhúng trong DOC-v2.0-01 (sau L466) — trùng pixel"
+    md5: 3419b484f15bbb13e6aee6f42db71664
+    kind: "Flow URD 2.2 (một phần DOC-v2.0-01)"
+    modules: [GN]
+  - id: DOC-v2.0-FIG-05
+    file: "Doc/Workflow ĐẨY HẬU KỲ – TIỀN TRẢ TRƯỚC (URD 2.2 §III.b).png"
+    revision: "ảnh flow §B.III.b trích từ DOC-v2.0-01 (sau L562) ngày 16/10/2026"
+    md5: 4cea9e3d9acb990361da91d25e0698ed
+    kind: "Flow URD 2.2 (một phần DOC-v2.0-01)"
+    modules: [HK]
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Router — Analyze v2.0
@@ -86,14 +98,16 @@ updated: 2026-10-16
 
 | Module | Req | SC | NEW | MOD | CARRIED | DEPR | P1 | P2 | P3 | CL | RISK | Risk Level |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|
-| XHD | 43 | 109 | 109 | 0 | 0 | 0 | 84 | 24 | 1 | 31 | 10 | High |
-| GN | 20 | 50 | 50 | 0 | 0 | 0 | 42 | 7 | 1 | 9 | 6 | High |
-| HK | 10 | 21 | 21 | 0 | 0 | 0 | 12 | 9 | 0 | 9 | 5 | High |
-| **Tổng** | **73** | **180** | **180** | **0** | **0** | **0** | **138** | **40** | **2** | **49** | **21** | — |
+| XHD | 43 | 109 | 109 | 0 | 0 | 2 | 85 | 23 | 1 | 34 | 10 | High |
+| GN | 20 | 49 | 49 | 0 | 0 | 1 | 42 | 6 | 1 | 10 | 6 | High |
+| HK | 10 | 18 | 18 | 0 | 0 | 3 | 12 | 6 | 0 | 10 | 5 | High |
+| **Tổng** | **73** | **176** | **176** | **0** | **0** | **6** | **139** | **35** | **2** | **54** | **21** | — |
 
-> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
-> ℹ️ 34 SC (XHD 21 · GN 5 · HK 8) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
-> 🔴 CL còn **OPEN**: 49/49. **BLOCKING (7):** CL-XHD-11 (khóa chống trùng) · CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-GN-01 (Paid voucher) · CL-HK-01 (ký hiệu HĐĐT) · CL-HK-03 (dòng EVC / chiết khấu).
+> ⛔ **URD 2.1 không sử dụng từ 16/10/2026** — 4 SC deprecated vì căn cứ chỉ có ở 2.1: SC-XHD-107, 108 (cutover) · SC-HK-009, 010 (bảng map ký hiệu).
+> ⛔ **19/10/2026** — deprecated thêm SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công.
+> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-041 (cutover — SC deprecated), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-HK-010 (dòng EVC / chiết khấu / mẫu HĐĐT) — nợ ở `CHANGELOG.md §3` từng module.
+> ℹ️ 26 SC (XHD 16 · GN 3 · HK 7) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
+> 🔴 CL còn **OPEN**: 42/54 (+CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09). **BLOCKING (5):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-01 (ký hiệu HĐĐT) · CL-HK-03 (dòng EVC / chiết khấu).
 
 ### 🔑 Luật `counts` canonical (v2)
 

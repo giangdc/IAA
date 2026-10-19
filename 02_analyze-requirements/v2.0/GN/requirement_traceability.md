@@ -7,8 +7,6 @@ module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #6–#9 · §B.II"
-  - id: DOC-v2.0-02
-    section: "§II (luồng A–D, đối tượng dữ liệu, BR-VC-07, BR-GC-04/05) — tham chiếu kỹ thuật"
 status: ANALYZED
 updated: 2026-10-16
 ---
@@ -17,7 +15,7 @@ updated: 2026-10-16
 
 > Tạo bởi: analyze-requirements. Ma trận truy vết REQ ↔ DOC ↔ Scenario ↔ Clarification.
 > **Layout v2** — quote REQ ở **§2** file này; quote SC ở `test_scenario_map.md`; CL ở `risk_assessment.md`.
-> `req_notation: BR` ⇒ **Schema A**. `L<n>` = số dòng bản trích text `.docx` (`scripts/doc/search-doc.sh`). URD 2.2 thắng khi mâu thuẫn với 2.1.
+> `req_notation: BR` ⇒ **Schema A**. `L<n>` = số dòng bản trích text `.docx` (`scripts/doc/search-doc.sh`).
 
 ## 1. Traceability Matrix (REQ → DOC → SC)
 
@@ -44,7 +42,7 @@ updated: 2026-10-16
 | REQ-GN-017 | BR-GC-02 | DOC-v2.0-01 §II.c (L534-535) | SC-GN-039, SC-GN-040, SC-GN-041 | CL-GN-07 |
 | REQ-GN-018 | BR-GC-03 | DOC-v2.0-01 §II.c (L539-541) | SC-GN-042, SC-GN-043, SC-GN-044, SC-GN-050 | CL-GN-07 |
 | REQ-GN-019 | BR-VC | DOC-v2.0-01 §II.c (L545) | SC-GN-045 | CL-GN-01, CL-GN-08 |
-| REQ-GN-020 | BR-VC | DOC-v2.0-01 §II.c (L546) | SC-GN-046, SC-GN-047, SC-GN-049 | CL-GN-02 |
+| REQ-GN-020 | BR-VC | DOC-v2.0-01 §II.c (L546) | SC-GN-046, SC-GN-047 *(SC-GN-049 deprecated 19/10/2026)* | CL-GN-02 |
 
 > `§II.c` = mục B.II "Gạch nợ hóa đơn" → c. Business rules. Mọi REQ đều có ≥1 SC.
 > Đơn **bán thêm** (REQ-XHD-040, phạm vi chung từ mail PM) có SC riêng ở module này: SC-GN-050 (nhánh Cọc dùng cọc của hợp đồng đang hoạt động).
@@ -56,7 +54,7 @@ updated: 2026-10-16
 
 > Paid đồng bộ 1:1 từ Orderpaid theo OrderCode, gồm cả voucher và tiền khách thanh toán; mỗi Paid gán PaidType theo nguồn tiền.
 
-↳ **Ghi chú:** Nhiều đợt thanh toán là các dòng detail trong cùng 1 Orderpaid (2.1 L456). PaidType phân loại tiền khách / voucher / phí TMĐT (2.1 L472). Paid voucher được đồng bộ nhưng việc gạch EVC thuộc đội EVC ⇒ Paid voucher có bị INVOICE dùng để gạch không là CL-GN-01.
+↳ **Ghi chú:** Nhiều đợt thanh toán là các dòng detail trong cùng 1 Orderpaid. PaidType phân loại tiền khách / voucher / phí TMĐT. Paid voucher được đồng bộ nhưng việc gạch EVC thuộc đội EVC ⇒ Paid voucher có bị INVOICE dùng để gạch không là CL-GN-01.
 
 ---
 
@@ -74,7 +72,7 @@ updated: 2026-10-16
 
 > Đồng bộ Paid là luồng độc lập với gạch nợ và luôn ghi nhận Paid kể cả khi hóa đơn chưa phát hành.
 
-↳ **Ghi chú:** Paid về trước HĐ ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên (2.1 L494).
+↳ **Ghi chú:** Paid về trước HĐ ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên.
 
 ---
 
@@ -93,7 +91,7 @@ updated: 2026-10-16
 
 > Ở điểm chạm (a), chỉ xử lý tiếp khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh sàn, hoặc Paid đã thanh toán hoàn tất.
 
-↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid (2.1 L595). Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — enum chưa có (CL-GN-04).
+↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid. Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — enum chưa có (CL-GN-04).
 
 ---
 
@@ -131,7 +129,7 @@ updated: 2026-10-16
 > Chỉ gạch nợ tạm khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh bán qua sàn (khách thanh toán với sàn nên tiền chưa chắc về công ty).
 > Kênh khác như tại quầy, tại nơi triển khai: không gạch nợ tạm, chờ Paid thanh toán hoàn tất rồi gạch nợ thật.
 
-↳ **Ghi chú:** "Kênh sàn" — §A.2 không đánh dấu kênh nào là sàn; 2.1 L125 nói "Sàn TMĐT (Tiktok, Shopee)" ⇒ giả định {20, 21} (CL-GN-03).
+↳ **Ghi chú:** "Kênh sàn" — §A.2 không đánh dấu kênh nào là sàn; giả định {20, 21} theo §A.1 L59 "kênh TMĐT (Shopee, TikTok Shop)" của 2.2 () (CL-GN-03).
 
 ---
 
@@ -161,7 +159,7 @@ updated: 2026-10-16
 > Chỉ lấy dòng Paid có Amount > 0 và cùng OrderCode với hóa đơn.
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
 
-↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần" mâu thuẫn bề ngoài với gạch từng phần BR-GN-04 (bill gạch thiếu, Paid mới về thì gạch tiếp?) — 2.1 L611 ghi "(idempotent)" ⇒ suy diễn của analyst: nghĩa là không gạch lại cùng một khoản (CL-GN-05).
+↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần" mâu thuẫn bề ngoài với gạch từng phần BR-GN-04 (bill gạch thiếu, Paid mới về thì gạch tiếp?) — chưa rõ (CL-GN-05).
 
 ---
 
@@ -202,7 +200,7 @@ updated: 2026-10-16
 > Tổng cọc còn lại của hợp đồng (mọi loại cọc) cộng tổng tiền EVC của đơn (tính cả phần bị lock) phải không nhỏ hơn nợ của bill đang xét.
 > Cọc chỉ gồm tiền thật khách trả, không gồm EVC.
 
-↳ **Ghi chú:** Phạm vi cọc theo **hợp đồng**, không theo OrderCode (2.1 L635). Tổng EVC + lock lấy qua API đội EVC (2.1 L476) — 2.2 không nêu nguồn (CL-GN-02). Biên "không nhỏ hơn" ⇒ bằng nhau là đủ.
+↳ **Ghi chú:** Phạm vi cọc theo **hợp đồng**, không theo OrderCode. Tổng EVC + lock lấy qua API đội EVC — 2.2 không nêu nguồn (CL-GN-02). Biên "không nhỏ hơn" ⇒ bằng nhau là đủ.
 
 ---
 
@@ -212,7 +210,7 @@ updated: 2026-10-16
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > Thiếu ở một loại thì không gạch cả bill đó, không gạch một phần; các bill khác của đơn vẫn xét bình thường.
 
-↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết HĐ (2.1 L468). Danh sách loại cọc chưa có (CL-GN-07).
+↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết HĐ. Danh sách loại cọc chưa có (CL-GN-07).
 
 ---
 
@@ -223,7 +221,7 @@ updated: 2026-10-16
 > Tính trên nợ còn lại sau khi EVC đã gạch; ghi Payment và trừ cọc theo BillNumber + số hợp đồng.
 > Dư cọc không xử lý; không gạch lại hóa đơn đã gạch.
 
-↳ **Ghi chú:** Số dòng Payment = số loại cọc trên bill (2.1 L639: "1 dòng Payment per (BillNumber × loại cọc)"). "Sau khi EVC đã gạch" ⇒ phụ thuộc đội EVC gạch trước (2.1 L641 — thứ tự: lấy EVC → kiểm đủ → EVC gạch → trừ cọc).
+↳ **Ghi chú:** Nhiều dịch vụ cùng loại cọc gom thành một dòng Payment (L539) ⇒ số dòng Payment = số loại cọc trên bill. "Sau khi EVC đã gạch" ⇒ phụ thuộc đội EVC gạch trước (CL-GN-08).
 
 ---
 
@@ -243,7 +241,7 @@ updated: 2026-10-16
 
 > Với EVC bị lock (khách chưa ký hợp đồng), INVOICE chừa phần lock khi gạch tiền khách: số gạch = nhỏ nhất của (nợ bill trừ tiền lock) và Paid khách thanh toán.
 
-↳ **Ghi chú:** Hiện chỉ EVC Loyalty FTEL có khoản lock (2.1 L633). BVA: lock = 0 · Paid khách < / = / > (nợ − lock). Nguồn số tiền lock + lỗi API: CL-GN-02.
+↳ **Ghi chú:** Hiện chỉ EVC Loyalty FTEL có khoản lock. BVA: lock = 0 · Paid khách < / = / > (nợ − lock). Nguồn số tiền lock + lỗi API: CL-GN-02.
 
 ---
 

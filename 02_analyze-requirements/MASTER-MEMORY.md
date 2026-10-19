@@ -9,7 +9,7 @@
 ## 1. Version Registry
 | Version | Release Date | Input Folder | Analyze Folder | Status | Tổng DOC | Tổng SC (all) | Tổng SC (new+mod) | Parent |
 |---------|-------------|-------------|----------------|--------|----------|--------------|-------------------|--------|
-| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 7 | 180 | 180 | v1.0 (Phase 1 — chưa có trong workspace) |
+| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 9 | 178 | 178 | v1.0 (Phase 1 — chưa có trong workspace) |
 
 ## 2. DOC ID Registry (Global)
 > **`Status`** — trạng thái của FILE, không phải của yêu cầu:
@@ -22,15 +22,17 @@
 | DOC ID | Version | File | Loại | Status | Superseded by | Modules |
 |--------|---------|------|------|--------|---------------|---------|
 | DOC-v2.0-01 | v2.0 | `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.docx` | URD rev 2.2 — **bản chính** | Active | — | XHD, GN, HK |
-| DOC-v2.0-02 | v2.0 | `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_0_URD_v1_0.docx` | URD rev 2.1 — tham chiếu kỹ thuật (2.2 thắng khi mâu thuẫn) | Superseded | DOC-v2.0-01 | XHD, GN, HK |
 | DOC-v2.0-03 | v2.0 | `00_input/v2.0/Doc/Invoice_Issuance_Architecture_v2_2_URD_v2_0.pdf` | URD rev 2.2 bản PDF PO confirm — nội dung = DOC-v2.0-01, không trích dẫn | Active | — | XHD, GN, HK |
 | DOC-v2.0-04 | v2.0 | `00_input/v2.0/Doc/Mail_PM-LeLTM_2026-10-13_PO-confirm-URD-v2.2.png` | Mail PM — xác nhận phạm vi (bổ sung) | Active | — | XHD, GN, HK |
 | DOC-v2.0-05 | v2.0 | `00_input/v2.0/Doc/AnhNQ75-List HT Triển khai.xlsx` | Danh mục hình thức triển khai (bổ sung — URD thắng khi mâu thuẫn) | Active | — | XHD |
 | DOC-v2.0-FIG-01 | v2.0 | `00_input/v2.0/Design/Chi tiết hóa đơn.png` | Ảnh màn hiện hữu "Chi tiết của Hóa đơn" (không phải prototype) | Active | — | XHD, GN, HK |
 | DOC-v2.0-FIG-02 | v2.0 | `00_input/v2.0/Design/Danh sách hóa đơn của Hợp đồng.png` | Ảnh màn hiện hữu "Liệt kê cước của thuê bao" (không phải prototype) | Active | — | XHD |
+| DOC-v2.0-FIG-03 | v2.0 | `00_input/v2.0/Doc/Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png` | Flow §B.I.b (XHD) — ảnh nhúng trong DOC-v2.0-01 sau L337, trùng pixel | Active | — | XHD |
+| DOC-v2.0-FIG-04 | v2.0 | `00_input/v2.0/Doc/FLOW GẠCH NỢ HÓA ĐƠN – ĐỒNG BỘ PAID.png` | Flow §B.II.b (GN) — ảnh nhúng trong DOC-v2.0-01 sau L466, trùng pixel | Active | — | GN |
+| DOC-v2.0-FIG-05 | v2.0 | `00_input/v2.0/Doc/Workflow ĐẨY HẬU KỲ – TIỀN TRẢ TRƯỚC (URD 2.2 §III.b).png` | Flow §B.III.b (HK) — trích từ DOC-v2.0-01 sau L562 | Active | — | HK |
 
-> **DOC-v2.0-02 `Superseded` nhưng giữ file:** Phụ lục D của URD 2.2 ghi "Chi tiết xem URD v2.1" ⇒ còn là căn cứ cho cutover, rủi ro phát hành trùng, bảng map ký hiệu HĐĐT. Bản sao `…v2_2_URD_v2_0 (1).docx` (trùng byte với DOC-v2.0-01) đã xoá 16/10/2026 trước khi đăng ký — không cấp DOC-ID.
 > **Đổi tên 16/10/2026:** `Design/Pasted image.png` → `Design/Chi tiết hóa đơn.png` (cùng nội dung, đổi trước khi đăng ký) — DOC-v2.0-FIG-01 trỏ tên mới.
+> **Flow 16/10/2026:** FIG-03..05 là ảnh nhúng sẵn trong DOC-v2.0-01 (mục `b. Flow` không có text nên bản trích `.docx` không có L-number) — đối chiếu pixel 16/10/2026: trùng 100%. Ghi chú trong ảnh chủ yếu tóm tắt lại BR; ô tô màu = "Nội dung mới, đã sửa hoặc cần xác nhận". FIG-05 do analyze trích từ URD.
 > Chưa nhận (không cấp DOC-ID): URD v1.0 Phase 1 (GAP-24) · email ISC 24/09 + FTQ 30/09/2026 (GAP-57) · tài liệu tích hợp Kafka / schema / API (GAP-07) · link lưu đồ draw.io (GAP-58).
 
 ## 3. Scenario Lifecycle (Cross-Version)
@@ -49,7 +51,7 @@
 **Phải test (new + modified):**
 | SC ID | Type | Lý do |
 |-------|------|-------|
-| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (180) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
+| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (178 active · 4 deprecated) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
 
 **Nên regression (carried — high risk):**
 | SC ID | Type | Lý do |
@@ -89,7 +91,7 @@
 | 0.5 | init-source-code | SKIPPED | — | — | — | Không automation |
 | 1 | init-project | COMPLETED | 2026-10-07 | — | CLAUDE.md/PIPELINE.md/COMMANDS.md | — |
 | 2 | create-test-plan | COMPLETED | 2026-10-14 | v2.0 | `01_test-plans/TP-master-InvoiceIssuance-v2.0.md` (bản 1.3) + DOC-READINESS + Excel/Email | Doc readiness CONDITIONAL — 45 GAP mở |
-| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file + `quotes/`) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` |
+| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 176 SC active (6 deprecated) · 54 CL (42 Open · 5 BLOCKING) |
 | 4 | generate-tc | NOT_STARTED | — | — | — | Nên resolve CL BLOCKING trước (router §2) |
 | 4b | export-tc-rp | NOT_STARTED | — | — | — | renderer deliverable FPT — chạy sau consolidate |
 | 4c | review-tc-ba | NOT_STARTED | — | — | — | vòng feedback BA trên sheet — chỉ khi project review TC online |
@@ -106,9 +108,11 @@
 
 ## 9. Notes (quyết định cross-version — KHÔNG phải per-run count log)
 - **2026-10-13** — URD rev 2.2 là bản chính (PO confirm qua mail PM — DOC-v2.0-04); rev 2.1 giữ làm tham chiếu kỹ thuật, **2.2 thắng khi mâu thuẫn**.
+- **2026-10-16** — ⛔ **URD rev 2.1 không sử dụng** (QC owner: đã out) — thay quyết định 13/10. Chỉ URD 2.2 là căn cứ; SC dựng duy nhất trên 2.1 chuyển DEPRECATED (SC-XHD-107, 108 · SC-HK-009, 010).
 - **2026-10-13** — Phạm vi gồm **đơn bán mới + bán thêm** (mail PM); URD không phân biệt loại đơn ⇒ analyze giả định rule áp chung (CL-XHD-25).
 - **2026-10-14** — **TL (URD §B.IV) ngoài phạm vi** test v2.0 (QC lead chốt) ⇒ không có module `TL/` trong analyze.
 - **2026-10-16** — Analyze dùng **layout module-first v2** (INIT trên thư mục trống). Module = XHD / GN / HK, map mã chức năng FR01–FR11 ở `Project_rule.md §Module Codes`.
+- **2026-10-16** — File trả lời câu hỏi vòng 1 là câu trả lời của **QC**, không phải PO: CL chỉ đóng khi câu trả lời dựa được vào chữ URD 2.2; câu QC báo "không tìm thấy trong tài liệu" giữ Open và chuyển PO ở vòng 2.
 - **2026-10-16** — Tài liệu bổ sung `DOC-v2.0-05` (HT triển khai) và ảnh `DOC-v2.0-FIG-01/02` (màn Hệ thống Thông tin, HĐ 2025) **không phải URD** — chỉ làm dữ liệu / câu hỏi, không sinh rule.
 
 ## 10. Version Cutover — Compaction Rule

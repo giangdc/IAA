@@ -10,13 +10,13 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   new: 109
   modified: 0
   carried: 0
-  deprecated: 0
-  p1: 84
-  p2: 24
+  deprecated: 2
+  p1: 85
+  p2: 23
   p3: 1
-  blocked_by_cl: 21      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
+  blocked_by_cl: 16      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 
 # Test Scenario Map — v2.0 · Module XHD
@@ -43,6 +43,8 @@ updated: 2026-10-16
 - Tổng số scenarios: 109 (NEW: 109, MODIFIED: 0, CARRIED: 0) — số canonical ở frontmatter `counts:`.
 - Phân bổ priority: xem frontmatter `counts:` (p1 / p2 / p3).
 
+> ℹ️ **19/10/2026 — QC không có quyền xem log** (CL-XHD-15, CL-XHD-19): mọi Then "ghi log" / "ghi Note" chỉ verify phần hành vi (không phát hành / không ghi nhận) qua tool ở `07_environments/environments.md §Tool tra cứu`; phần log không verify.
+
 ## Scenarios — NEW & MODIFIED (chi tiết đầy đủ)
 
 ### XHD — Đồng bộ đơn hàng & xuất hóa đơn tự động
@@ -68,7 +70,7 @@ updated: 2026-10-16
 | SC-XHD-017 | Ma trận kênh | REQ-XHD-001, REQ-XHD-002, REQ-XHD-040 | DOC-v2.0-01 §A.2 (L134-137) | Kênh **Tiktok (21)** — đã có Phase 1 | Như SC-XHD-001 | Đơn ghi nhận đủ với SaleChannelID = 21; luồng Phase 1 không hỏng | P1 | Regression | NEW |
 | SC-XHD-018 | Sự kiện SPF | REQ-XHD-003 | DOC-v2.0-01 BR-DB-01 (L345) | Đơn đã đồng bộ, DV chưa thanh toán | SPF phát sự kiện **thanh toán** | INVOICE nhận bản tin, cập nhật đơn; dòng DV đủ điều kiện phát hành ĐK DV | P1 | Functional | NEW |
 | SC-XHD-019 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-028 | DOC-v2.0-01 BR-DB-01 (L345) | Đơn đã đồng bộ, chưa có HĐ | SPF phát sự kiện **hủy đơn** | INVOICE ghi nhận trạng thái hủy; đơn không được phát hành ở đợt kế tiếp | P1 | Functional | NEW |
-| SC-XHD-020 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-008 | DOC-v2.0-01 BR-DB-01 (L345) ↔ BR-DB-03 (L359) | Kênh bất kỳ | SPF phát sự kiện **tạo đơn** / **cập nhật thông tin KH** | (giả định TP: đồng bộ đủ 4 sự kiện như 2.1) INVOICE ghi nhận đơn / cập nhật thông tin KH — ⛔ chờ CL-XHD-01 | P2 | Functional | NEW |
+| SC-XHD-020 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-008 | DOC-v2.0-01 BR-DB-01 (L345) ↔ BR-DB-03 (L359) | Kênh bất kỳ | SPF phát sự kiện **tạo đơn** / **cập nhật thông tin KH** | INVOICE ghi nhận đơn / cập nhật thông tin KH **nếu** SPF có gửi 2 sự kiện này (URD 2.2 BR-DB-01 chỉ có thanh toán, hủy đơn) — ⛔ chờ CL-XHD-01 | P2 | Functional | NEW |
 | SC-XHD-021 | Tín hiệu giao hàng | REQ-XHD-004, REQ-XHD-012 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất HĐ, phương thức TIN/PNC | **Phiếu thi công** chuyển "Đã xử lý hoàn tất" → tín hiệu về INVOICE | Tín hiệu map đúng dòng TB theo khóa 4 thành phần; TB đủ điều kiện phát hành | P1 | Integration | NEW |
 | SC-XHD-022 | Tín hiệu giao hàng | REQ-XHD-004 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất HĐ, phương thức NCC (Vendor) | **Vendor** báo đối tác giao xong | Tín hiệu ghi nhận cho đúng TB của phương thức; TB đủ điều kiện | P1 | Integration | NEW |
 | SC-XHD-023 | Tín hiệu giao hàng | REQ-XHD-004 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất HĐ, phương thức Quầy | **Phiếu giao tại quầy** hoàn tất | Tín hiệu ghi nhận cho đúng TB; TB đủ điều kiện | P1 | Integration | NEW |
@@ -94,8 +96,8 @@ updated: 2026-10-16
 | SC-XHD-043 | Lịch worker | REQ-XHD-014 | DOC-v2.0-01 BR-XHD-01 (L382, L384) | Dòng có mốc nghiệp vụ **ngay trước / đúng / ngay sau** giờ chốt đợt 1 | Tới giờ chạy đợt 1 | **Trước giờ chốt: vào đợt 1; đúng giờ chốt và sau: sang đợt sau** (biên "trước giờ chốt") | P1 | Boundary | NEW |
 | SC-XHD-044 | Lịch worker | REQ-XHD-014 | DOC-v2.0-01 BR-XHD-01 (L381, L383) | Cấu hình hiện 2 đợt | Đổi tham số (thêm 1 đợt / đổi giờ chốt) | Worker chạy theo cấu hình mới, không cần sửa code; dòng phân đợt theo giờ chốt mới | P2 | Functional | NEW |
 | SC-XHD-045 | Lịch worker | REQ-XHD-015 | DOC-v2.0-01 BR-XHD-01 (L384) | Dòng có mốc nghiệp vụ **ngày N**, bản tin về INVOICE ngày N+1 | Các đợt worker + realtime ngày N+1 chạy | Không đợt nào lấy dòng (hiện trạng có chủ đích — RISK-XHD-03); cảnh báo ⛔ chờ CL-XHD-22 | P2 | Negative | NEW |
-| SC-XHD-046 | Lịch worker | REQ-XHD-016 | DOC-v2.0-01 BR-XHD-01 (L385) | **Ngày cuối tháng**, dòng đủ điều kiện sau giờ chốt cuối | Hệ thống xử lý dòng | (giả định TP: realtime vẫn chạy) Ghi nhận BillDate thực tế; nếu HĐ sang tháng sau thì đúng câu L385 — ⛔ chờ CL-XHD-06 | P1 | Boundary | NEW |
-| SC-XHD-047 | Lịch FPL | REQ-XHD-017 | DOC-v2.0-01 BR-XHD-01 (L387) | Đơn FPL đã qua delay 2h, đủ điều kiện | Tới mốc worker FPL kế tiếp (2h/lần) | Đơn được phát hành ở mốc đó (mốc cụ thể ⛔ chờ CL-XHD-05; giả định TP 0:05, 2:05 … 22:05) | P1 | Functional | NEW |
+| SC-XHD-046 | Lịch worker | REQ-XHD-016 | DOC-v2.0-01 BR-XHD-01 (L385) | **Ngày cuối tháng**, dòng đủ điều kiện sau giờ chốt cuối | Hệ thống xử lý dòng | **Không** phát hành trong ngày cuối tháng (realtime cũng không xuất); dòng giữ BillNumber rỗng, HĐ thuộc tháng sau — phát hành ngày 1 tháng sau, BillDate = ngày phát hành (QC, chờ PM confirm) — đợt cụ thể ⛔ chờ CL-XHD-32 | P1 | Boundary | NEW |
+| SC-XHD-047 | Lịch FPL | REQ-XHD-017 | DOC-v2.0-01 BR-XHD-01 (L387) | Đơn FPL đã qua delay 2h, đủ điều kiện | Tới mốc worker FPL kế tiếp (2h/lần) | Đơn được phát hành ở mốc đó (chu kỳ 2 giờ, đợt cuối 22:05 — BR-XHD-01; giờ các đợt trước 22:05 ⛔ chờ CL-XHD-05, giả định TP 0:05, 2:05 …) | P1 | Functional | NEW |
 | SC-XHD-048 | Lịch FPL | REQ-XHD-017 | DOC-v2.0-01 BR-XHD-01 (L388) | Đơn FPL tạo trong ngày bị lỡ 2 mốc trước do delay | Tới mốc 22:05 | Mốc 22:05 quét toàn bộ 0h–22h, phát hành các đơn còn sót | P1 | Functional | NEW |
 | SC-XHD-049 | Delay FPL | REQ-XHD-021 | DOC-v2.0-01 BR-XHD-03 (L399) | Đơn FPL đủ điều kiện nhưng mới tạo < 2 giờ | Worker FPL chạy | Đơn **chưa** phát hành ở mốc này; chờ mốc sau | P1 | Negative | NEW |
 | SC-XHD-050 | Delay FPL | REQ-XHD-021 | DOC-v2.0-01 BR-XHD-03 (L399) | Đơn FPL có thời gian tạo đơn cách mốc chạy **1:59 / 2:00 / 2:01** | Worker FPL chạy | **1:59 chưa phát hành; 2:00 và 2:01 phát hành** (biên "delay 2h" — mốc tính ⛔ chờ CL-XHD-04) | P2 | Boundary | NEW |
@@ -112,7 +114,7 @@ updated: 2026-10-16
 | SC-XHD-061 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng **tổ chức**, PĐK **đã duyệt**, ngày thường | Dòng đủ điều kiện, worker chạy | HĐ được phát hành | P1 | Functional | NEW |
 | SC-XHD-062 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng tổ chức, PĐK **chưa duyệt**, ngày thường | Worker chạy | **Không** autobill; dòng giữ BillNumber rỗng | P1 | Negative | NEW |
 | SC-XHD-063 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng tổ chức, PĐK chưa duyệt, ngày thuộc **2 ngày cuối tháng** | Worker chạy | HĐ **vẫn** phát hành (không xét PĐK) | P1 | Functional | NEW |
-| SC-XHD-064 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng tổ chức chưa duyệt PĐK; tháng 28 / 30 / 31 ngày | Worker chạy vào **ngày cuối −2**, **cuối −1**, **ngày cuối** | **Cuối −2: chặn; cuối −1 và ngày cuối: phát hành** (cách tính ⛔ chờ CL-XHD-07) | P2 | Boundary | NEW |
+| SC-XHD-064 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | Hợp đồng tổ chức chưa duyệt PĐK; tháng 28 / 30 / 31 ngày | Worker chạy vào **ngày cuối −2**, **cuối −1**, **ngày cuối** | **Cuối −2: chặn; cuối −1 và ngày cuối: phát hành** (2 ngày lịch — CL-XHD-07 đã chốt) | P2 | Boundary | NEW |
 | SC-XHD-065 | PĐK | REQ-XHD-022 | DOC-v2.0-01 BR-XHD-03 (L400) | HĐ tổ chức bị chặn ở đợt trước vì chưa duyệt PĐK | PĐK được duyệt, đợt worker sau chạy | (giả định TP: đợt kế tiếp phát hành) — ⛔ chờ CL-XHD-07 | P2 | Functional | NEW |
 | SC-XHD-066 | Hợp đồng con | REQ-XHD-023 | DOC-v2.0-01 BR-XHD-03 (L401) | Hợp đồng có gắn hợp đồng cha; DV đã thanh toán | Worker / realtime chạy | **Không** phát hành DV | P1 | Negative | NEW |
 | SC-XHD-067 | Hợp đồng con | REQ-XHD-023 | DOC-v2.0-01 BR-XHD-03 (L401) | Hợp đồng con; TB đã giao hoàn tất | Worker / realtime chạy | **Không** phát hành TB | P1 | Negative | NEW |
@@ -127,9 +129,9 @@ updated: 2026-10-16
 | SC-XHD-076 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L420) | Dòng DV đã có BillNumber | Đợt worker sau chạy | Dòng bị bỏ qua, không phát hành lại | P1 | Negative | NEW |
 | SC-XHD-077 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L418) | Đơn đã phát hành toàn bộ | Bản tin Kafka **lặp** cùng nội dung về lại | Không phát sinh HĐ mới | P1 | Negative | NEW |
 | SC-XHD-078 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L419) | 2 dòng TB cùng mã đơn + dịch vụ hóa đơn + gói, **khác phương thức triển khai** | Mỗi phương thức có tín hiệu giao hàng ở thời điểm khác | 2 lần phát hành hợp lệ, không bị coi là trùng | P1 | Functional | NEW |
-| SC-XHD-079 | Chống trùng | REQ-XHD-027, REQ-XHD-002 | DOC-v2.0-01 BR-XHD-08 (L419) ↔ §C#3 (L649-651) | Đơn nhóm Tổng đài Oncall có cả "Thiết bị Oncall" và "Thiết bị IP phone" (cùng SubServiceType 31) | Cả 2 đủ điều kiện | Cả 2 dòng được phát hành, không bị coi là trùng — ⛔ chờ CL-XHD-11, CL-XHD-12 | P2 | Negative | NEW |
+| SC-XHD-079 | Chống trùng | REQ-XHD-027, REQ-XHD-002 | DOC-v2.0-01 BR-XHD-08 (L419) ↔ §C#3 (L649-651) | Đơn nhóm Tổng đài Oncall có cả "Thiết bị Oncall" và "Thiết bị IP phone" (cùng SubServiceType 31) | Cả 2 đủ điều kiện | Cả 2 dòng được phát hành, không bị coi là trùng (khóa chống trùng 2.2 không chứa SubServiceType — CL-XHD-11); tín hiệu giao map đúng dòng TB của mình ⛔ chờ CL-XHD-12 | P2 | Negative | NEW |
 | SC-XHD-080 | Hợp lệ | REQ-XHD-028, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L425) | Đơn ở trạng thái **hủy** | Worker chạy | Không phát hành; ghi log | P1 | Negative | NEW |
-| SC-XHD-081 | Hợp lệ | REQ-XHD-028, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L425) | Đơn ở trạng thái **đang cập nhật** | Worker chạy | Không phát hành; ghi log (giá trị trạng thái ⛔ chờ CL-XHD-14) | P1 | Negative | NEW |
+| SC-XHD-081 | Hợp lệ | REQ-XHD-028, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L425) | Đơn ở trạng thái **đang cập nhật** | Worker chạy | Không phát hành (trạng thái hợp lệ = "Bình thường"; giá trị "đang cập nhật" ⛔ chờ CL-XHD-14) | P1 | Negative | NEW |
 | SC-XHD-082 | Hợp lệ | REQ-XHD-029, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L426) | Hợp đồng **không có hiệu lực** | Worker chạy | Không phát hành; ghi log | P1 | Negative | NEW |
 | SC-XHD-083 | Hợp lệ | REQ-XHD-029, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L426) | Đơn thiếu **Sale Team** | Worker chạy | Không phát hành; ghi log | P1 | Negative | NEW |
 | SC-XHD-084 | Hợp lệ | REQ-XHD-029, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L426) | Đơn thiếu **Sale Channel** | Worker chạy | Không phát hành; ghi log | P1 | Negative | NEW |
@@ -143,8 +145,8 @@ updated: 2026-10-16
 | SC-XHD-092 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID gói dịch vụ = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** | P1 | Boundary | NEW |
 | SC-XHD-093 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID chính sách = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** | P1 | Boundary | NEW |
 | SC-XHD-094 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID câu lệnh giá = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** | P1 | Boundary | NEW |
-| SC-XHD-095 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID chương trình khuyến mãi = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** (đơn không KM ⛔ chờ CL-XHD-15) | P1 | Boundary | NEW |
-| SC-XHD-096 | Hợp lệ | REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L428) | Dòng bị chặn ở đợt 1 vì thiếu thông tin | Thông tin được bổ sung trước giờ chốt đợt 2 | (giả định TP theo 2.1: đợt sau phát hành theo bản tin mới) — không có hàng chờ phát hành lại — ⛔ chờ CL-XHD-17 | P2 | Functional | NEW |
+| SC-XHD-095 | Hợp lệ | REQ-XHD-030, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L427) | **ID chương trình khuyến mãi = 0** / **= 1** | Worker chạy | **0: không phát hành + log; 1: phát hành** (đơn không KM ⇒ theo chữ URD bị chặn, ⛔ chờ BA xác nhận CL-XHD-15) | P1 | Boundary | NEW |
+| SC-XHD-096 | Hợp lệ | REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L428) | Dòng bị chặn ở đợt 1 vì thiếu thông tin | Thông tin được bổ sung trước giờ chốt đợt 2 | Đợt 2 cùng ngày phát hành dòng (worker quét dòng chưa xuất có mốc nghiệp vụ trong ngày — L384); không có hàng chờ phát hành lại | P2 | Functional | NEW |
 | SC-XHD-097 | Job cảnh báo | REQ-XHD-032 | DOC-v2.0-01 BR-XHD-10 (L429) | Có đơn thiếu thông tin trước giờ chốt | Job cảnh báo chạy | Job chạy chu kỳ 15 phút; đầu ra cảnh báo ⛔ chờ CL-XHD-16 | P3 | Functional | NEW |
 | SC-XHD-098 | Hủy đơn đã có HĐ | REQ-XHD-033 | DOC-v2.0-01 BR-XHD-10 (L430) | Đơn đã có BillNumber | SPF phát sự kiện hủy đơn | HĐ giữ nguyên: không tự hủy, không sinh HĐ điều chỉnh; Paid/Payment không bị hệ thống đảo | P1 | Negative | NEW |
 | SC-XHD-099 | Chi nhánh | REQ-XHD-034 | DOC-v2.0-01 BR-XHD-12 (L434) | Hợp đồng do chi nhánh X quản lý | HĐ được phát hành | Chi nhánh xuất HĐ = X, lưu trên tồn xuất HĐ (`OB_OrderBill`) | P1 | Functional | NEW |
@@ -154,10 +156,10 @@ updated: 2026-10-16
 | SC-XHD-103 | Invoice Event | REQ-XHD-037 | DOC-v2.0-01 BR-XHD-13 (L442) | HĐ vừa phát hành thành công | Sau khi ghi BillNumber | Invoice Event được gửi lên Kafka (kích hoạt điểm chạm b của GN và hậu kỳ HK) | P1 | Integration | NEW |
 | SC-XHD-104 | Phát hành Billing | REQ-XHD-035 | DOC-v2.0-01 BR-XHD-13 (L439) | Billing lỗi / timeout (mock) | Worker gọi phát hành | (giả định TP: dòng giữ BillNumber rỗng + log) — ⛔ chờ CL-XHD-18 | P2 | Negative | NEW |
 | SC-XHD-105 | 1 đơn n HĐ | REQ-XHD-038 | DOC-v2.0-01 BR-XHD-14 (L446-447) | Đơn có DV + TB ở 2 phương thức, đủ điều kiện ở 3 thời điểm khác đợt | Lần lượt các đợt / realtime chạy | Đơn có **3 BillNumber**; `OB_OrderBill` liên kết đủ 3; mỗi HĐ có thể nhiều dòng | P1 | Functional | NEW |
-| SC-XHD-106 | Bán thêm | REQ-XHD-040 | DOC-v2.0-04 mail PM | Hợp đồng đang hoạt động có đơn **bán thêm** (DV / TB) | Đơn đi qua các điều kiện phát hành như đơn bán mới | Xuất HĐ theo cùng rule; HĐ gắn đúng đơn bán thêm (điểm khác biệt nếu có ⛔ chờ CL-XHD-25) | P1 | Functional | NEW |
-| SC-XHD-107 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L302) | Đơn đã ra HĐ ở luồng cũ (v1), kiểm tra chéo đang bật | Bản tin của đơn về luồng mới | Luồng mới **không** xử lý đơn — ⛔ chờ CL-XHD-24 (scope) | P2 | Regression | NEW |
-| SC-XHD-108 | Cutover | REQ-XHD-041 | DOC-v2.0-02 BR-DB-08 (L300) | Cả 2 luồng cùng đọc Kafka | 1 bản tin được luồng mới ghi | Luồng cũ không ghi bản tin đó (và ngược lại) — ⛔ chờ CL-XHD-24 | P2 | Regression | NEW |
-| SC-XHD-109 | HT triển khai | REQ-XHD-043 | DOC-v2.0-05 dòng 8 | Đơn có TB DeployType = "Không" (và đơn mix "Không" + TIN/PNC) | Không có / có phiếu thi công TINPNC | Hành vi phát hành TB ⛔ chờ CL-XHD-27 | P2 | Functional | NEW |
+| SC-XHD-106 | Bán thêm | REQ-XHD-040 | DOC-v2.0-04 mail PM | Hợp đồng đang hoạt động có đơn **bán thêm** (DV / TB) | Đơn đi qua các điều kiện phát hành như đơn bán mới | Xuất HĐ theo cùng rule đơn bán mới; HĐ gắn đúng đơn bán thêm (CL-XHD-25, 19/10/2026) | P1 | Functional | NEW |
+| SC-XHD-109 | HT triển khai | REQ-XHD-043 | DOC-v2.0-05 dòng 8 | Đơn có TB DeployType = "Không" (và đơn mix "Không" + TIN/PNC) | Không có / có phiếu thi công TINPNC | QC: xuất HĐ khi đơn hoàn tất — chưa có căn cứ URD ⛔ chờ CL-XHD-27, CL-XHD-34 | P2 | Functional | NEW |
+| SC-XHD-110 | Điều kiện phát hành | REQ-XHD-019, REQ-XHD-025 | DOC-v2.0-01 BR-XHD-06 (L412) ↔ BR-DB-07 (L374) | Đơn có **2 TB cùng phương thức** triển khai A; DV đã phát hành | Tín hiệu giao hàng hoàn tất của A chỉ mang **TB1** (giao thiếu TB2) | Chỉ TB1 phát hành; TB2 giữ BillNumber rỗng, chờ tín hiệu riêng (CL-XHD-10) | P1 | Functional | NEW |
+| SC-XHD-111 | Hợp lệ | REQ-XHD-031, REQ-XHD-015 | DOC-v2.0-01 BR-XHD-10 (L428) ↔ BR-XHD-01 (L384) | Dòng bị chặn trong ngày N vì thiếu thông tin | Thông tin được bổ sung **sau giờ chốt cuối ngày N** (hoặc ngày N+1) | Hệ thống **không** tự phát hành lại dòng ở các đợt sau (không giữ chờ — CL-XHD-17); dòng giữ BillNumber rỗng | P2 | Negative | NEW |
 
 #### Source Detail per Scenario (verbatim quotes — `references/quoting-guide.md`)
 
@@ -341,7 +343,7 @@ updated: 2026-10-16
 
 > Áp dụng chung cho mọi kênh bán: thanh toán, hủy đơn hàng.
 
-↳ **Ghi chú:** BR-DB-01 không có 2 sự kiện này nhưng BR-DB-03 / BR-XHD-03 cần chúng — SC dựng theo giả định TP (đủ 4 sự kiện như 2.1), đánh dấu chờ CL-XHD-01.
+↳ **Ghi chú:** BR-DB-01 không có 2 sự kiện này nhưng BR-DB-03 / BR-XHD-03 cần chúng — SC giữ chỗ, Then chờ CL-XHD-01.
 
 ---
 
@@ -404,7 +406,7 @@ updated: 2026-10-16
 
 > Nếu thiết bị đã có hóa đơn hoặc không khớp khóa thì không ghi nhận, chỉ ghi log nội dung tín hiệu vào cột Note.
 
-↳ **Ghi chú:** Nhánh "đã có hóa đơn" — cũng là ca giao bù trong cùng phương thức (2.1 BR-XHD-04: lần giao bù không phát sinh HĐ).
+↳ **Ghi chú:** Nhánh "đã có hóa đơn" — cũng là ca giao bù trong cùng phương thức.
 
 ---
 
@@ -440,7 +442,7 @@ updated: 2026-10-16
 
 > Nếu khách chọn lấy hóa đơn thì dùng thông tin khách tự nhập: tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu.
 
-↳ **Ghi chú:** Positive FPL. 7 trường đối chiếu với các ô "Mã số thuế KH", "Mã định danh", "Mã QHNS", "Số hộ chiếu" của màn `DOC-v2.0-FIG-01`.
+↳ **Ghi chú:** Positive FPL. 7 trường đối chiếu với các ô "Mã số thuế KH", "Mã định danh", "Mã QHNS", "Số hộ chiếu" của màn `DOC-v2.0-FIG-01` (ảnh: Chi tiết hóa đơn.png).
 
 ---
 
@@ -504,7 +506,7 @@ updated: 2026-10-16
 
 > Một đơn có thể được đồng bộ nhiều lần; lần đẩy cuối là thông tin mới nhất.
 
-↳ **Ghi chú:** Thay đổi chỉ cho phép ở thông tin KH sau khi thanh toán (2.1 L275) — dữ liệu khác nhau nên ở thông tin KH.
+↳ **Ghi chú:** Thay đổi chỉ cho phép ở thông tin KH sau khi thanh toán — dữ liệu khác nhau nên ở thông tin KH.
 
 ---
 
@@ -540,7 +542,7 @@ updated: 2026-10-16
 
 > Mỗi đợt quét các dòng chưa xuất hóa đơn có mốc nghiệp vụ trong ngày, trước giờ chốt của đợt.
 
-↳ **Ghi chú:** "Trong ngày, trước giờ chốt" ⇒ không có chặn dưới giữa các đợt (2.1 L314 nói rõ).
+↳ **Ghi chú:** "Trong ngày, trước giờ chốt" ⇒ không có chặn dưới giữa các đợt.
 
 ---
 
@@ -568,7 +570,7 @@ updated: 2026-10-16
 
 > Mỗi đợt quét các dòng chưa xuất hóa đơn có mốc nghiệp vụ trong ngày, trước giờ chốt của đợt.
 
-↳ **Ghi chú:** Ghi nhận hiện trạng có chủ đích (2.1 RISK-01); mail cảnh báo là REQ-XHD-042 chưa có SC.
+↳ **Ghi chú:** Ghi nhận hiện trạng có chủ đích; mail cảnh báo là REQ-XHD-042 chưa có SC.
 
 ---
 
@@ -577,7 +579,7 @@ updated: 2026-10-16
 
 > Đơn đủ điều kiện sau giờ chốt cuối của ngày cuối tháng sẽ phát hành sang tháng sau, ảnh hưởng kỳ ghi nhận doanh thu.
 
-↳ **Ghi chú:** Then hai khả năng tùy CL-XHD-06: realtime phát hành ngay trong tháng, hoặc dòng nằm chờ sang tháng sau.
+↳ **Ghi chú:** CL-XHD-06 đã chốt (16/10/2026): không phát hành trong tháng, sang tháng sau — ngoại lệ của realtime ngày cuối tháng. Đợt nào của tháng sau phát hành: CL-XHD-32.
 
 ---
 
@@ -686,7 +688,7 @@ updated: 2026-10-16
 
 > Hai điều kiện xét độc lập và dùng chung cho mọi kênh bán.
 
-↳ **Ghi chú:** Hệ quả có chủ đích ghi ở 2.1 L333.
+↳ **Ghi chú:** Hệ quả trực tiếp của câu "hai điều kiện xét độc lập" (L397).
 
 ---
 
@@ -695,7 +697,7 @@ updated: 2026-10-16
 
 > Thiết bị: khi có tín hiệu giao hàng hoàn tất của phương thức triển khai tương ứng (phiếu thi công, Vendor, quầy).
 
-↳ **Ghi chú:** Hành vi "phát hành toàn bộ TB của phương thức" của BR-XHD-04 cũ có còn hay không: CL-XHD-10.
+↳ **Ghi chú:** CL-XHD-10 đã chốt (16/10/2026): chỉ phát hành TB có trong tín hiệu — ca giao thiếu cùng phương thức ở SC-XHD-110.
 
 ---
 
@@ -740,7 +742,7 @@ updated: 2026-10-16
 
 > hai ngày cuối tháng không xét điều kiện này.
 
-↳ **Ghi chú:** Biên theo tháng 28/30/31 ngày; "2 ngày cuối" = 2 ngày lịch cuối cùng (suy diễn — CL-XHD-07).
+↳ **Ghi chú:** Biên theo tháng 28/30/31 ngày; "2 ngày cuối" = 2 ngày lịch cuối cùng (CL-XHD-07 đã chốt 16/10/2026).
 
 ---
 
@@ -878,7 +880,7 @@ updated: 2026-10-16
 > Mục A.3, BR-DB-07, BR-XHD-08
 > Khóa chống trùng có dùng SubServiceType nên có thể làm hai dòng bị coi là trùng.
 
-↳ **Ghi chú:** Doc tự nêu rủi ro; kết quả mong đợi chờ CL-XHD-11/12.
+↳ **Ghi chú:** Khóa chống trùng chốt theo 2.2 (CL-XHD-11) nên không còn trùng ở bước phát hành; rủi ro còn lại ở bước map tín hiệu BR-DB-07 (CL-XHD-12).
 
 ---
 
@@ -1031,7 +1033,7 @@ updated: 2026-10-16
 
 > hệ thống không giữ chờ phát hành lại vì hóa đơn phải lập trong ngày.
 
-↳ **Ghi chú:** "Không giữ chờ" ≠ "không bao giờ phát hành" — 2.1 có câu bản tin mới thì xuất lại; 2.2 mất (CL-XHD-17).
+↳ **Ghi chú:** CL-XHD-17 đã chốt theo 2.2 (16/10/2026): còn trong ngày thì đợt sau vẫn lấy; qua ngày thì không phát hành lại (SC-XHD-111).
 
 ---
 
@@ -1086,7 +1088,7 @@ updated: 2026-10-16
 
 > Nội dung hiển thị trên hóa đơn là tên dịch vụ + số tháng sử dụng (lấy từ SPF), không hiển thị kỳ hạn từ ngày – đến ngày.
 
-↳ **Ghi chú:** Ảnh FIG-01 (màn hiện hữu) vẫn có "Từ ngày / Đến ngày" — CL-XHD-28.
+↳ **Ghi chú:** Ảnh FIG-01 (ảnh: Chi tiết hóa đơn.png) (màn hiện hữu) vẫn có "Từ ngày / Đến ngày" — CL-XHD-28.
 
 ---
 
@@ -1127,24 +1129,6 @@ updated: 2026-10-16
 
 ---
 
-##### SC-XHD-107 · Cutover — kiểm tra chéo luồng cũ
-📍 `DOC-v2.0-02 §I.c BR-DB-08 · L302`
-
-> Trong giai đoạn đầu sau khi go-live, luồng mới kiểm tra chéo trên dữ liệu cũ ở MỨC ĐƠN HÀNG: nếu Đơn hàng đã ra hóa đơn ở luồng cũ thì luồng mới không xử lý đơn đó nữa.
-
-↳ **Ghi chú:** Nội dung từ 2.1 (2.2 chuyển phụ lục D#1).
-
----
-
-##### SC-XHD-108 · Cutover — một bản tin một luồng
-📍 `DOC-v2.0-02 §I.c BR-DB-08 · L300`
-
-> Kafka dùng chung một nguồn bản tin; mỗi bản tin chỉ được xử lý bởi một trong hai luồng — đã ghi qua luồng mới thì không ghi qua luồng cũ và ngược lại.
-
-↳ **Ghi chú:** Như SC-XHD-107.
-
----
-
 ##### SC-XHD-109 · TB có HT triển khai "Không"
 📍 `DOC-v2.0-05 sheet "1. HT Triển khai" · STT 8`
 
@@ -1152,6 +1136,24 @@ updated: 2026-10-16
 > - None: không đẩy triển khai, giao hàng nếu hàng hóa, dịch vụ trên đơn hàng chỉ có "Không"
 
 ↳ **Ghi chú:** TB "Không" không có tín hiệu giao hàng ⇒ theo BR-XHD-03 sẽ không bao giờ đủ điều kiện. Cần BA xác nhận (CL-XHD-27).
+
+---
+
+##### SC-XHD-110 · Giao thiếu TB cùng phương thức
+📍 `DOC-v2.0-01 §I.c BR-XHD-06 · L412` ↔ `BR-DB-07 · L374`
+
+> Mỗi tín hiệu chỉ phát hành đúng thành phần gắn với tín hiệu đó: tín hiệu thanh toán chỉ phát hành dịch vụ; tín hiệu giao hàng chỉ phát hành thiết bị của phương thức triển khai đó.
+
+↳ **Ghi chú:** Tín hiệu map vào từng TB theo khóa (BR-DB-07) ⇒ TB không có trong tín hiệu thì chưa đủ điều kiện. Thêm 16/10/2026 sau khi CL-XHD-10 chốt.
+
+---
+
+##### SC-XHD-111 · Bổ sung thông tin sau khi qua ngày
+📍 `DOC-v2.0-01 §I.c BR-XHD-10 · L428`
+
+> Không hợp lệ thì không phát hành và ghi log; hệ thống không giữ chờ phát hành lại vì hóa đơn phải lập trong ngày.
+
+↳ **Ghi chú:** Qua ngày thì không phát hành lại (CL-XHD-17). Thêm 16/10/2026.
 
 ## Scenarios — CARRIED (reference only)
 
@@ -1163,4 +1165,5 @@ updated: 2026-10-16
 
 | Scenario ID | Tên ngắn | Module | Deprecated ở | Lý do |
 |-------------|----------|--------|-------------|-------|
-| — | *(không có)* | — | — | — |
+| SC-XHD-107 | Cutover — đơn đã ra HĐ ở luồng cũ | XHD | v2.0 (16/10/2026) | URD 2.2 §D#1 chỉ nêu tên mục, không có hành vi ⇒ chờ CL-XHD-33, CL-XHD-24 |
+| SC-XHD-108 | Cutover — 2 luồng cùng đọc Kafka | XHD | v2.0 (16/10/2026) | Như SC-XHD-107 |

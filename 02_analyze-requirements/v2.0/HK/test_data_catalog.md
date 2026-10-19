@@ -21,11 +21,11 @@ updated: 2026-10-16
 | Invoice Event | Runtime | 1 event / HĐ phát hành thành công (payload chưa có) | event lặp (→ không đẩy / add lại) | — | §III.a · BR-HK-09 (CL-XHD-29) |
 | Thành phần HĐ | Fixture | chỉ DV · chỉ TB · DV + TB | — | — | BR-HK-01 |
 | Số lần phát hành của đơn | Fixture | 1 · ≥2 (DV và TB khác đợt) | — | **lần 2 chỉ đẩy phần vừa xuất** | BR-HK-01 · BR-XHD-14 |
-| Ký hiệu HĐĐT (7 ký tự) | Runtime | `1K<yy>T<xx>` — vd `1K26TQA` (giả định bảng 2.1) | `<xx>` sai bảng map (→ sai kê khai) | — | BR-HK-03 · DOC-v2.0-02 L769-774 (CL-HK-01) |
-| Vùng × loại đầu → 2 ký tự cuối | Master | Vùng 1 `M=HT U=QA A=HH` · Vùng 2 `ET EA EH` · Vùng 3 `GT GA GH` · Vùng 4 `MT MA MH` · Vùng 5 = Vùng 1 · Vùng 6 `OT OA OH` · Vùng 7 `YT YA YH` · FPL `U=PA A=PH` (giả định 2.1) | tỉnh không thuộc vùng nào (→ thiếu thông tin, chưa đẩy) | **Vùng 5 dùng chung Vùng 1 · FPL không có đầu M** | DOC-v2.0-02 L776-784 (CL-HK-01, CL-HK-02) |
-| Loại đầu | Master | `M` · `U` · `A` — theo loại HĐ (map loại HĐ → đầu chưa có) | — | — | DOC-v2.0-02 L775 (CL-HK-01) |
-| ID HĐ | Runtime | `<đầu><yy><mã tỉnh><số HĐ>` — vd `U26HN01053692` | mã chi nhánh thay mã tỉnh (→ sai) | — | BR-HK-03 · DOC-v2.0-02 L788-792 (CL-HK-08) |
-| Mã tỉnh | Master | theo danh mục tỉnh thành (vd `HN`) | — | — | DOC-v2.0-02 L791 (CL-HK-08) |
+| Ký hiệu HĐĐT | Runtime | theo bảng map DVKH HO chốt với FAF — ⛔ chờ CL-HK-01 | ký hiệu sai bảng chốt (→ sai kê khai) | — | BR-HK-03 L581 (CL-HK-01, CL-HK-10) |
+| Vùng × loại đầu → 2 ký tự cuối | Master | ⛔ chờ bảng chốt (CL-HK-01) | — | — | DOC-v2.0-01 §D#5 L675 (CL-HK-10) |
+| Loại đầu | Master | `M` · `U` · `A` (BR-HK-03 L582 "loại đầu") — map loại HĐ → đầu ⛔ chờ CL-HK-01 | — | — | BR-HK-03 (CL-HK-01) |
+| ID HĐ | Runtime | loại đầu + năm + mã tỉnh + số HĐ — định dạng ⛔ chờ CL-HK-10 | — | — | BR-HK-03 L582 (CL-HK-08, CL-HK-10) |
+| Mã tỉnh | Master | danh mục chưa có ⛔ chờ CL-HK-08, CL-HK-10 | — | — | BR-HK-03 L582 |
 | Nội dung dòng hàng | Runtime | tên dịch vụ + số tháng (SPF) | có "từ ngày – đến ngày" · tên gốc trên đơn (→ sai) | — | BR-HK-05 |
 | Mức thuế suất | Master | `{KCT, 0%, 5%, 8%, 10%}` | — | **HĐ chỉ 1 mức · HĐ đủ 5 mức** | BR-HK-07 |
 | Dòng tổng theo thuế suất | Runtime | mỗi mức: thành tiền + thuế GTGT + tổng cộng; dòng tổng cộng chung = Σ các mức | — | — | BR-HK-07 |
@@ -41,12 +41,13 @@ updated: 2026-10-16
   - **Fixture** = test **tự tạo** (đơn / HĐ có thành phần cần thiết, mock HĐĐT / Dịch vụ). Test chịu trách nhiệm tạo + dọn.
   - **Runtime** = sinh khi chạy (ký hiệu, ID HĐ, payload đẩy, cờ đã add) — không cố định trước.
 - Boundary values (in **đậm**) là ứng viên chính cho BVA ở generate-tc.
-- ⚠️ Bảng map ký hiệu là của **URD 2.1** — giả định tới khi CL-HK-01 trả lời. Full quote: `../quotes/REQ-HK-005.md`.
+- ⛔ Chưa có bảng map ký hiệu — chờ bảng chốt (CL-HK-01, CL-HK-10).
+- Tool verify (`07_environments/environments.md §Tool tra cứu`): tiền trả trước → **Quản lý kế toán › Cước trả trước › Tra cứu new**; hóa đơn → **Quản lý kế toán › Liệt kê cước**.
 
 ### Quy ước cell (giữ nhất quán)
 - **Loại data:** đúng 1 trong `Master` / `Fixture` / `Runtime` (xem Ghi chú chung). Field lấy từ danh mục hệ thống → `Master`; field test nhập/tạo → `Fixture`; field hệ thống tự sinh → `Runtime`.
 - **Valid:** `value (mô tả)` — vd `ABC1234567 (10 ký tự)`, `hôm nay (default)`.
 - **Invalid:** `value (→ hệ quả/MSG)` — vd `rỗng (→MSG-001)`, `"abc" (→MSG-E-002)`. Dự án không có mã MSG → ghi mô tả hệ quả (vd `rỗng (→ báo lỗi bắt buộc nhập)`).
 - **Boundary:** **bold** giá trị biên + (hợp lệ/chặn) — vd `**500 ký tự (hợp lệ), 501 (chặn)**`.
-- **Nguồn:** dùng **đúng ký hiệu của DOC dự án** theo `req_notation` — ở đây là `BR-…`; nội dung chỉ có ở 2.1 ghi `DOC-v2.0-02 L…`. **KHÔNG tự bịa ID**.
+- **Nguồn:** dùng **đúng ký hiệu của DOC dự án** theo `req_notation` — ở đây là `BR-…`. **KHÔNG tự bịa ID**.
 - Set literal `{0=…, 1=…}`; `→` = hệ quả; `⟷` = quan hệ 2 chiều; `[…]` = ID pattern.

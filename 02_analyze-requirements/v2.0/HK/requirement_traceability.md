@@ -7,8 +7,6 @@ module: { code: HK, dir: HK, name: "Đẩy hậu kỳ qua dịch vụ – tiền
 doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #12 · §B.III · §C#1 · §D#5, #6"
-  - id: DOC-v2.0-02
-    section: "§III (BR-HK-03 bảng map vùng, BR-HK-04, BR-HK-06, BR-HK-08, BR-HK-10) — tham chiếu kỹ thuật"
 status: ANALYZED
 updated: 2026-10-16
 ---
@@ -17,7 +15,7 @@ updated: 2026-10-16
 
 > Tạo bởi: analyze-requirements. Ma trận truy vết REQ ↔ DOC ↔ Scenario ↔ Clarification.
 > **Layout v2** — quote REQ ở **§2** file này; quote SC ở `test_scenario_map.md`; CL ở `risk_assessment.md`.
-> `req_notation: BR` ⇒ **Schema A**. `L<n>` = số dòng bản trích text `.docx` (`scripts/doc/search-doc.sh`). URD 2.2 thắng khi mâu thuẫn với 2.1.
+> `req_notation: BR` ⇒ **Schema A**. `L<n>` = số dòng bản trích text `.docx` (`scripts/doc/search-doc.sh`).
 
 ## 1. Traceability Matrix (REQ → DOC → SC)
 
@@ -29,11 +27,11 @@ updated: 2026-10-16
 | REQ-HK-002 | BR-HK-01 | DOC-v2.0-01 §III.c (L570) | SC-HK-002, SC-HK-003 | — |
 | REQ-HK-003 | BR-HK-01 | DOC-v2.0-01 §III.c (L571) | SC-HK-004, SC-HK-005 | CL-HK-09 |
 | REQ-HK-004 | BR-HK-02 | DOC-v2.0-01 §III.c (L575-577) | SC-HK-006, SC-HK-007, SC-HK-018 | CL-HK-03, CL-HK-04, CL-HK-05 |
-| REQ-HK-005 | BR-HK-03 | DOC-v2.0-01 §III.c (L581, L583-584) + DOC-v2.0-02 BR-HK-03 (L767-785) | SC-HK-008, SC-HK-009, SC-HK-010, SC-HK-020 | CL-HK-01, CL-HK-02 |
+| REQ-HK-005 | BR-HK-03 | DOC-v2.0-01 §III.c (L581, L583-584) | SC-HK-008, SC-HK-020 *(SC-HK-009, 010 deprecated 16/10/2026)* | CL-HK-01, CL-HK-02, CL-HK-10 |
 | REQ-HK-006 | BR-HK-03 | DOC-v2.0-01 §III.c (L582) | SC-HK-011 | CL-HK-08 |
 | REQ-HK-007 | BR-HK-05 | DOC-v2.0-01 §III.c (L588) | SC-HK-012 | — |
 | REQ-HK-008 | BR-HK-07 | DOC-v2.0-01 §III.c (L592) | SC-HK-013, SC-HK-014 | — |
-| REQ-HK-009 | BR-HK-09 | DOC-v2.0-01 §III.c (L596) | SC-HK-015, SC-HK-016, SC-HK-017, SC-HK-019, SC-HK-021 | CL-HK-06, CL-HK-07 |
+| REQ-HK-009 | BR-HK-09 | DOC-v2.0-01 §III.c (L596) | SC-HK-015, SC-HK-016, SC-HK-017, SC-HK-021 | CL-HK-06, CL-HK-07 |
 | REQ-HK-010 | BR-HK-02 | DOC-v2.0-01 §III.c (L575) + §D#6 (L678-681) | — *(chờ đặc tả — CHANGELOG §3)* | CL-HK-03, CL-HK-04 |
 
 > `§III.c` = mục B.III "Đẩy hậu kỳ qua dịch vụ – tiền trả trước" → c. Business rules.
@@ -83,7 +81,7 @@ updated: 2026-10-16
 ---
 
 ### REQ-HK-005 · Ký hiệu HĐ điện tử theo quy định thuế; đầu số sai là sai kê khai
-📍 `DOC-v2.0-01 §III.c BR-HK-03 · L581, L583-584` + `DOC-v2.0-02 BR-HK-03 · L767-785`  ·  Clarif: `CL-HK-01`, `CL-HK-02`
+📍 `DOC-v2.0-01 §III.c BR-HK-03 · L581, L583-584`  ·  Clarif: `CL-HK-01`, `CL-HK-02`
 
 **URD 2.2** — `DOC-v2.0-01 L581, L583-584`
 > Ký hiệu hóa đơn xác định theo quy định thuế; DVKH HO chốt với FAF.
@@ -91,10 +89,7 @@ updated: 2026-10-16
 > Bảng map vùng miền và các đơn vị có đầu số riêng xem tài liệu kỹ thuật.
 > Đầu số sai là sai kê khai thuế, không chỉ lỗi hiển thị.
 
-**URD 2.1 — bảng map (tham chiếu kỹ thuật)** — `DOC-v2.0-02 L767-785`
-> KÝ HIỆU HÓA ĐƠN ĐIỆN TỬ. Ký hiệu gồm 7 ký tự theo quy định về hóa đơn điện tử. Ví dụ 1K26TQA: … (full quote: [`../quotes/REQ-HK-005.md`](../quotes/REQ-HK-005.md))
-
-↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1 ⇒ bảng map 2.1 chỉ là **giả định** (CL-HK-01 / GAP-17). Loại hóa đơn nào dùng đầu M / U / A chưa liệt kê; HĐ bán thêm dùng đầu nào chưa rõ. Đơn vị có đầu số riêng (FPL, FMC) chưa rõ in/out scope (CL-HK-02 / GAP-34). Severity cao: sai là sai kê khai thuế.
+↳ **Ghi chú:** 2.2 ghi "cần chốt ký hiệu" (cột So với v2.1, L585) + §C#1 ⇒ SC ký hiệu chờ bảng chốt (CL-HK-01 / GAP-17, CL-HK-10). Loại hóa đơn nào dùng đầu M / U / A chưa liệt kê; HĐ bán thêm dùng đầu nào chưa rõ. Đơn vị có đầu số riêng (URD 2.2 không liệt kê) chưa rõ in/out scope (CL-HK-02 / GAP-34). Severity cao: sai là sai kê khai thuế.
 
 ---
 
@@ -103,7 +98,7 @@ updated: 2026-10-16
 
 > ID hóa đơn ghép từ loại đầu + năm + mã tỉnh + số hóa đơn.
 
-↳ **Ghi chú:** Ví dụ 2.1 (L788-792): `U26HN01053692` = U + 26 + HN + 01053692; mã tỉnh lấy theo danh mục tỉnh thành, **không** phải mã chi nhánh; số HĐ trùng "Số (Invoice No)". Mã tỉnh của cái gì (địa chỉ KH? chi nhánh hợp đồng?) chưa rõ (CL-HK-08).
+↳ **Ghi chú:** Định dạng từng thành phần (năm 2 hay 4 số, mã tỉnh theo danh mục nào) chưa có (CL-HK-10). Mã tỉnh của cái gì (địa chỉ KH? chi nhánh hợp đồng?) chưa rõ (CL-HK-08).
 
 ---
 
@@ -112,7 +107,7 @@ updated: 2026-10-16
 
 > Hiển thị tên dịch vụ + số tháng sử dụng (lấy từ SPF); không hiển thị kỳ hạn từ ngày – đến ngày và không dùng bảng map.
 
-↳ **Ghi chú:** Kiểm trên dữ liệu đẩy sang HĐĐT (khác XHD REQ-XHD-036 kiểm trên HĐ Billing). "Không dùng bảng map" — 2.1 L795: bên HĐ dựng lại tên, không lấy nguyên tên gốc trên đơn.
+↳ **Ghi chú:** Kiểm trên dữ liệu đẩy sang HĐĐT (khác XHD REQ-XHD-036 kiểm trên HĐ Billing). "Không dùng bảng map" — nội dung dựng từ tên dịch vụ + số tháng.
 
 ---
 
@@ -121,7 +116,7 @@ updated: 2026-10-16
 
 > Gom tổng tiền theo từng mức thuế suất (không chịu thuế, 0%, 5%, 8%, 10%), mỗi mức một dòng gồm thành tiền, thuế GTGT và tổng cộng; sau đó là dòng tổng cộng chung.
 
-↳ **Ghi chú:** EP 5 mức thuế suất. Mức không có dòng chi tiết thì có in dòng 0 không — suy diễn: chỉ in mức có phát sinh (cần xác nhận khi có mẫu HĐĐT, CL-HK-04).
+↳ **Ghi chú:** EP 5 mức thuế suất. Mức không có dòng chi tiết thì **không in** — QC trả lời CL-HK-04 19/10/2026 (khớp suy diễn trước đó).
 
 ---
 
@@ -130,7 +125,7 @@ updated: 2026-10-16
 
 > Mỗi đơn chỉ add tiền trả trước một lần, kể cả khi đơn phát hành ở nhiều đợt hóa đơn.
 
-↳ **Ghi chú:** 2.1 L753 viết "một lần với 1 dịch vụ" (per dịch vụ) — 2.2 viết "mỗi đơn" (per đơn) ⇒ **2.2 thắng**, nhưng add ở đợt nào, số tiền nào, TB có add không: chưa rõ (CL-HK-07 / GAP-59). Đẩy Dịch vụ lỗi: CL-HK-06.
+↳ **Ghi chú:** "Mỗi đơn một lần" (per đơn), nhưng add ở đợt nào, số tiền nào, TB có add không: chưa rõ (CL-HK-07 / GAP-59). Đẩy Dịch vụ lỗi: CL-HK-06.
 
 ---
 
@@ -145,9 +140,9 @@ updated: 2026-10-16
 > BR-HK-06, 08
 > Kỹ thuật.
 
-↳ **Ghi chú:** Không có rule nào ở 2.2; 2.1 BR-HK-06 câu cụt ("Nhưng đơn hàng có chiết khấu là đơn hàng đại lý Fpt Play hoặc Smart Home (hiện đi từ luồng đơn hàng không có)" — L798). TP: F21 "Chờ bổ sung", đề xuất Out-scope (GAP-04, Blocker). **Chưa sinh SC.**
+↳ **Ghi chú:** Không có rule nào ở URD 2.2 (D#6 chuyển phụ lục). TP: F21 "Chờ bổ sung", đề xuất Out-scope (GAP-04, Blocker). **Chưa sinh SC.**
 
 ---
 
-> **Quy ước:** Implicit REQ → *(Implicit — không có quote trực tiếp)* + derivation ở Ghi chú. Quote >500 ký tự → sidecar `v2.0/quotes/` (REQ-HK-005 có sidecar bảng map vùng).
+> **Quy ước:** Implicit REQ → *(Implicit — không có quote trực tiếp)* + derivation ở Ghi chú. Quote >500 ký tự → sidecar `v2.0/quotes/`.
 > **Clarification quote KHÔNG ở đây** — `HK/risk_assessment.md` §Clarifications. **SC quote** ở `test_scenario_map.md`.
