@@ -172,7 +172,7 @@ updated: 2026-10-19
 
 > Hiển thị tên dịch vụ + số tháng sử dụng (lấy từ SPF); không hiển thị kỳ hạn từ ngày – đến ngày và không dùng bảng map.
 
-↳ **Ghi chú:** Kiểm trên payload đẩy hóa đơn điện tử.
+↳ **Ghi chú:** Kiểm trên payload đẩy hóa đơn điện tử. Mẫu DOC-v2.0-06 (hóa đơn 06/08/2026, luồng cũ) còn in "(Từ ngày … đến ngày …)" — v2.0 **theo URD** (QC owner 19/10/2026): còn in kỳ hạn ⇒ bug.
 
 ---
 

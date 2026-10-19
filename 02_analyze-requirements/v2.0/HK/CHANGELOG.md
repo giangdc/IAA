@@ -50,6 +50,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Đóng CL-HK-11:** ký hiệu hóa đơn điện tử kiểm trên biên bản điện tử (Danh sách hóa đơn › cột Chuyển đổi hóa đơn › icon máy in) — SC-HK-008, 009, 010, 020 hết chờ CL; tool thêm vào `07_environments/environments.md` | QC owner 19/10/2026 | cl_open 4→3 · blocked_by_cl 6→2 |
 | 2026-10-19 | UPDATE | **Đóng CL-HK-05:** đẩy hóa đơn điện tử lỗi ⇒ báo dev retry thủ công, không retry tự động. SC-HK-007, 018 viết lại Then, hết chờ CL | QC owner 19/10/2026 | cl_open 3→2 · blocked_by_cl 2→0 |
 | 2026-10-19 | UPDATE | **Đóng CL-HK-04** theo mẫu hóa đơn DOC-v2.0-06 (U26SG00002067): phần tổng in đủ 5 dòng mức thuế, mức không phát sinh để trống — **sửa ý vòng 2** ("chỉ in dòng 10%" là nói chi tiết hóa đơn). SC-HK-014 viết lại Then; SC-HK-006 có danh sách trường theo mẫu | QC owner 19/10/2026 + DOC-v2.0-06 | cl_open 2→1 |
+| 2026-10-19 | UPDATE | SC-HK-012 giữ theo URD BR-HK-05 (không in "từ ngày – đến ngày"); ghi chú mẫu DOC-v2.0-06 là luồng cũ, v2.0 còn in kỳ hạn ⇒ bug | QC owner 19/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
