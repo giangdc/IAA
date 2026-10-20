@@ -19,7 +19,7 @@ id_range:
   cl: CL-GN-01..10
   risk: RISK-GN-01..06
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Changelog — Module GN (`GN`)
@@ -48,6 +48,11 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Đóng CL-GN-05:** Bill chỉ gạch khi Paid đủ nợ còn lại; Paid thiếu ⇒ không gạch, chờ Paid đủ (khác cách đọc chữ BR-GN-04 "gạch từng phần" — theo QC owner). SC-GN-031 viết lại Then | QC owner 19/10/2026 | cl_open 6→5 |
 | 2026-10-19 | UPDATE | CL-GN-05 bổ sung: đơn nhiều Bill — Bill thiếu tiền bị bỏ qua, xét tiếp Bill nhỏ hơn. SC-GN-028 viết lại Then (500k gạch · 300k không gạch · 100k gạch) | QC owner 19/10/2026 | Không |
 | 2026-10-19 | UPDATE | **Mở lại CL-GN-05:** quy tắc "chỉ gạch khi Paid đủ nợ còn lại" + bỏ qua Bill thiếu tiền là cách hiểu của QC owner, chờ BA xác nhận. SC-GN-028, 031 giữ Then, đánh dấu ⛔ chờ CL-GN-05 | QC owner 19/10/2026 | cl_open 5→6 · blocked_by_cl 2→4 |
+| 2026-10-20 | UPDATE | **Đóng CL-GN-08:** INVOICE và hệ thống EVC chạy song song; INVOICE chừa phần tiền voucher / EVC khi gạch tiền khách; EVC gạch lỗi ⇒ báo đội EVC retry bằng tay hoặc tool hỗ trợ — SC-GN-045 viết lại Then; ghi chú REQ-GN-018, 019 | QC owner 20/10/2026 | cl_open 6→5 |
+| 2026-10-20 | UPDATE | **Đóng CL-GN-05 (vòng 4):** gạch nợ Paid áp cho sàn TMĐT — tiền về công ty mới gạch ⇒ Paid = tổng tiền đơn; "gạch từng phần" (BR-GN-04) là chia Paid cho từng bill, không phải gạch một phần hóa đơn. SC-GN-028 viết lại (Paid 900k, gạch đủ 3 bill); **deprecated SC-GN-031** (Paid < nợ không xảy ra); ghi chú REQ-GN-012, 014; RISK-GN-05 bỏ SC-GN-031 | BA trả lời vòng 4 + QC owner 20/10/2026 | SC 48→47 (deprecated 3) · P1 42→41 · cl_open 5→4 · blocked_by_cl 4→2 |
+| 2026-10-20 | UPDATE | **Đóng CL-GN-09 (vòng 4):** 2 bill bằng tiền nhau ⇒ gạch bill nào trước cũng được. SC-GN-030 viết lại (2 bill 300k, Paid 600k = tổng tiền đơn; không kiểm thứ tự, bỏ ⛔); ghi chú REQ-GN-013, test_data_catalog | BA trả lời vòng 4 + QC owner 20/10/2026 | cl_open 4→3 · blocked_by_cl 2→1 |
+| 2026-10-20 | UPDATE | SC-GN-032 (Paid > nợ, Paid dư được giữ) **giữ nguyên Then**; thêm ghi chú: thực tế Paid = tổng tiền đơn nên case ít xảy ra, QC chưa rõ có ngoại lệ — data dựng được trên STG hay không sẽ xác định khi test | QC owner 20/10/2026 | Không |
+| 2026-10-20 | UPDATE | **Vòng 4:** đóng CL-GN-04 (verify gạch nợ tạm trên bảng kê thanh toán, Phương thức thanh toán = "gạch nợ tạm") · đóng CL-GN-10 (cấu hình EVC D#4 là phần dành cho dev) · ghi nhận CL-GN-01: PO trả lời danh sách EVC sau; 2 quy tắc EVC không / có xác định SPDV; ghi chú REQ-GN-005, 010, test_data_catalog | BA trả lời vòng 4 + QC owner 20/10/2026 | cl_open 3→1 |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -63,7 +68,7 @@ updated: 2026-10-19
 
 | # | Nợ | Trạng thái | Đích xử lý |
 |---|---|---|---|
-| 1 | 🔴 CL-GN-01 + CL-GN-10: danh sách loại EVC / voucher, bên gạch (INVOICE / đội EVC) — chặn expected SC-GN-048 | Mở lại 19/10/2026 (QC owner: gạch nợ EVC vẫn test) | Hỏi BA vòng 3 |
-| 2 | 🔴 CL-GN-08 thứ tự đội EVC ↔ INVOICE ở nhánh Paid | Mở lại 19/10/2026 | Hỏi BA vòng 3 |
-| 3 | 🟡 4 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
+| 1 | 🔴 CL-GN-01: danh sách loại EVC / voucher — chặn expected SC-GN-048 (CL-GN-10 đóng 20/10/2026) | Vòng 4: BA hỏi PO, trả lời sau; đã có 2 quy tắc EVC theo SPDV | Chờ PO; cân nhắc thêm SC cho 2 quy tắc |
+| 2 | ✅ CL-GN-08 thứ tự đội EVC ↔ INVOICE ở nhánh Paid | Resolved 20/10/2026 — chạy song song, INVOICE chừa phần voucher / EVC | — |
+| 3 | 🟡 1 SC có Then `⛔ chờ CL-…` | Theo giả định TP | Khi CL resolved: `--update` |
 | 4 | 🟡 Mock API kênh thanh toán / đội EVC / consumer Kafka Out chưa có | TP Entry Criteria | Chuẩn bị trước R1 (26/10/2026) |

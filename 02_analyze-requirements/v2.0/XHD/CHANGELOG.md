@@ -27,7 +27,7 @@ id_range:
   cl: CL-XHD-01..34
   risk: RISK-XHD-01..10
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Changelog — Module XHD (`XHD`)
@@ -64,6 +64,17 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Thêm SC-XHD-112, 113** (CL-XHD-07): đơn bán thêm trên hợp đồng doanh nghiệp — PĐK mới chưa duyệt ⇒ không xuất hóa đơn (P1 Negative); đã duyệt ⇒ phát hành (P2 Functional) | QC owner 19/10/2026 | SC 109→111 · P1 84→85 · P2 24→25 |
 | 2026-10-20 | UPDATE | SC-XHD-030: màn Chi tiết hóa đơn — thông tin khách hàng đối chiếu theo hợp đồng, dòng dịch vụ / sản phẩm đối chiếu theo thông tin đơn hàng mua. SC-XHD-020: ghi rõ case cập nhật thông tin hợp đồng trong khi chờ phát hành hóa đơn ⇒ hệ thống ghi nhận thông tin hợp đồng mới (BR-DB-03 L359) | QC owner 20/10/2026 | Không |
 | 2026-10-20 | UPDATE | Tool cập nhật thông tin hợp đồng: Inside › Quản lý hợp đồng › Cập nhật hợp đồng — thêm vào `07_environments/environments.md`, ghi vào SC-XHD-020 | QC owner 20/10/2026 | Không |
+| 2026-10-20 | SCOPE↓ | **Kênh FPL (10) chỉ bán nhóm 5 FPT Play Stands Alone và 7 FPT Play** — SC-XHD-006 giới hạn 2 nhóm; ghi ngoại lệ ở CL-XHD-26, REQ-XHD-001 | QC owner 20/10/2026 | Không (SC giữ nguyên số) |
+| 2026-10-20 | UPDATE | **Đóng CL-XHD-31:** hồi quy Shopee / TikTok chỉ test theo rule URD 2.2, không chờ URD v1.0 — SC-XHD-016, 017 viết lại Then; ghi chú SC-XHD-060, REQ-XHD-005, 020; RISK-XHD-09 → Mitigated | QC owner 20/10/2026 | cl_open 15→14 |
+| 2026-10-20 | UPDATE | **Sửa kết luận CL-XHD-02 (vòng 4):** kênh FPL — khách không bấm Xuất hóa đơn / quá 2 giờ không nhập ⇒ hệ thống **vẫn phát hành hóa đơn với thông tin mặc định trên hợp đồng** (URD L355; BA trả lời tại CL-XHD-05), thay ý "không phát hành" của vòng 3. SC-XHD-032, 033, 034 viết lại Then; ghi chú SC-XHD-050, REQ-XHD-007, test_data_catalog | BA trả lời vòng 4 + QC owner 20/10/2026 | Không |
+| 2026-10-20 | UPDATE | **Đóng CL-XHD-32 (vòng 4):** thanh toán 23:59 ngày cuối tháng, tín hiệu về 00:01 ngày 1 ⇒ phát hành ở đợt worker 12:05 ngày 1, BillDate = ngày phát hành — SC-XHD-046 viết lại theo ví dụ của BA, bỏ ⛔ · **Đóng CL-XHD-05 (vòng 4):** FPL quét 0h–2h chạy job 1 lần, 2h–4h chạy job 1 lần … — SC-XHD-047 viết lại, bỏ ⛔; ghi chú REQ-XHD-016, 017, test_data_catalog | BA trả lời vòng 4 + QC owner 20/10/2026 | cl_open 14→12 · blocked_by_cl 7→5 |
+| 2026-10-20 | UPDATE | **Đóng CL-XHD-27, CL-XHD-34 (vòng 4):** TB hình thức "Không" gửi tín hiệu qua phiếu quầy — quầy gửi ⇒ xuất hóa đơn, **quầy không gửi ⇒ không xuất hóa đơn**; mix "Không" + TIN/PNC ⇒ theo phiếu thi công; ≥1 SPDV mix TIN/PNC ⇒ cả đơn đi luồng TINPNC. SC-XHD-109 viết lại (3 nhánh), bỏ ⛔; ghi chú REQ-XHD-004, 043, test_data_catalog | BA trả lời vòng 4 + QC owner 20/10/2026 | cl_open 12→10 · blocked_by_cl 5→4 |
+| 2026-10-20 | SCOPE↓ | **Vòng 4 — QC không test / phần dành cho dev:** đóng CL-XHD-21 ⛔ (BR-XHD-18, REQ-XHD-039 ngoài phạm vi), CL-XHD-22 ⛔ (mail cảnh báo bản tin trễ, REQ-XHD-042 ngoài phạm vi), CL-XHD-29 ⛔ (tài liệu tích hợp — QC verify định tính), CL-XHD-13 (Type 1–4), CL-XHD-16 (job cảnh báo — **deprecated SC-XHD-097**), CL-XHD-19 (không xem log), CL-XHD-23 (race worker ↔ realtime — RISK-XHD-02 Closed), CL-XHD-33 (giữ URD 2.1 cho D#1–D#6, mốc nghiệp vụ theo giả định QC). SC-XHD-040, 045 bỏ ⛔. Ghi nhận vòng 4 cho CL-XHD-11, 12 (hỏi dev) | BA trả lời vòng 4 + QC owner 20/10/2026 | SC 111→110 (deprecated 3) · P3 1→0 · cl_open 10→2 · cl_blocking 3→0 · blocked_by_cl 4→1 |
+| 2026-10-20 | UPDATE | **Đóng CL-XHD-11:** BA chốt khóa chống trùng theo BR-XHD-08 L419 (DV = mã đơn hàng + dịch vụ hóa đơn + gói dịch vụ; TB thêm phương thức triển khai), §C#3 L651 không áp dụng — SC-XHD-079, RISK-XHD-04, test_data_catalog. **SC-XHD-045 giữ rule:** mốc nghiệp vụ DV = ngày thanh toán, TB = ngày giao hàng (CL-XHD-33 bổ sung); ngày N không phải ngày cuối tháng — ngày cuối tháng → ngày 1 là ngoại lệ CL-XHD-32 / SC-XHD-046; RISK-XHD-03 cập nhật | BA chốt (QC owner chuyển lời) 20/10/2026 + QC owner | cl_open 2→1 |
+| 2026-10-20 | UPDATE | **SC-XHD-046 viết lại:** đơn tạo 23:50, thanh toán 23:59 ngày 31/10, tín hiệu về 00:01 ngày 01/11 ⇒ mốc nghiệp vụ 00:01 ngày 01/11 ⇒ đợt worker 12:05 ngày 01/11 — đúng rule BR-XHD-01 L384, **không phải ngoại lệ**. **Mốc nghiệp vụ = thời điểm tín hiệu đẩy về hệ thống xuất hóa đơn** (CL-XHD-33 sửa định nghĩa). SC-XHD-045 bỏ điều kiện "không phải ngày cuối tháng"; RISK-XHD-03, test_data_catalog, REQ-XHD-016 cập nhật | QC owner 20/10/2026 | Không |
+| 2026-10-20 | UPDATE | **CL-XHD-33 chốt lại:** worker xét theo mốc nghiệp vụ (thiết bị: ngày giao hàng · dịch vụ: ngày thanh toán); realtime phát hành theo thời điểm SPF đẩy về (thiết bị phải đã có ngày giao hàng, dịch vụ phải đã có ngày thanh toán) — thay định nghĩa "mốc = thời điểm tín hiệu về" của dòng trên; SC-XHD-045, RISK-XHD-03, test_data_catalog cập nhật | QC owner 20/10/2026 | Không |
+| 2026-10-20 | UPDATE | SC-XHD-046: ngày thanh toán hệ thống ghi nhận = 00:01 ngày 01/11 (lúc SPF đẩy về), không phải 23:59 ngày 31/10 ⇒ worker 12:05 ngày 01/11 lấy dòng đúng rule; sửa chữ ở SC-XHD-046, CL-XHD-32, REQ-XHD-016, test_data_catalog | QC owner 20/10/2026 | Không |
+| 2026-10-20 | SCOPE↓ | **Không test kênh SR-KPDV (SaleChannelID 18)** — **deprecated SC-XHD-014**; ghi ngoại lệ ở CL-XHD-26, REQ-XHD-001, 002, RISK-XHD-08, test_data_catalog | QC owner 20/10/2026 | SC 110→109 (deprecated 4) · P1 85→84 |
 
 ## 2. Ràng buộc còn hiệu lực
 
@@ -82,10 +93,10 @@ updated: 2026-10-19
 
 | # | Nợ | Trạng thái | Đích xử lý |
 |---|---|---|---|
-| 1 | 🔴 REQ-XHD-039 (BR-XHD-18 clear "thuê thiết bị đầu cuối") **chưa có SC** | URD 1 câu, "kịp plan" — CL-XHD-21 ⛔ | PM trả lời GAP-53 → `/analyze-requirements --update` thêm SC hoặc đánh dấu Out-scope |
-| 2 | 🔴 REQ-XHD-042 (mail cảnh báo bản tin trễ qua ngày) **chưa có SC** | "Bắt buộc" nhưng không đặc tả — CL-XHD-22 ⛔ | PM trả lời GAP-02/11 → `--update` |
-| 3 | 🔴 CL-XHD-29 tài liệu tích hợp (payload / schema / enum) chặn setup data + execute | GAP-07 chưa trả lời | Xin SDD trước setup 23/10/2026; chưa có ⇒ verify định tính |
-| 4 | 🟡 CL-XHD-11 khóa chống trùng — đã chốt theo 2.2 (16/10/2026), còn field dữ liệu | Hết BLOCKING; field chờ schema CL-XHD-29 | Có schema ⇒ điền field vào `test_data_catalog` |
+| 1 | ✅ REQ-XHD-039 (BR-XHD-18) — **ngoài phạm vi test** | Đóng 20/10/2026 (CL-XHD-21, BA vòng 4) | QC lead cập nhật Scope OUT của TP |
+| 2 | ✅ REQ-XHD-042 (mail cảnh báo bản tin trễ) — **ngoài phạm vi test** | Đóng 20/10/2026 (CL-XHD-22, BA vòng 4) | QC lead cập nhật Scope OUT của TP |
+| 3 | 🟡 CL-XHD-29 tài liệu tích hợp — BA: phần dành cho dev | Đóng 20/10/2026 | Verify định tính qua tool; RISK-XHD-01 còn mở |
+| 4 | ✅ CL-XHD-11 khóa chống trùng — BA chốt theo BR-XHD-08 L419 | Đóng 20/10/2026 | — |
 | 5 | 🟡 18 SC có Then `⛔ chờ CL-…` / `(giả định TP)` (đếm ở `counts.blocked_by_cl`) | Theo giả định của TP §2.4 | Khi CL resolved: `--update` sửa Then, ghi 1 dòng UPDATE ở §1 |
 | 6 | ✅ CL-XHD-30 đơn ngoài 17 kênh / ServiceID 2, 22 — **ngoài scope test** (TP §2.2 #6 + QC trả lời vòng 2 "bỏ qua không test") ⇒ không thêm SC negative | Đóng 19/10/2026 | — |
 | 7 | 🟡 CL-XHD-27, CL-XHD-28 mới phát hiện khi analyze (chưa có GAP-ID) | Chưa đưa vào DOC-READINESS / TP §2.4 | QC owner thêm vào danh sách gửi PM (create-test-plan `--update`) |

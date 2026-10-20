@@ -74,7 +74,7 @@ doc_source:
     kind: "Flow URD 2.2 (một phần DOC-v2.0-01)"
     modules: [HK]
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Router — Analyze v2.0
@@ -110,16 +110,16 @@ updated: 2026-10-19
 
 | Module | Req | SC | NEW | MOD | CARRIED | DEPR | P1 | P2 | P3 | CL | RISK | Risk Level |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|
-| XHD | 43 | 111 | 111 | 0 | 0 | 2 | 85 | 25 | 1 | 34 | 10 | High |
-| GN | 20 | 48 | 48 | 0 | 0 | 2 | 42 | 5 | 1 | 10 | 6 | High |
+| XHD | 43 | 109 | 109 | 0 | 0 | 4 | 84 | 25 | 0 | 34 | 10 | High |
+| GN | 20 | 47 | 47 | 0 | 0 | 3 | 41 | 5 | 1 | 10 | 6 | High |
 | HK | 10 | 20 | 20 | 0 | 0 | 1 | 12 | 8 | 0 | 11 | 5 | High |
-| **Tổng** | **73** | **179** | **179** | **0** | **0** | **5** | **139** | **38** | **2** | **55** | **21** | — |
+| **Tổng** | **73** | **176** | **176** | **0** | **0** | **8** | **137** | **38** | **1** | **55** | **21** | — |
 
 > ⚠️ **URD 2.1 (`DOC-v2.0-02`) chỉ dùng cho Phụ lục D của 2.2** — D#1, 2, 3, 4, 5, 6; **không** D#7, 8, 9 (QC owner chốt 19/10/2026, thay quyết định 16/10 "không sử dụng"). D#4 (EVC: BR-VC-01..07, BR-GC-04..07) dùng từ vòng 3 19/10/2026 vì 2.2 ghi "Giữ nguyên (gộp nhóm BR-VC)"; bỏ các bước 2.1 đánh dấu `[Bỏ]`. SC-XHD-107, 108 · SC-HK-009, 010 dùng lại.
-> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy hóa đơn) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06).
-> ℹ️ REQ không có SC **có chủ đích** (URD chưa đủ để viết Then): REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ), REQ-XHD-033 (ngoài scope test — TP §2.2 #2), REQ-HK-010 (dòng EVC / chiết khấu / mẫu hóa đơn điện tử) — nợ ở `CHANGELOG.md §3` từng module.
-> ℹ️ 11 SC (XHD 7 · GN 4 · HK 0) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
-> 🔴 CL còn **OPEN**: 22/55 (đóng CL-XHD-07: đơn bán thêm có PĐK mới riêng · đóng CL-XHD-24: cutover có test · đóng CL-HK-04 theo mẫu DOC-v2.0-06 · đóng CL-HK-05: lỗi đẩy hóa đơn điện tử ⇒ dev retry thủ công · đóng CL-HK-11: ký hiệu kiểm trên biên bản điện tử · CL-GN-05 mở lại chờ BA xác nhận · **vòng 3 19/10/2026:** đóng CL-XHD-01, 02, 03, 04, 08, 14, 15, 18, 26 · CL-GN-06, 07 · CL-HK-07, 09 · làm rõ thêm CL-XHD-07, 12, 27 · CL-GN-08, 10 (URD 2.1 dùng cho D#4) · +CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho hóa đơn bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu hóa đơn điện tử · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (4):** CL-XHD-21 (BR-XHD-18) · CL-XHD-22 (mail cảnh báo bản tin trễ) · CL-XHD-29 (tài liệu tích hợp — chặn setup + execute) · CL-HK-03 (dòng EVC / chiết khấu).
+> ⛔ **19/10/2026** — deprecated SC-XHD-098, 100 (ngoài scope test — TP §2.2 #2, #3: điều chỉnh / hủy hóa đơn) · SC-GN-049 (API EVC lỗi, CL-GN-02) · SC-HK-019 (hệ thống Dịch vụ lỗi, CL-HK-06): STG không test lỗi / timeout hệ thống ngoài, thực tế retry thủ công. · **vòng 3:** SC-GN-024 (Paid quyết toán sàn < nợ không xảy ra, CL-GN-06). · **20/10/2026:** SC-XHD-014 (kênh SR-KPDV không test — QC owner) · **vòng 4:** SC-XHD-097 (job cảnh báo — QC không test, CL-XHD-16) · SC-GN-031 (Paid luôn = tổng tiền đơn ⇒ Paid < nợ không xảy ra, CL-GN-05).
+> ℹ️ REQ không có SC **có chủ đích**: REQ-XHD-039 (BR-XHD-18), REQ-XHD-042 (mail cảnh báo bản tin trễ) — ngoài phạm vi test (vòng 4, 20/10/2026); REQ-XHD-033 (ngoài scope test — TP §2.2 #2), REQ-HK-010 (dòng EVC / chiết khấu / mẫu hóa đơn điện tử) — nợ ở `CHANGELOG.md §3` từng module.
+> ℹ️ 2 SC (XHD 1 · GN 1 · HK 0) có `Then` phụ thuộc CL chưa trả lời, vẫn gán Priority — đếm ở `counts.blocked_by_cl`.
+> 🔴 CL còn **OPEN**: 3/55 — CL-XHD-12 (hỏi dev) · CL-GN-01 (danh sách EVC, chờ PO) · CL-HK-03 ⛔ (template dòng EVC, chờ BA). (**20/10/2026:** đóng CL-XHD-11 — khóa chống trùng theo BR-XHD-08 L419 · **vòng 4:** đóng CL-XHD-21, 22, 29 (hết BLOCKING), 13, 16, 19, 23, 33 · CL-GN-04, 10 — QC không test / phần dành cho dev; deprecated SC-XHD-097 · đóng CL-XHD-27, 34 — TB "Không" qua phiếu quầy, quầy không gửi tín hiệu ⇒ không xuất hóa đơn · đóng CL-XHD-32 — thanh toán 23:59 cuối tháng, tín hiệu 00:01 ngày 1 ⇒ worker 12:05 ngày 1 · đóng CL-XHD-05 — FPL mỗi khung 2 giờ chạy job 1 lần · đóng CL-GN-09 — 2 bill bằng tiền thì gạch bill nào trước cũng được · đóng CL-GN-05 — Paid sàn TMĐT = tổng tiền đơn, "gạch từng phần" là chia Paid cho từng bill · sửa kết luận CL-XHD-02 — FPL quá 2 giờ không nhập ⇒ vẫn phát hành với thông tin mặc định trên hợp đồng · **20/10/2026:** đóng CL-XHD-31 — hồi quy Phase 1 chỉ test theo URD 2.2 · đóng CL-GN-08 — INVOICE và EVC chạy song song, INVOICE chừa phần voucher / EVC · đóng CL-XHD-07: đơn bán thêm có PĐK mới riêng · đóng CL-XHD-24: cutover có test · đóng CL-HK-04 theo mẫu DOC-v2.0-06 · đóng CL-HK-05: lỗi đẩy hóa đơn điện tử ⇒ dev retry thủ công · đóng CL-HK-11: ký hiệu kiểm trên biên bản điện tử · **vòng 3 19/10/2026:** đóng CL-XHD-01, 02, 03, 04, 08, 14, 15, 18, 26 · CL-GN-06, 07 · CL-HK-07, 09 · làm rõ thêm CL-XHD-07, 12, 27 · CL-GN-08, 10 (URD 2.1 dùng cho D#4) · +CL-XHD-33, CL-GN-10, CL-HK-10 khi bỏ URD 2.1 · đã đóng CL-XHD-06, 09, 10, 17 · làm rõ một phần CL-XHD-02, 04, 05, 07, 08, 11 — 16/10/2026 · **vòng 2 19/10/2026:** +CL-XHD-34 · đóng CL-XHD-20, 25, 28, 30 · CL-GN-02, 03 · CL-HK-06, 08 · làm rõ một phần CL-XHD-14, 15, 19, 27, 31, 32 · CL-GN-01, 05, 07, 09 · CL-HK-04, 07, 09 · theo URD 2.1 Phụ lục D: đóng CL-HK-02, 10 · làm rõ một phần CL-XHD-22, 23, 24, CL-HK-03 · đóng CL-HK-01: chỉ test đầu U, cho hóa đơn bán mới và bán thêm · +CL-HK-11 điểm verify ký hiệu hóa đơn điện tử · gạch nợ EVC / voucher **vẫn test** (QC owner, khác TP §2.2 #5) — CL-GN-01, 08, 10 mở, chờ BA liệt kê loại EVC / voucher). **BLOCKING (1):** CL-HK-03 (dòng EVC — chờ template BA). CL-XHD-21, 22, 29 hết BLOCKING 20/10/2026.
 
 ### 🔑 Luật `counts` canonical (v2)
 

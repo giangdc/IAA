@@ -11,7 +11,7 @@ counts:                 # 🔑 CANONICAL — CL/RISK của module HK
   risk: 5
   risk_high: 2
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Risk Assessment — v2.0 · Module HK
@@ -105,6 +105,8 @@ updated: 2026-10-19
 **Câu hỏi cho BA:** Dòng EVC / chiết khấu trên hóa đơn điện tử có trong phạm vi test v2.0? Nếu có: loại EVC nào được thể hiện, format dòng.
 
 🟡 **Làm rõ một phần 19/10/2026** — Theo `DOC-v2.0-02`: **dòng chiết khấu** chỉ có ở đơn đại lý FPT Play / Smart Home — BR-HK-06 L798 *"(hiện đi từ luồng đơn hàng không có)"* ⇒ **không test**. **Dòng EVC** (L725) *"Thêm DÒNG EVC trên hóa đơn nếu loại EVC đó thuộc nhóm được thể hiện"*; thông tin khác theo mẫu (BR-HK-08) chỉ có tên. Còn mở (**vẫn BLOCKING**, thu hẹp về dòng EVC): loại EVC nào thuộc nhóm được thể hiện + format dòng EVC. Nguồn: QC trả lời 19/10/2026 vòng 2 (dùng URD 2.1 cho Phụ lục D, QC owner chốt 19/10/2026).
+
+🟡 **Vòng 4 20/10/2026** — BA: *"Theo như URD mô tả, template BA gửi sau nha, thông tin tôi gửi chỉ là mẫu"* ⇒ vẫn BLOCKING, chờ BA gửi template dòng EVC. Nguồn: BA trả lời vòng 4.
 
 ---
 

@@ -12,7 +12,7 @@ doc_source:
   - id: DOC-v2.0-05
     section: "sheet \"1. HT Triển khai\""
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Requirement Traceability — v2.0 · Module XHD
@@ -29,8 +29,8 @@ updated: 2026-10-19
 
 | REQ ID | Maps (Ref DOC) | DOC §section | Scenarios | Clarification |
 |--------|----------------|--------------|-----------|---------------|
-| REQ-XHD-001 | — | DOC-v2.0-01 §A.2 (L79-137) | SC-XHD-001..017 | CL-XHD-26 |
-| REQ-XHD-002 | — | DOC-v2.0-01 §A.3 (L138-260) | SC-XHD-001..017 (chiều dữ liệu nhóm DV) | CL-XHD-12, CL-XHD-13, CL-XHD-26, CL-XHD-30 |
+| REQ-XHD-001 | — | DOC-v2.0-01 §A.2 (L79-137) | SC-XHD-001..017 *(SC-XHD-014 SR-KPDV deprecated 20/10/2026)* | CL-XHD-26 |
+| REQ-XHD-002 | — | DOC-v2.0-01 §A.3 (L138-260) | SC-XHD-001..017 trừ SC-XHD-014 (chiều dữ liệu nhóm DV) | CL-XHD-12, CL-XHD-13, CL-XHD-26, CL-XHD-30 |
 | REQ-XHD-003 | BR-DB-01 | DOC-v2.0-01 §I.c (L343-346) | SC-XHD-018, SC-XHD-019, SC-XHD-020 | CL-XHD-01 |
 | REQ-XHD-004 | BR-DB-02 | DOC-v2.0-01 §I.c (L347-350) | SC-XHD-021, SC-XHD-022, SC-XHD-023, SC-XHD-024 | CL-XHD-27 |
 | REQ-XHD-005 | BR-DB-02 | DOC-v2.0-01 §I.c (L351) | SC-XHD-029 | CL-XHD-31 |
@@ -44,7 +44,7 @@ updated: 2026-10-19
 | REQ-XHD-013 | BR-DB-07 | DOC-v2.0-01 §I.c (L375-376) | SC-XHD-025, SC-XHD-026, SC-XHD-027 | CL-XHD-19 |
 | REQ-XHD-014 | BR-XHD-01 | DOC-v2.0-01 §I.c (L378-383) | SC-XHD-041, SC-XHD-042, SC-XHD-043, SC-XHD-044 | — |
 | REQ-XHD-015 | BR-XHD-01 | DOC-v2.0-01 §I.c (L384) | SC-XHD-042, SC-XHD-045, SC-XHD-111 | CL-XHD-22, CL-XHD-32 |
-| REQ-XHD-016 | BR-XHD-01 | DOC-v2.0-01 §I.c (L385) | SC-XHD-046 | CL-XHD-06 ✅, CL-XHD-32 |
+| REQ-XHD-016 | BR-XHD-01 | DOC-v2.0-01 §I.c (L385) | SC-XHD-046 | CL-XHD-06 ✅, CL-XHD-32 ✅ |
 | REQ-XHD-017 | BR-XHD-01 | DOC-v2.0-01 §I.c (L386-388) | SC-XHD-047, SC-XHD-048 | CL-XHD-05 |
 | REQ-XHD-018 | BR-XHD-02 | DOC-v2.0-01 §I.c (L390-393) | SC-XHD-054, SC-XHD-055, SC-XHD-056 | — |
 | REQ-XHD-019 | BR-XHD-03 | DOC-v2.0-01 §I.c (L397) | SC-XHD-057, SC-XHD-058, SC-XHD-059, SC-XHD-110 | CL-XHD-10 ✅ |
@@ -55,22 +55,22 @@ updated: 2026-10-19
 | REQ-XHD-024 | BR-XHD-05 | DOC-v2.0-01 §I.c (L404-408) | SC-XHD-069, SC-XHD-070, SC-XHD-071, SC-XHD-072 | — |
 | REQ-XHD-025 | BR-XHD-06 | DOC-v2.0-01 §I.c (L410-413) | SC-XHD-073, SC-XHD-074, SC-XHD-075, SC-XHD-110 | CL-XHD-10 ✅ |
 | REQ-XHD-026 | BR-XHD-06 | DOC-v2.0-01 §I.c (L414) | SC-XHD-051, SC-XHD-052 | CL-XHD-05 |
-| REQ-XHD-027 | BR-XHD-08 | DOC-v2.0-01 §I.c (L416-421) | SC-XHD-076, SC-XHD-077, SC-XHD-078, SC-XHD-079 | CL-XHD-11, CL-XHD-12, CL-XHD-23 |
+| REQ-XHD-027 | BR-XHD-08 | DOC-v2.0-01 §I.c (L416-421) | SC-XHD-076, SC-XHD-077, SC-XHD-078, SC-XHD-079 | CL-XHD-11 ✅, CL-XHD-12, CL-XHD-23 ✅ |
 | REQ-XHD-028 | BR-XHD-10 | DOC-v2.0-01 §I.c (L425) | SC-XHD-019, SC-XHD-080, SC-XHD-081 | CL-XHD-14 |
 | REQ-XHD-029 | BR-XHD-10 | DOC-v2.0-01 §I.c (L426) | SC-XHD-082..089 | CL-XHD-14, CL-XHD-15 |
 | REQ-XHD-030 | BR-XHD-10 | DOC-v2.0-01 §I.c (L427) | SC-XHD-090..095 | CL-XHD-15 |
 | REQ-XHD-031 | BR-XHD-10 | DOC-v2.0-01 §I.c (L428) | SC-XHD-080..096, SC-XHD-111 | CL-XHD-15, CL-XHD-17 ✅ |
-| REQ-XHD-032 | BR-XHD-10 | DOC-v2.0-01 §I.c (L429) | SC-XHD-097 | CL-XHD-16 |
+| REQ-XHD-032 | BR-XHD-10 | DOC-v2.0-01 §I.c (L429) | — *(SC-XHD-097 deprecated 20/10/2026 — ngoài phạm vi test)* | CL-XHD-16 ✅ |
 | REQ-XHD-033 | BR-XHD-10 | DOC-v2.0-01 §I.c (L430) | — *(⛔ ngoài scope test — TP §2.2 #2; SC-XHD-098 deprecated 19/10/2026)* | — |
 | REQ-XHD-034 | BR-XHD-12 | DOC-v2.0-01 §I.c (L432-435) | SC-XHD-099 *(SC-XHD-100 ⛔ ngoài scope test — TP §2.2 #3, deprecated 19/10/2026)* | — |
 | REQ-XHD-035 | BR-XHD-13 | DOC-v2.0-01 §I.c (L437-440) | SC-XHD-101, SC-XHD-104 | CL-XHD-18 |
 | REQ-XHD-036 | BR-XHD-13 | DOC-v2.0-01 §I.c (L441) | SC-XHD-102 | CL-XHD-28 |
 | REQ-XHD-037 | BR-XHD-13 | DOC-v2.0-01 §I.c (L442) | SC-XHD-103 | CL-XHD-29 |
 | REQ-XHD-038 | BR-XHD-14 | DOC-v2.0-01 §I.c (L444-447) | SC-XHD-105 | — |
-| REQ-XHD-039 | BR-XHD-18 | DOC-v2.0-01 §I.c (L449-452) | — *(chờ đặc tả — CHANGELOG §3)* | CL-XHD-21 |
+| REQ-XHD-039 | BR-XHD-18 | DOC-v2.0-01 §I.c (L449-452) | — *(ngoài phạm vi test — CL-XHD-21, 20/10/2026)* | CL-XHD-21 ✅ |
 | REQ-XHD-040 | — | DOC-v2.0-04 (mail PM) | SC-XHD-106 | CL-XHD-25 |
 | REQ-XHD-041 | — | DOC-v2.0-01 §D#1 (L658-661) | SC-XHD-107, SC-XHD-108 *(dùng lại 19/10/2026 — URD 2.1 BR-DB-08)* | CL-XHD-24, CL-XHD-33 |
-| REQ-XHD-042 | — | DOC-v2.0-01 §D#3 (L666-669) | — *(chờ đặc tả — CHANGELOG §3)* | CL-XHD-22, CL-XHD-33 |
+| REQ-XHD-042 | — | DOC-v2.0-01 §D#3 (L666-669) | — *(ngoài phạm vi test — CL-XHD-22, 20/10/2026)* | CL-XHD-22 ✅, CL-XHD-33 ✅ |
 | REQ-XHD-043 | — | DOC-v2.0-05 sheet "1. HT Triển khai" · dòng 1–8 | SC-XHD-109 | CL-XHD-27 |
 
 > **Cột `DOC §section` = neo audit chính.** `§I.c` = mục B.I "Đồng bộ đơn hàng và xuất hóa đơn tự động" → c. Business rules.
@@ -103,7 +103,7 @@ updated: 2026-10-19
 > | 20 | Shopee | Shopee | Đã triển khai ver1.0Có điều chinh ver2.0 |
 > | 21 | Tiktok | Tiktok | Đã triển khai v1.0Có điều chỉnh v2.0 |
 
-↳ **Ghi chú:** 17 kênh có đơn SPF đều phải xuất hóa đơn tự động. QC lead chốt test bán mới + bán thêm cho mọi nhóm dịch vụ × mọi kênh (CL-XHD-26, 19/10/2026). Kênh 20, 21 là luồng Phase 1 ⇒ vừa là test mới vừa là **hồi quy**. URD chỉ liệt kê kênh và nhóm DV riêng rẽ, **không có ma trận kênh nào bán nhóm DV nào** (CL-XHD-26 / GAP-62) ⇒ test plan đang giả định đủ 17 × 20 × 2 loại đơn. Implicit: SaleChannelID ngoài 17 giá trị trên (vd 3, 5, 6, 8) không thuộc phạm vi — URD không nói hệ thống xử lý chúng ra sao.
+↳ **Ghi chú:** 17 kênh có đơn SPF đều phải xuất hóa đơn tự động. QC lead chốt test bán mới + bán thêm cho mọi nhóm dịch vụ × mọi kênh (CL-XHD-26, 19/10/2026); ngoại lệ: kênh **SR-KPDV (18) không test** (QC owner 20/10/2026, SC-XHD-014 deprecated); kênh **FPL (10) chỉ bán nhóm 5 FPT Play Stands Alone và 7 FPT Play** (QC owner 20/10/2026). Kênh 20, 21 là luồng Phase 1 ⇒ vừa là test mới vừa là **hồi quy**. URD chỉ liệt kê kênh và nhóm DV riêng rẽ, **không có ma trận kênh nào bán nhóm DV nào** (CL-XHD-26 / GAP-62) ⇒ test plan đang giả định đủ 17 × 20 × 2 loại đơn. Implicit: SaleChannelID ngoài 17 giá trị trên (vd 3, 5, 6, 8) không thuộc phạm vi — URD không nói hệ thống xử lý chúng ra sao.
 
 ---
 
@@ -134,7 +134,7 @@ updated: 2026-10-19
 > Tín hiệu đi thẳng về INVOICE từ 3 nguồn độc lập: phiếu thi công (tình trạng "Đã xử lý hoàn tất"), Vendor (khi đối tác giao xong), phiếu giao tại quầy.
 > Tín hiệu gồm mã đơn, ServiceCode, SubserviceType, phương thức triển khai, nguồn gửi và thời gian hoàn tất.
 
-↳ **Ghi chú:** 3 nguồn = 3 lớp EP. Tín hiệu **không đi qua đơn hàng SPF**. 6 trường của tín hiệu là căn cứ verify dữ liệu ghi nhận. `DOC-v2.0-05` (file HT Triển khai) liệt kê 8 hình thức (TIN/PNC, TIN/PNC giao hàng, Quầy, Sale, NCC Samsung/Sony/Casper, FTI, Không) — **suy diễn của analyst** về map sang 3 nguồn: TIN/PNC + FTI → phiếu thi công · NCC → Vendor · Quầy + Sale → phiếu giao tại quầy · "Không" → không có tín hiệu (CL-XHD-27).
+↳ **Ghi chú:** 3 nguồn = 3 lớp EP. Tín hiệu **không đi qua đơn hàng SPF**. 6 trường của tín hiệu là căn cứ verify dữ liệu ghi nhận. `DOC-v2.0-05` (file HT Triển khai) liệt kê 8 hình thức (TIN/PNC, TIN/PNC giao hàng, Quầy, Sale, NCC Samsung/Sony/Casper, FTI, Không) — **suy diễn của analyst** về map sang 3 nguồn: TIN/PNC + FTI → phiếu thi công · NCC → Vendor · Quầy + Sale → phiếu giao tại quầy · "Không" → có thể gửi qua phiếu quầy, quầy không gửi tín hiệu thì không xuất hóa đơn (CL-XHD-27 resolved 20/10/2026).
 
 ---
 
@@ -143,7 +143,7 @@ updated: 2026-10-19
 
 > Với đơn TMĐT, tín hiệu hoàn tất thanh toán là lúc SPF đánh dấu đơn "đã thanh toán"; cùng lúc đó Paid được ghi nhận ở trạng thái gạch nợ tạm.
 
-↳ **Ghi chú:** Điểm nối XHD ↔ GN cho kênh sàn (20, 21): cùng một mốc vừa kích hoạt xuất hóa đơn phần DV vừa sinh Paid tạm (gạch nợ tạm ở `GN/` REQ-GN-009). Hành vi Phase 1 giữ hay đổi chưa có căn cứ vì chưa nhận URD v1.0 (CL-XHD-31 / GAP-24).
+↳ **Ghi chú:** Điểm nối XHD ↔ GN cho kênh sàn (20, 21): cùng một mốc vừa kích hoạt xuất hóa đơn phần DV vừa sinh Paid tạm (gạch nợ tạm ở `GN/` REQ-GN-009). Hành vi Phase 1: chỉ test theo rule URD 2.2, không dùng URD v1.0 (CL-XHD-31 resolved 20/10/2026).
 
 ---
 
@@ -163,7 +163,7 @@ updated: 2026-10-19
 > Nếu khách chọn lấy hóa đơn thì dùng thông tin khách tự nhập: tên, email, số điện thoại, mã số thuế, mã định danh, mã quan hệ ngân sách, số hộ chiếu.
 > Khách được nhập thông tin trong tối đa 2 giờ, tính từ thời điểm ghi nhận trên hệ thống của kênh.
 
-↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy hóa đơn" và "quá 2 giờ không nhập" ⇒ **không phát hành hóa đơn**; quá 2 giờ nút Xuất hóa đơn bị ẩn (CL-XHD-02 resolved 19/10/2026). Quy tắc bắt buộc nhập của kênh FPL: CL-XHD-03 (resolved 19/10/2026). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất hóa đơn (CL-XHD-04).
+↳ **Ghi chú:** 7 trường khách nhập. Câu "(ví dụ FPL)" để ngỏ khả năng có kênh khác. Nhánh "khách **không** lấy hóa đơn" và "quá 2 giờ không nhập" ⇒ **vẫn phát hành hóa đơn với thông tin mặc định trên hợp đồng** (URD L355); quá 2 giờ nút Xuất hóa đơn bị ẩn (CL-XHD-02 resolved 19/10/2026, sửa 20/10/2026 theo BA trả lời vòng 4). Quy tắc bắt buộc nhập của kênh FPL: CL-XHD-03 (resolved 19/10/2026). Trường nào bắt buộc, định dạng ra sao, ai kiểm tra: chưa đặc tả (CL-XHD-03 / GAP-49). Mốc 2 giờ "từ thời điểm ghi nhận trên hệ thống của kênh" khác mốc delay 2h "theo thời gian tạo đơn" của BR-XHD-03 (CL-XHD-04). **Cập nhật 16/10/2026:** ngoại lệ chỉ áp kênh FPL (CL-XHD-02); 2 mốc 2 giờ là 2 việc khác nhau — hạn nhập thông tin ≠ delay xuất hóa đơn (CL-XHD-04).
 
 ---
 
@@ -201,7 +201,7 @@ updated: 2026-10-19
 
 > INVOICE ghi lại thời điểm nhận mỗi bản tin để phân luồng worker hoặc realtime.
 
-↳ **Ghi chú:** Mốc này là căn cứ của realtime (REQ-XHD-018). Tên cột lưu chưa có vì thiếu schema (CL-XHD-29 / GAP-07).
+↳ **Ghi chú:** Mốc này là căn cứ của realtime (REQ-XHD-018). Tên cột là phần của dev, QC không verify (CL-XHD-29 resolved 20/10/2026).
 
 ---
 
@@ -220,7 +220,7 @@ updated: 2026-10-19
 > Nếu thiết bị đã có hóa đơn hoặc không khớp khóa thì không ghi nhận, chỉ ghi log nội dung tín hiệu vào cột Note.
 > Nguồn gửi được lưu lại để đối soát; không ràng buộc nguồn nào được báo cho phương thức triển khai nào.
 
-↳ **Ghi chú:** 2 nhánh negative (đã có hóa đơn · không khớp khóa) cùng đầu ra "log cột Note". Cột Note thuộc bảng nào, format ra sao: chưa đặc tả (CL-XHD-19 / GAP-27) ⇒ expected chỉ kiểm được "có log chứa nội dung tín hiệu". Nguồn bất kỳ báo cho phương thức bất kỳ đều hợp lệ.
+↳ **Ghi chú:** 2 nhánh negative (đã có hóa đơn · không khớp khóa) cùng đầu ra "log cột Note". Cột Note thuộc bảng nào, format ra sao: chưa đặc tả (CL-XHD-19 / GAP-27) ⇒ QC không xem được log (CL-XHD-19 resolved 20/10/2026) ⇒ expected chỉ kiểm hành vi: không ghi nhận / không phát hành. Nguồn bất kỳ báo cho phương thức bất kỳ đều hợp lệ.
 
 ---
 
@@ -241,7 +241,7 @@ updated: 2026-10-19
 
 > Mỗi đợt quét các dòng chưa xuất hóa đơn có mốc nghiệp vụ trong ngày, trước giờ chốt của đợt.
 
-↳ **Ghi chú:** Không có chặn dưới giữa các đợt trong ngày. Dòng có mốc nghiệp vụ **ngày trước** không được đợt nào lấy — khoảng trống D#3 (CL-XHD-22).
+↳ **Ghi chú:** Không có chặn dưới giữa các đợt trong ngày. Dòng có mốc nghiệp vụ **ngày trước** không được đợt nào lấy — khoảng trống D#3; mail cảnh báo QC không test (CL-XHD-22 resolved 20/10/2026).
 
 ---
 
@@ -250,7 +250,7 @@ updated: 2026-10-19
 
 > Đơn đủ điều kiện sau giờ chốt cuối của ngày cuối tháng sẽ phát hành sang tháng sau, ảnh hưởng kỳ ghi nhận doanh thu.
 
-↳ **Ghi chú:** Câu này mâu thuẫn với realtime "xử lý ngay khi nhận" (BR-XHD-06): sau giờ chốt cuối thì realtime chạy ngay trong ngày ⇒ hóa đơn vẫn thuộc tháng này? (CL-XHD-06 / GAP-43). Test plan giả định realtime vẫn chạy. **Cập nhật 16/10/2026:** CL-XHD-06 chốt theo đúng câu này — sau giờ chốt cuối ngày cuối tháng không phát hành trong tháng; đợt phát hành ở tháng sau: CL-XHD-32.
+↳ **Ghi chú:** Câu này mâu thuẫn với realtime "xử lý ngay khi nhận" (BR-XHD-06): sau giờ chốt cuối thì realtime chạy ngay trong ngày ⇒ hóa đơn vẫn thuộc tháng này? (CL-XHD-06 / GAP-43). Test plan giả định realtime vẫn chạy. **Cập nhật 16/10/2026:** CL-XHD-06 chốt theo đúng câu này — sau giờ chốt cuối ngày cuối tháng không phát hành trong tháng; đợt phát hành ở tháng sau: CL-XHD-32. **Cập nhật 20/10/2026:** đơn tạo 23:50, thanh toán 23:59 ngày 31/10, tín hiệu về 00:01 ngày 01/11 ⇒ ngày thanh toán ghi nhận 00:01 ngày 01/11 ⇒ phát hành ở đợt worker 12:05 ngày 01/11, BillDate = 01/11 (CL-XHD-32, CL-XHD-33).
 
 ---
 
@@ -261,7 +261,7 @@ updated: 2026-10-19
 > 2h quét 1 lần
 > Mốc 22:05 chốt từ 0h đến 22 giờ (Do FPL có rule delay 2h nên phải bổ sung khung giờ để quét hết những case không quét được do delay ở hai khung giờ trước)
 
-↳ **Ghi chú:** Không nêu giờ bắt đầu, giờ chốt từng đợt 2h, có phải tham số không (CL-XHD-05 / GAP-50). "Hai khung giờ trước" có thể hiểu là 2 đợt chung 12:05/18:05 hoặc 2 đợt FPL liền trước — suy diễn của analyst, chưa chắc. Test plan giả định các mốc 0:05, 2:05 … 22:05. **Cập nhật 16/10/2026:** lịch FPL thuộc BR "Lịch xuất hóa đơn (tham số cấu hình)" (L379) và flow FIG-03 (ảnh: Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png) ghi giờ chốt / giờ chạy là tham số; còn mở giờ các đợt trước 22:05 (CL-XHD-05).
+↳ **Ghi chú:** Không nêu giờ bắt đầu, giờ chốt từng đợt 2h, có phải tham số không (CL-XHD-05 / GAP-50). "Hai khung giờ trước" có thể hiểu là 2 đợt chung 12:05/18:05 hoặc 2 đợt FPL liền trước — suy diễn của analyst, chưa chắc. Test plan giả định các mốc 0:05, 2:05 … 22:05. **Cập nhật 16/10/2026:** lịch FPL thuộc BR "Lịch xuất hóa đơn (tham số cấu hình)" (L379) và flow FIG-03 (ảnh: Workflow ĐỒNG BỘ & XUẤT HÓA ĐƠN TỰ ĐỘNG (v2.0).png) ghi giờ chốt / giờ chạy là tham số; còn mở giờ các đợt trước 22:05 (CL-XHD-05). **Cập nhật 20/10/2026:** quét 0h–2h chạy job 1 lần, 2h–4h chạy job 1 lần, … ; giờ chạy trong khung là tham số (CL-XHD-05 resolved).
 
 ---
 
@@ -289,7 +289,7 @@ updated: 2026-10-19
 
 > Đơn TMĐT: dịch vụ khi SPF đánh dấu đơn "đã thanh toán"; thiết bị khi giao hàng thành công.
 
-↳ **Ghi chú:** Hồi quy Phase 1 cho kênh 20, 21. "Giao hàng thành công" của đơn TMĐT đi qua nguồn tín hiệu nào trong 3 nguồn BR-DB-02: URD không nói.
+↳ **Ghi chú:** Hồi quy Phase 1 cho kênh 20, 21 — chỉ test theo rule URD 2.2 (CL-XHD-31 resolved 20/10/2026). "Giao hàng thành công" của đơn TMĐT đi qua nguồn tín hiệu nào trong 3 nguồn BR-DB-02: URD không nói.
 
 ---
 
@@ -358,7 +358,7 @@ updated: 2026-10-19
 > Dòng đã có BillNumber thì bỏ qua.
 > Một hóa đơn vẫn có thể chứa nhiều dòng.
 
-↳ **Ghi chú:** Khóa 2.2 khác 2.1 (`OrderCode + ServiceCode + SubserviceType`) nhưng cột "So với v2.1" ghi "Giữ nguyên"; §C#3 vẫn nói khóa "có dùng SubServiceType" (CL-XHD-11 / GAP-41). Race worker ↔ realtime (D#2) chưa có phương án (CL-XHD-23). **Cập nhật 16/10/2026:** QC chốt khóa theo 2.2; field dữ liệu chờ schema (CL-XHD-11 một phần → CL-XHD-29).
+↳ **Ghi chú:** Khóa 2.2 khác 2.1 (`OrderCode + ServiceCode + SubserviceType`) nhưng cột "So với v2.1" ghi "Giữ nguyên"; §C#3 vẫn nói khóa "có dùng SubServiceType" (CL-XHD-11 / GAP-41). **20/10/2026:** BA chốt khóa theo BR-XHD-08 L419, §C#3 L651 không áp dụng (CL-XHD-11 resolved). Race worker ↔ realtime (D#2) chưa có phương án (CL-XHD-23). **Cập nhật 16/10/2026:** QC chốt khóa theo 2.2; field dữ liệu chờ schema (CL-XHD-11 một phần → CL-XHD-29).
 
 ---
 
@@ -403,7 +403,7 @@ updated: 2026-10-19
 
 > Job cảnh báo chạy 15 phút một lần để bổ sung thông tin kịp trước giờ chốt.
 
-↳ **Ghi chú:** Không có điều kiện, kênh gửi, người nhận, nội dung (CL-XHD-16 / GAP-31). Chỉ kiểm được tần suất chạy.
+↳ **Ghi chú:** Không có điều kiện, kênh gửi, người nhận, nội dung (CL-XHD-16 / GAP-31). Chỉ kiểm được tần suất chạy. **20/10/2026:** QC không test (CL-XHD-16) — SC-XHD-097 deprecated.
 
 ---
 
@@ -456,7 +456,7 @@ updated: 2026-10-19
 
 > Sau đó gửi Invoice Event để gạch nợ và xử lý hậu kỳ.
 
-↳ **Ghi chú:** Điểm nối XHD → GN (điểm chạm b) và XHD → HK. Payload chưa có (CL-XHD-29 / GAP-07).
+↳ **Ghi chú:** Điểm nối XHD → GN (điểm chạm b) và XHD → HK. Payload là phần của dev, QC không verify (CL-XHD-29 resolved 20/10/2026).
 
 ---
 
@@ -476,7 +476,7 @@ updated: 2026-10-19
 > Bổ sung chức năng cho phép DVKH HO chủ động xử lý với hợp đồng có yêu cầu clear nội dung "thuê thiết bị đầu cuối" trên hóa đơn.
 > Mới (kịp plan các chức năng chính sẽ thự hiện)
 
-↳ **Ghi chú:** Chỉ 1 câu: không rõ thao tác, có UI không, kết quả trên hóa đơn; "kịp plan" ⇒ chưa chắc thuộc v2.0 (CL-XHD-21 / GAP-53, Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`.
+↳ **Ghi chú:** Chỉ 1 câu: không rõ thao tác, có UI không, kết quả trên hóa đơn; "kịp plan" ⇒ chưa chắc thuộc v2.0 (CL-XHD-21 / GAP-53, Blocker). **Không sinh SC** — BA vòng 4: QC không test (CL-XHD-21 resolved 20/10/2026).
 
 ---
 
@@ -509,7 +509,7 @@ updated: 2026-10-19
 > RISK-01
 > PM và SA xử lý; mail cảnh báo là yêu cầu bắt buộc đã thống nhất.
 
-↳ **Ghi chú:** "Bắt buộc" nhưng không có điều kiện, lịch, người nhận, nội dung (CL-XHD-22 / GAP-02, 11 — Blocker). **Chưa sinh SC** — ghi nợ ở `CHANGELOG.md §3`. Xuất hóa đơn bổ sung case-by-case: ngoài phạm vi (TP §2.2 #9).
+↳ **Ghi chú:** "Bắt buộc" nhưng không có điều kiện, lịch, người nhận, nội dung (CL-XHD-22 / GAP-02, 11 — Blocker). **Không sinh SC** — BA vòng 4: phần dành cho dev, QC không test (CL-XHD-22 resolved 20/10/2026). Xuất hóa đơn bổ sung case-by-case: ngoài phạm vi (TP §2.2 #9).
 
 ---
 
@@ -526,7 +526,7 @@ updated: 2026-10-19
 > | 7 | FTI | … | Đơn hàng SPF: - DeployType = FTI | … | |
 > | 8 | Không/ None | … | Đơn hàng SPF - DeployType = Không | … | |
 
-↳ **Ghi chú:** Tài liệu **bổ sung** (không phải URD, người soạn AnhNQ75, chưa có ngày/version) — dùng làm dữ liệu cho chiều "phương thức triển khai" của khóa BR-DB-07 / BR-XHD-08. Bảng rút gọn: cột C, D, F lược bằng "…" (chi tiết ở file). Câu hỏi mở: TB có DeployType = "Không" không có tín hiệu giao hàng thì phát hành theo đường nào; "mix" TIN/PNC + Quầy/Sale gộp về TINPNC thì phương thức trong khóa là gì (CL-XHD-27). **URD 2.2 thắng** khi mâu thuẫn.
+↳ **Ghi chú:** Tài liệu **bổ sung** (không phải URD, người soạn AnhNQ75, chưa có ngày/version) — dùng làm dữ liệu cho chiều "phương thức triển khai" của khóa BR-DB-07 / BR-XHD-08. Bảng rút gọn: cột C, D, F lược bằng "…" (chi tiết ở file). Đã chốt (CL-XHD-27, 34 resolved 20/10/2026): TB "Không" gửi tín hiệu qua phiếu quầy, quầy không gửi ⇒ không xuất hóa đơn; mix "Không" + TIN/PNC ⇒ theo phiếu thi công; ≥1 SPDV mix TIN/PNC ⇒ cả đơn đi luồng TINPNC. **URD 2.2 thắng** khi mâu thuẫn.
 
 ---
 

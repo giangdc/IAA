@@ -8,7 +8,7 @@ doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #6–#9 · §B.II"
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Requirement Traceability — v2.0 · Module GN
@@ -36,7 +36,7 @@ updated: 2026-10-19
 | REQ-GN-011 | BR-NT-04 | DOC-v2.0-01 §II.c (L503-504) | SC-GN-022, SC-GN-023 *(SC-GN-024 deprecated 19/10/2026)* | CL-GN-04, CL-GN-06 |
 | REQ-GN-012 | BR-GN-01 | DOC-v2.0-01 §II.c (L508-509) | SC-GN-025, SC-GN-026, SC-GN-027, SC-GN-048 | CL-GN-01, CL-GN-05 |
 | REQ-GN-013 | BR-GN-03 | DOC-v2.0-01 §II.c (L513-514) | SC-GN-028, SC-GN-029, SC-GN-030 | CL-GN-09 |
-| REQ-GN-014 | BR-GN-04 | DOC-v2.0-01 §II.c (L518-520) | SC-GN-031, SC-GN-032, SC-GN-033, SC-GN-034, SC-GN-035 | CL-GN-05 |
+| REQ-GN-014 | BR-GN-04 | DOC-v2.0-01 §II.c (L518-520) | SC-GN-032, SC-GN-033, SC-GN-034, SC-GN-035 *(SC-GN-031 deprecated 20/10/2026)* | CL-GN-05 |
 | REQ-GN-015 | BR-GN-05 | DOC-v2.0-01 §II.c (L524-525) | SC-GN-036 | — |
 | REQ-GN-016 | BR-GC-01 | DOC-v2.0-01 §II.c (L529-530) | SC-GN-037, SC-GN-038 | CL-GN-02 |
 | REQ-GN-017 | BR-GC-02 | DOC-v2.0-01 §II.c (L534-535) | SC-GN-039, SC-GN-040, SC-GN-041 | CL-GN-07 |
@@ -91,7 +91,7 @@ updated: 2026-10-19
 
 > Ở điểm chạm (a), chỉ xử lý tiếp khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh sàn, hoặc Paid đã thanh toán hoàn tất.
 
-↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid. Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — enum chưa có (CL-GN-04).
+↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid. Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — verify qua bảng kê thanh toán, Phương thức thanh toán = "gạch nợ tạm" (CL-GN-04 resolved 20/10/2026).
 
 ---
 
@@ -139,7 +139,7 @@ updated: 2026-10-19
 > Ghi Payment bằng phương thức thanh toán đặc biệt, số tiền bằng toàn bộ nợ còn lại.
 > Khoản này tính vào tổng Payment nên hóa đơn chuyển sang "Đã gạch nợ" ngay.
 
-↳ **Ghi chú:** Mã "phương thức thanh toán đặc biệt" chưa có (CL-GN-04). Số tiền = nợ **còn lại** (không phải tổng hóa đơn).
+↳ **Ghi chú:** Phương thức thanh toán đặc biệt = "gạch nợ tạm", verify trên bảng kê thanh toán (CL-GN-04 resolved 20/10/2026). Số tiền = nợ **còn lại** (không phải tổng hóa đơn).
 
 ---
 
@@ -159,7 +159,7 @@ updated: 2026-10-19
 > Chỉ lấy dòng Paid có Amount > 0 và cùng OrderCode với hóa đơn.
 > Chỉ gạch bill còn nợ; mỗi bill chỉ gạch một lần.
 
-↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần": Bill chỉ gạch khi Paid đủ nợ còn lại; Paid thiếu ⇒ không gạch, chờ Paid đủ (CL-GN-05 — cách hiểu QC owner 19/10/2026, chờ BA xác nhận).
+↳ **Ghi chú:** Biên Amount `> 0`. "Mỗi bill chỉ gạch một lần": luồng Paid áp cho sàn TMĐT — khách thanh toán xong, tiền về công ty mới gạch ⇒ Paid luôn = tổng tiền đơn; 1 đơn nhiều bill, mỗi bill gạch đủ nợ 1 lần (CL-GN-05 resolved 20/10/2026).
 
 ---
 
@@ -169,7 +169,7 @@ updated: 2026-10-19
 > Một đơn có 1..n bill; gạch từng bill, theo số tiền từ cao xuống thấp.
 > Áp dụng cho cả nhánh Paid và nhánh Cọc.
 
-↳ **Ghi chú:** Hai bill bằng tiền nhau: thứ tự không định nghĩa (CL-GN-09). Thứ tự quan trọng khi Paid không đủ cho mọi bill.
+↳ **Ghi chú:** Hai bill bằng tiền nhau: gạch bill nào trước cũng được (CL-GN-09 resolved 20/10/2026). Paid = tổng tiền đơn (CL-GN-05) ⇒ thứ tự kiểm qua thứ tự ghi Payment.
 
 ---
 
@@ -180,7 +180,7 @@ updated: 2026-10-19
 > Dừng khi hết nợ hoặc hết Paid; Paid dư được giữ lại.
 > Nhánh Cọc không đẩy Kafka Out.
 
-↳ **Ghi chú:** BVA Paid < nợ / = nợ / > nợ — QC owner: Paid < nợ ⇒ không gạch, chờ Paid đủ (CL-GN-05 — cách hiểu QC owner, chờ BA xác nhận; khác cách đọc chữ "gạch từng phần"). 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out (payload chưa có — CL-XHD-29).
+↳ **Ghi chú:** "Gạch từng phần" = chia số dư Paid cho từng bill của đơn (mỗi lần gạch trừ Paid), **không** phải gạch một phần hóa đơn. Paid = tổng tiền đơn (sàn TMĐT) ⇒ không có biên Paid < nợ (SC-GN-031 deprecated — CL-GN-05 resolved 20/10/2026). 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out (payload chưa có — CL-XHD-29).
 
 ---
 
@@ -221,7 +221,7 @@ updated: 2026-10-19
 > Tính trên nợ còn lại sau khi EVC đã gạch; ghi Payment và trừ cọc theo BillNumber + số hợp đồng.
 > Dư cọc không xử lý; không gạch lại hóa đơn đã gạch.
 
-↳ **Ghi chú:** Nhiều dịch vụ cùng loại cọc gom thành một dòng Payment (L539) ⇒ số dòng Payment = số loại cọc trên bill. "Sau khi EVC đã gạch" ⇒ phụ thuộc đội EVC gạch trước (CL-GN-08).
+↳ **Ghi chú:** Nhiều dịch vụ cùng loại cọc gom thành một dòng Payment (L539) ⇒ số dòng Payment = số loại cọc trên bill. "Sau khi EVC đã gạch": INVOICE và hệ thống EVC chạy song song, INVOICE chừa phần tiền voucher / EVC khi gạch tiền khách, không chờ đội EVC gạch xong (CL-GN-08 resolved 20/10/2026).
 
 ---
 
@@ -232,7 +232,7 @@ updated: 2026-10-19
 > (...)
 > Chi tiết cấu hình EVC xem phụ lục.
 
-↳ **Ghi chú:** Ranh giới phạm vi: INVOICE **không** ghi Payment EVC. Gạch nợ EVC / voucher **vẫn test** (QC owner 19/10/2026 — khác TP §2.2 #5). Cấu hình EVC (PaidType, Owner, trần 50%, lock) ở Phụ lục D#4 ⇒ lấy theo URD 2.1 BR-VC-01..07, BR-GC-04..07, bỏ bước đánh dấu `[Bỏ]`; gạch EVC do đội EVC thực hiện (CL-GN-10, 19/10/2026).
+↳ **Ghi chú:** Ranh giới phạm vi: INVOICE **không** ghi Payment EVC. Gạch nợ EVC / voucher **vẫn test** (QC owner 19/10/2026 — khác TP §2.2 #5). Cấu hình EVC (PaidType, Owner, trần 50%, lock) ở Phụ lục D#4 ⇒ lấy theo URD 2.1 BR-VC-01..07, BR-GC-04..07, bỏ bước đánh dấu `[Bỏ]`; gạch EVC do đội EVC thực hiện (CL-GN-10, 19/10/2026). INVOICE và EVC chạy song song; INVOICE chừa phần tiền voucher / EVC; EVC gạch lỗi ⇒ báo đội EVC retry bằng tay hoặc tool hỗ trợ (CL-GN-08 resolved 20/10/2026).
 
 ---
 

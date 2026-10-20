@@ -6,17 +6,17 @@ version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module GN
   req: 20
-  sc: 48
-  new: 48
+  sc: 47
+  new: 47
   modified: 0
   carried: 0
-  deprecated: 2
-  p1: 42
+  deprecated: 3
+  p1: 41
   p2: 5
   p3: 1
-  blocked_by_cl: 4
+  blocked_by_cl: 1
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Test Scenario Map — v2.0 · Module GN
@@ -71,10 +71,9 @@ updated: 2026-10-19
 | SC-GN-025 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | Hóa đơn còn nợ; Paid cùng OrderCode Amount = **0** và Paid Amount = **1** | Gạch nợ chạy | **Amount 0 không được dùng; Amount 1 được dùng** | P1 | Boundary | NEW |
 | SC-GN-026 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L508) | Hóa đơn của OrderCode X; Paid thuộc OrderCode **Y** | Gạch nợ chạy | Paid của Y không được dùng cho hóa đơn của X | P1 | Negative | NEW |
 | SC-GN-027 | Điều kiện Paid | REQ-GN-012 | DOC-v2.0-01 BR-GN-01 (L509) | Hóa đơn **đã gạch đủ** | Điểm chạm kích hoạt lại (worker 30 phút) | Không gạch lần nữa; không có Payment trùng | P1 | Negative | NEW |
-| SC-GN-028 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | Đơn có 3 bill 300k / 500k / 100k, luồng Paid, Paid 600k | Gạch nợ chạy | Xét 500k → 300k → 100k: gạch **bill 500k** (Paid còn 100k); **bill 300k không gạch** (Paid 100k < nợ 300k); gạch **bill 100k** (Paid 100k = nợ); Paid còn 0 — cách hiểu QC owner ⛔ chờ BA xác nhận CL-GN-05 | P1 | Functional | NEW |
+| SC-GN-028 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | Đơn sàn TMĐT có 3 bill 300k / 500k / 100k, luồng Paid, **Paid 900k = tổng tiền đơn** | Gạch nợ chạy | Gạch lần lượt **bill 500k → bill 300k → bill 100k** (từ cao xuống thấp), mỗi bill gạch đủ nợ 1 lần; cả 3 bill "Đã gạch nợ"; Paid còn 0 (CL-GN-05 resolved 20/10/2026) | P1 | Functional | NEW |
 | SC-GN-029 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L514) | Đơn có ≥2 bill, luồng **Cọc** | Gạch nợ chạy | Bill được xét từ cao xuống thấp | P1 | Functional | NEW |
-| SC-GN-030 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | 2 bill **bằng tiền nhau**, Paid chỉ đủ 1 bill | Gạch nợ chạy | Thứ tự — QC: ưu tiên BillNumber cao nhất ⛔ chờ BA xác nhận chỉ là tie-break (CL-GN-09) | P3 | Boundary | NEW |
-| SC-GN-031 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 500k; Paid 300k | Gạch nợ chạy | **Không gạch** (Paid 300k < nợ 500k); hóa đơn còn nợ 500k; Paid 300k giữ lại — khi Paid tích lũy đủ 500k thì gạch 500k — cách hiểu QC owner ⛔ chờ BA xác nhận CL-GN-05 | P1 | Boundary | NEW |
+| SC-GN-030 | Thứ tự bill | REQ-GN-013 | DOC-v2.0-01 BR-GN-03 (L513) | Đơn sàn TMĐT có 2 bill **bằng tiền nhau** (vd 300k / 300k), luồng Paid, Paid 600k = tổng tiền đơn | Gạch nợ chạy | Cả 2 bill được gạch đủ nợ, "Đã gạch nợ"; Paid còn 0. **Bill nào gạch trước cũng được** — không kiểm thứ tự giữa 2 bill (CL-GN-09 resolved 20/10/2026) | P3 | Boundary | NEW |
 | SC-GN-032 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518-519) | Hóa đơn nợ 300k; Paid 500k | Gạch nợ chạy | Gạch 300k; hóa đơn hết nợ; **Paid dư 200k được giữ** | P1 | Boundary | NEW |
 | SC-GN-033 | Gạch từng phần | REQ-GN-014, REQ-GN-015 | DOC-v2.0-01 BR-GN-04 (L518) | Hóa đơn nợ 500k; Paid 500k | Gạch nợ chạy | Gạch 500k; hóa đơn "Đã gạch nợ"; Paid còn 0 | P1 | Boundary | NEW |
 | SC-GN-034 | Gạch từng phần | REQ-GN-014 | DOC-v2.0-01 BR-GN-04 (L518) | Luồng Paid, hóa đơn còn nợ | Một lần gạch thực hiện | 3 đầu ra: dòng Payment ghi nhận · Paid bị trừ đúng số tiền · Kafka Out đẩy về kênh thanh toán | P1 | Integration | NEW |
@@ -88,7 +87,7 @@ updated: 2026-10-19
 | SC-GN-042 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L539) | Bill có 2 DV cùng loại cọc A + 1 DV loại cọc B | Gạch cọc | 2 dòng Payment (1 cho loại A gom 2 DV, 1 cho loại B); mỗi DV trừ đúng loại cọc | P1 | Functional | NEW |
 | SC-GN-043 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L540) | Bill nợ 1.000k, đội EVC đã gạch 200k | Gạch cọc | Trừ cọc trên **800k** còn lại; Payment + trừ cọc ghi theo BillNumber + số hợp đồng | P1 | Functional | NEW |
 | SC-GN-044 | Cọc — cách trừ | REQ-GN-018 | DOC-v2.0-01 BR-GC-03 (L541) | Cọc hóa đơn dư sau khi gạch; hóa đơn đã gạch bằng cọc | Điểm chạm kích hoạt lại | Cọc dư giữ nguyên, không xử lý; hóa đơn không bị gạch lại | P2 | Negative | NEW |
-| SC-GN-045 | EVC | REQ-GN-019 | DOC-v2.0-01 BR-VC (L545) | Đơn có EVC (không lock), luồng Paid | Gạch nợ chạy | INVOICE **không** ghi Payment cho phần EVC; chỉ gạch tiền khách trên phần nợ còn lại | P1 | Negative | NEW |
+| SC-GN-045 | EVC | REQ-GN-019 | DOC-v2.0-01 BR-VC (L545) | Đơn có EVC (không lock), luồng Paid | Gạch nợ chạy | INVOICE **không** ghi Payment cho phần EVC; chỉ gạch tiền khách trên phần nợ còn lại, **chừa phần tiền voucher / EVC** — không chờ đội EVC gạch xong (chạy song song, CL-GN-08 20/10/2026) | P1 | Negative | NEW |
 | SC-GN-046 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; EVC lock 300k; Paid khách 900k | Gạch tiền khách | Gạch = min(1.000k − 300k, 900k) = **700k**; Paid khách dư 200k giữ lại; phần 300k chừa ra | P1 | Functional | NEW |
 | SC-GN-047 | EVC lock | REQ-GN-020 | DOC-v2.0-01 BR-VC (L546) | Bill nợ 1.000k; lock **0**; Paid khách 500k / 1.000k | Gạch tiền khách | **Lock 0 ⇒ gạch như thường: 500k / 1.000k** | P2 | Boundary | NEW |
 | SC-GN-048 | Paid voucher | REQ-GN-012, REQ-GN-019 | DOC-v2.0-01 BR-DP-01 (L474) ↔ BR-VC (L545) | Đơn có Paid PaidType **voucher** Amount > 0 cùng OrderCode | Gạch nợ luồng Paid | Paid voucher **được dùng** gạch nợ như Paid tiền khách (CL-GN-01 vòng 2) — loại EVC / voucher nào INVOICE gạch ⛔ chờ CL-GN-01, CL-GN-10 | P1 | Functional | NEW |
@@ -338,7 +337,7 @@ updated: 2026-10-19
 
 > Một đơn có 1..n bill; gạch từng bill, theo số tiền từ cao xuống thấp.
 
-↳ **Ghi chú:** Paid không đủ cho tất cả bill để thấy rõ thứ tự.
+↳ **Ghi chú:** Luồng Paid áp cho sàn TMĐT: tiền khách thanh toán về công ty rồi mới gạch ⇒ Paid luôn = tổng tiền đơn; thứ tự kiểm qua thứ tự ghi Payment của từng bill (CL-GN-05 resolved 20/10/2026).
 
 ---
 
@@ -356,17 +355,7 @@ updated: 2026-10-19
 
 > theo số tiền từ cao xuống thấp.
 
-↳ **Ghi chú:** Tie-break không định nghĩa (CL-GN-09) — P3.
-
----
-
-##### SC-GN-031 · Paid < nợ
-📍 `DOC-v2.0-01 §II.c BR-GN-04 · L518-519`
-
-> Mỗi lần gạch = nhỏ nhất của số dư Paid và nợ còn lại
-> Dừng khi hết nợ hoặc hết Paid
-
-↳ **Ghi chú:** Biên dưới. QC owner: chỉ gạch khi Paid đủ nợ còn lại (CL-GN-05, 19/10/2026).
+↳ **Ghi chú:** 2 bill bằng tiền nhau ⇒ gạch bill nào trước cũng được, tùy logic code; TC chỉ kiểm cả 2 bill được gạch đúng số tiền (CL-GN-09 resolved 20/10/2026) — P3.
 
 ---
 
@@ -375,7 +364,7 @@ updated: 2026-10-19
 
 > Paid dư được giữ lại.
 
-↳ **Ghi chú:** Biên trên.
+↳ **Ghi chú:** Biên trên. **Giữ nguyên SC** (QC owner 20/10/2026): theo logic thực tế, luồng Paid của sàn TMĐT có Paid = tổng tiền đơn (CL-GN-05), nên Paid > nợ thường không xảy ra. QC chưa rõ có ngoại lệ hay không ⇒ vẫn giữ case. Khi test, nếu QC **không dựng được** data Paid > nợ trên STG thì ghi rõ lý do vào kết quả chạy (không tự kết luận PASS / FAIL).
 
 ---
 
@@ -492,7 +481,7 @@ updated: 2026-10-19
 
 > Phần gạch nợ bằng EVC do đội EVC thực hiện; ISC tự quyết phương thức quản trị và xử lý voucher.
 
-↳ **Ghi chú:** Ranh giới phạm vi (TP §2.2 #5).
+↳ **Ghi chú:** Ranh giới INVOICE ↔ đội EVC. QC owner 20/10/2026 (CL-GN-08): 2 hệ thống chạy song song; INVOICE chừa phần tiền voucher / EVC khi gạch tiền khách. EVC gạch lỗi ⇒ báo đội EVC retry bằng tay hoặc dùng tool hỗ trợ (INVOICE không gạch thay).
 
 ---
 
@@ -544,3 +533,4 @@ updated: 2026-10-19
 |-------------|----------|--------|-------------|-------|
 | SC-GN-049 | API EVC lỗi / timeout | GN | v2.0 (19/10/2026) | CL-GN-02: STG không test timeout; thực tế đội dự án retry thủ công, API lỗi ⇒ log bug |
 | SC-GN-024 | Paid hoàn tất nhỏ hơn nợ đã gạch tạm | GN | v2.0 (19/10/2026) | CL-GN-06: phí sàn TMĐT đã tính vào tiền khách trả ⇒ không có trường hợp Paid quyết toán của sàn nhỏ hơn nợ |
+| SC-GN-031 | Paid < nợ (gạch từng phần hóa đơn) | GN | v2.0 (20/10/2026) | CL-GN-05: luồng Paid áp cho sàn TMĐT, khách thanh toán full ⇒ Paid = tổng tiền đơn, không có trường hợp Paid nhỏ hơn nợ; "gạch từng phần" (BR-GN-04) là chia Paid cho từng bill, không phải gạch một phần hóa đơn |

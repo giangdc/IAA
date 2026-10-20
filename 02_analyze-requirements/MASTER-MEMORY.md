@@ -58,7 +58,7 @@
 **Nên regression (carried — high risk):**
 | SC ID | Type | Lý do |
 |-------|------|-------|
-| SC-XHD-016, SC-XHD-017, SC-XHD-029, SC-XHD-060 · SC-GN-019, SC-GN-022 | Regression (Phase 1 TMĐT) | Kênh Shopee / Tiktok đã chạy Phase 1, "có điều chỉnh v2.0" — chưa có URD v1.0 (CL-XHD-31); gắn R2 theo TP §3.2 |
+| SC-XHD-016, SC-XHD-017, SC-XHD-029, SC-XHD-060 · SC-GN-019, SC-GN-022 | Regression (Phase 1 TMĐT) | Kênh Shopee / Tiktok đã chạy Phase 1, "có điều chỉnh v2.0" — chỉ test theo rule URD 2.2, không dùng URD v1.0 (CL-XHD-31 resolved 20/10/2026); gắn R2 theo TP §3.2 |
 
 **Không cần test (carried — low risk, stable):**
 | SC ID | Type | Lý do |

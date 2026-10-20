@@ -5,7 +5,7 @@ type: test_data_catalog
 version: v2.0
 module: { code: GN, dir: GN, name: "Gạch nợ hóa đơn" }
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Test Data Catalog — v2.0 · Module GN
@@ -19,15 +19,15 @@ updated: 2026-10-19
 | Field | Loại data | Valid | Invalid | Boundary | Nguồn |
 |-------|-----------|-------|---------|----------|-------|
 | Orderpaid → Paid (OrderCode) | Fixture | 1 Orderpaid / OrderCode, nhiều dòng detail = nhiều đợt thanh toán | — | — | BR-DP-01 (CL-GN-01) |
-| PaidType | Master | tiền khách · các loại voucher (BR-DP-01 L474) — enum + danh sách loại EVC / voucher chờ BA (CL-GN-01, CL-GN-10); Paid voucher được dùng gạch nợ (CL-GN-01 vòng 2) | — | — | BR-DP-01 (CL-GN-01, CL-GN-10) |
+| PaidType | Master | tiền khách · các loại voucher (BR-DP-01 L474) — danh sách loại EVC / voucher chờ PO (CL-GN-01); Paid voucher được dùng gạch nợ (CL-GN-01 vòng 2) | — | — | BR-DP-01 (CL-GN-01, CL-GN-10) |
 | Khóa trùng Paid | Fixture | trùng đủ `OrderCode + RefTransactionId + PaidType + Amount` (→ cập nhật paymentstatus) | khác 1 trong 3 trường RefTransactionId / PaidType / Amount (→ thêm mới) | — | BR-DP-01 |
-| paymentstatus | Master | `gạch nợ tạm` · `thanh toán hoàn tất` (giá trị enum chưa có) | trạng thái khác (→ dừng ở điểm chạm a, CL-GN-04) | — | BR-XL-01 · §A.5 #6 |
+| paymentstatus | Master | `gạch nợ tạm` · `thanh toán hoàn tất` (verify trên bảng kê thanh toán — CL-GN-04) | trạng thái khác (→ dừng ở điểm chạm a, CL-GN-04) | — | BR-XL-01 · §A.5 #6 |
 | Điểm chạm | Runtime | `(a) đồng bộ Paid xong` · `(b) sau khi xuất hóa đơn` · `(c) worker 30 phút` | — | **chu kỳ worker = 30 phút** | BR-XL-01 |
 | Kênh sàn | Master | `{20 Shopee, 21 Tiktok}` (giả định — URD 2.2 §A.1 L59 "kênh TMĐT (Shopee, TikTok Shop)") | kênh khác, vd quầy / nơi triển khai (→ không gạch tạm) | — | BR-NT-01 (CL-GN-03) |
 | Trường gạch nợ Paid/Cọc (OrderBill) | Runtime | `Paid` · `Cọc` · rỗng (→ gọi API kênh thanh toán) | API lỗi / timeout (→ dừng, không retry) | — | BR-XL-03 |
-| Phương thức thanh toán đặc biệt (Payment tạm) | Master | mã PT đặc biệt (chưa có), số tiền = toàn bộ nợ còn lại | — | — | BR-NT-02 (CL-GN-04) |
+| Phương thức thanh toán đặc biệt (Payment tạm) | Master | Phương thức thanh toán = "gạch nợ tạm" trên bảng kê thanh toán, số tiền = toàn bộ nợ còn lại | — | — | BR-NT-02 (CL-GN-04) |
 | Paid Amount | Fixture | `≥ 1`, cùng OrderCode với hóa đơn | `0`, âm (→ không dùng) · khác OrderCode (→ không dùng) | **0 (không dùng), 1 (dùng)** | BR-GN-01 |
-| Danh sách bill của đơn | Fixture | 1..n bill, số tiền khác nhau (vd 500k / 300k / 100k) | — | **2 bill bằng tiền (→ CL-GN-09)** | BR-GN-03 |
+| Danh sách bill của đơn | Fixture | 1..n bill, số tiền khác nhau (vd 500k / 300k / 100k) | — | **2 bill bằng tiền (→ bill nào gạch trước cũng được, CL-GN-09)** | BR-GN-03 |
 | Paid so với nợ bill | Fixture | Paid < nợ · Paid = nợ · Paid > nợ | — | **Paid = nợ − 1 / = nợ / = nợ + 1** | BR-GN-04 |
 | Σ Payment so với tổng hóa đơn | Runtime | Σ Payment = tổng hóa đơn (→ "Đã gạch nợ") | Σ Payment < tổng hóa đơn (→ còn nợ) | **T − 1 (còn nợ), T (Đã gạch nợ)** | BR-GN-05 |
 | Kafka Out | Runtime | 1 bản tin / lần gạch nhánh Paid (payload chưa có) | có Kafka Out ở nhánh Cọc (→ sai) | — | BR-GN-04 (CL-XHD-29) |
@@ -46,7 +46,7 @@ updated: 2026-10-19
   - **Fixture** = test **tự tạo** (Orderpaid/Paid, tồn cọc, mock EVC…). Test chịu trách nhiệm tạo + dọn.
   - **Runtime** = sinh khi chạy (Payment, Kafka Out, trạng thái hóa đơn) — không cố định trước.
 - Boundary values (in **đậm**) là ứng viên chính cho BVA ở generate-tc.
-- Bảng verify chính: `Paid` / `Orderpaid` · `Payment` · `Ob_OrderBill` (trường Paid/Cọc) · bảng tồn cọc (tên bảng chưa có — CL-GN-10). Tiền VND không phần thập phân.
+- Bảng verify chính: `Paid` / `Orderpaid` · `Payment` · `Ob_OrderBill` (trường Paid/Cọc) · bảng tồn cọc (tên bảng là phần của dev — CL-GN-10). Tiền VND không phần thập phân.
 - Tool verify (`07_environments/environments.md §Tool tra cứu`): khoản thu → **Foxpay › Thanh toán online › Đối soát khoản thu online**; cọc → **Quản lý kế toán › Tiền đặt cọc › Tra cứu**; trạng thái nợ hóa đơn → **Quản lý kế toán › Liệt kê cước**. Gạch nợ tay (**Gạch nợ bổ sung TT online**) chỉ dùng chuẩn bị / khôi phục data, không thay luồng tự động.
 - Số tiền trong cột Valid / Boundary là **dữ liệu minh họa của analyst**, không phải giá trị của URD.
 
