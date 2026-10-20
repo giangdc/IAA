@@ -16,7 +16,7 @@ counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của mod
   p3: 1
   blocked_by_cl: 7      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Test Scenario Map — v2.0 · Module XHD
@@ -70,7 +70,7 @@ updated: 2026-10-19
 | SC-XHD-017 | Ma trận kênh | REQ-XHD-001, REQ-XHD-002, REQ-XHD-040 | DOC-v2.0-01 §A.2 (L134-137) | Kênh **Tiktok (21)** — đã có Phase 1 | Như SC-XHD-001 | Đơn ghi nhận đủ với SaleChannelID = 21; luồng Phase 1 không hỏng | P1 | Regression | NEW |
 | SC-XHD-018 | Sự kiện SPF | REQ-XHD-003 | DOC-v2.0-01 BR-DB-01 (L345) | Đơn đã đồng bộ, DV chưa thanh toán | SPF phát sự kiện **thanh toán** | INVOICE nhận bản tin, cập nhật đơn; dòng DV đủ điều kiện phát hành ĐK DV | P1 | Functional | NEW |
 | SC-XHD-019 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-028 | DOC-v2.0-01 BR-DB-01 (L345) | Đơn đã đồng bộ, chưa có hóa đơn | SPF phát sự kiện **hủy đơn** | INVOICE ghi nhận trạng thái hủy; đơn không được phát hành ở đợt kế tiếp | P1 | Functional | NEW |
-| SC-XHD-020 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-008 | DOC-v2.0-01 BR-DB-01 (L345) ↔ BR-DB-03 (L359) | Khách hàng cập nhật thông tin trên **hợp đồng** trước khi hóa đơn phát hành | Worker phát hành hóa đơn | Hóa đơn dùng thông tin khách hàng **mới nhất trên hợp đồng**; SPF chỉ gửi sự kiện thanh toán, hủy đơn — không có sự kiện tạo đơn / cập nhật thông tin khách (CL-XHD-01, 19/10/2026) | P2 | Functional | NEW |
+| SC-XHD-020 | Sự kiện SPF | REQ-XHD-003, REQ-XHD-008 | DOC-v2.0-01 BR-DB-01 (L345) ↔ BR-DB-03 (L359) | Đơn đã đủ điều kiện, **đang chờ phát hành hóa đơn**; cập nhật thông tin trên **hợp đồng** trong lúc chờ | Worker phát hành hóa đơn | Hệ thống **ghi nhận thông tin hợp đồng mới**: màn Chi tiết hóa đơn in thông tin khách hàng **mới nhất trên hợp đồng** (QC owner 20/10/2026); SPF chỉ gửi sự kiện thanh toán, hủy đơn — không có sự kiện tạo đơn / cập nhật thông tin khách (CL-XHD-01, 19/10/2026) | P2 | Functional | NEW |
 | SC-XHD-021 | Tín hiệu giao hàng | REQ-XHD-004, REQ-XHD-012 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất hóa đơn, phương thức TIN/PNC | **Phiếu thi công** chuyển "Đã xử lý hoàn tất" → tín hiệu về INVOICE | Tín hiệu map đúng dòng TB theo khóa 4 thành phần; TB đủ điều kiện phát hành | P1 | Integration | NEW |
 | SC-XHD-022 | Tín hiệu giao hàng | REQ-XHD-004 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất hóa đơn, phương thức NCC (Vendor) | **Vendor** báo đối tác giao xong | Tín hiệu ghi nhận cho đúng TB của phương thức; TB đủ điều kiện | P1 | Integration | NEW |
 | SC-XHD-023 | Tín hiệu giao hàng | REQ-XHD-004 | DOC-v2.0-01 BR-DB-02 (L349) | Đơn có TB chưa xuất hóa đơn, phương thức Quầy | **Phiếu giao tại quầy** hoàn tất | Tín hiệu ghi nhận cho đúng TB; TB đủ điều kiện | P1 | Integration | NEW |
@@ -80,7 +80,7 @@ updated: 2026-10-19
 | SC-XHD-027 | Tín hiệu giao hàng | REQ-XHD-013 | DOC-v2.0-01 BR-DB-07 (L375) | TB của phương thức đã có BillNumber | Nhận lại tín hiệu giao hàng cho phương thức đó | Không ghi nhận, không phát hành lại; log nội dung tín hiệu vào cột Note | P1 | Negative | NEW |
 | SC-XHD-028 | Tín hiệu giao hàng | REQ-XHD-012 | DOC-v2.0-01 BR-DB-07 (L374) | TB có mã đơn + ServiceCode + SubserviceType khớp nhưng phương thức khác | Nhận tín hiệu sai phương thức triển khai | Coi là không khớp khóa (khớp 3/4 không đủ) → không ghi nhận, log Note | P2 | Negative | NEW |
 | SC-XHD-029 | Đơn TMĐT | REQ-XHD-005 | DOC-v2.0-01 BR-DB-02 (L351) | Đơn Shopee/Tiktok có DV | SPF đánh dấu đơn "đã thanh toán" | DV đủ điều kiện phát hành; đồng thời Paid ghi nhận paymentstatus = gạch nợ tạm (đối chiếu GN SC-GN-019) | P1 | Regression | NEW |
-| SC-XHD-030 | Thông tin KH | REQ-XHD-006 | DOC-v2.0-01 BR-DB-03 (L355) | Đơn kênh khác FPL đủ điều kiện | Worker phát hành hóa đơn | Tên, địa chỉ, MST… trên hóa đơn lấy theo **hợp đồng** | P1 | Functional | NEW |
+| SC-XHD-030 | Thông tin KH | REQ-XHD-006 | DOC-v2.0-01 BR-DB-03 (L355) | Đơn kênh khác FPL đủ điều kiện; thông tin khách trên đơn khác hợp đồng | Worker phát hành hóa đơn | Màn **Chi tiết hóa đơn**: thông tin khách hàng (tên, địa chỉ, MST…) đối chiếu theo **hợp đồng**; dòng dịch vụ / sản phẩm đối chiếu theo **thông tin đơn hàng mua** (QC owner 20/10/2026) | P1 | Functional | NEW |
 | SC-XHD-031 | Thông tin KH | REQ-XHD-007 | DOC-v2.0-01 BR-DB-03 (L356-358) | Đơn FPL, khách chọn **lấy hóa đơn** | Khách nhập đủ 7 trường trong 2 giờ, sau đó hóa đơn được phát hành | Hóa đơn dùng thông tin khách tự nhập (tên, email, SĐT, MST, mã định danh, mã QHNS, số hộ chiếu), không dùng thông tin hợp đồng | P1 | Functional | NEW |
 | SC-XHD-032 | Thông tin KH | REQ-XHD-007 | DOC-v2.0-01 BR-DB-03 (L358) | Đơn FPL đã thanh toán; khách vào web FPL › Quản lý thanh toán và gói › Xuất hóa đơn | Khách mở form ở mốc **đúng 2:00** và **2:01** kể từ thời gian tạo đơn | **2:00: nút Xuất hóa đơn còn, khách nhập được; 2:01: nút Xuất hóa đơn bị ẩn** (CL-XHD-02, 19/10/2026) | P2 | Boundary | NEW |
 | SC-XHD-033 | Thông tin KH | REQ-XHD-007 | DOC-v2.0-01 BR-DB-03 (L356) | Đơn FPL đã thanh toán | Khách **không bấm** Xuất hóa đơn trong 2 giờ | **Không phát hành hóa đơn** (CL-XHD-02, 19/10/2026) | P2 | Functional | NEW |
@@ -345,7 +345,7 @@ updated: 2026-10-19
 
 > Áp dụng chung cho mọi kênh bán: thanh toán, hủy đơn hàng.
 
-↳ **Ghi chú:** SPF chỉ gửi thanh toán, hủy đơn; thông tin khách lấy từ hợp đồng lúc phát hành (CL-XHD-01 resolved 19/10/2026) ⇒ SC verify hóa đơn in thông tin mới nhất của hợp đồng.
+↳ **Ghi chú:** SPF chỉ gửi thanh toán, hủy đơn; thông tin khách lấy từ hợp đồng lúc phát hành (CL-XHD-01 resolved 19/10/2026) ⇒ SC verify hóa đơn in thông tin mới nhất của hợp đồng. QC owner 20/10/2026: cập nhật thông tin hợp đồng **trong khi chờ phát hành hóa đơn** (sau khi đơn đủ điều kiện, trước đợt worker) ⇒ kiểm hệ thống có ghi nhận thông tin hợp đồng mới hay không; căn cứ BR-DB-03 L359 *"lần phát hành tiếp theo dùng thông tin mới nhất"*. Việc cập nhật không tự phát hành hóa đơn — xem SC-XHD-035.
 
 ---
 
@@ -435,7 +435,7 @@ updated: 2026-10-19
 
 > Mặc định lấy theo thông tin trên hợp đồng.
 
-↳ **Ghi chú:** Verify bằng cách cho thông tin trên đơn khác hợp đồng — hóa đơn phải in thông tin hợp đồng.
+↳ **Ghi chú:** Verify bằng cách cho thông tin trên đơn khác hợp đồng — hóa đơn phải in thông tin hợp đồng. QC owner 20/10/2026: trên màn Chi tiết hóa đơn, phần **thông tin khách hàng** đối chiếu với **hợp đồng**; phần **dòng dịch vụ / sản phẩm** đối chiếu với **thông tin đơn hàng mua** (nội dung dòng = tên dịch vụ + số tháng — xem SC-XHD-102).
 
 ---
 
