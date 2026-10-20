@@ -63,6 +63,7 @@ updated: 2026-10-19
 | 2026-10-19 | UPDATE | **Đóng CL-XHD-07:** đơn bán thêm trên hợp đồng tổ chức có PĐK mới riêng — phải duyệt PĐK mới mới xuất hóa đơn (hết GAP-61) | QC owner 19/10/2026 | cl_open 16→15 |
 | 2026-10-19 | UPDATE | **Thêm SC-XHD-112, 113** (CL-XHD-07): đơn bán thêm trên hợp đồng doanh nghiệp — PĐK mới chưa duyệt ⇒ không xuất hóa đơn (P1 Negative); đã duyệt ⇒ phát hành (P2 Functional) | QC owner 19/10/2026 | SC 109→111 · P1 84→85 · P2 24→25 |
 | 2026-10-20 | UPDATE | SC-XHD-030: màn Chi tiết hóa đơn — thông tin khách hàng đối chiếu theo hợp đồng, dòng dịch vụ / sản phẩm đối chiếu theo thông tin đơn hàng mua. SC-XHD-020: ghi rõ case cập nhật thông tin hợp đồng trong khi chờ phát hành hóa đơn ⇒ hệ thống ghi nhận thông tin hợp đồng mới (BR-DB-03 L359) | QC owner 20/10/2026 | Không |
+| 2026-10-20 | UPDATE | Tool cập nhật thông tin hợp đồng: Inside › Quản lý hợp đồng › Cập nhật hợp đồng — thêm vào `07_environments/environments.md`, ghi vào SC-XHD-020 | QC owner 20/10/2026 | Không |
 
 ## 2. Ràng buộc còn hiệu lực
 
