@@ -75,6 +75,7 @@ updated: 2026-10-20
 | 2026-10-20 | UPDATE | **CL-XHD-33 chốt lại:** worker xét theo mốc nghiệp vụ (thiết bị: ngày giao hàng · dịch vụ: ngày thanh toán); realtime phát hành theo thời điểm SPF đẩy về (thiết bị phải đã có ngày giao hàng, dịch vụ phải đã có ngày thanh toán) — thay định nghĩa "mốc = thời điểm tín hiệu về" của dòng trên; SC-XHD-045, RISK-XHD-03, test_data_catalog cập nhật | QC owner 20/10/2026 | Không |
 | 2026-10-20 | UPDATE | SC-XHD-046: ngày thanh toán hệ thống ghi nhận = 00:01 ngày 01/11 (lúc SPF đẩy về), không phải 23:59 ngày 31/10 ⇒ worker 12:05 ngày 01/11 lấy dòng đúng rule; sửa chữ ở SC-XHD-046, CL-XHD-32, REQ-XHD-016, test_data_catalog | QC owner 20/10/2026 | Không |
 | 2026-10-20 | SCOPE↓ | **Không test kênh SR-KPDV (SaleChannelID 18)** — **deprecated SC-XHD-014**; ghi ngoại lệ ở CL-XHD-26, REQ-XHD-001, 002, RISK-XHD-08, test_data_catalog | QC owner 20/10/2026 | SC 110→109 (deprecated 4) · P1 85→84 |
+| 2026-10-20 | UPDATE | **Đóng CL-XHD-12:** dev xác nhận Thiết bị Oncall và Thiết bị IP phone là 1 dịch vụ (SubServiceType 31), dữ liệu STG có 2 dòng là dư — **deprecated SC-XHD-079**; RISK-XHD-04 → Resolved; ghi chú REQ-XHD-002, 027, test_data_catalog | Dev trả lời (QC owner chuyển lời) 20/10/2026 | SC 109→108 (deprecated 5) · P2 25→24 · cl_open 1→0 · blocked_by_cl 1→0 |
 
 ## 2. Ràng buộc còn hiệu lực
 

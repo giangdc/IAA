@@ -6,7 +6,7 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — CL/RISK của module XHD
   cl: 34
-  cl_open: 1
+  cl_open: 0
   cl_blocking: 0        # CL chặn sinh TC / execute (đánh dấu ⛔ BLOCKING)
   risk: 10
   risk_high: 6
@@ -34,7 +34,7 @@ updated: 2026-10-20
 | RISK-XHD-01 | XHD / tích hợp (xuyên module) | Không có payload Kafka Order/Invoice Event, schema bảng, API Billing, enum trạng thái ⇒ không dựng được dữ liệu test và không định lượng được expected | High | DOC-v2.0-01 §D: "Chi tiết xem URD v2.1"; TP §2.3 GAP-07 | Mọi SC Integration; SC-XHD-024, 040, 101, 103 | BA: tài liệu tích hợp là phần của dev, QC không nhận (CL-XHD-29 resolved 20/10/2026) ⇒ verify định tính qua log + bảng `OB_*` | Open | SC-XHD-001..017, SC-XHD-040, SC-XHD-101, SC-XHD-103 · REQ-XHD-011, REQ-XHD-037 |
 | RISK-XHD-02 | XHD / phát hành trùng | Worker và realtime chạy song song có khoảng trống giữa kiểm BillNumber và ghi BillNumber ⇒ 2 hóa đơn thật cho 1 dòng, nợ khách tính gấp đôi, GN trừ Paid 2 lần | High | DOC-v2.0-01 §D#2 (L662-665) | Tín hiệu đến sát giờ chốt cuối; bản tin lặp; SC-XHD-055, 056, 077 | Phương án là việc của dev, QC không test worker ↔ realtime song song (CL-XHD-23 resolved 20/10/2026); exploratory R1 sát giờ chốt; hóa đơn dư xử lý ngoài phạm vi | Closed | SC-XHD-055, SC-XHD-056, SC-XHD-077 · REQ-XHD-027 |
 | RISK-XHD-03 | XHD / bản tin trễ qua ngày | Dòng có mốc nghiệp vụ ngày N nhưng bản tin về ngày N+1 rơi vào khoảng trống — không luồng nào phát hành; mail cảnh báo "bắt buộc" chưa có đặc tả | High | DOC-v2.0-01 §D#3 (L666-669) | SC-XHD-045 (ghi nhận hiện trạng) | Mail cảnh báo + phương án xử lý là việc của dev, QC không test (CL-XHD-22 resolved 20/10/2026); SC-XHD-045 giữ rule; worker xét DV theo ngày thanh toán, TB theo ngày giao hàng; realtime theo thời điểm SPF đẩy về (CL-XHD-33) | Open | SC-XHD-045 · REQ-XHD-015, REQ-XHD-042 |
-| RISK-XHD-04 | XHD / khóa chống trùng | Khóa chống trùng BR-XHD-08 (dịch vụ hóa đơn + gói) khác khóa map tín hiệu BR-DB-07 (ServiceCode + SubserviceType) và §C#3; SubServiceType 31 trùng ở 2 DV ⇒ dev và QC có thể dùng 2 khóa khác nhau, chặn nhầm hoặc phát hành trùng | High | DOC-v2.0-01 BR-XHD-08 (L419) ↔ §C#3 (L649-651) ↔ BR-DB-07 (L374) | SC-XHD-076..079, SC-XHD-028 | BA chốt khóa theo BR-XHD-08 L419 (CL-XHD-11 resolved 20/10/2026); còn field dữ liệu của khóa (CL-XHD-29) và SubServiceType 31 ở khóa map tín hiệu BR-DB-07 (CL-XHD-12) | Open | SC-XHD-076, SC-XHD-077, SC-XHD-078, SC-XHD-079 · REQ-XHD-027 |
+| RISK-XHD-04 | XHD / khóa chống trùng | Khóa chống trùng BR-XHD-08 (dịch vụ hóa đơn + gói) khác khóa map tín hiệu BR-DB-07 (ServiceCode + SubserviceType) và §C#3; SubServiceType 31 trùng ở 2 DV (dev 20/10/2026: là 1 dịch vụ, dữ liệu STG dư) ⇒ dev và QC có thể dùng 2 khóa khác nhau, chặn nhầm hoặc phát hành trùng | High | DOC-v2.0-01 BR-XHD-08 (L419) ↔ §C#3 (L649-651) ↔ BR-DB-07 (L374) | SC-XHD-076..078, SC-XHD-028 | BA chốt khóa theo BR-XHD-08 L419 (CL-XHD-11 resolved 20/10/2026); SubServiceType 31 là 1 dịch vụ (CL-XHD-12 resolved 20/10/2026) | Resolved | SC-XHD-076, SC-XHD-077, SC-XHD-078 · REQ-XHD-027 |
 | RISK-XHD-05 | XHD / kênh FPL | Lịch 2h, mốc 22:05, delay 2h, realtime sau 22h, thông tin KH 2 giờ đều mới ở 2.2 và thiếu mốc cụ thể ⇒ dễ lệch giữa dev / QC; vùng 18:00–22:00 khác kênh khác | High | DOC-v2.0-01 BR-XHD-01 (L386-388), BR-XHD-03 (L399), BR-XHD-06 (L414), BR-DB-03 (L356-358) | SC-XHD-031..034, SC-XHD-047..053 | Resolve CL-XHD-02..05 trước generate-tc; chỉnh lịch trên STG để chạy được nhiều mốc trong ngày | Open | SC-XHD-031..034, SC-XHD-047..053 · REQ-XHD-007, REQ-XHD-017, REQ-XHD-021, REQ-XHD-026 |
 | RISK-XHD-06 | XHD / điều kiện PĐK + hợp đồng con | Rule mới; chưa biết trường nhận diện hợp đồng tổ chức, nguồn trạng thái PĐK, cách tính "2 ngày cuối tháng", đầu ra khi chặn ⇒ có thể chặn nhầm (không ra hóa đơn) hoặc bỏ lọt | High | DOC-v2.0-01 BR-XHD-03 (L400-401) | SC-XHD-061..068 (biên cuối tháng 28/30/31 ngày) | Resolve CL-XHD-07, 08, 09; chuẩn bị hợp đồng tổ chức / cá nhân / hợp đồng con trên STG | Open | SC-XHD-061..068 · REQ-XHD-022, REQ-XHD-023 |
 | RISK-XHD-07 | XHD / thời gian | Nhiều SC phụ thuộc giờ chốt, cuối tháng, qua nửa đêm ⇒ khó tái hiện trên STG nếu không chỉnh được giờ hệ thống / tham số lịch | Medium | DOC-v2.0-01 BR-XHD-01 (L381-385); TP §3.2 | SC-XHD-041..046, 054..056, 063, 064 | Xác nhận với dev cách chỉnh tham số lịch + giờ hệ thống STG trước R1 | Open | SC-XHD-041..046, SC-XHD-054..056, SC-XHD-063, SC-XHD-064 · REQ-XHD-014..016 |
@@ -293,7 +293,7 @@ updated: 2026-10-20
 ---
 
 ### CL-XHD-12 · SubServiceType 31 trùng ở 2 dịch vụ Tổng đài Oncall
-📍 `DOC-v2.0-01 §A.3 (L191-192, L259)` + `§C#3 (L649-651)`  ·  Status: **Open — đã rõ một phần 19/10/2026** · §C#3 của URD
+📍 `DOC-v2.0-01 §A.3 (L191-192, L259)` + `§C#3 (L649-651)`  ·  Status: **Resolved 20/10/2026** · §C#3 của URD
 
 > 31 – Thiết bị Oncall (Type 2)
 > 31 – Thiết bị IP phone (Type 2)
@@ -311,6 +311,8 @@ updated: 2026-10-20
 🟡 **Làm rõ một phần 19/10/2026 (vòng 3)** — SubServiceType của "Thiết bị IP phone" **đúng là 31**, trùng "Thiết bị Oncall". Còn mở: tín hiệu giao hàng map theo mã đơn + ServiceCode + SubserviceType + phương thức (BR-DB-07) phân biệt 2 thiết bị bằng gì — QC hỏi lại BA. Nguồn: QC trả lời 19/10/2026 vòng 3.
 
 🟡 **Vòng 4 20/10/2026** — Gộp với CL-XHD-11. BA: phân biệt 2 thiết bị cùng SubServiceType 31 khi map tín hiệu giao hàng (BR-DB-07) *"phải hỏi dev"*. Còn mở — **hỏi dev**. Nguồn: BA trả lời vòng 4.
+
+✅ **RESOLVED 20/10/2026** — Dev: **Thiết bị Oncall và Thiết bị IP phone là 1 dịch vụ, giống nhau** (cùng SubServiceType 31); dữ liệu STG đang có 2 dòng là **dư** ⇒ không có trường hợp 2 thiết bị khác nhau cùng SubServiceType 31 trên 1 đơn. **SC-XHD-079 deprecated.** Khi dựng data nhóm 8 Tổng đài Oncall, QC chỉ dùng 1 dịch vụ thiết bị (SubServiceType 31), không dùng dòng dư trên STG. Nguồn: Dev trả lời (QC owner chuyển lời) 20/10/2026.
 
 ---
 

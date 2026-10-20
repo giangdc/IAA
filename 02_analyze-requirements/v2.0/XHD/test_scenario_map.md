@@ -6,15 +6,15 @@ version: v2.0
 module: { code: XHD, dir: XHD, name: "Đồng bộ đơn hàng & xuất hóa đơn tự động" }
 counts:                 # 🔑 CANONICAL — REQ/SC/lifecycle/priority của module XHD
   req: 43
-  sc: 109
-  new: 109
+  sc: 108
+  new: 108
   modified: 0
   carried: 0
-  deprecated: 4
+  deprecated: 5
   p1: 84
-  p2: 25
+  p2: 24
   p3: 0
-  blocked_by_cl: 1      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
+  blocked_by_cl: 0      # SC có Then phụ thuộc CL chưa trả lời (vẫn gán Priority)
 status: ANALYZED
 updated: 2026-10-20
 ---
@@ -128,7 +128,6 @@ updated: 2026-10-20
 | SC-XHD-076 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L420) | Dòng DV đã có BillNumber | Đợt worker sau chạy | Dòng bị bỏ qua, không phát hành lại | P1 | Negative | NEW |
 | SC-XHD-077 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L418) | Đơn đã phát hành toàn bộ | Bản tin Kafka **lặp** cùng nội dung về lại | Không phát sinh hóa đơn mới | P1 | Negative | NEW |
 | SC-XHD-078 | Chống trùng | REQ-XHD-027 | DOC-v2.0-01 BR-XHD-08 (L419) | 2 dòng TB cùng mã đơn + dịch vụ hóa đơn + gói, **khác phương thức triển khai** | Mỗi phương thức có tín hiệu giao hàng ở thời điểm khác | 2 lần phát hành hợp lệ, không bị coi là trùng | P1 | Functional | NEW |
-| SC-XHD-079 | Chống trùng | REQ-XHD-027, REQ-XHD-002 | DOC-v2.0-01 BR-XHD-08 (L419) ↔ §C#3 (L649-651) | Đơn nhóm Tổng đài Oncall có cả "Thiết bị Oncall" và "Thiết bị IP phone" (cùng SubServiceType 31) | Cả 2 đủ điều kiện | Cả 2 dòng được phát hành, không bị coi là trùng (khóa chống trùng BR-XHD-08 L419 không chứa SubServiceType — CL-XHD-11 resolved 20/10/2026); tín hiệu giao map đúng dòng TB của mình ⛔ chờ CL-XHD-12 | P2 | Negative | NEW |
 | SC-XHD-080 | Hợp lệ | REQ-XHD-028, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L425) | Đơn ở trạng thái **Đã hủy** | Worker chạy | Không phát hành hóa đơn; ghi log (CL-XHD-14) | P1 | Negative | NEW |
 | SC-XHD-081 | Hợp lệ | REQ-XHD-028, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L425) | Đơn ở trạng thái **Đang cập nhật** (đơn chưa có thông tin hợp đồng) | Worker chạy | Không phát hành hóa đơn (trạng thái hợp lệ = "Bình thường" — CL-XHD-14, QC owner giữ case 19/10/2026) | P1 | Negative | NEW |
 | SC-XHD-082 | Hợp lệ | REQ-XHD-029, REQ-XHD-031 | DOC-v2.0-01 BR-XHD-10 (L426) | **Hợp đồng** ở trạng thái **Tạm ngưng** / **Đã chấm dứt** / **Ngưng vì lý do thanh toán** | Worker chạy | Không phát hành hóa đơn; ghi log (CL-XHD-14) | P1 | Negative | NEW |
@@ -864,17 +863,6 @@ updated: 2026-10-20
 
 ---
 
-##### SC-XHD-079 · SubServiceType 31 trùng
-📍 `DOC-v2.0-01 §C#3 · L649-651`
-
-> SubServiceType 31 trùng ở hai dịch vụ của nhóm Tổng đài Oncall (Thiết bị Oncall, Thiết bị IP phone).
-> Mục A.3, BR-DB-07, BR-XHD-08
-> Khóa chống trùng có dùng SubServiceType nên có thể làm hai dòng bị coi là trùng.
-
-↳ **Ghi chú:** BA chốt khóa chống trùng theo BR-XHD-08 L419 (CL-XHD-11 resolved 20/10/2026) — câu §C#3 L651 không áp dụng, nên không còn trùng ở bước phát hành; rủi ro còn lại ở bước map tín hiệu BR-DB-07 (CL-XHD-12).
-
----
-
 ##### SC-XHD-080 · Đơn hủy
 📍 `DOC-v2.0-01 §I.c BR-XHD-10 · L425`
 
@@ -1169,3 +1157,4 @@ updated: 2026-10-20
 | SC-XHD-100 | Đổi chi nhánh giữa 2 lần phát hành — hóa đơn cũ không tự điều chỉnh | XHD | v2.0 (19/10/2026) | ⛔ **Ngoài scope test — TP §2.2 #3** *"Điều chỉnh hóa đơn đã phát hành khi chi nhánh đổi giữa các lần phát hành"*. QC owner 19/10/2026 |
 | SC-XHD-097 | Job cảnh báo 15 phút | XHD | v2.0 (20/10/2026) | ⛔ **Ngoài scope test** — CL-XHD-16: BA vòng 4 *"qc không test chỗ này"*. QC owner 20/10/2026 |
 | SC-XHD-014 | Ma trận — kênh SR-KPDV (18) | XHD | v2.0 (20/10/2026) | ⛔ **Ngoài scope test** — QC owner 20/10/2026: không test kênh SR-KPDV (SaleChannelID 18) |
+| SC-XHD-079 | SubServiceType 31 trùng (Thiết bị Oncall / Thiết bị IP phone) | XHD | v2.0 (20/10/2026) | CL-XHD-12: dev xác nhận 2 dịch vụ là 1, dữ liệu STG dư ⇒ không có trường hợp 2 thiết bị khác nhau cùng SubServiceType 31 |

@@ -30,7 +30,7 @@ updated: 2026-10-20
 | REQ ID | Maps (Ref DOC) | DOC §section | Scenarios | Clarification |
 |--------|----------------|--------------|-----------|---------------|
 | REQ-XHD-001 | — | DOC-v2.0-01 §A.2 (L79-137) | SC-XHD-001..017 *(SC-XHD-014 SR-KPDV deprecated 20/10/2026)* | CL-XHD-26 |
-| REQ-XHD-002 | — | DOC-v2.0-01 §A.3 (L138-260) | SC-XHD-001..017 trừ SC-XHD-014 (chiều dữ liệu nhóm DV) | CL-XHD-12, CL-XHD-13, CL-XHD-26, CL-XHD-30 |
+| REQ-XHD-002 | — | DOC-v2.0-01 §A.3 (L138-260) | SC-XHD-001..017 trừ SC-XHD-014 (chiều dữ liệu nhóm DV) | CL-XHD-12 ✅, CL-XHD-13 ✅, CL-XHD-26, CL-XHD-30 |
 | REQ-XHD-003 | BR-DB-01 | DOC-v2.0-01 §I.c (L343-346) | SC-XHD-018, SC-XHD-019, SC-XHD-020 | CL-XHD-01 |
 | REQ-XHD-004 | BR-DB-02 | DOC-v2.0-01 §I.c (L347-350) | SC-XHD-021, SC-XHD-022, SC-XHD-023, SC-XHD-024 | CL-XHD-27 |
 | REQ-XHD-005 | BR-DB-02 | DOC-v2.0-01 §I.c (L351) | SC-XHD-029 | CL-XHD-31 |
@@ -55,7 +55,7 @@ updated: 2026-10-20
 | REQ-XHD-024 | BR-XHD-05 | DOC-v2.0-01 §I.c (L404-408) | SC-XHD-069, SC-XHD-070, SC-XHD-071, SC-XHD-072 | — |
 | REQ-XHD-025 | BR-XHD-06 | DOC-v2.0-01 §I.c (L410-413) | SC-XHD-073, SC-XHD-074, SC-XHD-075, SC-XHD-110 | CL-XHD-10 ✅ |
 | REQ-XHD-026 | BR-XHD-06 | DOC-v2.0-01 §I.c (L414) | SC-XHD-051, SC-XHD-052 | CL-XHD-05 |
-| REQ-XHD-027 | BR-XHD-08 | DOC-v2.0-01 §I.c (L416-421) | SC-XHD-076, SC-XHD-077, SC-XHD-078, SC-XHD-079 | CL-XHD-11 ✅, CL-XHD-12, CL-XHD-23 ✅ |
+| REQ-XHD-027 | BR-XHD-08 | DOC-v2.0-01 §I.c (L416-421) | SC-XHD-076, SC-XHD-077, SC-XHD-078 *(SC-XHD-079 deprecated 20/10/2026)* | CL-XHD-11 ✅, CL-XHD-12 ✅, CL-XHD-23 ✅ |
 | REQ-XHD-028 | BR-XHD-10 | DOC-v2.0-01 §I.c (L425) | SC-XHD-019, SC-XHD-080, SC-XHD-081 | CL-XHD-14 |
 | REQ-XHD-029 | BR-XHD-10 | DOC-v2.0-01 §I.c (L426) | SC-XHD-082..089 | CL-XHD-14, CL-XHD-15 |
 | REQ-XHD-030 | BR-XHD-10 | DOC-v2.0-01 §I.c (L427) | SC-XHD-090..095 | CL-XHD-15 |
@@ -115,7 +115,7 @@ updated: 2026-10-20
 > Ô màu vàng: SubServiceType 31 trùng ở hai dịch vụ (Thiết bị Oncall, Thiết bị IP phone) của nhóm Tổng đài Oncall.
 > Không có trong danh sách phạm vi: ServiceID 2 (SubServiceType 5 đến 9) vì không có trong bảng nhóm dịch vụ; ServiceID 22 (GSafe) vì chưa có dịch vụ nào.
 
-↳ **Ghi chú:** Bảng đầy đủ 20 nhóm × SubServiceType nằm ở `test_data_catalog.md` (field `ServiceID / SubServiceType`) — không chép lại ở đây. Mỗi dịch vụ có cột `Type 1..4`; URD **chưa định nghĩa** Type và cách map sang ProductType DV/TB (§C#2 → CL-XHD-13). SubServiceType 31 trùng ở 2 dịch vụ ảnh hưởng khóa chống trùng (§C#3 → CL-XHD-12). Hai cột "Loại nhóm" `Billing` / `SubScription` chưa được BR nào dùng — **suy diễn của analyst:** chỉ mang tính mô tả.
+↳ **Ghi chú:** Bảng đầy đủ 20 nhóm × SubServiceType nằm ở `test_data_catalog.md` (field `ServiceID / SubServiceType`) — không chép lại ở đây. Mỗi dịch vụ có cột `Type 1..4`; URD **chưa định nghĩa** Type và cách map sang ProductType DV/TB (§C#2 → CL-XHD-13). SubServiceType 31 trùng ở 2 dịch vụ ảnh hưởng khóa chống trùng (§C#3 → CL-XHD-12). Hai cột "Loại nhóm" `Billing` / `SubScription` chưa được BR nào dùng — **suy diễn của analyst:** chỉ mang tính mô tả. **20/10/2026:** dev xác nhận Thiết bị Oncall và Thiết bị IP phone là 1 dịch vụ, dữ liệu STG có 2 dòng là dư (CL-XHD-12 resolved).
 
 ---
 
