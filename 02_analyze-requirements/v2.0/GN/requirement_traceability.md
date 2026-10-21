@@ -8,7 +8,7 @@ doc_source:
   - id: DOC-v2.0-01
     section: "§A.5 #6–#9 · §B.II"
 status: ANALYZED
-updated: 2026-10-20
+updated: 2026-10-21
 ---
 
 # Requirement Traceability — v2.0 · Module GN
@@ -23,29 +23,29 @@ updated: 2026-10-20
 
 | REQ ID | Maps (Ref DOC) | DOC §section | Scenarios | Clarification |
 |--------|----------------|--------------|-----------|---------------|
-| REQ-GN-001 | BR-DP-01 | DOC-v2.0-01 §II.c (L474) | SC-GN-001, SC-GN-002 | CL-GN-01 |
-| REQ-GN-002 | BR-DP-01 | DOC-v2.0-01 §II.c (L475) | SC-GN-003, SC-GN-004, SC-GN-005, SC-GN-006 | — |
+| REQ-GN-001 | BR-DP-01 | DOC-v2.0-01 §II.c (L474) | — *(SC-GN-001, 002 deprecated 21/10/2026 — dev tự kiểm)* | CL-GN-01 |
+| REQ-GN-002 | BR-DP-01 | DOC-v2.0-01 §II.c (L475) | SC-GN-003 *(SC-GN-004, 005, 006 deprecated 21/10/2026 — dev tự kiểm)* | — |
 | REQ-GN-003 | BR-DP-01 | DOC-v2.0-01 §II.c (L476) | SC-GN-007 | — |
-| REQ-GN-004 | BR-XL-01 | DOC-v2.0-01 §II.c (L480-481) | SC-GN-008, SC-GN-009, SC-GN-010 | — |
-| REQ-GN-005 | BR-XL-01 | DOC-v2.0-01 §II.c (L482) | SC-GN-011, SC-GN-012, SC-GN-013 | CL-GN-03, CL-GN-04 |
+| REQ-GN-004 | BR-XL-01 | DOC-v2.0-01 §II.c (L480-481) | SC-GN-008, SC-GN-009, SC-GN-010, SC-GN-055 | — |
+| REQ-GN-005 | BR-XL-01 | DOC-v2.0-01 §II.c (L482) | SC-GN-011, SC-GN-013 *(SC-GN-012, 052 deprecated 21/10/2026)* | CL-GN-03, CL-GN-04 |
 | REQ-GN-006 | BR-XL-03 | DOC-v2.0-01 §II.c (L486) | SC-GN-014 | — |
 | REQ-GN-007 | BR-XL-03 | DOC-v2.0-01 §II.c (L487-488) | SC-GN-015, SC-GN-016, SC-GN-017 | — |
-| REQ-GN-008 | BR-XL-03 | DOC-v2.0-01 §II.c (L489) | SC-GN-018, SC-GN-021 | — |
-| REQ-GN-009 | BR-NT-01 | DOC-v2.0-01 §II.c (L493-494) | SC-GN-019, SC-GN-020 | CL-GN-03 |
-| REQ-GN-010 | BR-NT-02 | DOC-v2.0-01 §II.c (L498-499) | SC-GN-019 | CL-GN-04 |
+| REQ-GN-008 | BR-XL-03 | DOC-v2.0-01 §II.c (L489) | SC-GN-018 *(SC-GN-021, 052 deprecated 21/10/2026)* | CL-GN-07 |
+| REQ-GN-009 | BR-NT-01 | DOC-v2.0-01 §II.c (L493-494) | SC-GN-019 *(SC-GN-020 deprecated 21/10/2026)* | CL-GN-03 |
+| REQ-GN-010 | BR-NT-02 | DOC-v2.0-01 §II.c (L498-499) | SC-GN-019, SC-GN-051 | CL-GN-04, CL-GN-01 |
 | REQ-GN-011 | BR-NT-04 | DOC-v2.0-01 §II.c (L503-504) | SC-GN-022, SC-GN-023 *(SC-GN-024 deprecated 19/10/2026)* | CL-GN-04, CL-GN-06 |
-| REQ-GN-012 | BR-GN-01 | DOC-v2.0-01 §II.c (L508-509) | SC-GN-025, SC-GN-026, SC-GN-027, SC-GN-048 | CL-GN-01, CL-GN-05 |
+| REQ-GN-012 | BR-GN-01 | DOC-v2.0-01 §II.c (L508-509) | SC-GN-026, SC-GN-027, SC-GN-048 *(SC-GN-025 deprecated 21/10/2026)* | CL-GN-01, CL-GN-05 |
 | REQ-GN-013 | BR-GN-03 | DOC-v2.0-01 §II.c (L513-514) | SC-GN-028, SC-GN-029, SC-GN-030 | CL-GN-09 |
-| REQ-GN-014 | BR-GN-04 | DOC-v2.0-01 §II.c (L518-520) | SC-GN-032, SC-GN-033, SC-GN-034, SC-GN-035 *(SC-GN-031 deprecated 20/10/2026)* | CL-GN-05 |
-| REQ-GN-015 | BR-GN-05 | DOC-v2.0-01 §II.c (L524-525) | SC-GN-036 | — |
-| REQ-GN-016 | BR-GC-01 | DOC-v2.0-01 §II.c (L529-530) | SC-GN-037, SC-GN-038 | CL-GN-02 |
-| REQ-GN-017 | BR-GC-02 | DOC-v2.0-01 §II.c (L534-535) | SC-GN-039, SC-GN-040, SC-GN-041 | CL-GN-07 |
-| REQ-GN-018 | BR-GC-03 | DOC-v2.0-01 §II.c (L539-541) | SC-GN-042, SC-GN-043, SC-GN-044, SC-GN-050 | CL-GN-07 |
-| REQ-GN-019 | BR-VC | DOC-v2.0-01 §II.c (L545) | SC-GN-045 | CL-GN-01, CL-GN-08 |
+| REQ-GN-014 | BR-GN-04 | DOC-v2.0-01 §II.c (L518-520) | SC-GN-033, SC-GN-034 *(SC-GN-031 deprecated 20/10/2026 · SC-GN-032, 035 deprecated 21/10/2026)* | CL-GN-05 |
+| REQ-GN-015 | BR-GN-05 | DOC-v2.0-01 §II.c (L524-525) | SC-GN-033, SC-GN-046 *(SC-GN-036 deprecated 21/10/2026)* | — |
+| REQ-GN-016 | BR-GC-01 | DOC-v2.0-01 §II.c (L529-530) | SC-GN-037, SC-GN-050, SC-GN-054, SC-GN-056..075 *(SC-GN-038 deprecated 21/10/2026)* | CL-GN-02, CL-GN-07 |
+| REQ-GN-017 | BR-GC-02 | DOC-v2.0-01 §II.c (L534-535) | SC-GN-042 *(SC-GN-039, 040, 041 deprecated 21/10/2026)* | CL-GN-07 |
+| REQ-GN-018 | BR-GC-03 | DOC-v2.0-01 §II.c (L539-541) | SC-GN-042, SC-GN-043, SC-GN-050, SC-GN-053, SC-GN-054, SC-GN-055, SC-GN-056..075 *(SC-GN-044 deprecated 21/10/2026)* | CL-GN-07 |
+| REQ-GN-019 | BR-VC | DOC-v2.0-01 §II.c (L545) | SC-GN-045, SC-GN-051 | CL-GN-01, CL-GN-08 |
 | REQ-GN-020 | BR-VC | DOC-v2.0-01 §II.c (L546) | SC-GN-046, SC-GN-047 *(SC-GN-049 deprecated 19/10/2026)* | CL-GN-02 |
 
 > `§II.c` = mục B.II "Gạch nợ hóa đơn" → c. Business rules. Mọi REQ đều có ≥1 SC.
-> Đơn **bán thêm** (REQ-XHD-040, phạm vi chung từ mail PM) có SC riêng ở module này: SC-GN-050 (nhánh Cọc dùng cọc của hợp đồng đang hoạt động).
+> Đơn **bán thêm** (REQ-XHD-040, phạm vi chung từ mail PM) có SC riêng ở module này: SC-GN-050 (bill bán thêm có dòng cọc riêng), SC-GN-054 (gạch đơn bán thêm thì gạch luôn đơn trước còn nợ nếu đã thỏa điều kiện) — QC owner 21/10/2026 nháp #15. Bán mới = phát sinh hợp đồng mới; bán thêm = bán trên hợp đồng đã có (có thể từ rất lâu); hai luồng cơ bản như nhau.
 
 ## 2. Requirement Source Detail (verbatim quotes — home của REQ quote)
 
@@ -54,7 +54,7 @@ updated: 2026-10-20
 
 > Paid đồng bộ 1:1 từ Orderpaid theo OrderCode, gồm cả voucher và tiền khách thanh toán; mỗi Paid gán PaidType theo nguồn tiền.
 
-↳ **Ghi chú:** Nhiều đợt thanh toán là các dòng detail trong cùng 1 Orderpaid. PaidType phân loại tiền khách / voucher / phí TMĐT. Paid voucher được đồng bộ nhưng việc gạch EVC thuộc đội EVC ⇒ Paid voucher có bị INVOICE dùng để gạch không là CL-GN-01.
+↳ **Ghi chú:** Nhiều đợt thanh toán là các dòng detail trong cùng 1 Orderpaid. PaidType phân loại tiền khách / voucher / phí TMĐT. Paid voucher được đồng bộ nhưng việc gạch EVC thuộc đội EVC ⇒ Paid voucher có bị INVOICE dùng để gạch không là CL-GN-01. **QC không check (dev tự kiểm)** — QC owner 21/10/2026: luồng sàn không có data trên Foxpay Đối soát khoản thu online, QC không có màn tra bảng Paid ⇒ SC-GN-001, 002 deprecated; REQ này không có SC QC (gap có chủ đích, CHANGELOG §3).
 
 ---
 
@@ -63,7 +63,7 @@ updated: 2026-10-20
 
 > Trùng khi giống cả 4 trường OrderCode + RefTransactionId + PaidType + Amount: trùng thì cập nhật paymentstatus, không trùng thì thêm mới.
 
-↳ **Ghi chú:** EP theo từng trường khác nhau ⇒ 1 SC trùng đủ 4 + 3 SC khác 1 trường (OrderCode khác đã ra đơn khác nên bỏ). Trường hợp trùng chỉ cập nhật `paymentstatus`, không đổi Amount.
+↳ **Ghi chú:** EP theo từng trường khác nhau ⇒ 1 SC trùng đủ 4 + 3 SC khác 1 trường (OrderCode khác đã ra đơn khác nên bỏ). Trường hợp trùng chỉ cập nhật `paymentstatus`, không đổi Amount. QC owner 21/10/2026: QC không xem được bảng Paid ⇒ nhánh "không trùng → thêm mới" (SC-GN-004..006) dev tự kiểm; nhánh trùng (SC-GN-003) QC kiểm gián tiếp qua hóa đơn (không gạch 2 lần).
 
 ---
 
@@ -72,7 +72,7 @@ updated: 2026-10-20
 
 > Đồng bộ Paid là luồng độc lập với gạch nợ và luôn ghi nhận Paid kể cả khi hóa đơn chưa phát hành.
 
-↳ **Ghi chú:** Paid về trước hóa đơn ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên.
+↳ **Ghi chú:** Paid về trước hóa đơn ⇒ nằm chờ, điểm chạm (b) "sau khi xuất hóa đơn" hoặc (c) worker 30 phút sẽ nhặt lên. QC kiểm gián tiếp qua hóa đơn (SC-GN-007): Paid về trước vẫn được dùng gạch khi hóa đơn phát hành; bản thân dòng Paid dev tự kiểm (QC owner 21/10/2026).
 
 ---
 
@@ -91,7 +91,7 @@ updated: 2026-10-20
 
 > Ở điểm chạm (a), chỉ xử lý tiếp khi Paid ở trạng thái gạch nợ tạm và đơn thuộc kênh sàn, hoặc Paid đã thanh toán hoàn tất.
 
-↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid. Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — verify qua bảng kê thanh toán, Phương thức thanh toán = "gạch nợ tạm" (CL-GN-04 resolved 20/10/2026).
+↳ **Ghi chú:** Bộ lọc chỉ áp điểm chạm (a); điểm chạm (b), (c) vẫn xét kênh trong luồng gạch Paid. **Paid chỉ có ở luồng sàn** (QC owner 21/10/2026) ⇒ điểm chạm (a) chỉ xảy ra với đơn sàn; đơn ngoài sàn (luồng Cọc) gạch ở điểm chạm (b), (c). Giá trị enum `paymentstatus` ngoài "tạm" / "hoàn tất" (nếu có) dừng ngay — verify qua bảng kê thanh toán, Phương thức thanh toán = "gạch nợ tạm" (CL-GN-04 resolved 20/10/2026).
 
 ---
 
@@ -180,7 +180,7 @@ updated: 2026-10-20
 > Dừng khi hết nợ hoặc hết Paid; Paid dư được giữ lại.
 > Nhánh Cọc không đẩy Kafka Out.
 
-↳ **Ghi chú:** "Gạch từng phần" = chia số dư Paid cho từng bill của đơn (mỗi lần gạch trừ Paid), **không** phải gạch một phần hóa đơn. Paid = tổng tiền đơn (sàn TMĐT) ⇒ không có biên Paid < nợ (SC-GN-031 deprecated — CL-GN-05 resolved 20/10/2026). 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out (payload chưa có — CL-XHD-29).
+↳ **Ghi chú:** "Gạch từng phần" = chia số dư Paid cho từng bill của đơn (mỗi lần gạch trừ Paid), **không** phải gạch một phần hóa đơn. Paid = tổng tiền đơn (sàn TMĐT) ⇒ không có biên Paid < nợ (SC-GN-031 deprecated — CL-GN-05 resolved 20/10/2026). 3 đầu ra mỗi lần gạch: Payment, Paid giảm, Kafka Out — QC chỉ kiểm Payment + Paid giảm; Kafka Out (và nhánh Cọc không đẩy) QC không check Kafka (BA: phần dành cho dev — CL-XHD-29, 21/10/2026).
 
 ---
 
@@ -190,7 +190,7 @@ updated: 2026-10-20
 > Khi tổng Payment bằng tổng tiền hóa đơn thì hóa đơn chuyển sang "Đã gạch nợ".
 > Áp dụng cho cả gạch nợ tạm và gạch nợ thật.
 
-↳ **Ghi chú:** Cũng là "Kết quả" của chức năng II (L465). Biên Σ Payment = tổng hóa đơn − 1 / = tổng hóa đơn.
+↳ **Ghi chú:** Cũng là "Kết quả" của chức năng II (L465). Biên T − 1 không dựng được (Paid / cọc luôn bằng phần khách trả) ⇒ SC-GN-036 deprecated (QC owner 21/10/2026, nháp #13); "Đã gạch nợ" khi Σ Payment = T kiểm qua SC-GN-033, trạng thái còn nợ (chưa "Đã gạch nợ") qua SC-GN-046.
 
 ---
 
@@ -200,7 +200,7 @@ updated: 2026-10-20
 > Tổng cọc còn lại của hợp đồng (mọi loại cọc) cộng tổng tiền EVC của đơn (tính cả phần bị lock) phải không nhỏ hơn nợ của bill đang xét.
 > Cọc chỉ gồm tiền thật khách trả, không gồm EVC.
 
-↳ **Ghi chú:** Phạm vi cọc theo **hợp đồng**, không theo OrderCode. Tổng EVC + lock lấy qua API đội EVC — 2.2 không nêu nguồn (CL-GN-02). Biên "không nhỏ hơn" ⇒ bằng nhau là đủ.
+↳ **Ghi chú:** Phạm vi cọc theo **hợp đồng**, không theo OrderCode. Tổng EVC + lock lấy qua API đội EVC — 2.2 không nêu nguồn (CL-GN-02). Biên "không nhỏ hơn" ⇒ bằng nhau là đủ. **Cọc luôn bằng tiền đơn** (khách thanh toán ngoài Paid đều đẩy vào cọc — QC owner 21/10/2026) ⇒ không có case thiếu tiền, SC-GN-038 deprecated; chỉ còn biên bằng (SC-GN-037).
 
 ---
 
@@ -210,7 +210,7 @@ updated: 2026-10-20
 > Cọc của hợp đồng theo từng loại phải đủ cho các dịch vụ dùng loại cọc đó trên bill.
 > Thiếu ở một loại thì không gạch cả bill đó, không gạch một phần; các bill khác của đơn vẫn xét bình thường.
 
-↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết hóa đơn. Map dịch vụ ↔ loại cọc không test; chỉ check có sinh đặt cọc, đơn bán thêm vẫn có cọc (CL-GN-07, 19/10/2026).
+↳ **Ghi chú:** Loại cọc tương ứng dịch vụ đã ghi sẵn trên dòng chi tiết hóa đơn. Map dịch vụ ↔ loại cọc không test; chỉ check có sinh đặt cọc, đơn bán thêm vẫn có cọc (CL-GN-07, 19/10/2026). Cọc luôn bằng tiền đơn ⇒ không có case thiếu một loại cọc (QC owner 21/10/2026) — SC-GN-040, 041 deprecated; nhánh "thiếu cọc" của BR-GC-02 là gap có chủ đích. QC owner 21/10/2026 (nháp #12): **không kiểm theo loại cọc** ⇒ SC-GN-039 gộp vào SC-GN-042 (kiểm có sinh Payment cọc, tổng tiền đúng, nợ = 0).
 
 ---
 
@@ -221,7 +221,7 @@ updated: 2026-10-20
 > Tính trên nợ còn lại sau khi EVC đã gạch; ghi Payment và trừ cọc theo BillNumber + số hợp đồng.
 > Dư cọc không xử lý; không gạch lại hóa đơn đã gạch.
 
-↳ **Ghi chú:** Nhiều dịch vụ cùng loại cọc gom thành một dòng Payment (L539) ⇒ số dòng Payment = số loại cọc trên bill. "Sau khi EVC đã gạch": INVOICE và hệ thống EVC chạy song song, INVOICE chừa phần tiền voucher / EVC khi gạch tiền khách, không chờ đội EVC gạch xong (CL-GN-08 resolved 20/10/2026).
+↳ **Ghi chú:** Nhiều dịch vụ cùng loại cọc gom thành một dòng Payment (L539) ⇒ số dòng Payment = số loại cọc trên bill. "Sau khi EVC đã gạch": INVOICE và hệ thống EVC chạy song song, INVOICE chừa phần tiền voucher / EVC khi gạch tiền khách, không chờ đội EVC gạch xong (CL-GN-08 resolved 20/10/2026). QC owner 21/10/2026: không kiểm số dòng Payment theo loại cọc (nháp #12). **Thông tin cọc của hợp đồng có nhiều dòng, mỗi dòng gắn 1 bill; thanh toán bill nào thì clear đúng dòng đó, mỗi dòng clear 1 lần ⇒ không có cọc dư** (nháp #11) — SC-GN-053 thay SC-GN-044.
 
 ---
 

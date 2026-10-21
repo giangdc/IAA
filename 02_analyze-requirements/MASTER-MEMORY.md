@@ -9,7 +9,7 @@
 ## 1. Version Registry
 | Version | Release Date | Input Folder | Analyze Folder | Status | Tổng DOC | Tổng SC (all) | Tổng SC (new+mod) | Parent |
 |---------|-------------|-------------|----------------|--------|----------|--------------|-------------------|--------|
-| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 9 | 179 | 179 | v1.0 (Phase 1 — chưa có trong workspace) |
+| v2.0 | TBD (R3 kết thúc 13/11/2026) | `00_input/v2.0/` | `02_analyze-requirements/v2.0/` | ANALYZED | 9 | 182 | 182 | v1.0 (Phase 1 — chưa có trong workspace) |
 
 ## 2. DOC ID Registry (Global)
 > **`Status`** — trạng thái của FILE, không phải của yêu cầu:
@@ -42,9 +42,9 @@
 
 | Module | Origin | Lifecycle | Count |
 |--------|--------|-----------|-------|
-| XHD | v2.0 | NEW | 109 |
-| GN | v2.0 | NEW | 50 |
-| HK | v2.0 | NEW | 21 |
+| XHD | v2.0 | NEW | 108 |
+| GN | v2.0 | NEW | 54 |
+| HK | v2.0 | NEW | 20 |
 
 > v2.0 là version đầu tiên trong workspace (Phase 1 v1.0 chưa có analyze/TC) ⇒ toàn bộ NEW. Số đếm dẫn xuất từ `v2.0/<MODULE>/test_scenario_map.md` `counts:`.
 
@@ -53,7 +53,7 @@
 **Phải test (new + modified):**
 | SC ID | Type | Lý do |
 |-------|------|-------|
-| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (179 active · 5 deprecated) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
+| Toàn bộ `SC-XHD-*`, `SC-GN-*`, `SC-HK-*` (182 active · 27 deprecated — số hiện hành ở router `v2.0/MEMORY.md §2`) | NEW | Version đầu — xem `v2.0/<MODULE>/test_scenario_map.md` |
 
 **Nên regression (carried — high risk):**
 | SC ID | Type | Lý do |
@@ -93,8 +93,8 @@
 | 0.5 | init-source-code | SKIPPED | — | — | — | Không automation |
 | 1 | init-project | COMPLETED | 2026-10-07 | — | CLAUDE.md/PIPELINE.md/COMMANDS.md | — |
 | 2 | create-test-plan | COMPLETED | 2026-10-14 | v2.0 | `01_test-plans/TP-master-InvoiceIssuance-v2.0.md` (bản 1.3) + DOC-READINESS + Excel/Email | Doc readiness CONDITIONAL — 45 GAP mở |
-| 3 | analyze-requirements | COMPLETED | 2026-10-16 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 179 SC active (5 deprecated) · 55 CL (22 Open · 4 BLOCKING) |
-| 4 | generate-tc | NOT_STARTED | — | — | — | Nên resolve CL BLOCKING trước (router §2) |
+| 3 | analyze-requirements | COMPLETED | 2026-10-21 | v2.0 · XHD, GN, HK (TL ngoài phạm vi) | `02_analyze-requirements/v2.0/` (router + 3 module × 6 file; `quotes/` đã xoá 16/10/2026 cùng URD 2.1) | INIT layout v2 — 73 REQ · 180 SC · 49 CL (7 BLOCKING) · 21 RISK; 100% quote URD đã verify với bản trích `.docx` · UPDATE 16/10/2026 (QC trả lời CL + flow URD; bỏ URD 2.1): 178 SC active (4 deprecated) · 53 CL (49 Open · 6 BLOCKING) · UPDATE 19/10/2026 (QC trả lời CL vòng 2 + tool verify): 178 SC active (4 deprecated) · 55 CL (40 Open · 4 BLOCKING) — gồm dùng URD 2.1 cho Phụ lục D · UPDATE 19/10/2026 vòng 3: 179 SC active (5 deprecated) · 55 CL (22 Open · 4 BLOCKING) · UPDATE 21/10/2026 GN (BA trả lời câu nháp): GN 42 SC active (10 deprecated) · CL GN 0 Open — số hiện hành ở router `v2.0/MEMORY.md §2` |
+| 4 | generate-tc | PARTIAL | 2026-10-21 | v2.0 · GN | `03_test-cases/v2.0/fragments/TC-GN-v2.0.md` | GN 54 TC (P1 34 · P2 19 · P3 1), standard mode; chưa consolidate TC-MASTER. XHD, HK chưa generate |
 | 4b | export-tc-rp | NOT_STARTED | — | — | — | renderer deliverable FPT — chạy sau consolidate |
 | 4c | review-tc-ba | NOT_STARTED | — | — | — | vòng feedback BA trên sheet — chỉ khi project review TC online |
 | 5 | review-tc | NOT_STARTED | — | — | — | — |
@@ -106,7 +106,7 @@
 | 11 | log-bug | NOT_STARTED | — | — | — | — |
 | 11b | sync-jira-bugs | NOT_STARTED | — | — | — | pull/mirror Jira → local — chỉ khi project dùng Jira (`project_key` TBD) |
 | 12 | test-report | NOT_STARTED | — | — | — | — |
-| 13 | health-check | NOT_STARTED | — | — | — | — |
+| 13 | health-check | COMPLETED | 2026-10-21 | Version v2.0 · module GN (quick, inline) | — | 1 CRITICAL, 5 WARNING, 3 INFO — đã sửa G-02 (số SC MASTER §1/§3) + 4 WARNING (Khuyến nghị #2, CHANGELOG §3 #5, TC-GN-012, TC-GN-017); group 01 đã viết lại theo data dev + Push custom task (21/10/2026) |
 
 ## 9. Notes (quyết định cross-version — KHÔNG phải per-run count log)
 - **2026-10-13** — URD rev 2.2 là bản chính (PO confirm qua mail PM — DOC-v2.0-04); rev 2.1 giữ làm tham chiếu kỹ thuật, **2.2 thắng khi mâu thuẫn**.
