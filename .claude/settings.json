@@ -1,15 +1,15 @@
 {
   "hooks": {
     "Stop": [
-      { "hooks": [ { "type": "command", "command": "node .claude/hooks/validate-vibe-run.mjs" } ] }
+      { "hooks": [ { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/validate-vibe-run.mjs\"" } ] }
     ],
     "SessionStart": [
-      { "hooks": [ { "type": "command", "command": "node .claude/hooks/inject-project-rule.mjs" } ] }
+      { "hooks": [ { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/inject-project-rule.mjs\"" } ] }
     ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",
-        "hooks": [ { "type": "command", "command": "node .claude/hooks/run-python.mjs .claude/hooks/memory-guard.py" } ]
+        "hooks": [ { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/run-python.mjs\" \"$CLAUDE_PROJECT_DIR/.claude/hooks/memory-guard.py\"" } ]
       }
     ]
   }
